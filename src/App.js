@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Header from './components/Header'
+import Sidebar from './components/Sidebar'
+import { Container } from 'react-bootstrap'
+import { BrowserRouter, Routes,Switch, Redirect } from 'react-router-dom'
 
-function App() {
+const Layout = ({children}) => {
+}
+const App = ({children}) => {
+  const [sidebar, toggleSidebar] = useState(false);
+  const handleToggleSidebar = () => toggleSidebar(!sidebar)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Header handleToggleSidebar={handleToggleSidebar}/>
+      <div className='flex text-xl text-black'>
+        <Sidebar sidebar={sidebar} handleToggleSidebar={handleToggleSidebar}/>
+        <Container sidebar={sidebar} fluid className={`transform ${ sidebar ? "ml-[250px]" : ""}`}>
+             {/* <HomeScreen/> */}
+             {children}
+           </Container>
+      </div>
+    </>
+  )
 }
 
-export default App;
+export default App

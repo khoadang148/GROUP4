@@ -29,7 +29,7 @@ const Sidebar = ({ sidebar }) => {
     maxHeight: "100vh",
     backgroundColor: "white",
     color: "black",
-    fontWeight: "500",
+    fontWeight: "400",
   
   };
 

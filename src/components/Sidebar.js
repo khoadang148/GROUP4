@@ -19,20 +19,21 @@ const Sidebar = ({ sidebar }) => {
     backgroundColor: "white",
     color: "black",
     fontWeight: "500",
+  
   };
 
   return (
     <Menu
-      onMouseEnter={() => setHandShowScroll(true)}
-      onMouseLeave={() => setHandShowScroll(false)}
-      style={slidebarStyles}
-      onClick={handleClick}
-      className={`drop-shadow-lg h-full w-[250px] bg-white transform ${
-        sidebar
-          ? "translate-x-0 w-[300px] z-50 fixed text-base duration-1000"
-          : "hidden -translate-x-full"
-      }`}
-      mode="inline"
+    onMouseEnter={() => setHandShowScroll(true)}
+    onMouseLeave={() => setHandShowScroll(false)}
+    style={slidebarStyles}
+    onClick={handleClick}
+    className={` transition-transform duration-700 drop-shadow-lg h-full w-[250px] bg-white transform ${
+      sidebar
+        ? "translate-x-0 w-[250px] z-50 fixed text-base "
+        : "translate-x-[-100%] "
+    }`}
+    mode="inline"
     >
       <Menu.Item key="1">
         <FontAwesomeIcon

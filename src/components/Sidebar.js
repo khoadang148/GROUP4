@@ -4,7 +4,18 @@ import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 import img1 from "../assets/img1.jpg";
 import img2 from "../assets/img2.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHouse,
+  faHeadset,
+  faMagnifyingGlass,
+  faCirclePlus,
+  faGear,
+  faCircleQuestion,
+  faFlag,
+  faMessage,
+  faLayerGroup, // Import the layers icon
+} from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
 const { SubMenu } = Menu;
 
@@ -34,36 +45,39 @@ const Sidebar = ({ sidebar }) => {
       }`}
       mode="inline"
     >
-      <Menu.Item key="1">
-        <FontAwesomeIcon
-          icon={faHouse}
-          className="mr-2 text-black hover:text-red-500"
-        />
+      <Menu.Item key="1" className="flex items-center">
+        <FontAwesomeIcon icon={faHouse} className="mr-2 icon" />
         Home
       </Menu.Item>
-      <Menu.Item key="2">Live Stream</Menu.Item>
-      <Menu.Item key="3">Explore</Menu.Item>
+      <Menu.Item key="2">
+        <FontAwesomeIcon icon={faHeadset} className="mr-2 icon" />
+        Live Stream
+      </Menu.Item>
+      <Menu.Item key="3">
+        <FontAwesomeIcon icon={faMagnifyingGlass} className="mr-2 icon" />
+        Explore
+      </Menu.Item>
       <SubMenu
         key="sub2"
-        icon={<AppstoreOutlined />}
+        icon={<FontAwesomeIcon icon={faLayerGroup} />} // Use layers icon here
         title="Categories"
         style={{ color: "black" }}
         className="submenu-hover"
       >
         <div className="font-normal pl-5">
           <Menu.Item key="4">Development</Menu.Item>
-          <Menu.Item key="4">Business</Menu.Item>
-          <Menu.Item key="4">Finance & Accounting</Menu.Item>
-          <Menu.Item key="4">It & Software</Menu.Item>
-          <Menu.Item key="4">Office Productive</Menu.Item>
-          <Menu.Item key="4">Personal Development</Menu.Item>
-          <Menu.Item key="4">Design</Menu.Item>
-          <Menu.Item key="4">Marketing</Menu.Item>
-          <Menu.Item key="4">Lifestyle</Menu.Item>
-          <Menu.Item key="4">Photography</Menu.Item>
-          <Menu.Item key="4">Health & Fitness</Menu.Item>
-          <Menu.Item key="4">Music</Menu.Item>
-          <Menu.Item key="4">Teaching & Academics</Menu.Item>
+          <Menu.Item key="5">Business</Menu.Item>
+          <Menu.Item key="6">Finance & Accounting</Menu.Item>
+          <Menu.Item key="7">IT & Software</Menu.Item>
+          <Menu.Item key="8">Office Productive</Menu.Item>
+          <Menu.Item key="9">Personal Development</Menu.Item>
+          <Menu.Item key="10">Design</Menu.Item>
+          <Menu.Item key="11">Marketing</Menu.Item>
+          <Menu.Item key="12">Lifestyle</Menu.Item>
+          <Menu.Item key="13">Photography</Menu.Item>
+          <Menu.Item key="14">Health & Fitness</Menu.Item>
+          <Menu.Item key="15">Music</Menu.Item>
+          <Menu.Item key="16">Teaching & Academics</Menu.Item>
         </div>
       </SubMenu>
       <Menu.Divider />
@@ -75,14 +89,17 @@ const Sidebar = ({ sidebar }) => {
         className="submenu-hover"
       >
         <div className="font-normal pl-5">
-          <Menu.Item key="5">Certification Center</Menu.Item>
-          <Menu.Item key="5">Certification Fill Form</Menu.Item>
-          <Menu.Item key="5">Test View</Menu.Item>
-          <Menu.Item key="5">Test Result</Menu.Item>
-          <Menu.Item key="5">My Certification</Menu.Item>
+          <Menu.Item key="17">Certification Center</Menu.Item>
+          <Menu.Item key="18">Certification Fill Form</Menu.Item>
+          <Menu.Item key="19">Test View</Menu.Item>
+          <Menu.Item key="20">Test Result</Menu.Item>
+          <Menu.Item key="21">My Certification</Menu.Item>
         </div>
       </SubMenu>
-      <Menu.Item key="6">Save Courses</Menu.Item>
+      <Menu.Item key="22">
+        <FontAwesomeIcon icon={faHeart} className="mr-2 icon" />
+        Save Courses
+      </Menu.Item>
       <SubMenu
         key="sub5"
         icon={<SettingOutlined />}
@@ -91,26 +108,26 @@ const Sidebar = ({ sidebar }) => {
         className="submenu-hover"
       >
         <div className="font-normal pl-5">
-          <Menu.Item key="7">About</Menu.Item>
-          <Menu.Item key="7">Sign In</Menu.Item>
-          <Menu.Item key="7">Sign Up</Menu.Item>
-          <Menu.Item key="7">Sign Up Steps</Menu.Item>
-          <Menu.Item key="7">Paid Membership</Menu.Item>
-          <Menu.Item key="7">Course Detail View</Menu.Item>
-          <Menu.Item key="7">Checkout</Menu.Item>
-          <Menu.Item key="7">Invoice</Menu.Item>
-          <Menu.Item key="7">Career</Menu.Item>
-          <Menu.Item key="7">Job Apply</Menu.Item>
-          <Menu.Item key="7">Our Blog</Menu.Item>
-          <Menu.Item key="7">Blog Detail View</Menu.Item>
-          <Menu.Item key="7">Company Details</Menu.Item>
-          <Menu.Item key="7">Press</Menu.Item>
-          <Menu.Item key="7">Live Steam View</Menu.Item>
-          <Menu.Item key="7">Add Live Steam</Menu.Item>
-          <Menu.Item key="7">Search Result</Menu.Item>
-          <Menu.Item key="7">Thank you</Menu.Item>
-          <Menu.Item key="7">Coming Soon</Menu.Item>
-          <Menu.Item key="7">Error 404</Menu.Item>
+          <Menu.Item key="23">About</Menu.Item>
+          <Menu.Item key="24">Sign In</Menu.Item>
+          <Menu.Item key="25">Sign Up</Menu.Item>
+          <Menu.Item key="26">Sign Up Steps</Menu.Item>
+          <Menu.Item key="27">Paid Membership</Menu.Item>
+          <Menu.Item key="28">Course Detail View</Menu.Item>
+          <Menu.Item key="29">Checkout</Menu.Item>
+          <Menu.Item key="30">Invoice</Menu.Item>
+          <Menu.Item key="31">Career</Menu.Item>
+          <Menu.Item key="32">Job Apply</Menu.Item>
+          <Menu.Item key="33">Our Blog</Menu.Item>
+          <Menu.Item key="34">Blog Detail View</Menu.Item>
+          <Menu.Item key="35">Company Details</Menu.Item>
+          <Menu.Item key="36">Press</Menu.Item>
+          <Menu.Item key="37">Live Steam View</Menu.Item>
+          <Menu.Item key="38">Add Live Steam</Menu.Item>
+          <Menu.Item key="39">Search Result</Menu.Item>
+          <Menu.Item key="40">Thank you</Menu.Item>
+          <Menu.Item key="41">Coming Soon</Menu.Item>
+          <Menu.Item key="42">Error 404</Menu.Item>
         </div>
       </SubMenu>
       <hr />
@@ -119,7 +136,7 @@ const Sidebar = ({ sidebar }) => {
         title="SUBSCRIPTIONS"
         style={{ color: "black" }}
       >
-        <Menu.Item key="8">
+        <Menu.Item key="43">
           <div className="flex items-center">
             <img
               src={img1}
@@ -129,7 +146,7 @@ const Sidebar = ({ sidebar }) => {
             <p className="ml-6 pt-3">Rock Smith</p>
           </div>
         </Menu.Item>
-        <Menu.Item key="9">
+        <Menu.Item key="44">
           <div className="flex items-center">
             <img
               src={img2}
@@ -139,13 +156,28 @@ const Sidebar = ({ sidebar }) => {
             <p className="ml-6 pt-3">Jassica William</p>
           </div>
         </Menu.Item>
-        <Menu.Item key="10">Browser Instructors</Menu.Item>
+        <Menu.Item key="45">
+          <FontAwesomeIcon icon={faCirclePlus} className="mr-2 icon" />
+          Browser Instructors
+        </Menu.Item>
       </Menu.ItemGroup>
       <hr />
-      <Menu.Item key="11">Setting</Menu.Item>
-      <Menu.Item key="12">Help</Menu.Item>
-      <Menu.Item key="13">Report History</Menu.Item>
-      <Menu.Item key="14">Send Feedback</Menu.Item>
+      <Menu.Item key="46">
+        <FontAwesomeIcon icon={faGear} className="mr-2 icon" />
+        Setting
+      </Menu.Item>
+      <Menu.Item key="47">
+        <FontAwesomeIcon icon={faCircleQuestion} className="mr-2 icon" />
+        Help
+      </Menu.Item>
+      <Menu.Item key="48">
+        <FontAwesomeIcon icon={faFlag} className="mr-2 icon" />
+        Report History
+      </Menu.Item>
+      <Menu.Item key="49">
+        <FontAwesomeIcon icon={faMessage} className="mr-2 icon" />
+        Send Feedback
+      </Menu.Item>
       <hr />
       <div className="pb-[100px] pt-3 pl-[20px] text-xs leading-5">
         <div>
@@ -172,6 +204,9 @@ const Sidebar = ({ sidebar }) => {
           background-color: #ffecec !important;
           color: #ee4e4e !important;
         }
+        .ant-menu-item-selected .icon {
+          color: #ee4e4e !important;
+        }
         .ant-menu-submenu-selected {
           color: #ee4e4e !important;
         }
@@ -180,6 +215,9 @@ const Sidebar = ({ sidebar }) => {
         }
         .ant-menu-item:hover {
           background-color: #ffecec !important;
+        }
+        .ant-menu-item:hover .icon {
+          color: #ee4e4e !important;
         }
         .ant-menu-item-active {
           color: #ee4e4e !important;

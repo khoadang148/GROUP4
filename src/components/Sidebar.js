@@ -13,9 +13,10 @@ import {
   faCircleQuestion,
   faFlag,
   faMessage,
-  faLayerGroup, // Import the layers icon
+  faLayerGroup, 
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const { SubMenu } = Menu;
 
@@ -23,34 +24,40 @@ const Sidebar = ({ sidebar }) => {
   const handleClick = (e) => {
     console.log("click ", e);
   };
+
   const [handleShowScrollbar, setHandShowScroll] = useState(false);
   const slidebarStyles = {
     overflow: handleShowScrollbar ? "auto" : "hidden",
     maxHeight: "100vh",
     backgroundColor: "white",
     color: "black",
-    fontWeight: "400",
-  
+    fontWeight: "500",
+  };
+
+  const navigate = useNavigate();
+  const handleLivestream = () => {
+    navigate("/livestream");
+  };
+  const handleHome = () => {
+    navigate("/");
   };
 
   return (
     <Menu
-    onMouseEnter={() => setHandShowScroll(true)}
-    onMouseLeave={() => setHandShowScroll(false)}
-    style={slidebarStyles}
-    onClick={handleClick}
-    className={` transition-transform duration-700 drop-shadow-lg h-full w-[250px] bg-white transform ${
-      sidebar
-        ? "translate-x-0 w-[250px] z-50 fixed text-base "
-        : "translate-x-[-100%] "
-    }`}
-    mode="inline"
+      onMouseEnter={() => setHandShowScroll(true)}
+      onMouseLeave={() => setHandShowScroll(false)}
+      style={slidebarStyles}
+      onClick={handleClick}
+      className={`transition-transform duration-700 drop-shadow-lg h-full w-[250px] bg-white transform ${
+        sidebar ? "mt-[65px] fixed translate-x-0 z-50" : "translate-x-[-100%]"
+      } top-0 left-0`}
+      mode="inline"
     >
-      <Menu.Item key="1" className="flex items-center">
+      <Menu.Item key="1" className="flex items-center" onClick={handleHome}>
         <FontAwesomeIcon icon={faHouse} className="mr-2 icon" />
         Home
       </Menu.Item>
-      <Menu.Item key="2">
+      <Menu.Item key="2" onClick={handleLivestream}>
         <FontAwesomeIcon icon={faHeadset} className="mr-2 icon" />
         Live Stream
       </Menu.Item>
@@ -60,7 +67,7 @@ const Sidebar = ({ sidebar }) => {
       </Menu.Item>
       <SubMenu
         key="sub2"
-        icon={<FontAwesomeIcon icon={faLayerGroup} />} // Use layers icon here
+        icon={<FontAwesomeIcon icon={faLayerGroup} />}
         title="Categories"
         style={{ color: "black" }}
         className="submenu-hover"

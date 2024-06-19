@@ -3,7 +3,7 @@ import { MdNotifications, MdApps } from 'react-icons/md'
 import { Image } from 'react-bootstrap';
 const Header = ({handleToggleSidebar}) => {
   return (
-    <div className=" z-50 flex bg-white h-[65px] w-full drop-shadow-lg">
+    <div className=" z-50 flex bg-white h-[65px] w-full drop-shadow-lg fixed">
       <div className="flex">
         <button onClick={() => handleToggleSidebar()}>
           <Image

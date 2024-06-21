@@ -15,7 +15,7 @@ const LoginScreen = () => {
       const response = await fakeAuthApi(username, password);
       login(response.token);
       setLoading(false);
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       console.error('Login failed:', error);
       setLoading(false);

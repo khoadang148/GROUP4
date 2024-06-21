@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import { Form, Input, Button } from 'antd';
@@ -8,12 +8,20 @@ const LoginScreen = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/home'); // Redirect to home if token exists
+    }
+  }, [navigate]);
+
   const handleLogin = async (values) => {
     setLoading(true);
     try {
       const { username, password } = values;
       const response = await fakeAuthApi(username, password);
       login(response.token);
+      localStorage.setItem('token', response.token); // Save token to localStorage
       setLoading(false);
       navigate('/home');
     } catch (error) {

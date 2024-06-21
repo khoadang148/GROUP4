@@ -37,12 +37,13 @@ const Layout = ({ children }) => {
         <Sidebar
           sidebar={sidebar}
           handleToggleSidebar={handleToggleSidebar}
-          className="relative"
+          className="relative z-50"
         />
         <Container
+          sidebar={sidebar}
           fluid
-          className={`transition-transform duration-700 ${
-            sidebar ? "ml-250" : "ml-0"
+          className={`  transform duration-700 absolute   ${
+            sidebar ? "ml-[250px]" : "ml-0"
           }`}
         >
           {children}

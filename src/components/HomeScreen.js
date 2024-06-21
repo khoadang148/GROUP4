@@ -1,4 +1,6 @@
 import { CheckCircleOutlined } from "@ant-design/icons";
+import { faHeadset } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -41,7 +43,6 @@ const HomeScreen = () => {
   };
 
   return (
-
     <div className="grid grid-cols-7 bg-[#F7F7F7] gap-[200px]">
       <div className="col-span-5 mt-20">
         <div className="ml-[30px] mt-8 flex justify-between w-[950px]">
@@ -57,7 +58,7 @@ const HomeScreen = () => {
               disabled={startIndex === 0}
               className="group bg-white hover:bg-red-600 absolute left-11 z-50  cursor-pointer px-2 py-0 rounded-[5px] "
             >
-             <h1 className="group-hover:text-white">{"<"}</h1>
+              <h1 className="group-hover:text-white">{"<"}</h1>
             </button>
             <div className="flex gap-4 rounded relative h-[174px] mx-10">
               {keywords
@@ -92,55 +93,69 @@ const HomeScreen = () => {
           <h2>Featured Courses</h2>
           <span className=" text-sm">See all</span>
         </div>
-
-    
       </div>
       {/* cot ben phai */}
       <div className="col-span-2 mt-20   ">
         <div className="bg-[#FFFFFF] mt-9 w-[250px] ml-[-50px] flex flex-col items-center justify-center    ">
           <img
             src="https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-3.jpg"
-            className="rounded-full w-16 mt-3  "
+            className="rounded-full w-16 mt-7  "
           />
-          <div className="flex  ">
+          <div className="flex mt-5  ">
             <h3>Joginder Singh</h3>
             <CheckCircleOutlined className="text-blue-500" />
           </div>
-          <span className="text-sm">
-            Web Developer, Designer, and Teacher
-          </span>
-          <div className="flex gap-2 mt-3">
+          <span className="text-sm">Web Developer, Designer, and Teacher</span>
+          <div className="flex gap-2 mt-6">
             <div>
               <img
                 src="https://cdn.pixabay.com/photo/2015/05/17/10/51/facebook-770688_960_720.png"
-                className="w-[40px]"
+                className="w-[40px] rounded-lg"
               />
             </div>
             <div>
               <img
                 src="https://cdn.pixabay.com/photo/2017/08/23/11/30/twitter-2672572_960_720.jpg"
-                className="w-[40px]"
+                className="w-[40px] rounded-lg "
               />
             </div>
             <div>
               <img
                 src="https://i1.wp.com/globalinfusion.org/wp-content/uploads/2018/01/ig-logo-email.png?ssl=1"
-                className="w-[40px]"
+                className="w-[40px] rounded-lg"
               />
             </div>
             <div>
               <img
                 src="https://1.bp.blogspot.com/-hY5-pNrOcKw/XeI_00cpCgI/AAAAAAAAF4A/J7jS49V8kNozycy0PgY6wfc7SUU9gulTgCLcBGAsYHQ/s1600/Youtube-Icon-square-2340x2340.png"
-                className="w-[40px]"
+                className="w-[40px] rounded-lg"
               />
             </div>
           </div>
-          <div className="text-sm items-center justify-center mt-3">
+          <div className="text-sm items-center justify-center mt-5">
             <span>615k Students •</span>
             <span> 12 Courses</span>
-            
           </div>
           <h3 className="text-sm mt-4">Go To Profile</h3>
+        </div>
+        <div className="bg-[#FFFFFF]  mt-6 w-[250px] ml-[-50px]">
+          <h3 className="text-base ml-5 pt-3 pb-3 ">Live Streaming</h3>
+          <hr className="text-xl"></hr>
+          <div className="flex flex-col items-center justify-center">
+            <FontAwesomeIcon
+              icon={faHeadset}
+              className="text-4xl bg-[#FFECEC] mt-4 rounded-full px-3 py-3 "
+            />
+            <span className="text-sm mt-3">
+              Set up your channel and stream live to your students
+            </span>
+            <button className="bg-[#FF0000] rounded-sm text-white mt-6 px-2 py-2 text-sm w-24">
+              Get Started
+            </button>
+            <span className="text-sm mt-6">
+              Info : This feature only for 'Instructors'.
+            </span>
+          </div>
         </div>
       </div>
     </div>

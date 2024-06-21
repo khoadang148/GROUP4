@@ -41,6 +41,7 @@ const HomeScreen = () => {
   };
 
   return (
+
     <div className="grid grid-cols-7 bg-[#F7F7F7] gap-[200px]">
       <div className="col-span-5">
         <div className="ml-[30px] mt-8 flex justify-between w-[950px]">
@@ -91,6 +92,8 @@ const HomeScreen = () => {
           <h2>Featured Courses</h2>
           <span className=" text-sm">See all</span>
         </div>
+=======
+    
       </div>
       {/* cot ben phai */}
       <div className="col-span-2   ">

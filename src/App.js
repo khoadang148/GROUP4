@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { Container } from "react-bootstrap";
+import Footer from "./components/Footer";
 import {
   BrowserRouter,
   Routes,
@@ -14,7 +15,10 @@ import Livestream from "./components/Livestream";
 
 const Layout = ({ children }) => {
   const [sidebar, toggleSidebar] = useState(true);
+  // const [footer, toggleFooter] = useState(true);
   const handleToggleSidebar = () => toggleSidebar(!sidebar);
+  // const handleToggleFooter = () => toggleFooter(!footer);
+
   return (
     <>
       <Header handleToggleSidebar={handleToggleSidebar} />
@@ -22,18 +26,27 @@ const Layout = ({ children }) => {
         <Sidebar
           sidebar={sidebar}
           handleToggleSidebar={handleToggleSidebar}
-          className="relative"
+          className=" z-50 relative"
         />
         <Container
           sidebar={sidebar}
           fluid
-          className={` duration-700 absolute transform ${
-            sidebar ? "ml-[250px]" : ""
+          className={`  overflow-hidden duration-700 absolute transform ${
+            sidebar  ? "ml-[250px]" : ""
           }`}
         >
           {children}
+         
         </Container>
-      </div>
+      
+        
+       
+       
+      
+        </div>
+     <Footer 
+     sidebar={sidebar}
+     />
     </>
   );
 };
@@ -45,6 +58,7 @@ const App = () => {
         element={
           <Layout>
             <HomeScreen />
+         
           </Layout>
         }
       />

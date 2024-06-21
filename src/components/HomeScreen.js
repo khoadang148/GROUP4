@@ -43,7 +43,7 @@ const HomeScreen = () => {
   return (
 
     <div className="grid grid-cols-7 bg-[#F7F7F7] gap-[200px]">
-      <div className="col-span-5">
+      <div className="col-span-5 mt-20">
         <div className="ml-[30px] mt-8 flex justify-between w-[950px]">
           <h2>Live Streams</h2>
           <Link to={"/livestream"}>
@@ -92,11 +92,11 @@ const HomeScreen = () => {
           <h2>Featured Courses</h2>
           <span className=" text-sm">See all</span>
         </div>
-=======
+
     
       </div>
       {/* cot ben phai */}
-      <div className="col-span-2   ">
+      <div className="col-span-2 mt-20   ">
         <div className="bg-[#FFFFFF] mt-9 w-[250px] ml-[-50px] flex flex-col items-center justify-center    ">
           <img
             src="https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-3.jpg"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { Container } from "react-bootstrap";
@@ -16,16 +16,17 @@ import Livestream from "./components/Livestream";
 import { AuthContextProvider, useAuth } from "./context/AuthContext";
 import withAuth from "./AuthChecker";
 import AuthChecker from "./AuthChecker";
+import { useSelector } from "react-redux";
 
-const ProtectedRoute = ({ element: Element, ...rest }) => {
-  const { user } = useAuth();
+// const ProtectedRoute = ({ element: Element, ...rest }) => {
+//   const { user } = useAuth();
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
+//   if (!user) {
+//     return <Navigate to="/login" />;
+//   }
 
-  return <Route {...rest} element={<Element />} />;
-};
+//   return <Route {...rest} element={<Element />} />;
+// };
 const Layout = ({ children }) => {
   const [sidebar, toggleSidebar] = useState(true);
   const handleToggleSidebar = () => toggleSidebar(!sidebar);
@@ -54,30 +55,44 @@ const Layout = ({ children }) => {
 };
 
 const App = () => {
-  // const { user } = useAuth();
+  const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.role);
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      // Nếu không có token trong localStorage, điều hướng đến trang login
+      return <Navigate to="/login" />;
+    }
+  }, [token]);
+
   return (
-    <AuthContextProvider>
-        <Routes>
-        {/* {!user && <Route path="/" element={<Navigate to="/login" />} />} */}
-          <Route path="/" element={<LoginScreen />} />
-          <Route
-            path="/home"
-            element={
-              <Layout>
-              <HomeScreen />
-            </Layout>
-            }
-          />
-          <Route
-            path="/livestream"
-            element={
-              <Layout>
-              <Livestream />
-            </Layout>
-            }
-          />
-        </Routes>
-    </AuthContextProvider>
+    <Routes>
+    <Route path="/login" element={<LoginScreen />} />
+    <Route
+      path="/home"
+      element={
+        token ? (
+          <Layout>
+            <HomeScreen />
+          </Layout>
+        ) : (
+          <Navigate to="/login" />
+        )
+      }
+    />
+    <Route
+      path="/livestream"
+      element={
+        token ? (
+          <Layout>
+            <Livestream />
+          </Layout>
+        ) : (
+          <Navigate to="/login" />
+        )
+      }
+    />
+    <Route path="*" element={<Navigate to={token ? "/home" : "/login"} />} />
+  </Routes>
   );
 };
 

@@ -18,6 +18,8 @@ import withAuth from "./AuthChecker";
 import AuthChecker from "./AuthChecker";
 import { useSelector } from "react-redux";
 import ExploreScreen from "./ExploreScreen";
+import Footer from "./components/Footer";
+import SavedCourses from "./SavedCourses";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -33,25 +35,25 @@ const Layout = ({ children }) => {
   const handleToggleSidebar = () => toggleSidebar(!sidebar);
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header handleToggleSidebar={handleToggleSidebar} />
-      <div className="flex text-xl text-black">
+      <div className="flex text-black">
         <Sidebar
           sidebar={sidebar}
           handleToggleSidebar={handleToggleSidebar}
           className="relative z-50"
         />
         <Container
-          sidebar={sidebar}
           fluid
-          className={`  transform duration-700 absolute   ${
-            sidebar ? "ml-[250px]" : "ml-0"
+          className={`transform duration-700  ${
+            sidebar ? "ml-[250px]" : "ml-0 "
           }`}
         >
           {children}
         </Container>
       </div>
-    </>
+      <Footer sidebar={sidebar} />
+    </div>
   );
 };
 
@@ -103,9 +105,9 @@ const App = () => {
         element={
           token ? (
             <>
-              <>
+              <div className="flex flex-col min-h-screen">
                 <Header handleToggleSidebar={handleToggleSidebar} />
-                <div className="flex text-xl text-black">
+                <div className="flex text-xl flex-grow text-black">
                   <Sidebar
                     sidebar={sidebar}
                     handleToggleSidebar={handleToggleSidebar}
@@ -114,20 +116,35 @@ const App = () => {
                   <Container
                     sidebar={sidebar}
                     fluid
-                    className={`  transform duration-700 absolute   ${
+                    className={`  transform duration-700    ${
                       sidebar ? "ml-[250px]" : "ml-0"
                     }`}
                   >
                     <ExploreScreen sidebar={sidebar} />
                   </Container>
                 </div>
-              </>
+                <Footer
+                sidebar={sidebar}/>
+              </div>
             </>
           ) : (
             <Navigate to="/login" />
           )
         }
       />
+       <Route
+        path="/savedcourses"
+        element={
+          token ? (
+            <Layout>
+              <SavedCourses />
+            </Layout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+
       <Route path="*" element={<Navigate to={token ? "/home" : "/login"} />} />
     </Routes>
   );

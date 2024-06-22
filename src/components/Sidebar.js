@@ -44,6 +44,9 @@ const Sidebar = ({ sidebar }) => {
   const handleExplore = () => {
     navigate("/explore");
   }
+  const handleSavedCourses = () => {
+    navigate("/savedcourses")
+  }
 
   return (
     <Menu
@@ -107,7 +110,7 @@ const Sidebar = ({ sidebar }) => {
           <Menu.Item key="21">My Certification</Menu.Item>
         </div>
       </SubMenu>
-      <Menu.Item key="22">
+      <Menu.Item key="22" onClick={handleSavedCourses}>
         <FontAwesomeIcon icon={faHeart} className="mr-2 icon" />
         Save Courses
       </Menu.Item>

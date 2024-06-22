@@ -41,6 +41,9 @@ const Sidebar = ({ sidebar }) => {
   const handleHome = () => {
     navigate("/");
   };
+  const handleExplore = () => {
+    navigate("/explore");
+  }
 
   return (
     <Menu
@@ -61,7 +64,7 @@ const Sidebar = ({ sidebar }) => {
         <FontAwesomeIcon icon={faHeadset} className="mr-2 icon" />
         Live Stream
       </Menu.Item>
-      <Menu.Item key="3">
+      <Menu.Item key="3" onClick={handleExplore}>
         <FontAwesomeIcon icon={faMagnifyingGlass} className="mr-2 icon" />
         Explore
       </Menu.Item>

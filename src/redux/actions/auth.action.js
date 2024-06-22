@@ -18,6 +18,7 @@ export const login = (username, password) => {
                 dispatch({type: SET_TOKEN, payload:token});
                 localStorage.setItem('token', token)
                 localStorage.setItem('role', user.role);
+                console.log('token:',token)
             } else {
                 dispatch({type: LOGIN_FAILURE, error:"Invalid account"});
             }

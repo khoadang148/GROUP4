@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import ExploreScreen from "./ExploreScreen";
 import Footer from "./components/Footer";
 import SavedCourses from "./SavedCourses";
+import CertificationCenter from "./CertificationCenter";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -127,6 +128,7 @@ const App = () => {
                 sidebar={sidebar}/>
               </div>
             </>
+              
           ) : (
             <Navigate to="/login" />
           )
@@ -144,6 +146,22 @@ const App = () => {
           )
         }
       />
+
+      <Route
+      path="/certificationcenter"
+      element={
+        token ? (
+          <>
+              <div className="flex flex-col min-h-screen">
+              <CertificationCenter />
+                <Footer/>
+              </div>
+          </>
+        ) : (
+          <Navigate to="/login" />
+        )
+      }
+    />
 
       <Route path="*" element={<Navigate to={token ? "/home" : "/login"} />} />
     </Routes>

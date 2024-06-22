@@ -47,6 +47,9 @@ const Sidebar = ({ sidebar }) => {
   const handleSavedCourses = () => {
     navigate("/savedcourses")
   }
+  const handleCertificationCenter = () => {
+    navigate("/certificationcenter");
+  }
 
   return (
     <Menu
@@ -103,7 +106,7 @@ const Sidebar = ({ sidebar }) => {
         className="submenu-hover"
       >
         <div className="font-normal pl-5">
-          <Menu.Item key="17">Certification Center</Menu.Item>
+          <Menu.Item key="17" onClick={handleCertificationCenter}>Certification Center</Menu.Item>
           <Menu.Item key="18">Certification Fill Form</Menu.Item>
           <Menu.Item key="19">Test View</Menu.Item>
           <Menu.Item key="20">Test Result</Menu.Item>

@@ -21,6 +21,7 @@ import ExploreScreen from "./ExploreScreen";
 import Footer from "./components/Footer";
 import SavedCourses from "./SavedCourses";
 import CertificationCenter from "./CertificationCenter";
+import DashBoard from "./DashBoard";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -34,16 +35,26 @@ import CertificationCenter from "./CertificationCenter";
 const Layout = ({ children }) => {
   const [sidebar, toggleSidebar] = useState(true);
   const handleToggleSidebar = () => toggleSidebar(!sidebar);
+  const role = useSelector((state) => state.auth.role);
 
   return (
     <div className="flex flex-col min-h-screen">
       <Header handleToggleSidebar={handleToggleSidebar} />
       <div className="flex text-black">
-        <Sidebar
-          sidebar={sidebar}
-          handleToggleSidebar={handleToggleSidebar}
-          className="relative z-50"
-        />
+        {role === "student" && (
+          <Sidebar
+            sidebar={sidebar}
+            handleToggleSidebar={handleToggleSidebar}
+            className="relative z-50"
+          />
+        )}
+        {role === "teacher" && (
+          <Sidebar
+            sidebar={sidebar}
+            handleToggleSidebar={handleToggleSidebar}
+            className="relative z-50"
+          />
+        )}
         <Container
           fluid
           className={`transform duration-700  ${
@@ -66,13 +77,19 @@ const App = () => {
     setVisibleAvatars(visibleAvatars === 7 ? 6 : 7);
   }
   const token = useSelector((state) => state.auth.token);
-  const role = useSelector((state) => state.role);
+  const role = useSelector((state) => state.auth.role); 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       // Nếu không có token trong localStorage, điều hướng đến trang login
-      return <Navigate to="/login" />;
+      navigate("/login");
+    } else {
+      if (role === "teacher") {
+        navigate("/dashboard");
+      }
     }
-  }, [token]);
+  }, [token, role, navigate]);
 
   return (
     <Routes>
@@ -124,17 +141,15 @@ const App = () => {
                     <ExploreScreen sidebar={sidebar} />
                   </Container>
                 </div>
-                <Footer
-                sidebar={sidebar}/>
+                <Footer sidebar={sidebar} />
               </div>
             </>
-              
           ) : (
             <Navigate to="/login" />
           )
         }
       />
-       <Route
+      <Route
         path="/savedcourses"
         element={
           token ? (
@@ -148,20 +163,34 @@ const App = () => {
       />
 
       <Route
-      path="/certificationcenter"
-      element={
-        token ? (
-          <>
+        path="/certificationcenter"
+        element={
+          token ? (
+            <>
               <div className="flex flex-col min-h-screen">
-              <CertificationCenter />
-                <Footer/>
+                <CertificationCenter />
+                <Footer />
               </div>
-          </>
-        ) : (
-          <Navigate to="/login" />
-        )
-      }
-    />
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      {role === "teacher" && (
+        <Route
+          path="/dashboard"
+          element={
+            token ? (
+              <Layout>
+                <DashBoard />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
 
       <Route path="*" element={<Navigate to={token ? "/home" : "/login"} />} />
     </Routes>

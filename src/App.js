@@ -16,12 +16,14 @@ import Livestream from "./Livestream";
 import { AuthContextProvider, useAuth } from "./context/AuthContext";
 import withAuth from "./AuthChecker";
 import AuthChecker from "./AuthChecker";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ExploreScreen from "./ExploreScreen";
 import Footer from "./components/Footer";
 import SavedCourses from "./SavedCourses";
 import CertificationCenter from "./CertificationCenter";
 import DashBoard from "./DashBoard";
+import { setToken } from "./redux/actions/auth.action";
+import Cookies from "js-cookie";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -70,24 +72,30 @@ const Layout = ({ children }) => {
 };
 
 const App = () => {
+  const dispatch = useDispatch();
   const [sidebar, toggleSidebar] = useState(true);
   const [visibleAvatars, setVisibleAvatars] = useState(7);
   const handleToggleSidebar = () => {
     toggleSidebar(!sidebar);
     setVisibleAvatars(visibleAvatars === 7 ? 6 : 7);
-  }
+  };
   const token = useSelector((state) => state.auth.token);
-  const role = useSelector((state) => state.auth.role); 
+  const role = useSelector((state) => state.auth.role);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      // Nếu không có token trong localStorage, điều hướng đến trang login
-      navigate("/login");
+    // Đọc token từ cookie
+    const tokenFromCookie = Cookies.get("token");
+    if (tokenFromCookie) {
+      dispatch(setToken(tokenFromCookie));
     } else {
-      if (role === "teacher") {
-        navigate("/dashboard");
-      }
+      navigate("/login");
+    }
+  }, [dispatch, navigate]);
+
+  useEffect(() => {
+    if (token && role === "teacher") {
+      navigate("/dashboard");
     }
   }, [token, role, navigate]);
 

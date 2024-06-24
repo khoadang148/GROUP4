@@ -23,6 +23,7 @@ import {
   faDollarSign,
   faWallet,
   faNewspaper,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faHeart,
@@ -30,7 +31,8 @@ import {
   faCircleCheck,
 } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/actions/auth.action";
 
 const { SubMenu } = Menu;
 
@@ -65,6 +67,11 @@ const Sidebar = ({ sidebar }) => {
     navigate("/certificationcenter");
   };
   const role = useSelector((state) => state.auth.role);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login"); // Chuyển hướng đến trang login sau khi logout
+  };
 
   return (
     <Menu
@@ -347,6 +354,10 @@ const Sidebar = ({ sidebar }) => {
           </div>
         </div>
       )}
+      <Menu.Item key="logout" onClick={handleLogout}>
+        <FontAwesomeIcon icon={faSignOutAlt} className="mr-2 icon" />
+        Logout
+      </Menu.Item>
 
       <style jsx>{`
         .ant-menu-item-selected {

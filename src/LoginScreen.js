@@ -1,9 +1,10 @@
 // src/LoginScreen.js
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { Form, Input, Button } from 'antd';
-import { login } from './redux/actions/auth.action';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Form, Input, Button } from "antd";
+import { login } from "./redux/actions/auth.action";
+import Cookies from "js-cookie";
 
 const LoginScreen = () => {
   const [loading, setLoading] = useState(false);
@@ -11,26 +12,35 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.error);
   const user = useSelector((state) => state.auth.user);
-  console.log('user',(user))
+  const token = useSelector((state) => state.auth.token);
+  console.log("user", user);
   const handleLogin = async (values) => {
     setLoading(true);
-    console.log(values)
+    console.log(values);
     await dispatch(login(values.username, values.password));
     setLoading(false);
-    if (user) {
-      navigate('/home');
+
+    if (token) {
+      Cookies.set("token", token, { expires: 7 });
+      navigate("/home");
     }
   };
 
   return (
-    <div className='max-w-[300px] my-[100px] mx-auto'>
+    <div className="max-w-[300px] my-[100px] mx-auto">
       <h2>Login</h2>
-      {error && <p className='text-red-600'>{error}</p>}
+      {error && <p className="text-red-600">{error}</p>}
       <Form onFinish={handleLogin}>
-        <Form.Item name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
+        <Form.Item
+          name="username"
+          rules={[{ required: true, message: "Please input your username!" }]}
+        >
           <Input placeholder="Username" />
         </Form.Item>
-        <Form.Item name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
           <Input.Password placeholder="Password" />
         </Form.Item>
         <Form.Item>

@@ -5,6 +5,7 @@ import {
   LOGIN_FAILURE,
   LOGOUT,
   SET_TOKEN,
+  SET_ROLE,
 } from "../actionType";
 
 const initialState = {
@@ -47,6 +48,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload,
+      };
+    case SET_ROLE:
+      return {
+        ...state,
+        role: Cookies.get("role"),
       };
     default:
       return state;

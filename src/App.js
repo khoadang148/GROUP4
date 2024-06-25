@@ -22,7 +22,7 @@ import Footer from "./components/Footer";
 import SavedCourses from "./SavedCourses";
 import CertificationCenter from "./CertificationCenter";
 import DashBoard from "./DashBoard";
-import { setToken } from "./redux/actions/auth.action";
+import { setToken, setRole } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
@@ -88,6 +88,7 @@ const App = () => {
     const tokenFromCookie = Cookies.get("token");
     if (tokenFromCookie) {
       dispatch(setToken(tokenFromCookie));
+      dispatch(setRole(tokenFromCookie));
     } else {
       navigate("/login");
     }

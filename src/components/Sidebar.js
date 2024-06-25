@@ -358,7 +358,6 @@ const Sidebar = ({ sidebar }) => {
         <FontAwesomeIcon icon={faSignOutAlt} className="mr-2 icon" />
         Logout
       </Menu.Item>
-
       <style jsx>{`
         .ant-menu-item-selected {
           background-color: #ffecec !important;

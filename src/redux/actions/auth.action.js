@@ -51,3 +51,11 @@ export const setToken = (token) => ({
   type: "SET_TOKEN",
   payload: token,
 });
+
+export const setRole = (role) => {
+  // Giả sử bạn có cách để lấy role từ token
+  return {
+    type: "SET_ROLE",
+    payload: role,
+  };
+};

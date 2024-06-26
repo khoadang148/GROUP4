@@ -43,7 +43,7 @@ const Layout = ({ children }) => {
   const role = useSelector((state) => state.auth.role);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen">
       <Header handleToggleSidebar={handleToggleSidebar} />
       <div className="flex text-black">
         {role === "student" && (
@@ -62,8 +62,8 @@ const Layout = ({ children }) => {
         )}
         <Container
           fluid
-          className={`transform duration-700  ${
-            sidebar ? "ml-[250px]" : "ml-0 "
+          className={`min-h-screen transform duration-700  ${
+            sidebar ? "ml-[250px]" : ""
           }`}
         >
           {/* {children} */}
@@ -184,7 +184,7 @@ const App = () => {
         element={
           token ? (
             <Layout>
-              <InstructorProfie />
+              <InstructorProfie sidebar={sidebar} />
             </Layout>
           ) : (
             <Navigate to="/login" />

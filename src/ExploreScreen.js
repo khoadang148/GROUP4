@@ -1,3 +1,4 @@
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import { Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -100,6 +101,7 @@ const ExploreScreen = ({ sidebar }) => {
 
   const [startIndex, setStartIndex] = useState(0);
   const [visibleAvatars, setVisibleAvatars] = useState(7);
+  const [hoveredCourse, setHoveredCourse] = useState(null);
 
   const handlePrevClick = () => {
     if (startIndex > 0) {
@@ -116,19 +118,29 @@ const ExploreScreen = ({ sidebar }) => {
   const handleToggleSidebar = () => {
     setVisibleAvatars(visibleAvatars === 7 ? 6 : 7);
   };
+
+  const handleMouseEnter = (index) => {
+    setHoveredCourse(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredCourse(null);
+  };
+
   return (
     <div className="mt-20 ml-8 overflow-x-hidden">
       <div className="group flex">
         <div
-          className={`mt-4 mb-5 border-2 border-[#F7F7F7] bg-white px-4 text-base  h-[50px] relative pt-1 group-focus-within:border-black ${
+          className={`mt-4 mb-5 border-2 border-[#F7F7F7] bg-white px-4 text-base h-[50px] relative pt-1 group-focus-within:border-black ${
             sidebar ? "w-[1400px]" : "w-[1640px]"
           }`}
         >
           <input
             type="text"
             placeholder="Search for Tuts Videos, Tutors, Tests and more.."
-            className={`focus:outline-none  text-sm ml-20 mt-2 text-black bg-white placeholder-gray-500 focus:placeholder-black focus:text-black rounded-[5px]
-                ${sidebar ? "w-[1300px]" : "w-[1540px]"}`}
+            className={`focus:outline-none text-sm ml-20 mt-2 text-black bg-white placeholder-gray-500 focus:placeholder-black focus:text-black rounded-[5px] ${
+              sidebar ? "w-[1300px]" : "w-[1540px]"
+            }`}
           />
           <button type="submit" className="top-2 left-14 absolute">
             <Image
@@ -147,12 +159,12 @@ const ExploreScreen = ({ sidebar }) => {
           <span className="text-sm">See all</span>
         </Link>
       </div>
-      <div className="mt-4  py-2 px-0 overflow-x-scroll no-scrollbar relative">
+      <div className="mt-4 py-2 px-0 overflow-x-scroll no-scrollbar relative">
         <div className="flex items-center">
           <button
             onClick={handlePrevClick}
             disabled={startIndex === 0}
-            className="group bg-white hover:bg-red-600 absolute left-3 z-50  cursor-pointer px-2 py-0 rounded-[5px] "
+            className="group bg-white hover:bg-red-600 absolute left-3 z-50 cursor-pointer px-2 py-0 rounded-[5px]"
           >
             <h1 className="group-hover:text-white">{"<"}</h1>
           </button>
@@ -186,7 +198,7 @@ const ExploreScreen = ({ sidebar }) => {
           <button
             onClick={handleNextClick}
             disabled={startIndex >= avatars.length - visibleAvatars}
-            className="group bg-white hover:bg-red-600 absolute right-[14px] z-50  cursor-pointer px-2 py-0 rounded-[5px] "
+            className="group bg-white hover:bg-red-600 absolute right-[14px] z-50 cursor-pointer px-2 py-0 rounded-[5px]"
           >
             <h1 className="group-hover:text-white">{">"}</h1>
           </button>
@@ -195,20 +207,16 @@ const ExploreScreen = ({ sidebar }) => {
       <div className="grid grid-cols-4 gap-[20px] mt-8">
         {thumbnails.map((thumbnail, index) => (
           <div
-            className={`bg-white relative ${
+            key={index}
+            className={`bg-white cursor-pointer relative ${
               sidebar ? "h-[370px] w-[330px]" : "h-[400px] w-[380px]"
             }`}
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={handleMouseLeave}
           >
             <div className="">
-              {/* <div className=" bg-[#fbcb0b] relative top-14 left-5 z-50 pb-2 w-[60px] h-[25px] rounded-[4px]">
-                <div className="inline-flex mb-3">
-                    <Image className="w-[14px] h-[20px] ml-2 pt-1 mt-1" src={require("../src/assets/star.png")} />
-                    <div className="text-[16px] ml-1 text-white pb-5">{rates[index]}</div>
-                </div>          
-              </div>
-              <div className="bg-[#fa8305] w-[80px] h-[20px] relative z-50 left-56 top-9 text-sm text-white font-medium text-center ml-[14px]">Best Seller</div> */}
               <div
-                className={`absolute top-4 left-5 bg-[#fbcb0b] px-2 py-1 z-10  ${
+                className={`absolute top-4 left-5 bg-[#fbcb0b] px-2 py-1 z-10 ${
                   sidebar ? "w-[60px] h-[30px]" : "w-[60px] h-[35px]"
                 }`}
               >
@@ -225,8 +233,8 @@ const ExploreScreen = ({ sidebar }) => {
               <div
                 className={`bg-[#fa8305] absolute z-50 top-4 text-sm text-white font-medium text-center ${
                   sidebar
-                    ? " right-3 ml-[10px]  w-[80px] h-[20px]"
-                    : " right-1 ml-[5px]  w-[80px] h-[20px]"
+                    ? "right-3 ml-[10px] w-[80px] h-[20px]"
+                    : "right-1 ml-[5px] w-[80px] h-[20px]"
                 }`}
               >
                 Best Seller
@@ -237,33 +245,107 @@ const ExploreScreen = ({ sidebar }) => {
                     ? "w-[310px] h-[170px] ml-[10px]"
                     : "ml-[5px] w-[370px] h-[200px]"
                 }`}
-                src={thumbnails[index]}
+                src={thumbnail}
                 alt="Search"
               />
-              <span className='text-xs text-white absolute bottom-[200px] right-[10px] p-[0.5rem] bg-[#505050] rounded-[3px] font-bold'>{hours[index]}</span>
+              <span className="text-xs text-white absolute bottom-[200px] right-[10px] p-[0.5rem] bg-[#505050] rounded-[3px] font-bold">
+                {hours[index]}
+              </span>
               <div
                 className={`relative left-2 top-2 shadow-inset-bottom ${
                   sidebar ? "w-[310px] h-[170px]" : "w-[370px] h-[200px]"
                 }`}
-              ></div>
+              >
+                {hoveredCourse === index && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Button className="group relative" variant="light">
+                      <div className="border-2 border-white p-4 rounded-full group-hover:bg-black group-hover:opacity-30">
+                        <Image
+                          className="w-[30px] inset-0 h-[35px] ml-2 opacity-100 z-50 group-hover: opacity-0"
+                          src={require("./assets/pause.png")}
+                        />
+                      </div>
+                    </Button>
+                  </div>
+                )}
+              </div>
+              {/* <div
+                className={`relative left-2 top-2 shadow-inset-bottom ${
+                  sidebar ? "w-[310px] h-[170px]" : "w-[370px] h-[200px]"
+                }`}
+              ></div> */}
               <div className="flex">
-                <div className={`text-[#91979f] text-xs font-medium flex mt-5 ml-3 ${sidebar?"gap-2":"gap-2"}`}>
+                <div
+                  className={`text-[#91979f] text-xs font-medium flex mt-5 ml-3 ${
+                    sidebar ? "gap-2" : "gap-2"
+                  }`}
+                >
                   {views[index]}
                   <h1>• </h1>
                   {times[index]}
                 </div>
-                <Button>
-                <Image
-                    className={`w-[16px] h-[16px] mt-4 ${sidebar?"ml-36":"ml-48"}`}
+                <Button
+                  className={`group relative ${sidebar ? "ml-36" : "ml-48"}`}
+                >
+                  <Image
+                    className={`w-[16px] h-[16px] mt-4 `}
                     src={require("./assets/more.png")}
                   />
+                  <div className="absolute left-2 z-50 w-[200px] bg-white border border-gray-300 rounded-md shadow-lg opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity duration-300">
+                    <ul className="py-1">
+                      <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
+                        <Image
+                          className="mr-2"
+                          src={require("../src/assets/share.png")}
+                        />
+                        Share
+                      </li>
+                      <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
+                        <Image
+                          className="mr-2"
+                          src={require("../src/assets/time.png")}
+                        />
+                        Save
+                      </li>
+                      <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
+                        <Image
+                          className="mr-2 w-[16px] h-[16px]"
+                          src={require("../src/assets/ban.png")}
+                        />
+                        Not Interested
+                      </li>
+                      <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
+                        <Image
+                          className="mr-2 w-[16px] h-[16px]"
+                          src={require("../src/assets/wind-flag.png")}
+                        />
+                        Report
+                      </li>
+                    </ul>
+                  </div>
                 </Button>
               </div>
               <div className="ml-3 text-xl font-semibold">{titles[index]}</div>
-              <div className="ml-3 text-sm text-[#91979f] mt-2">{languages[index]}</div>
-              <div className="flex  ml-3">
-                <div className="flex mt-4 text-base"><h1 className="mr-1 text-[#91979f] font-normal">By</h1> <h1>{instructors[index]}</h1></div>
-                <div className={` mt-2 font-medium ${sidebar?" ml-44":"ml-56"}`}>{prices[index]}</div>
+              <div className="ml-3 text-sm text-[#91979f] mt-2">
+                {languages[index]}
+              </div>
+              <div className="flex ml-3">
+                <div className="flex mt-4 text-base">
+                  <h1 className="mr-1 text-[#91979f] font-normal">By</h1>{" "}
+                  <h1>{instructors[index]}</h1>
+                </div>
+                <div
+                  className={`mt-2 font-medium flex gap-1 ${
+                    sidebar ? "ml-44" : "ml-56"
+                  }`}
+                >
+                  <ShoppingCartOutlined
+                    className={`mt-[1px] hover:text-red-600 ${
+                      hoveredCourse === index ? "block" : "hidden"
+                    }`}
+                  />
+                  {prices[index]}
+                </div>
               </div>
             </div>
           </div>

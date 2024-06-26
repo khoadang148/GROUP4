@@ -24,7 +24,7 @@ const Footer = ({ sidebar }) => {
   ];
 
   return (
-    <div className="relative bg-[#333333] w-[100%]">
+    <div className="relative bg-[#333333] w-[100%] mt-10">
       <div
         className={`relative ${
           sidebar ? "ml-64" : ""

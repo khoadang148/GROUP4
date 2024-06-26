@@ -29,6 +29,7 @@ import HeaderPages from "./components/HeaderPages";
 import About from "./About";
 import InstructorProfile from "./InstructorProfile";
 import Dashboard2 from "./Dashboard2";
+import OurBlog from "./OurBlog";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -185,6 +186,20 @@ const App = () => {
                 <Footer />
               </div>
             </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/blog"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages/>
+              <OurBlog />
+              <Footer />
+            </div>
           ) : (
             <Navigate to="/login" />
           )

@@ -5,10 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const About = () => {
   return (
     <div>
-      <div className="relative pt-[100px] p-4 z-40 flex flex-col items-center justify-center">
+      <div className="relative pt-[200px] p-4 z-40 flex flex-col items-center justify-center">
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative z-10 text-center text-black">
           <div className="flex justify-center space-x-4 mb-4 -mt-8">
+            <h3 className="inline-block">About</h3>
             <h3 className="inline-block">Blog</h3>
             <h3 className="inline-block">Company</h3>
             <h3 className="inline-block">Careers</h3>

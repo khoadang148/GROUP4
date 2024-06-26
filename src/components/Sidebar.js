@@ -72,6 +72,9 @@ const Sidebar = ({ sidebar }) => {
   };
   const handleAbout = () => {
     navigate ("/about") 
+  };
+  const handleOurBlog = () => {
+    navigate ("/blog") 
   }
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -398,7 +401,7 @@ const Sidebar = ({ sidebar }) => {
                  <Menu.Item key="30">Invoice</Menu.Item>
                  <Menu.Item key="31">Career</Menu.Item>
                  <Menu.Item key="32">Job Apply</Menu.Item>
-                 <Menu.Item key="33">Our Blog</Menu.Item>
+                 <Menu.Item key="33" onClick={handleOurBlog}>Our Blog</Menu.Item>
                  <Menu.Item key="34">Blog Detail View</Menu.Item>
                  <Menu.Item key="35">Company Details</Menu.Item>
                  <Menu.Item key="36">Press</Menu.Item>

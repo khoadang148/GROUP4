@@ -24,6 +24,8 @@ import CertificationCenter from "./CertificationCenter";
 import DashBoard from "./DashBoard";
 import { setToken, setRole } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
+import HeaderPages from "./components/HeaderPages";
+import About from "./About";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -181,6 +183,20 @@ const App = () => {
                 <Footer />
               </div>
             </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/about"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages/>
+              <About />
+              <Footer />
+            </div>
           ) : (
             <Navigate to="/login" />
           )

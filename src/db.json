@@ -1,17 +1,128 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "username": "student",
-        "password": "password",
-        "role": "student"
-      },
-      {
-        "id": 2,
-        "username": "teacher",
-        "password": "password",
-        "role": "teacher"
-      }
-    ]
-  }
-  
+  "cors": true,
+  "users": [
+    {
+      "id": 1,
+      "username": "student",
+      "password": "password",
+      "role": "student",
+      "enrolledCourses": [
+        {
+          "id": 1,
+          "avatar": "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-1.jpg",
+          "keyword": "John Doe",
+          "thumbnail": "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-1.jpg",
+          "rate": "4.5",
+          "price": "$10",
+          "instructor": "John Doe",
+          "language": "Javascript",
+          "hours": "25 hours",
+          "views": "109k views",
+          "time": "15 days ago",
+          "title": "Complete Python Bootcamp: Go from zero to hero in Python 3"
+        },
+        {
+          "id": 2,
+          "avatar": "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-1.jpg",
+          "keyword": "John Doe",
+          "thumbnail": "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-2.jpg",
+          "rate": "4.5",
+          "price": "$10",
+          "instructor": "John Doe",
+          "language": "Javascript",
+          "hours": "25 hours",
+          "views": "109k views",
+          "time": "15 days ago",
+          "title": "Complete Python Bootcamp: Go from zero to hero in Python 3"
+        },
+        {
+          "id": 3,
+          "avatar": "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-1.jpg",
+          "keyword": "John Doe",
+          "thumbnail": "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-3.jpg",
+          "rate": "4.5",
+          "price": "$10",
+          "instructor": "John Doe",
+          "language": "Javascript",
+          "hours": "25 hours",
+          "views": "109k views",
+          "time": "15 days ago",
+          "title": "Complete Python Bootcamp: Go from zero to hero in Python 3"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "username": "teacher",
+      "password": "password",
+      "role": "teacher",
+      "enrolledCourses": []
+    },
+    {
+      "id": 3,
+      "username": "newuser",
+      "password": "newpassword",
+      "role": "student",
+      "enrolledCourses": [
+        {
+          "id": 1,
+          "avatar": "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-1.jpg",
+          "keyword": "John Doe",
+          "thumbnail": "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-1.jpg",
+          "rate": "4.5",
+          "price": "$10",
+          "instructor": "John Doe",
+          "language": "Javascript",
+          "hours": "25 hours",
+          "views": "109k views",
+          "time": "15 days ago",
+          "title": "Complete Python Bootcamp: Go from zero to hero in Python 3"
+        }
+      ]
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "avatar": "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-1.jpg",
+      "keyword": "John Doe",
+      "thumbnail": "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-1.jpg",
+      "rate": "4.5",
+      "price": "$10",
+      "instructor": "John Doe",
+      "language": "Javascript",
+      "hours": "25 hours",
+      "views": "109k views",
+      "time": "15 days ago",
+      "title": "Complete Python Bootcamp: Go from zero to hero in Python 3"
+    },
+    {
+      "id": 2,
+      "avatar": "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-1.jpg",
+      "keyword": "John Doe",
+      "thumbnail": "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-2.jpg",
+      "rate": "4.5",
+      "price": "$10",
+      "instructor": "John Doe",
+      "language": "Javascript",
+      "hours": "25 hours",
+      "views": "109k views",
+      "time": "15 days ago",
+      "title": "Complete Python Bootcamp: Go from zero to hero in Python 3"
+    },
+    {
+      "id": 3,
+      "avatar": "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-1.jpg",
+      "keyword": "John Doe",
+      "thumbnail": "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-3.jpg",
+      "rate": "4.5",
+      "price": "$10",
+      "instructor": "John Doe",
+      "language": "Javascript",
+      "hours": "25 hours",
+      "views": "109k views",
+      "time": "15 days ago",
+      "title": "Complete Python Bootcamp: Go from zero to hero in Python 3"
+    }
+  ]
+}

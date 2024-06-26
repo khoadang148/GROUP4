@@ -7,6 +7,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   SET_TOKEN,
+  SET_ID,
 } from "../actionType";
 
 export const login = (username, password) => {
@@ -21,15 +22,16 @@ export const login = (username, password) => {
         (user) => user.username === username && user.password === password
       );
       if (user) {
-        const token = `fake-jwt-token-${user.role}`;
+        const token = `fake-jwt-token-${user.username}`;
         dispatch({ type: LOGIN_SUCCESS, payload: user });
         dispatch({ type: SET_TOKEN, payload: token });
 
         // Sử dụng cookies để lưu token
         Cookies.set("token", token, { expires: 7 }); // Thời gian sống token là 7 ngày
         Cookies.set("role", user.role, { expires: 7 }); // Lưu role của user
-        
-        console.log("token:", token);
+        Cookies.set("id", user.id, { expires: 7 });
+
+        // console.log("token:", token);
       } else {
         dispatch({ type: LOGIN_FAILURE, error: "Invalid account" });
       }
@@ -57,5 +59,13 @@ export const setRole = (role) => {
   return {
     type: "SET_ROLE",
     payload: role,
+  };
+};
+
+export const setID = (id) => {
+  // Thêm action lưu user
+  return {
+    type: SET_ID,
+    payload: id,
   };
 };

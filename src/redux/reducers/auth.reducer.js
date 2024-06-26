@@ -6,6 +6,8 @@ import {
   LOGOUT,
   SET_TOKEN,
   SET_ROLE,
+  SET_USER,
+  SET_ID,
 } from "../actionType";
 
 const initialState = {
@@ -14,6 +16,7 @@ const initialState = {
   user: null,
   error: null,
   loading: false,
+  id: Cookies.get("id") || null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -53,6 +56,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         role: Cookies.get("role"),
+      };
+    case SET_ID: // Xử lý hành động lưu user
+      return {
+        ...state,
+        id: Cookies.get("id"),
       };
     default:
       return state;

@@ -1,7 +1,9 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Image } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getEnrolledCourses } from "./redux/actions/course.action";
 
 const ExploreScreen = ({ sidebar }) => {
   const avatars = [
@@ -25,78 +27,6 @@ const ExploreScreen = ({ sidebar }) => {
     "Ridhima",
     "Amritpal",
     "Jimmy",
-  ];
-  const thumbnails = [
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-1.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-2.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-4.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-7.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-8.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-13.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-16.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-20.jpg",
-  ];
-  const rates = ["4.5", "5", "4", "4.5", "5", "4", "5", "4"];
-  const prices = ["$10", "$10", "$10", "$10", "$10", "$10", "$10", "$10"];
-  const instructors = [
-    "John Doe",
-    "John Doe",
-    "John Doe",
-    "John Doe",
-    "John Doe",
-    "John Doe",
-    "John Doe",
-    "John Doe",
-  ];
-  const languages = [
-    "Javascript",
-    "Web Development | Python",
-    "Javascript",
-    "Web Development | Python",
-    "Javascript",
-    "Web Development | Python",
-    "Javascript",
-    "Web Development | Python",
-  ];
-  const hours = [
-    "25 hours",
-    "28 hours",
-    "30 hours",
-    "1 hour",
-    "25 hours",
-    "28 hours",
-    "30 hours",
-    "1 hour",
-  ];
-  const views = [
-    "109k views",
-    "109k views",
-    "109k views",
-    "109k views",
-    "109k views",
-    "109k views",
-    "109k views",
-    "109k views",
-  ];
-  const times = [
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-  ];
-  const titles = [
-    "Complete Python Bootcamp: Go from zero to hero in Python 3",
-    "Complete Python Bootcamp: Go from zero to hero in Python 3",
-    "Complete python bootcamp",
-    "Complete python bootcamp",
-    "Complete python bootcamp",
-    "Complete python bootcamp",
-    "Complete python bootcamp",
-    "Complete python bootcamp",
   ];
 
   const [startIndex, setStartIndex] = useState(0);
@@ -126,6 +56,22 @@ const ExploreScreen = ({ sidebar }) => {
   const handleMouseLeave = () => {
     setHoveredCourse(null);
   };
+  const userId = useSelector((state) => state.auth.id);
+  console.log(userId);
+  const { courses, loading, error } = useSelector(
+    (state) => state.enrolledCourses
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (userId) {
+      dispatch(getEnrolledCourses(userId));
+    }
+  }, [dispatch, userId]);
+  // const mapStateToProps = (state) => ({
+  //   courses: state.enrolledCoursesReducer.courses,
+  //   loading: state.enrolledCoursesReducer.loading,
+  //   error: state.enrolledCoursesReducer.error,
+  // });
 
   return (
     <div className="mt-20 ml-8 overflow-x-hidden">
@@ -205,7 +151,7 @@ const ExploreScreen = ({ sidebar }) => {
         </div>
       </div>
       <div className="grid grid-cols-4 gap-[20px] mt-8">
-        {thumbnails.map((thumbnail, index) => (
+        {courses.map((course, index) => (
           <div
             key={index}
             className={`bg-white cursor-pointer relative ${
@@ -226,7 +172,7 @@ const ExploreScreen = ({ sidebar }) => {
                     src={require("./assets/star.png")}
                   />
                   <div className="text-[16px] ml-1 text-white">
-                    {rates[index]}
+                    {course.rate}
                   </div>
                 </div>
               </div>
@@ -245,11 +191,11 @@ const ExploreScreen = ({ sidebar }) => {
                     ? "w-[310px] h-[170px] ml-[10px]"
                     : "ml-[5px] w-[370px] h-[200px]"
                 }`}
-                src={thumbnail}
+                src={course.thumbnail}
                 alt="Search"
               />
               <span className="text-xs text-white absolute bottom-[200px] right-[10px] p-[0.5rem] bg-[#505050] rounded-[3px] font-bold">
-                {hours[index]}
+                {course.hours}
               </span>
               <div
                 className={`relative left-2 top-2 shadow-inset-bottom ${
@@ -280,9 +226,9 @@ const ExploreScreen = ({ sidebar }) => {
                     sidebar ? "gap-2" : "gap-2"
                   }`}
                 >
-                  {views[index]}
+                  {course.views}
                   <h1>• </h1>
-                  {times[index]}
+                  {course.time}
                 </div>
                 <Button
                   className={`group relative ${sidebar ? "ml-36" : "ml-48"}`}
@@ -325,14 +271,14 @@ const ExploreScreen = ({ sidebar }) => {
                   </div>
                 </Button>
               </div>
-              <div className="ml-3 text-xl font-semibold">{titles[index]}</div>
+              <div className="ml-3 text-xl font-semibold">{course.title}</div>
               <div className="ml-3 text-sm text-[#91979f] mt-2">
-                {languages[index]}
+                {course.language}
               </div>
               <div className="flex ml-3">
                 <div className="flex mt-4 text-base">
                   <h1 className="mr-1 text-[#91979f] font-normal">By</h1>{" "}
-                  <h1>{instructors[index]}</h1>
+                  <h1>{course.instructor}</h1>
                 </div>
                 <div
                   className={`mt-2 font-medium flex gap-1 ${
@@ -344,7 +290,7 @@ const ExploreScreen = ({ sidebar }) => {
                       hoveredCourse === index ? "block" : "hidden"
                     }`}
                   />
-                  {prices[index]}
+                  {course.price}
                 </div>
               </div>
             </div>

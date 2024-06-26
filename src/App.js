@@ -22,7 +22,7 @@ import Footer from "./components/Footer";
 import SavedCourses from "./SavedCourses";
 import CertificationCenter from "./CertificationCenter";
 import DashBoard from "./DashBoard";
-import { setToken, setRole } from "./redux/actions/auth.action";
+import { setToken, setRole, setID } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
 import InstructorProfie from "./InstructorProfie";
 
@@ -85,14 +85,17 @@ const App = () => {
   };
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
+  const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Đọc token từ cookie
+    
     const tokenFromCookie = Cookies.get("token");
+    const idFromCookie = Cookies.get("id");
     if (tokenFromCookie) {
       dispatch(setToken(tokenFromCookie));
       dispatch(setRole(tokenFromCookie));
+      dispatch(setID(idFromCookie));
     } else {
       navigate("/login");
     }

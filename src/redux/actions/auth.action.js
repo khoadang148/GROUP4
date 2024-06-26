@@ -28,7 +28,7 @@ export const login = (username, password) => {
         // Sử dụng cookies để lưu token
         Cookies.set("token", token, { expires: 7 }); // Thời gian sống token là 7 ngày
         Cookies.set("role", user.role, { expires: 7 }); // Lưu role của user
-
+        
         console.log("token:", token);
       } else {
         dispatch({ type: LOGIN_FAILURE, error: "Invalid account" });

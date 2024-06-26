@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Menu } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
-import img1 from "../assets/img1.jpg";
+import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -56,6 +56,9 @@ const Sidebar = ({ sidebar }) => {
   };
   const handleHome = () => {
     navigate("/");
+  };
+  const handleInstructorProfile = () => {
+    navigate("/instructorprofile");
   };
   const handleExplore = () => {
     navigate("/explore");
@@ -198,7 +201,7 @@ const Sidebar = ({ sidebar }) => {
           title="SUBSCRIPTIONS"
           style={{ color: "black" }}
         >
-          <Menu.Item key="43">
+          <Menu.Item key="43" onClick={handleInstructorProfile}>
             <div className="flex items-center">
               <img
                 src={img1}

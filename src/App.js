@@ -24,6 +24,7 @@ import CertificationCenter from "./CertificationCenter";
 import DashBoard from "./DashBoard";
 import { setToken, setRole } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
+import InstructorProfie from "./InstructorProfie";
 import HeaderPages from "./components/HeaderPages";
 import About from "./About";
 
@@ -65,7 +66,10 @@ const Layout = ({ children }) => {
             sidebar ? "ml-[250px]" : "ml-0 "
           }`}
         >
-          {children}
+          {/* {children} */}
+          {React.Children.map(children, (child) =>
+            React.cloneElement(child, { sidebar })
+          )}
         </Container>
       </div>
       <Footer sidebar={sidebar} />
@@ -134,7 +138,7 @@ const App = () => {
         element={
           token ? (
             <>
-              <div className="flex flex-col min-h-screen">
+              {/* <div className="flex flex-col min-h-screen">
                 <Header handleToggleSidebar={handleToggleSidebar} />
                 <div className="flex text-xl flex-grow text-black">
                   <Sidebar
@@ -153,7 +157,10 @@ const App = () => {
                   </Container>
                 </div>
                 <Footer sidebar={sidebar} />
-              </div>
+              </div> */}
+              <Layout>
+                <ExploreScreen sidebar={sidebar} />
+              </Layout>
             </>
           ) : (
             <Navigate to="/login" />
@@ -166,6 +173,18 @@ const App = () => {
           token ? (
             <Layout>
               <SavedCourses />
+            </Layout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/instructorprofile"
+        element={
+          token ? (
+            <Layout>
+              <InstructorProfie />
             </Layout>
           ) : (
             <Navigate to="/login" />

@@ -2,7 +2,15 @@ import React from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faTwitter, faGooglePlusG, faLinkedin, faInstagram, faYoutube, faPinterestP } from "@fortawesome/free-brands-svg-icons";
+import {
+  faFacebook,
+  faTwitter,
+  faGooglePlusG,
+  faLinkedin,
+  faInstagram,
+  faYoutube,
+  faPinterestP,
+} from "@fortawesome/free-brands-svg-icons";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = ({ sidebar }) => {
@@ -16,8 +24,12 @@ const Footer = ({ sidebar }) => {
   ];
 
   return (
-    <div className="relative bg-[#333333] w-[1600px]">
-      <div className={`relative ${sidebar ? "ml-64" : ""} transition-all duration-700`}>
+    <div className="relative bg-[#333333] w-[100%]">
+      <div
+        className={`relative ${
+          sidebar ? "ml-64" : ""
+        } transition-all duration-700`}
+      >
         <div className="footer_section_padding relative bg-[#333333]">
           <div className=" flex gap-[170px] justify-center items-center flex-row flex-wrap w-full text-left mb-[10px] mt-[10px] py-[20px] ml-[-70px]">
             <div className="footer-links-div w-[60px] ml-[5px] justify-center flex-col text-white text-[14px]">
@@ -84,17 +96,44 @@ const Footer = ({ sidebar }) => {
           <hr className="border-[#444444] w-[90%] ml-[50px] mr-[80px] " />
           <div className="flex justify-center  gap-[620px]  mt-4 p-4 ml-[-1px] ">
             <div className="flex items-center text-white text-sm">
-              <img className="w-8 mr-4 mb-3" src="https://gambolthemes.net/html-items/cursus-new-demo/images/logo1.svg" alt="Cursus Logo" />
-              <p>&copy; {new Date().getFullYear()} Cursus. All Rights Reserved.</p>
+              <img
+                className="w-8 mr-4 mb-3"
+                src="https://gambolthemes.net/html-items/cursus-new-demo/images/logo1.svg"
+                alt="Cursus Logo"
+              />
+              <p>
+                &copy; {new Date().getFullYear()} Cursus. All Rights Reserved.
+              </p>
             </div>
             <div className="flex space-x-3 ">
-              <FontAwesomeIcon icon={faFacebook} className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300 " />
-              <FontAwesomeIcon icon={faTwitter} className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300" />
-              <FontAwesomeIcon icon={faGooglePlusG} className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300" />
-              <FontAwesomeIcon icon={faLinkedin} className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300" />
-              <FontAwesomeIcon icon={faInstagram} className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300" />
-              <FontAwesomeIcon icon={faYoutube} className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300" />
-              <FontAwesomeIcon icon={faPinterestP} className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300" />
+              <FontAwesomeIcon
+                icon={faFacebook}
+                className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300 "
+              />
+              <FontAwesomeIcon
+                icon={faTwitter}
+                className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300"
+              />
+              <FontAwesomeIcon
+                icon={faGooglePlusG}
+                className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300"
+              />
+              <FontAwesomeIcon
+                icon={faLinkedin}
+                className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300"
+              />
+              <FontAwesomeIcon
+                icon={faInstagram}
+                className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300"
+              />
+              <FontAwesomeIcon
+                icon={faYoutube}
+                className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300"
+              />
+              <FontAwesomeIcon
+                icon={faPinterestP}
+                className="text-white w-6 h-6 transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-300"
+              />
             </div>
           </div>
         </div>

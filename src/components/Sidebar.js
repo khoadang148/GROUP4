@@ -69,6 +69,9 @@ const Sidebar = ({ sidebar }) => {
   const handleCertificationCenter = () => {
     navigate("/certificationcenter");
   };
+  const handleAbout = () => {
+    navigate ("/about") 
+  }
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -167,7 +170,7 @@ const Sidebar = ({ sidebar }) => {
           className="submenu-hover"
         >
           <div className="font-normal pl-5">
-            <Menu.Item key="23">About</Menu.Item>
+            <Menu.Item key="23" onClick={handleAbout}>About</Menu.Item>
             <Menu.Item key="24">Sign In</Menu.Item>
             <Menu.Item key="25">Sign Up</Menu.Item>
             <Menu.Item key="26">Sign Up Steps</Menu.Item>

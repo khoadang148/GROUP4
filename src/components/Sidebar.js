@@ -75,6 +75,9 @@ const Sidebar = ({ sidebar }) => {
     dispatch(logout());
     navigate("/login"); // Chuyển hướng đến trang login sau khi logout
   };
+  const handleAllInstructors = () => {
+    navigate("/allinstructors");
+  };
 
   return (
     <Menu
@@ -218,7 +221,7 @@ const Sidebar = ({ sidebar }) => {
               <p className="ml-6 pt-3">Jassica William</p>
             </div>
           </Menu.Item>
-          <Menu.Item key="45">
+          <Menu.Item key="45" onClick={handleAllInstructors}>
             <FontAwesomeIcon icon={faCirclePlus} className="mr-2 icon" />
             Browser Instructors
           </Menu.Item>
@@ -319,7 +322,7 @@ const Sidebar = ({ sidebar }) => {
       {role === "teacher" && (
         <Menu.Item key="61" className="flex items-center" onClick={handleHome}>
           <FontAwesomeIcon icon={faCircleCheck} className="mr-2 icon" />
-          Verìication
+          Verification
         </Menu.Item>
       )}
 

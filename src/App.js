@@ -25,6 +25,7 @@ import DashBoard from "./DashBoard";
 import { setToken, setRole, setID } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
 import InstructorProfie from "./InstructorProfie";
+import AllInstructors from "./AllInstructors";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -89,7 +90,6 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    
     const tokenFromCookie = Cookies.get("token");
     const idFromCookie = Cookies.get("id");
     if (tokenFromCookie) {
@@ -186,6 +186,18 @@ const App = () => {
           token ? (
             <Layout>
               <InstructorProfie sidebar={sidebar} />
+            </Layout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/allinstructors"
+        element={
+          token ? (
+            <Layout>
+              <AllInstructors sidebar={sidebar} />
             </Layout>
           ) : (
             <Navigate to="/login" />

@@ -30,6 +30,7 @@ import About from "./About";
 import InstructorProfile from "./InstructorProfile";
 import Dashboard2 from "./Dashboard2";
 import OurBlog from "./OurBlog";
+import Help from "./Help";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -178,6 +179,18 @@ const App = () => {
           )
         }
       />
+      <Route
+        path="/help"
+        element={
+          token ? (
+            <Layout>
+              <Help sidebar={sidebar} />
+            </Layout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
 
       <Route
         path="/certificationcenter"
@@ -199,7 +212,7 @@ const App = () => {
         element={
           token ? (
             <div className="flex flex-col min-h-screen">
-              <HeaderPages/>
+              <HeaderPages />
               <OurBlog />
               <Footer />
             </div>

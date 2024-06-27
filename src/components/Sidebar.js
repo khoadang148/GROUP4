@@ -76,6 +76,9 @@ const Sidebar = ({ sidebar }) => {
   const handleOurBlog = () => {
     navigate ("/blog") 
   }
+  const handleHelp = () => {
+    navigate ("/help") 
+  }
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -401,7 +404,9 @@ const Sidebar = ({ sidebar }) => {
                  <Menu.Item key="30">Invoice</Menu.Item>
                  <Menu.Item key="31">Career</Menu.Item>
                  <Menu.Item key="32">Job Apply</Menu.Item>
-                 <Menu.Item key="33" onClick={handleOurBlog}>Our Blog</Menu.Item>
+                 <Menu.Item key="33" onClick={handleOurBlog}>
+                   Our Blog
+                 </Menu.Item>
                  <Menu.Item key="34">Blog Detail View</Menu.Item>
                  <Menu.Item key="35">Company Details</Menu.Item>
                  <Menu.Item key="36">Press</Menu.Item>
@@ -462,7 +467,7 @@ const Sidebar = ({ sidebar }) => {
              </Menu.Item>
            )}
            {(role === "student" || role === "teacher") && (
-             <Menu.Item key="47">
+             <Menu.Item key="47" onClick={handleHelp}>
                <FontAwesomeIcon icon={faCircleQuestion} className="mr-2 icon" />
                Help
              </Menu.Item>

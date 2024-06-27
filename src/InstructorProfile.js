@@ -7,7 +7,7 @@ import {
 import React, { useState } from "react";
 import { Button, Image } from "react-bootstrap";
 
-const InstructorProfie = ({ sidebar }) => {
+const InstructorProfile = ({ sidebar }) => {
   const [hoveredCourse, setHoveredCourse] = useState(null);
   const thumbnails = [
     "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-1.jpg",
@@ -546,4 +546,4 @@ const InstructorProfie = ({ sidebar }) => {
   );
 };
 
-export default InstructorProfie;
+export default InstructorProfile;

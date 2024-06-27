@@ -24,8 +24,14 @@ import CertificationCenter from "./CertificationCenter";
 import DashBoard from "./DashBoard";
 import { setToken, setRole, setID } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
-import InstructorProfie from "./InstructorProfie";
 import AllInstructors from "./AllInstructors";
+import InstructorProfie from "./InstructorProfile";
+import HeaderPages from "./components/HeaderPages";
+import About from "./About";
+import InstructorProfile from "./InstructorProfile";
+import Dashboard2 from "./Dashboard2";
+import OurBlog from "./OurBlog";
+import Help from "./Help";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -79,11 +85,8 @@ const Layout = ({ children }) => {
 const App = () => {
   const dispatch = useDispatch();
   const [sidebar, toggleSidebar] = useState(true);
-  const [visibleAvatars, setVisibleAvatars] = useState(7);
-  const handleToggleSidebar = () => {
-    toggleSidebar(!sidebar);
-    setVisibleAvatars(visibleAvatars === 7 ? 6 : 7);
-  };
+  const [isHomeVisited, setIsHomeVisited] = useState(false);
+  const handleToggleSidebar = () => toggleSidebar(!sidebar);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
   const user = useSelector((state) => state.auth.user);
@@ -102,11 +105,16 @@ const App = () => {
   }, [dispatch, navigate]);
 
   useEffect(() => {
-    if (token && role === "teacher") {
+    if (role === "student" && isHomeVisited) {
+      navigate("/dashboard2");
+    } else if (role === "teacher" && isHomeVisited) {
       navigate("/dashboard");
     }
-  }, [token, role, navigate]);
+  }, [role, isHomeVisited, navigate]);
 
+  const handleHomeVisit = () => {
+    setIsHomeVisited(true);
+  };
   return (
     <Routes>
       <Route path="/login" element={<LoginScreen />} />
@@ -115,7 +123,7 @@ const App = () => {
         element={
           token ? (
             <Layout>
-              <HomeScreen />
+              <HomeScreen onVisit={handleHomeVisit} />
             </Layout>
           ) : (
             <Navigate to="/login" />
@@ -139,26 +147,6 @@ const App = () => {
         element={
           token ? (
             <>
-              {/* <div className="flex flex-col min-h-screen">
-                <Header handleToggleSidebar={handleToggleSidebar} />
-                <div className="flex text-xl flex-grow text-black">
-                  <Sidebar
-                    sidebar={sidebar}
-                    handleToggleSidebar={handleToggleSidebar}
-                    className="relative z-50"
-                  />
-                  <Container
-                    sidebar={sidebar}
-                    fluid
-                    className={`  transform duration-700    ${
-                      sidebar ? "ml-[250px]" : "ml-0"
-                    }`}
-                  >
-                    <ExploreScreen sidebar={sidebar} />
-                  </Container>
-                </div>
-                <Footer sidebar={sidebar} />
-              </div> */}
               <Layout>
                 <ExploreScreen sidebar={sidebar} />
               </Layout>
@@ -185,7 +173,19 @@ const App = () => {
         element={
           token ? (
             <Layout>
-              <InstructorProfie sidebar={sidebar} />
+              <InstructorProfile sidebar={sidebar} />
+            </Layout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/help"
+        element={
+          token ? (
+            <Layout>
+              <Help sidebar={sidebar} />
             </Layout>
           ) : (
             <Navigate to="/login" />
@@ -220,6 +220,34 @@ const App = () => {
           )
         }
       />
+      <Route
+        path="/blog"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <OurBlog />
+              <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/about"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <About />
+              <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
       {role === "teacher" && (
         <Route
           path="/dashboard"
@@ -227,6 +255,34 @@ const App = () => {
             token ? (
               <Layout>
                 <DashBoard />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+      <Route
+        path="/about"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <About />
+              <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      {role === "student" && (
+        <Route
+          path="/dashboard2"
+          element={
+            token ? (
+              <Layout>
+                <Dashboard2 />
               </Layout>
             ) : (
               <Navigate to="/login" />

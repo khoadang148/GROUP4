@@ -1,34 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken, setRole, setID } from "./redux/actions/auth.action";
+import Cookies from "js-cookie";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import { Container } from "react-bootstrap";
 import LoginScreen from "./LoginScreen";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-  Redirect,
-  Navigate,
-} from "react-router-dom";
+import SignupScreen from "./SignupScreen";
+import ForgotPasswordScreen from "./ForgotPasswordScreen";
 import HomeScreen from "./HomeScreen";
 import Livestream from "./Livestream";
-import { AuthContextProvider, useAuth } from "./context/AuthContext";
-import withAuth from "./AuthChecker";
-import AuthChecker from "./AuthChecker";
-import { useDispatch, useSelector } from "react-redux";
 import ExploreScreen from "./ExploreScreen";
 import Footer from "./components/Footer";
 import SavedCourses from "./SavedCourses";
 import CertificationCenter from "./CertificationCenter";
 import DashBoard from "./DashBoard";
-import { setToken, setRole, setID } from "./redux/actions/auth.action";
-import Cookies from "js-cookie";
 import AllInstructors from "./AllInstructors";
-import InstructorProfie from "./InstructorProfile";
+import InstructorProfile from "./InstructorProfile";
 import HeaderPages from "./components/HeaderPages";
 import About from "./About";
-import InstructorProfile from "./InstructorProfile";
 import Dashboard2 from "./Dashboard2";
 import OurBlog from "./OurBlog";
 import Help from "./Help";
@@ -39,15 +30,9 @@ import ApiClients from "./ApiClients";
 import CloseAccount from "./CloseAccount";
 import Notification from "./Notification";
 
-// const ProtectedRoute = ({ element: Element, ...rest }) => {
-//   const { user } = useAuth();
+// Import useNavigate from react-router-dom
+import { useNavigate } from "react-router-dom";
 
-//   if (!user) {
-//     return <Navigate to="/login" />;
-//   }
-
-//   return <Route {...rest} element={<Element />} />;
-// };
 const Layout = ({ children }) => {
   const [sidebar, toggleSidebar] = useState(true);
   const handleToggleSidebar = () => toggleSidebar(!sidebar);
@@ -57,14 +42,7 @@ const Layout = ({ children }) => {
     <div className="flex flex-col h-screen">
       <Header handleToggleSidebar={handleToggleSidebar} />
       <div className="flex text-black">
-        {role === "student" && (
-          <Sidebar
-            sidebar={sidebar}
-            handleToggleSidebar={handleToggleSidebar}
-            className="relative z-50"
-          />
-        )}
-        {role === "teacher" && (
+        {(role === "student" || role === "teacher") && (
           <Sidebar
             sidebar={sidebar}
             handleToggleSidebar={handleToggleSidebar}
@@ -73,11 +51,10 @@ const Layout = ({ children }) => {
         )}
         <Container
           fluid
-          className={`min-h-screen transform duration-700  ${
+          className={`min-h-screen transform duration-700 ${
             sidebar ? "ml-[250px]" : ""
           }`}
         >
-          {/* {children} */}
           {React.Children.map(children, (child) =>
             React.cloneElement(child, { sidebar })
           )}
@@ -90,12 +67,11 @@ const Layout = ({ children }) => {
 
 const App = () => {
   const dispatch = useDispatch();
-  const [sidebar, toggleSidebar] = useState(true);
   const [isHomeVisited, setIsHomeVisited] = useState(false);
-  const handleToggleSidebar = () => toggleSidebar(!sidebar);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
-  const user = useSelector((state) => state.auth.user);
+  
+  // Initialize useNavigate here
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -103,7 +79,7 @@ const App = () => {
     const idFromCookie = Cookies.get("id");
     if (tokenFromCookie) {
       dispatch(setToken(tokenFromCookie));
-      dispatch(setRole(tokenFromCookie));
+      dispatch(setRole(tokenFromCookie)); // Assuming setRole sets both token and role
       dispatch(setID(idFromCookie));
     } else {
       navigate("/login");
@@ -121,9 +97,12 @@ const App = () => {
   const handleHomeVisit = () => {
     setIsHomeVisited(true);
   };
+
   return (
     <Routes>
       <Route path="/login" element={<LoginScreen />} />
+      <Route path="/signup" element={<SignupScreen />} />
+      <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
       <Route
         path="/home"
         element={
@@ -152,11 +131,9 @@ const App = () => {
         path="/explore"
         element={
           token ? (
-            <>
-              <Layout>
-                <ExploreScreen sidebar={sidebar} />
-              </Layout>
-            </>
+            <Layout>
+              <ExploreScreen />
+            </Layout>
           ) : (
             <Navigate to="/login" />
           )
@@ -179,7 +156,7 @@ const App = () => {
         element={
           token ? (
             <Layout>
-              <InstructorProfile sidebar={sidebar} />
+              <InstructorProfile />
             </Layout>
           ) : (
             <Navigate to="/login" />
@@ -191,7 +168,7 @@ const App = () => {
         element={
           token ? (
             <Layout>
-              <Help sidebar={sidebar} />
+              <Help />
             </Layout>
           ) : (
             <Navigate to="/login" />
@@ -203,24 +180,21 @@ const App = () => {
         element={
           token ? (
             <Layout>
-              <AllInstructors sidebar={sidebar} />
+              <AllInstructors />
             </Layout>
           ) : (
             <Navigate to="/login" />
           )
         }
       />
-
       <Route
         path="/certificationcenter"
         element={
           token ? (
-            <>
-              <div className="flex flex-col min-h-screen">
-                <CertificationCenter />
-                <Footer />
-              </div>
-            </>
+            <div className="flex flex-col min-h-screen">
+              <CertificationCenter />
+              <Footer />
+            </div>
           ) : (
             <Navigate to="/login" />
           )
@@ -258,12 +232,9 @@ const App = () => {
         path="/setting"
         element={
           token ? (
-            <>
-             
-              <Layout>
-                <SettingAccount sidebar={sidebar} />
-              </Layout>
-            </>
+            <Layout>
+              <SettingAccount />
+            </Layout>
           ) : (
             <Navigate to="/login" />
           )
@@ -273,12 +244,9 @@ const App = () => {
         path="/notification"
         element={
           token ? (
-            <>
-             
-              <Layout>
-               <Notification sidebar={sidebar}/>
-              </Layout>
-            </>
+            <Layout>
+              <Notification />
+            </Layout>
           ) : (
             <Navigate to="/login" />
           )
@@ -288,27 +256,21 @@ const App = () => {
         path="/privacy"
         element={
           token ? (
-            <>
-             
-              <Layout>
-              <Privacy sidebar={sidebar}/>
-              </Layout>
-            </>
+            <Layout>
+              <Privacy />
+            </Layout>
           ) : (
             <Navigate to="/login" />
           )
         }
       />
-       <Route
+      <Route
         path="/billing"
         element={
           token ? (
-            <>
-             
-              <Layout>
-             <BillingandPayout sidebar={sidebar}/>
-              </Layout>
-            </>
+            <Layout>
+              <BillingandPayout />
+            </Layout>
           ) : (
             <Navigate to="/login" />
           )
@@ -318,12 +280,9 @@ const App = () => {
         path="/apiclient"
         element={
           token ? (
-            <>
-             
-              <Layout>
-             <ApiClients sidebar={sidebar}/>
-              </Layout>
-            </>
+            <Layout>
+              <ApiClients />
+            </Layout>
           ) : (
             <Navigate to="/login" />
           )
@@ -333,12 +292,9 @@ const App = () => {
         path="/closeAccount"
         element={
           token ? (
-            <>
-             
-              <Layout>
-             <CloseAccount sidebar={sidebar}/>
-              </Layout>
-            </>
+            <Layout>
+              <CloseAccount />
+            </Layout>
           ) : (
             <Navigate to="/login" />
           )
@@ -358,20 +314,6 @@ const App = () => {
           }
         />
       )}
-      <Route
-        path="/about"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <About />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
       {role === "student" && (
         <Route
           path="/dashboard2"
@@ -386,7 +328,6 @@ const App = () => {
           }
         />
       )}
-
       <Route path="*" element={<Navigate to={token ? "/home" : "/login"} />} />
     </Routes>
   );

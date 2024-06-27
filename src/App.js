@@ -24,6 +24,7 @@ import CertificationCenter from "./CertificationCenter";
 import DashBoard from "./DashBoard";
 import { setToken, setRole, setID } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
+import AllInstructors from "./AllInstructors";
 import InstructorProfie from "./InstructorProfile";
 import HeaderPages from "./components/HeaderPages";
 import About from "./About";
@@ -185,6 +186,18 @@ const App = () => {
           token ? (
             <Layout>
               <Help sidebar={sidebar} />
+            </Layout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/allinstructors"
+        element={
+          token ? (
+            <Layout>
+              <AllInstructors sidebar={sidebar} />
             </Layout>
           ) : (
             <Navigate to="/login" />

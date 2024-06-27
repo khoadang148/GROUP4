@@ -192,7 +192,6 @@ const ExploreScreen = ({ sidebar }) => {
                     : "ml-[5px] w-[370px] h-[200px]"
                 }`}
                 src={course.thumbnail}
-                alt="Search"
               />
               <span className="text-xs text-white absolute bottom-[200px] right-[10px] p-[0.5rem] bg-[#505050] rounded-[3px] font-bold">
                 {course.hours}

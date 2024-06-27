@@ -32,6 +32,12 @@ import InstructorProfile from "./InstructorProfile";
 import Dashboard2 from "./Dashboard2";
 import OurBlog from "./OurBlog";
 import Help from "./Help";
+import SettingAccount from "./Setting";
+import Privacy from "./Privacy";
+import BillingandPayout from "./BillingandPayout";
+import ApiClients from "./ApiClients";
+import CloseAccount from "./CloseAccount";
+import Notification from "./Notification";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -243,6 +249,96 @@ const App = () => {
               <About />
               <Footer />
             </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/setting"
+        element={
+          token ? (
+            <>
+             
+              <Layout>
+                <SettingAccount sidebar={sidebar} />
+              </Layout>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/notification"
+        element={
+          token ? (
+            <>
+             
+              <Layout>
+               <Notification sidebar={sidebar}/>
+              </Layout>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/privacy"
+        element={
+          token ? (
+            <>
+             
+              <Layout>
+              <Privacy sidebar={sidebar}/>
+              </Layout>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+       <Route
+        path="/billing"
+        element={
+          token ? (
+            <>
+             
+              <Layout>
+             <BillingandPayout sidebar={sidebar}/>
+              </Layout>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/apiclient"
+        element={
+          token ? (
+            <>
+             
+              <Layout>
+             <ApiClients sidebar={sidebar}/>
+              </Layout>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/closeAccount"
+        element={
+          token ? (
+            <>
+             
+              <Layout>
+             <CloseAccount sidebar={sidebar}/>
+              </Layout>
+            </>
           ) : (
             <Navigate to="/login" />
           )

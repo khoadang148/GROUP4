@@ -38,6 +38,8 @@ import BillingandPayout from "./BillingandPayout";
 import ApiClients from "./ApiClients";
 import CloseAccount from "./CloseAccount";
 import Notification from "./Notification";
+import BlogSingle from "./BlogSingle";
+import CompanyDetails from "./CompanyDetails";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -233,6 +235,34 @@ const App = () => {
             <div className="flex flex-col min-h-screen">
               <HeaderPages />
               <OurBlog />
+              <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/blogsingle"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <BlogSingle />
+              <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/company"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <CompanyDetails />
               <Footer />
             </div>
           ) : (

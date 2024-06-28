@@ -4,8 +4,10 @@ import {
   LikeOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Image } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getEnrolledCourses } from "./redux/actions/course.action";
 
 const InstructorProfile = ({ sidebar }) => {
   const [hoveredCourse, setHoveredCourse] = useState(null);
@@ -89,6 +91,17 @@ const InstructorProfile = ({ sidebar }) => {
     setHoveredCourse(null);
   };
   const [activeTab, setActiveTab] = useState("About");
+  const userId = useSelector((state) => state.auth.id);
+  console.log(userId);
+  const { courses, loading, error } = useSelector(
+    (state) => state.enrolledCourses
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (userId) {
+      dispatch(getEnrolledCourses(userId));
+    }
+  }, [dispatch, userId]);
   const About = () => {
     return (
       <div className="mt-10">
@@ -126,7 +139,7 @@ const InstructorProfile = ({ sidebar }) => {
           My courses (8)
         </div>
         <div className="grid grid-cols-4 gap-y-[20px] mt-8 mr-36">
-          {thumbnails.map((thumbnail, index) => (
+          {courses.map((course, index) => (
             <div
               key={index}
               className={`bg-white cursor-pointer relative ${
@@ -153,7 +166,7 @@ const InstructorProfile = ({ sidebar }) => {
                       src={require("./assets/star.png")}
                     />
                     <div className="text-[16px] ml-1 text-white">
-                      {rates[index]}
+                      {course.rate}
                     </div>
                   </div>
                 </div>
@@ -164,11 +177,11 @@ const InstructorProfile = ({ sidebar }) => {
                 </div>
                 <Image
                   className={`absolute max-w-none indent-0 shadow-inset-bottom mt-2 w-[250px] h-[130px] ml-[10px]`}
-                  src={thumbnails[index]}
+                  src={course.thumbnail}
                   alt="Search"
                 />
                 <span className="text-xs text-white absolute bottom-[210px] right-[20px] p-[6px] bg-[#505050] rounded-[3px] font-bold">
-                  {hours[index]}
+                  {course.hours}
                 </span>
                 <div
                   className={`relative left-2 top-2 shadow-inset-bottom ${
@@ -199,9 +212,9 @@ const InstructorProfile = ({ sidebar }) => {
                       sidebar ? "gap-2" : "gap-2"
                     }`}
                   >
-                    {views[index]}
+                    {course.views}
                     <h1>• </h1>
-                    {times[index]}
+                    {course.time}
                   </div>
                   <Button
                     className={`group relative ${sidebar ? "ml-24" : "ml-24"}`}
@@ -246,12 +259,12 @@ const InstructorProfile = ({ sidebar }) => {
                 </div>
                 <div className="ml-3 text-base font-bold">{titles[index]}</div>
                 <div className="ml-3 text-sm text-[#91979f] mt-2">
-                  {languages[index]}
+                  {course.language}
                 </div>
                 <div className="flex  ml-3">
                   <div className="flex mt-4 text-base">
                     <h1 className="mr-1 text-[#91979f] font-normal">By</h1>{" "}
-                    <h1>{instructors[index]}</h1>
+                    <h1>{course.instructor}</h1>
                   </div>
                   <div
                     className={` mt-[17px] font-medium flex ${
@@ -263,7 +276,7 @@ const InstructorProfile = ({ sidebar }) => {
                         hoveredCourse === index ? "block" : "hidden"
                       }`}
                     />
-                    {prices[index]}
+                    {course.price}
                   </div>
                 </div>
               </div>

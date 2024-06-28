@@ -11,6 +11,18 @@ const OurBlog = () => {
   const handleBlogSingle = () => {
     navigate('/blogsingle');
   };
+  const handleAbout = () => {
+    navigate("/about");
+  };
+  const handleCompany = () => {
+    navigate ("/company") 
+  };
+  const handleOurBlog = () => {
+    navigate ("/blog") 
+  };
+  const handlePress = () => {
+    navigate ("/press") 
+  }
 
   const courses = [
     {
@@ -67,29 +79,29 @@ const OurBlog = () => {
     </div>
   );
 
+ 
   return (
     <div>
-      <div className="relative pt-[100px] p-4 z-40 flex flex-col items-center justify-center">
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 text-center text-black">
-          <div className="flex justify-center space-x-4 mb-5 mt-4">
-            <h3 className="inline-block">About</h3>
-            <h3 className="inline-block">Blog</h3>
-            <h3 className="inline-block">Company</h3>
-            <h3 className="inline-block">Careers</h3>
-            <h3 className="inline-block">Press</h3>
+      <div className="relative pt-[70px] p-4 z-40 flex flex-col items-center justify-center">
+        <div className="pb-2">
+          <div className="flex justify-center z-50 space-x-4 text-black mt-4 relative">
+            <h3 className=" cursor-pointer"  onClick={handleAbout}>About</h3>
+            <h3 className="" onClick={handleOurBlog}>Blog</h3>
+            <h3 className="" onClick={handleCompany}>Company</h3>
+            <h3 className="">Careers</h3>
+            <h3 className=""onClick={handlePress} >Press</h3>
           </div>
-          <div>
-            <h1 className="text-xl font-bold">Insights, ideas, and stories</h1>
+          <div className="relative z-10 text-center text-black pt-9">
+            <h1 className="text-2xl font-bold ">What others are saying</h1>
           </div>
         </div>
         <img
-          className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+          className="absolute inset-0 z-0 h-[200px] w-full opacity-15"
           src={require("../src/assets/title_bg.jpg")}
           alt="Background Image"
         />
       </div>
-      <div className="p-8 grid grid-cols-3 gap-8 mt-14">
+      <div className="p-8 grid grid-cols-3 gap-8 mt-4">
         <div className="grid grid-cols-3 gap-8 pl-[250px]">
           <div className="flex border p-[10px] rounded-sm shadow-md bg-white relative w-[200px] h-[300px] flex-col items-center">
             <div className="relative">

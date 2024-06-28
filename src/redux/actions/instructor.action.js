@@ -5,11 +5,13 @@ import {
   FETCH_INSTRUCTORS_SUCCESS,
 } from "../actionType";
 
+const API_URL = "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1";
+
 export const getAllInstructor = () => {
   return async (dispatch) => {
     dispatch({ type: FETCH_INSTRUCTORS_REQUEST });
     try {
-      const response = await axios.get("http://localhost:3001/users");
+      const response = await axios.get(`${API_URL}/users`);
       const instructors = response.data.filter(
         (user) => user.role === "teacher"
       );

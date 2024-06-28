@@ -1,9 +1,17 @@
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  FlagOutlined,
+  HeartOutlined,
+  MoreOutlined,
+  ShareAltOutlined,
+  ShoppingCartOutlined,
+  StopOutlined,
+} from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { Button, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getEnrolledCourses } from "./redux/actions/course.action";
+import { Dropdown, Space } from "antd";
 
 const ExploreScreen = ({ sidebar }) => {
   const avatars = [
@@ -28,7 +36,57 @@ const ExploreScreen = ({ sidebar }) => {
     "Amritpal",
     "Jimmy",
   ];
-
+  const items = [
+    {
+      key: "1",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+          className="hover:bg-red-400"
+        >
+          <ShareAltOutlined /> Share
+        </a>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.aliyun.com"
+        >
+          <HeartOutlined /> Save
+        </a>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.luohanacademy.com"
+        >
+          <StopOutlined /> Not Interested
+        </a>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.luohanacademy.com"
+        >
+          <FlagOutlined /> Report
+        </a>
+      ),
+    },
+  ];
   const [startIndex, setStartIndex] = useState(0);
   const [visibleAvatars, setVisibleAvatars] = useState(7);
   const [hoveredCourse, setHoveredCourse] = useState(null);
@@ -229,46 +287,19 @@ const ExploreScreen = ({ sidebar }) => {
                   <h1>• </h1>
                   {course.time}
                 </div>
-                <Button
-                  className={`group relative ${sidebar ? "ml-36" : "ml-48"}`}
+
+                <Dropdown
+                  menu={{
+                    items,
+                  }}
+                  className="ml-[140px] mt-[15px]"
                 >
-                  <Image
-                    className={`w-[16px] h-[16px] mt-4 `}
-                    src={require("./assets/more.png")}
-                  />
-                  <div className="absolute left-2 z-50 w-[200px] bg-white border border-gray-300 rounded-md shadow-lg opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity duration-300">
-                    <ul className="py-1">
-                      <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
-                        <Image
-                          className="mr-2"
-                          src={require("../src/assets/share.png")}
-                        />
-                        Share
-                      </li>
-                      <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
-                        <Image
-                          className="mr-2"
-                          src={require("../src/assets/time.png")}
-                        />
-                        Save
-                      </li>
-                      <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
-                        <Image
-                          className="mr-2 w-[16px] h-[16px]"
-                          src={require("../src/assets/ban.png")}
-                        />
-                        Not Interested
-                      </li>
-                      <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
-                        <Image
-                          className="mr-2 w-[16px] h-[16px]"
-                          src={require("../src/assets/wind-flag.png")}
-                        />
-                        Report
-                      </li>
-                    </ul>
-                  </div>
-                </Button>
+                  <a onClick={(e) => e.preventDefault()}>
+                    <Space>
+                      <MoreOutlined className="text-2xl hover:text-black " />
+                    </Space>
+                  </a>
+                </Dropdown>
               </div>
               <div className="ml-3 text-xl font-semibold">{course.title}</div>
               <div className="ml-3 text-sm text-[#91979f] mt-2">
@@ -289,7 +320,7 @@ const ExploreScreen = ({ sidebar }) => {
                       hoveredCourse === index ? "block" : "hidden"
                     }`}
                   />
-                  {course.price}
+                  {course.price || ""}
                 </div>
               </div>
             </div>

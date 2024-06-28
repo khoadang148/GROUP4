@@ -10,11 +10,14 @@ import {
   SET_ID,
 } from "../actionType";
 
+// Thay thế URL mock API của bạn vào đây
+const API_URL = "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1";
+
 export const login = (username, password) => {
   return async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
     try {
-      const response = await axios.get("http://localhost:3001/users", {
+      const response = await axios.get(`${API_URL}/users`, {
         params: { username, password },
       });
       console.log(response);

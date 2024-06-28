@@ -46,6 +46,9 @@ import ReportHistory from "./ReportHistory";
 import SendFeedback from "./SendFeedback";
 import AddLiveStream from "./AddLiveStream";
 import Earning from "./Earning";
+import CertificationFillForm from "./CertificationFillForm";
+import Press from "./Press";
+import ShoppingCart from "./ShoppingCart";
 
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
@@ -241,6 +244,22 @@ const App = () => {
         }
       />
       <Route
+        path="/certificationfillform"
+        element={
+          token ? (
+            <>
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <CertificationFillForm />
+                <Footer />
+              </div>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
         path="/blog"
         element={
           token ? (
@@ -283,6 +302,20 @@ const App = () => {
         }
       />
       <Route
+        path="/press"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <Press />
+              <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
         path="/about"
         element={
           token ? (
@@ -296,12 +329,26 @@ const App = () => {
           )
         }
       />
+       <Route
+        path="/shoppingcart"
+        element={
+          token ? (
+            <>
+              <div className="flex flex-col min-h-screen">
+                <ShoppingCart/>
+                <Footer />
+              </div>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
       <Route
         path="/setting"
         element={
           token ? (
             <>
-             
               <Layout>
                 <SettingAccount sidebar={sidebar} />
               </Layout>
@@ -356,9 +403,8 @@ const App = () => {
         element={
           token ? (
             <>
-             
               <Layout>
-               <Notification sidebar={sidebar}/>
+                <Notification sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -371,9 +417,8 @@ const App = () => {
         element={
           token ? (
             <>
-             
               <Layout>
-              <Privacy sidebar={sidebar}/>
+                <Privacy sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -381,14 +426,13 @@ const App = () => {
           )
         }
       />
-       <Route
+      <Route
         path="/billing"
         element={
           token ? (
             <>
-             
               <Layout>
-             <BillingandPayout sidebar={sidebar}/>
+                <BillingandPayout sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -401,9 +445,8 @@ const App = () => {
         element={
           token ? (
             <>
-             
               <Layout>
-             <ApiClients sidebar={sidebar}/>
+                <ApiClients sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -416,9 +459,8 @@ const App = () => {
         element={
           token ? (
             <>
-             
               <Layout>
-             <CloseAccount sidebar={sidebar}/>
+                <CloseAccount sidebar={sidebar} />
               </Layout>
             </>
           ) : (

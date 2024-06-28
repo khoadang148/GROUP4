@@ -1,13 +1,13 @@
-import React from 'react'
-import { MdNotifications, MdApps } from 'react-icons/md'
-import { Image } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-const Header = ({handleToggleSidebar}) => {
+import React from "react";
+import { MdNotifications, MdApps } from "react-icons/md";
+import { Image } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+const Header = ({ handleToggleSidebar }) => {
   const navigate = useNavigate();
 
   const handleShoppingCart = () => {
-    navigate('/shoppingcart');
-  }
+    navigate("/shoppingcart");
+  };
   return (
     <div className=" z-50 flex bg-white h-[65px] w-full drop-shadow-lg fixed">
       <div className="flex">
@@ -74,12 +74,12 @@ const Header = ({handleToggleSidebar}) => {
         ></Image>
         <img
           className="rounded-full border  w-[40px] h-[40px] object-contain mx-[10px]"
-          src={""}
+          src={require("../assets/img1.png")}
           alt="ava"
         />
       </div>
     </div>
   );
-}
+};
 
-export default Header
+export default Header;

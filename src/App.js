@@ -42,6 +42,7 @@ import CloseAccount from "./CloseAccount";
 import Notification from "./Notification";
 import BlogSingle from "./BlogSingle";
 import CompanyDetails from "./CompanyDetails";
+import CertificationFillForm from "./CertificationFillForm";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -236,6 +237,22 @@ const App = () => {
         }
       />
       <Route
+        path="/certificationfillform"
+        element={
+          token ? (
+            <>
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <CertificationFillForm />
+                <Footer />
+              </div>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
         path="/blog"
         element={
           token ? (
@@ -296,7 +313,6 @@ const App = () => {
         element={
           token ? (
             <>
-             
               <Layout>
                 <SettingAccount sidebar={sidebar} />
               </Layout>
@@ -311,9 +327,8 @@ const App = () => {
         element={
           token ? (
             <>
-             
               <Layout>
-               <Notification sidebar={sidebar}/>
+                <Notification sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -326,9 +341,8 @@ const App = () => {
         element={
           token ? (
             <>
-             
               <Layout>
-              <Privacy sidebar={sidebar}/>
+                <Privacy sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -336,14 +350,13 @@ const App = () => {
           )
         }
       />
-       <Route
+      <Route
         path="/billing"
         element={
           token ? (
             <>
-             
               <Layout>
-             <BillingandPayout sidebar={sidebar}/>
+                <BillingandPayout sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -356,9 +369,8 @@ const App = () => {
         element={
           token ? (
             <>
-             
               <Layout>
-             <ApiClients sidebar={sidebar}/>
+                <ApiClients sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -371,9 +383,8 @@ const App = () => {
         element={
           token ? (
             <>
-             
               <Layout>
-             <CloseAccount sidebar={sidebar}/>
+                <CloseAccount sidebar={sidebar} />
               </Layout>
             </>
           ) : (

@@ -43,6 +43,7 @@ import Notification from "./Notification";
 import BlogSingle from "./BlogSingle";
 import CompanyDetails from "./CompanyDetails";
 import CertificationFillForm from "./CertificationFillForm";
+import Press from "./Press";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -287,6 +288,20 @@ const App = () => {
             <div className="flex flex-col min-h-screen">
               <HeaderPages />
               <CompanyDetails />
+              <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/press"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <Press />
               <Footer />
             </div>
           ) : (

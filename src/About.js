@@ -1,26 +1,40 @@
 import React from 'react';
 import { faMobileScreen, faUser, faCertificate, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from 'react-router-dom';
 
 const About = () => {
+  const navigate = useNavigate();
+
+  const handleAbout = () => {
+    navigate("/about");
+  };
+  const handleCompany = () => {
+    navigate ("/company") 
+  };
+  const handleOurBlog = () => {
+    navigate ("/blog") 
+  };
+  const handlePress = () => {
+    navigate ("/press") 
+  }
   return (
     <div>
-      <div className="relative pt-[200px] p-4 z-40 flex flex-col items-center justify-center">
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 text-center text-black">
-          <div className="flex justify-center space-x-4 mb-4 -mt-8">
-            <h3 className="inline-block">About</h3>
-            <h3 className="inline-block">Blog</h3>
-            <h3 className="inline-block">Company</h3>
-            <h3 className="inline-block">Careers</h3>
-            <h3 className="inline-block">Press</h3>
+      <div className="relative pt-[70px] p-4 z-40 flex flex-col items-center justify-center">
+        <div className="pb-2">
+          <div className="flex justify-center z-50 space-x-4 text-black mt-4 relative">
+            <h3 className=" cursor-pointer"  onClick={handleAbout}>About</h3>
+            <h3 className="" onClick={handleOurBlog}>Blog</h3>
+            <h3 className="" onClick={handleCompany}>Company</h3>
+            <h3 className="">Careers</h3>
+            <h3 className=""onClick={handlePress} >Press</h3>
           </div>
-          <div>
-            <h1 className="text-2xl font-bold">Improving Lives Through Learning</h1>
+          <div className="relative z-10 text-center text-black pt-9">
+            <h1 className="text-2xl font-bold ">What others are saying</h1>
           </div>
         </div>
         <img
-          className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+          className="absolute inset-0 z-0 h-[200px] w-full opacity-15"
           src={require("../src/assets/title_bg.jpg")}
           alt="Background Image"
         />

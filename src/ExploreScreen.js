@@ -1,4 +1,11 @@
-import { FlagOutlined, HeartOutlined, MoreOutlined, ShareAltOutlined, ShoppingCartOutlined, StopOutlined } from "@ant-design/icons";
+import {
+  FlagOutlined,
+  HeartOutlined,
+  MoreOutlined,
+  ShareAltOutlined,
+  ShoppingCartOutlined,
+  StopOutlined,
+} from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { Button, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -280,20 +287,19 @@ const ExploreScreen = ({ sidebar }) => {
                   <h1>• </h1>
                   {course.time}
                 </div>
-                
-                  <Dropdown
-                          menu={{
-                            items,
-                          }}
-                          className="ml-[140px] mt-[15px]"
-                        >
-                          <a onClick={(e) => e.preventDefault()}>
-                            <Space>
-                              <MoreOutlined className="text-2xl hover:text-black " />
-                            </Space>
-                          </a>
-                        </Dropdown>
-               
+
+                <Dropdown
+                  menu={{
+                    items,
+                  }}
+                  className="ml-[140px] mt-[15px]"
+                >
+                  <a onClick={(e) => e.preventDefault()}>
+                    <Space>
+                      <MoreOutlined className="text-2xl hover:text-black " />
+                    </Space>
+                  </a>
+                </Dropdown>
               </div>
               <div className="ml-3 text-xl font-semibold">{course.title}</div>
               <div className="ml-3 text-sm text-[#91979f] mt-2">
@@ -314,7 +320,7 @@ const ExploreScreen = ({ sidebar }) => {
                       hoveredCourse === index ? "block" : "hidden"
                     }`}
                   />
-                  {course.price}
+                  {course.price || ""}
                 </div>
               </div>
             </div>

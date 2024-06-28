@@ -1,15 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllInstructor } from "./redux/actions/instructor.action";
+import {
+  getAllInstructor,
+  searchInstructors,
+} from "./redux/actions/instructor.action";
 
 const AllInstructors = ({ sidebar }) => {
   const dispatch = useDispatch();
   const instructorsState = useSelector((state) => state.instructors);
+  const [searchQuery, setSearchQuery] = useState("");
+
   useEffect(() => {
     dispatch(getAllInstructor());
   }, [dispatch]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchQuery) {
+        dispatch(searchInstructors(searchQuery));
+      }
+    }, 300); 
+
+    return () => clearTimeout(timer); 
+  }, [searchQuery, dispatch]);
+
   const { instructors, error } = instructorsState;
+
   return (
     <div className="mt-20 ml-8 overflow-x-hidden">
       <div className="group flex">
@@ -24,8 +41,10 @@ const AllInstructors = ({ sidebar }) => {
             className={`focus:outline-none text-sm ml-20 mt-2 text-black bg-white placeholder-gray-500 focus:placeholder-black focus:text-black rounded-[5px] ${
               sidebar ? "w-[1300px]" : "w-[1540px]"
             }`}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button type="submit" className="top-2 left-14 absolute">
+          <button type="button" className="top-2 left-14 absolute">
             <Image
               className="max-w-none mt-2"
               src={require("./assets/search.png")}

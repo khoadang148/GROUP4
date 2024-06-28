@@ -12,6 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getEnrolledCourses } from "./redux/actions/course.action";
 import { Dropdown, Space } from "antd";
+import {
+  getAllInstructor,
+  searchInstructors,
+} from "./redux/actions/instructor.action";
 
 const ExploreScreen = ({ sidebar }) => {
   const avatars = [
@@ -125,6 +129,14 @@ const ExploreScreen = ({ sidebar }) => {
       dispatch(getEnrolledCourses(userId));
     }
   }, [dispatch, userId]);
+
+  const { instructors } = useSelector((state) => state.instructors);
+  useEffect(() => {
+    dispatch(getAllInstructor());
+  }, [dispatch]);
+
+ 
+
   // const mapStateToProps = (state) => ({
   //   courses: state.enrolledCoursesReducer.courses,
   //   loading: state.enrolledCoursesReducer.loading,
@@ -177,20 +189,20 @@ const ExploreScreen = ({ sidebar }) => {
               sidebar ? "w-[1400px]" : "w-full"
             }`}
           >
-            {keywords
+            {instructors
               .slice(startIndex, startIndex + visibleAvatars)
-              .map((value, i) => (
+              .map((instructor, i) => (
                 <div
                   key={i}
                   className="bg-[#DDD8DD] rounded w-[230px] h-[175px]"
                 >
                   <div className="flex items-center flex-col justify-center bg-[#E3DFE3] mt-3 mb-3 ml-3 mr-3 h-[155px] drop-shadow-md">
                     <img
-                      src={avatars[startIndex + i]}
-                      alt={value}
+                      src={instructor.avatar}
+                      alt=""
                       className="w-20 h-20 rounded-full border-white"
                     />
-                    <h3 className="text-xs">{value}</h3>
+                    <h3 className="text-xs">{instructor.username}</h3>
                     <span className="text-xs">
                       <span>live </span>
                       <span className="text-red-600">•</span>

@@ -1,7 +1,13 @@
 import React from 'react'
 import { MdNotifications, MdApps } from 'react-icons/md'
 import { Image } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 const Header = ({handleToggleSidebar}) => {
+  const navigate = useNavigate();
+
+  const handleShoppingCart = () => {
+    navigate('/shoppingcart');
+  }
   return (
     <div className=" z-50 flex bg-white h-[65px] w-full drop-shadow-lg fixed">
       <div className="flex">
@@ -45,11 +51,12 @@ const Header = ({handleToggleSidebar}) => {
           Create New Course
         </button>
         <Image
-          className="max-w-none mt-2 mr-4"
+          className="max-w-none mt-2 mr-4 cursor-pointer"
           src={require("../assets/shopping-cart.png")}
           width={24}
           height={24}
           alt="Search"
+          onClick={handleShoppingCart}
         ></Image>
         <Image
           className="max-w-none mt-2 mr-4"

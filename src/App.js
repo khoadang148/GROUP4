@@ -44,6 +44,7 @@ import BlogSingle from "./BlogSingle";
 import CompanyDetails from "./CompanyDetails";
 import CertificationFillForm from "./CertificationFillForm";
 import Press from "./Press";
+import ShoppingCart from "./ShoppingCart";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -318,6 +319,21 @@ const App = () => {
               <About />
               <Footer />
             </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+       <Route
+        path="/shoppingcart"
+        element={
+          token ? (
+            <>
+              <div className="flex flex-col min-h-screen">
+                <ShoppingCart/>
+                <Footer />
+              </div>
+            </>
           ) : (
             <Navigate to="/login" />
           )

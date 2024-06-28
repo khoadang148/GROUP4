@@ -2,10 +2,13 @@ import { ShoppingCartOutlined } from "@ant-design/icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getEnrolledCourses } from "./redux/actions/course.action";
+import { Image } from "react-bootstrap";
 
 const CourseCard = ({
-  image,
+  thumbnail,
   rating,
   title,
   category,
@@ -25,11 +28,10 @@ const CourseCard = ({
     onMouseLeave={handleMouseLeave}
   >
     <div className="relative w-[350px] h-full">
-      <img
-        src={image}
-        alt={title}
-        className="w-[350px] h-[180px] object-cover rounded-sm"
-      />
+     <div>
+      <Image src={thumbnail}
+      className="w-[350px] h-[180px] object-cover rounded-sm"/>
+     </div>
       <span className="absolute top-2 left-2 bg-yellow-400 text-white text-sm font-medium gap-2 px-3 py-1 rounded">
         <FontAwesomeIcon icon={faStar} />
         {rating}
@@ -80,57 +82,19 @@ const SavedCourses = () => {
   const handleMouseLeave = () => {
     setHoveredCourse(null);
   };
+  const userId = useSelector((state) => state.auth.id);
+  console.log(userId);
+  const { courses, loading, error } = useSelector(
+    (state) => state.enrolledCourses
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (userId) {
+      dispatch(getEnrolledCourses(userId));
+    }
+  }, [dispatch, userId]);
 
-  const courses = [
-    {
-      image:
-        "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-1.jpg",
-      rating: "4.5",
-      title: "Complete Python Bootcamp: Go from zero to hero in Python 3",
-      category: "Web Development | Python",
-      author: "Jassica William",
-      hours: "25",
-      price: "10",
-      views: "109k",
-      date: "15 days ago",
-    },
-    {
-      image:
-        "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-2.jpg",
-      rating: "4.5",
-      title: "The Complete JavaScript Course 2020: Build Real Projects!",
-      category: "Development | JavaScript",
-      author: "Jassica William",
-      hours: "28",
-      price: "5",
-      views: "5M",
-      date: "15 days ago",
-    },
-    {
-      image:
-        "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-3.jpg",
-      rating: "4.5",
-      title: "The Complete JavaScript Course 2020: Build Real Projects!",
-      category: "Development | JavaScript",
-      author: "Jassica William",
-      hours: "12",
-      price: "13",
-      views: "1M",
-      date: "15 days ago",
-    },
-    {
-      image:
-        "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-4.jpg",
-      rating: "4.5",
-      title: "The Complete JavaScript Course 2020: Build Real Projects!",
-      category: "Development | JavaScript",
-      author: "Jassica William",
-      hours: "1",
-      price: "12",
-      views: "153k",
-      date: "15 days ago",
-    },
-  ];
+ 
 
   return (
     <div className="p-8 grid grid-cols-3 gap-8 mt-14">
@@ -142,7 +106,7 @@ const SavedCourses = () => {
           </button>
         </div>
         <hr className="my-2" />
-        <p className="text-gray-500 text-sm">4 Courses</p>
+        <p className="text-gray-500 text-sm">{courses.length} Courses</p>
         <button className="bg-[#ED2927] hover:bg-[#333333] text-white w-full py-2 rounded-sm mt-4">
           <FontAwesomeIcon icon={faTrashAlt} className="mr-2" />
           <span className="text-sm">Remove Saved Courses</span>
@@ -153,7 +117,7 @@ const SavedCourses = () => {
         {courses.map((course, index) => (
           <CourseCard
             key={index}
-            image={course.image}
+            thumbnail={course.thumbnail}
             rating={course.rating}
             title={course.title}
             category={course.category}

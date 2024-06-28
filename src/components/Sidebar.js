@@ -85,6 +85,9 @@ const Sidebar = ({ sidebar }) => {
   const handleAllInstructors = () => {
     navigate("/allinstructors");
   };
+  const handleCompany = () => {
+    navigate ("/company") 
+  }
 
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -415,7 +418,7 @@ const Sidebar = ({ sidebar }) => {
                    Our Blog
                  </Menu.Item>
                  <Menu.Item key="34">Blog Detail View</Menu.Item>
-                 <Menu.Item key="35">Company Details</Menu.Item>
+                 <Menu.Item key="35" onClick={handleCompany}>Company Details</Menu.Item>
                  <Menu.Item key="36">Press</Menu.Item>
                  <Menu.Item key="37">Live Steam View</Menu.Item>
                  <Menu.Item key="38">Add Live Steam</Menu.Item>

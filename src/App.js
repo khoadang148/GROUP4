@@ -3,6 +3,8 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { Container } from "react-bootstrap";
 import LoginScreen from "./LoginScreen";
+import SignupScreen from "./SignupScreen";
+import ForgotPasswordScreen from "./ForgotPasswordScreen";
 import {
   BrowserRouter as Router,
   Routes,
@@ -101,14 +103,17 @@ const App = () => {
   useEffect(() => {
     const tokenFromCookie = Cookies.get("token");
     const idFromCookie = Cookies.get("id");
-    if (tokenFromCookie) {
+  
+    // Check if we are on signup or forgot password screen
+    if (tokenFromCookie && !window.location.pathname.includes("/signup") && !window.location.pathname.includes("/forgot-password")) {
       dispatch(setToken(tokenFromCookie));
       dispatch(setRole(tokenFromCookie));
       dispatch(setID(idFromCookie));
-    } else {
+    } else if (!window.location.pathname.includes("/signup") && !window.location.pathname.includes("/forgot-password")) {
       navigate("/login");
     }
   }, [dispatch, navigate]);
+  
 
   useEffect(() => {
     if (role === "student" && isHomeVisited) {
@@ -124,6 +129,8 @@ const App = () => {
   return (
     <Routes>
       <Route path="/login" element={<LoginScreen />} />
+      <Route path="/signup" element={<SignupScreen />} />
+      <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
       <Route
         path="/home"
         element={

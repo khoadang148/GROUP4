@@ -88,6 +88,9 @@ const Sidebar = ({ sidebar }) => {
   const handleCompany = () => {
     navigate ("/company") 
   }
+   const handleCertificationFillForm = () => {
+     navigate("/certificationfillform");
+   };
 
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -380,7 +383,9 @@ const Sidebar = ({ sidebar }) => {
                  <Menu.Item key="17" onClick={handleCertificationCenter}>
                    Certification Center
                  </Menu.Item>
-                 <Menu.Item key="18">Certification Fill Form</Menu.Item>
+                 <Menu.Item key="18" onClick={handleCertificationFillForm}>
+                   Certification Fill Form
+                 </Menu.Item>
                  <Menu.Item key="19">Test View</Menu.Item>
                  <Menu.Item key="20">Test Result</Menu.Item>
                  <Menu.Item key="21">My Certification</Menu.Item>
@@ -418,7 +423,9 @@ const Sidebar = ({ sidebar }) => {
                    Our Blog
                  </Menu.Item>
                  <Menu.Item key="34">Blog Detail View</Menu.Item>
-                 <Menu.Item key="35" onClick={handleCompany}>Company Details</Menu.Item>
+                 <Menu.Item key="35" onClick={handleCompany}>
+                   Company Details
+                 </Menu.Item>
                  <Menu.Item key="36">Press</Menu.Item>
                  <Menu.Item key="37">Live Steam View</Menu.Item>
                  <Menu.Item key="38">Add Live Steam</Menu.Item>

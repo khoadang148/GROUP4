@@ -88,6 +88,18 @@ const Sidebar = ({ sidebar }) => {
   const handleCompany = () => {
     navigate ("/company") 
   }
+  const handleReportHistory = () => {
+    navigate("/reporthistory");
+  }
+  const handleSendFeedback = () => {
+    navigate("/sendfeedback");
+  }
+  const handleAddLiveStream = () => {
+    navigate("/addlivestream");
+  }
+  const handleEarning = () =>{
+    navigate("/earning")
+  }
 
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -258,7 +270,7 @@ const Sidebar = ({ sidebar }) => {
              <Menu.Item
                key="58"
                className="flex items-center"
-               onClick={handleHome}
+               onClick={handleEarning}
              >
                <FontAwesomeIcon icon={faDollarSign} className="mr-2 icon" />
                Earning
@@ -421,7 +433,7 @@ const Sidebar = ({ sidebar }) => {
                  <Menu.Item key="35" onClick={handleCompany}>Company Details</Menu.Item>
                  <Menu.Item key="36">Press</Menu.Item>
                  <Menu.Item key="37">Live Steam View</Menu.Item>
-                 <Menu.Item key="38">Add Live Steam</Menu.Item>
+                 <Menu.Item key="38" onClick={handleAddLiveStream}>Add Live Steam</Menu.Item>
                  <Menu.Item key="39">Search Result</Menu.Item>
                  <Menu.Item key="40">Thank you</Menu.Item>
                  <Menu.Item key="41">Coming Soon</Menu.Item>
@@ -483,13 +495,13 @@ const Sidebar = ({ sidebar }) => {
              </Menu.Item>
            )}
            {(role === "student" || role === "teacher") && (
-             <Menu.Item key="48">
+             <Menu.Item key="48" onClick={handleReportHistory}>
                <FontAwesomeIcon icon={faFlag} className="mr-2 icon" />
                Report History
              </Menu.Item>
            )}
            {(role === "student" || role === "teacher") && (
-             <Menu.Item key="49">
+             <Menu.Item key="49" onClick={handleSendFeedback}>
                <FontAwesomeIcon icon={faMessage} className="mr-2 icon" />
                Send Feedback
              </Menu.Item>

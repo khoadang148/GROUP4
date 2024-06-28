@@ -42,6 +42,11 @@ import CloseAccount from "./CloseAccount";
 import Notification from "./Notification";
 import BlogSingle from "./BlogSingle";
 import CompanyDetails from "./CompanyDetails";
+import ReportHistory from "./ReportHistory";
+import SendFeedback from "./SendFeedback";
+import AddLiveStream from "./AddLiveStream";
+import Earning from "./Earning";
+
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -306,6 +311,46 @@ const App = () => {
           )
         }
       />
+       <Route
+        path="/reporthistory"
+        element={
+          token ? (
+            <Layout>
+              <ReportHistory />
+            </Layout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/sendfeedback"
+        element={
+          token ? (
+            <Layout>
+              <SendFeedback />
+            </Layout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/addlivestream"
+        element={
+          token ? (
+            <>
+             
+              <Layout>
+              <AddLiveStream sidebar={sidebar}/>
+              </Layout>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      
       <Route
         path="/notification"
         element={
@@ -388,6 +433,20 @@ const App = () => {
             token ? (
               <Layout>
                 <DashBoard />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+      {role === "teacher" && (
+        <Route
+          path="/earning"
+          element={
+            token ? (
+              <Layout>
+                <Earning />
               </Layout>
             ) : (
               <Navigate to="/login" />

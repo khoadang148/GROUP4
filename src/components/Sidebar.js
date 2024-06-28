@@ -91,6 +91,9 @@ const Sidebar = ({ sidebar }) => {
    const handleCertificationFillForm = () => {
      navigate("/certificationfillform");
    };
+   const handlePress = () => {
+    navigate ("/press") 
+  }
 
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -426,7 +429,7 @@ const Sidebar = ({ sidebar }) => {
                  <Menu.Item key="35" onClick={handleCompany}>
                    Company Details
                  </Menu.Item>
-                 <Menu.Item key="36">Press</Menu.Item>
+                 <Menu.Item key="36" onClick={handlePress}>Press</Menu.Item>
                  <Menu.Item key="37">Live Steam View</Menu.Item>
                  <Menu.Item key="38">Add Live Steam</Menu.Item>
                  <Menu.Item key="39">Search Result</Menu.Item>

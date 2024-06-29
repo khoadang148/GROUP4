@@ -7,7 +7,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { Button, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getEnrolledCourses } from "./redux/actions/course.action";
+import { getEnrolledCourses } from "../redux/actions/course.action";
 
 const InstructorProfile = ({ sidebar }) => {
   const [hoveredCourse, setHoveredCourse] = useState(null);
@@ -149,13 +149,6 @@ const InstructorProfile = ({ sidebar }) => {
               onMouseLeave={handleMouseLeave}
             >
               <div className="">
-                {/* <div className=" bg-[#fbcb0b] relative top-14 left-5 z-50 pb-2 w-[60px] h-[25px] rounded-[4px]">
-                <div className="inline-flex mb-3">
-                    <Image className="w-[14px] h-[20px] ml-2 pt-1 mt-1" src={require("../src/assets/star.png")} />
-                    <div className="text-[16px] ml-1 text-white pb-5">{rates[index]}</div>
-                </div>          
-              </div>
-              <div className="bg-[#fa8305] w-[80px] h-[20px] relative z-50 left-56 top-9 text-sm text-white font-medium text-center ml-[14px]">Best Seller</div> */}
                 <div
                   className={`absolute top-4 left-3 bg-[#fbcb0b] rounded-sm px-2 py-1 z-10 w-[60px] h-[30px]
                   }`}
@@ -163,7 +156,7 @@ const InstructorProfile = ({ sidebar }) => {
                   <div className="inline-flex items-center">
                     <Image
                       className="w-[14px] h-[20px] ml-1"
-                      src={require("./assets/star.png")}
+                      src={require("../../src/assets/star.png")}
                     />
                     <div className="text-[16px] ml-1 text-white">
                       {course.rate}
@@ -194,7 +187,7 @@ const InstructorProfile = ({ sidebar }) => {
                         <div className="border-2 border-white p-4 rounded-full group-hover:bg-black group-hover:opacity-30">
                           <Image
                             className="w-[30px] inset-0 h-[35px] ml-2 opacity-100 z-50 group-hover: opacity-0"
-                            src={require("./assets/pause.png")}
+                            src={require("../../src/assets/pause.png")}
                           />
                         </div>
                       </Button>
@@ -221,35 +214,35 @@ const InstructorProfile = ({ sidebar }) => {
                   >
                     <Image
                       className={`w-[16px] h-[16px] mt-4 `}
-                      src={require("./assets/more.png")}
+                      src={require("../../src/assets/more.png")}
                     />
                     <div className="absolute left-2 z-50 w-[200px] bg-white border border-gray-300 rounded-md shadow-lg opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity duration-300">
                       <ul className="py-1">
                         <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
                           <Image
                             className="mr-2"
-                            src={require("../src/assets/share.png")}
+                            src={require("../../src/assets/share.png")}
                           />
                           Share
                         </li>
                         <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
                           <Image
                             className="mr-2"
-                            src={require("../src/assets/time.png")}
+                            src={require("../../src/assets/time.png")}
                           />
                           Save
                         </li>
                         <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
                           <Image
                             className="mr-2 w-[16px] h-[16px]"
-                            src={require("../src/assets/ban.png")}
+                            src={require("../../src/assets/ban.png")}
                           />
                           Not Interested
                         </li>
                         <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer text-start flex">
                           <Image
                             className="mr-2 w-[16px] h-[16px]"
-                            src={require("../src/assets/wind-flag.png")}
+                            src={require("../../src/assets/wind-flag.png")}
                           />
                           Report
                         </li>
@@ -297,7 +290,7 @@ const InstructorProfile = ({ sidebar }) => {
           <div className="flex ml-10 pt-4">
             <Image
               className="w-[40px] h-[40px]"
-              src={require("../src/assets/img1.png")}
+              src={require("../../src/assets/img1.png")}
             />
             <div
               className={`ml-3 border-2 border-[#F7F7F7] bg-[#F7F7F7] px-4 text-base h-[45px] relative pt-1 group-focus-within:border-black ${
@@ -325,7 +318,7 @@ const InstructorProfile = ({ sidebar }) => {
           <div className="flex ml-10 pt-4">
             <Image
               className="w-[50px] h-[50px]"
-              src={require("../src/assets/img1.png")}
+              src={require("../../src/assets/img1.png")}
             />
             <div className="ml-4">
               <h1>John Doe</h1>
@@ -336,7 +329,7 @@ const InstructorProfile = ({ sidebar }) => {
                 <button className="flex items-center">
                   <Image
                     className="w-[16px] h-[16px]"
-                    src={require("./assets/more.png")}
+                    src={require("../../src/assets/more.png")}
                   />
                 </button>
                 <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity duration-300">
@@ -344,14 +337,14 @@ const InstructorProfile = ({ sidebar }) => {
                     <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer flex">
                       <Image
                         className="mr-2 w-[16px] h-[16px]"
-                        src={require("../src/assets/edit.png")}
+                        src={require("../../src/assets/edit.png")}
                       />
                       Edit
                     </li>
                     <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer flex">
                       <Image
                         className="mr-2 w-[16px] h-[16px]"
-                        src={require("../src/assets/delete.png")}
+                        src={require("../../src/assets/delete.png")}
                       />
                       Delete
                     </li>
@@ -384,7 +377,7 @@ const InstructorProfile = ({ sidebar }) => {
           <div className="flex ml-20 pt-4">
             <Image
               className="w-[50px] h-[50px]"
-              src={require("../src/assets/img1.png")}
+              src={require("../../src/assets/img1.png")}
             />
             <div className="ml-4">
               <h1>John Doe</h1>
@@ -395,7 +388,7 @@ const InstructorProfile = ({ sidebar }) => {
                 <button className="flex items-center">
                   <Image
                     className="w-[16px] h-[16px]"
-                    src={require("./assets/more.png")}
+                    src={require("../../src/assets/more.png")}
                   />
                 </button>
                 <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity duration-300">
@@ -403,14 +396,14 @@ const InstructorProfile = ({ sidebar }) => {
                     <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer flex">
                       <Image
                         className="mr-2 w-[16px] h-[16px]"
-                        src={require("../src/assets/edit.png")}
+                        src={require("../../src/assets/edit.png")}
                       />
                       Edit
                     </li>
                     <li className="px-4 py-2 hover:bg-[#ffecec] cursor-pointer flex">
                       <Image
                         className="mr-2 w-[16px] h-[16px]"
-                        src={require("../src/assets/delete.png")}
+                        src={require("../../src/assets/delete.png")}
                       />
                       Delete
                     </li>
@@ -454,7 +447,7 @@ const InstructorProfile = ({ sidebar }) => {
           <div className={`flex  mt-6 ${sidebar ? "ml-28" : "ml-64"}`}>
             <Image
               className="w-[110px] h-[110px]"
-              src={require("../src/assets/img1.png")}
+              src={require("../../src/assets/img1.png")}
             />
             <div className=" ml-6 mt-6">
               <div className="text-white font-bold text-2xl">John Doe</div>
@@ -488,26 +481,26 @@ const InstructorProfile = ({ sidebar }) => {
           <div className="ml-[200px] mt-16 text-white flex text-[14px]">
             <Image
               className="w-[14px] h-[14px] mr-2"
-              src={require("../src/assets/windsock.png")}
+              src={require("../../src/assets/windsock.png")}
             />
             Report Profile
           </div>
           <div className="flex mt-6 ml-[72px]">
             <Image
               className="w-[40px] h-[40px] mr-2 transition-transform duration-200 transform hover:scale-110 cursor-pointer"
-              src={require("../src/assets/facebook.png")}
+              src={require("../../src/assets/facebook.png")}
             />
             <Image
               className="w-[40px] h-[40px] mr-2 transition-transform duration-200 transform hover:scale-110 cursor-pointer"
-              src={require("../src/assets/twitter.png")}
+              src={require("../../src/assets/twitter.png")}
             />
             <Image
               className="w-[40px] h-[40px] mr-2 transition-transform duration-200 transform hover:scale-110 cursor-pointer"
-              src={require("../src/assets/linkedin.png")}
+              src={require("../../src/assets/linkedin.png")}
             />
             <Image
               className="w-[40px] h-[40px] mr-2 transition-transform duration-200 transform hover:scale-110 cursor-pointer"
-              src={require("../src/assets/youtube.png")}
+              src={require("../../src/assets/youtube.png")}
             />
           </div>
           <div className="flex mt-6 gap-2">

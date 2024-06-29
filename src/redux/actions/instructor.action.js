@@ -19,7 +19,7 @@ export const getAllInstructor = () => {
       });
       dispatch({ type: FETCH_INSTRUCTORS_SUCCESS, payload: response.data });
     } catch (error) {
-      dispatch({ type: FETCH_INSTRUCTORS_FAILURE, payload: error.message });
+      dispatch({ type: FETCH_INSTRUCTORS_FAILURE, error: error.message });
     }
   };
 };
@@ -31,7 +31,7 @@ export const searchInstructors = (query) => {
       const response = await axios.get(`${API_URL}/users`, {
         params: { role: "teacher", username: query },
       });
-      console.log(response);
+      // console.log(response);
       dispatch({ type: SEARCH_INSTRUCTORS_SUCCESS, payload: response.data });
     } catch (error) {
       dispatch({ type: SEARCH_INSTRUCTORS_FAILURE, error: error.message });

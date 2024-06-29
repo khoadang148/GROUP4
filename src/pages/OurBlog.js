@@ -22,6 +22,9 @@ const OurBlog = () => {
   };
   const handlePress = () => {
     navigate ("/press") 
+  };
+  const handleCareer =()=>{
+    navigate("/career")
   }
 
   const courses = [
@@ -88,7 +91,7 @@ const OurBlog = () => {
             <h3 className=" cursor-pointer"  onClick={handleAbout}>About</h3>
             <h3 className="" onClick={handleOurBlog}>Blog</h3>
             <h3 className="" onClick={handleCompany}>Company</h3>
-            <h3 className="">Careers</h3>
+            <h3 className="" onClick={handleCareer}>Careers</h3>
             <h3 className=""onClick={handlePress} >Press</h3>
           </div>
           <div className="relative z-10 text-center text-black pt-9">
@@ -97,7 +100,7 @@ const OurBlog = () => {
         </div>
         <img
           className="absolute inset-0 z-0 h-[200px] w-full opacity-15"
-          src={require("../src/assets/title_bg.jpg")}
+          src={require("../assets/title_bg.jpg")}
           alt="Background Image"
         />
       </div>
@@ -116,7 +119,7 @@ const OurBlog = () => {
                 className="absolute left-2 top-1/2 transform -translate-y-1/2"
               >
                 <img
-                  src={require("../src/assets/search.png")}
+                  src={require("../assets/search.png")}
                   width={13}
                   height={13}
                   className="mb-3"

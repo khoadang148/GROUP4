@@ -114,6 +114,9 @@ const Sidebar = ({ sidebar }) => {
   const handleCopyright = () => {
     navigate("/copyright");
   };
+  const handleNotification = () => {
+    navigate("/teachernotifi");
+  };
 
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -149,7 +152,7 @@ const Sidebar = ({ sidebar }) => {
           <Menu.Item
             key="67"
             className="flex items-center"
-            onClick={handleHome}
+            onClick={handleNotification}
           >
             <FontAwesomeIcon icon={faBell} className="mr-2 icon" />
             Notifications
@@ -157,7 +160,7 @@ const Sidebar = ({ sidebar }) => {
           <Menu.Item
             key="68"
             className="flex items-center"
-            onClick={handleHome}
+            
           >
             <FontAwesomeIcon icon={faTrophy} className="mr-2 icon" />
             My Certification
@@ -199,7 +202,8 @@ const Sidebar = ({ sidebar }) => {
       );
     } else if (
       (role === "teacher" && location.pathname === "/dashboard") ||
-      location.pathname === "/earning"
+      location.pathname === "/earning"||
+      location.pathname === "/teachernotifi"
     ) {
       return (
         <>
@@ -257,7 +261,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="55"
               className="flex items-center"
-              onClick={handleHome}
+              onClick={handleNotification}
             >
               <FontAwesomeIcon icon={faBell} className="mr-2 icon" />
               Notifications

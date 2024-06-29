@@ -146,7 +146,7 @@ const ShoppingCart = () => {
         <button onClick={handleBackClick} className="ml-22">
           <img
             className="w-[120px] h-[30px]"
-            src={require("../src/assets/logo.png")}
+            src={require("../assets/logo.png")}
             alt="hehe"
           />
         </button>

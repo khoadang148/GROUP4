@@ -13,7 +13,7 @@ import {
   Redirect,
   Navigate,
 } from "react-router-dom";
-import HomeScreen from "./HomeScreen";
+import HomeScreen from "../src/pages/HomeScreen";
 import Livestream from "./pages/Livestream";
 import { AuthContextProvider, useAuth } from "./context/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,12 +31,12 @@ import InstructorProfile from "../src/pages/InstructorProfile";
 import Dashboard2 from "./Dashboard2";
 import OurBlog from "./pages/OurBlog";
 import Help from "./pages/Help";
-import SettingAccount from "./Setting";
-import Privacy from "./Privacy";
-import BillingandPayout from "./BillingandPayout";
-import ApiClients from "./ApiClients";
-import CloseAccount from "./CloseAccount";
-import Notification from "./Notification";
+import SettingAccount from "../src/pages/Setting";
+import Privacy from "../src/pages/Privacy";
+import BillingandPayout from "../src/pages/BillingandPayout";
+import ApiClients from "../src/pages/ApiClients";
+import CloseAccount from "../src/pages/CloseAccount";
+import Notification from "../src/pages/Notification";
 import BlogSingle from "./pages/BlogSingle";
 import CompanyDetails from "./pages/CompanyDetails";
 import ReportHistory from "./ReportHistory";
@@ -45,9 +45,11 @@ import AddLiveStream from "./AddLiveStream";
 import Earning from "./Earning";
 import CertificationFillForm from "./CertificationFillForm";
 import Press from "./pages/Press";
-import ShoppingCart from "./ShoppingCart";
+import ShoppingCart from "../src/pages/ShoppingCart";
 import Career from "./pages/Career";
 import Copyright from "./pages/Copyright";
+import StudentNotification from "./pages/TeacherNotification";
+import TeacherNotification from "./pages/TeacherNotification";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -353,7 +355,7 @@ const App = () => {
           token ? (
             <>
               <div className="flex flex-col min-h-screen">
-                <ShoppingCart />
+               <ShoppingCart/>
                 <Footer />
               </div>
             </>
@@ -368,7 +370,7 @@ const App = () => {
           token ? (
             <>
               <Layout>
-                <SettingAccount sidebar={sidebar} />
+                <SettingAccount sidebar={sidebar}/>
               </Layout>
             </>
           ) : (
@@ -421,7 +423,7 @@ const App = () => {
           token ? (
             <>
               <Layout>
-                <Notification sidebar={sidebar} />
+                <Notification sidebar={sidebar}/>
               </Layout>
             </>
           ) : (
@@ -449,7 +451,7 @@ const App = () => {
           token ? (
             <>
               <Layout>
-                <BillingandPayout sidebar={sidebar} />
+               <BillingandPayout sidebar={sidebar}/>
               </Layout>
             </>
           ) : (
@@ -477,7 +479,7 @@ const App = () => {
           token ? (
             <>
               <Layout>
-                <ApiClients sidebar={sidebar} />
+                <ApiClients sidebar={sidebar}/>
               </Layout>
             </>
           ) : (
@@ -491,7 +493,7 @@ const App = () => {
           token ? (
             <>
               <Layout>
-                <CloseAccount sidebar={sidebar} />
+                <CloseAccount sidebar={sidebar}/>
               </Layout>
             </>
           ) : (
@@ -549,6 +551,20 @@ const App = () => {
             token ? (
               <Layout>
                 <Dashboard2 />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+      {role === "teacher" && (
+        <Route
+          path="/teachernotifi"
+          element={
+            token ? (
+              <Layout>
+              <TeacherNotification/>
               </Layout>
             ) : (
               <Navigate to="/login" />

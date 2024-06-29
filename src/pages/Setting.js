@@ -1,7 +1,7 @@
 import { SettingOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
-import React, { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+import React from 'react'
+import {  useNavigate } from 'react-router-dom';
 import {  message } from 'antd';
 const SettingAccount = () => {
     const navigate = useNavigate();

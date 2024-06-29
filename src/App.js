@@ -14,7 +14,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import HomeScreen from "./HomeScreen";
-import Livestream from "./Livestream";
+import Livestream from "./pages/Livestream";
 import { AuthContextProvider, useAuth } from "./context/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
 import ExploreScreen from "../src/pages/ExploreScreen";
@@ -30,7 +30,7 @@ import About from "./About";
 import InstructorProfile from "../src/pages/InstructorProfile";
 import Dashboard2 from "./Dashboard2";
 import OurBlog from "./OurBlog";
-import Help from "./Help";
+import Help from "./pages/Help";
 import SettingAccount from "./Setting";
 import Privacy from "./Privacy";
 import BillingandPayout from "./BillingandPayout";

@@ -108,6 +108,9 @@ const Sidebar = ({ sidebar }) => {
     const handlePress = () => {
       navigate("/press");
     };
+    const handleCareer = () => {
+      navigate ("/career") 
+    }
  
     const role = useSelector((state) => state.auth.role);
     const dispatch = useDispatch();
@@ -434,7 +437,7 @@ const Sidebar = ({ sidebar }) => {
                   <Menu.Item key="28">Course Detail View</Menu.Item>
                   <Menu.Item key="29">Checkout</Menu.Item>
                   <Menu.Item key="30">Invoice</Menu.Item>
-                  <Menu.Item key="31">Career</Menu.Item>
+                  <Menu.Item key="31" onClick={handleCareer}>Career</Menu.Item>
                   <Menu.Item key="32">Job Apply</Menu.Item>
                   <Menu.Item key="33" onClick={handleOurBlog}>
                     Our Blog

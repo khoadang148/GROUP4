@@ -26,10 +26,10 @@ import { setToken, setRole, setID } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
 import AllInstructors from "../src/pages/AllInstructors";
 import HeaderPages from "./components/HeaderPages";
-import About from "./About";
+import About from "./pages/About";
 import InstructorProfile from "../src/pages/InstructorProfile";
 import Dashboard2 from "./Dashboard2";
-import OurBlog from "./OurBlog";
+import OurBlog from "./pages/OurBlog";
 import Help from "./pages/Help";
 import SettingAccount from "./Setting";
 import Privacy from "./Privacy";
@@ -37,15 +37,16 @@ import BillingandPayout from "./BillingandPayout";
 import ApiClients from "./ApiClients";
 import CloseAccount from "./CloseAccount";
 import Notification from "./Notification";
-import BlogSingle from "./BlogSingle";
-import CompanyDetails from "./CompanyDetails";
+import BlogSingle from "./pages/BlogSingle";
+import CompanyDetails from "./pages/CompanyDetails";
 import ReportHistory from "./ReportHistory";
 import SendFeedback from "./SendFeedback";
 import AddLiveStream from "./AddLiveStream";
 import Earning from "./Earning";
 import CertificationFillForm from "./CertificationFillForm";
-import Press from "./Press";
+import Press from "./pages/Press"
 import ShoppingCart from "./ShoppingCart";
+import Career from "./pages/Career";
 
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
@@ -311,6 +312,20 @@ const App = () => {
             <div className="flex flex-col min-h-screen">
               <HeaderPages />
               <Press />
+              <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/career"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <Career />
               <Footer />
             </div>
           ) : (

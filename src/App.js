@@ -44,10 +44,10 @@ import SendFeedback from "./SendFeedback";
 import AddLiveStream from "./AddLiveStream";
 import Earning from "./Earning";
 import CertificationFillForm from "./CertificationFillForm";
-import Press from "./pages/Press"
+import Press from "./pages/Press";
 import ShoppingCart from "./ShoppingCart";
 import Career from "./pages/Career";
-
+import Copyright from "./pages/Copyright";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -376,7 +376,7 @@ const App = () => {
           )
         }
       />
-       <Route
+      <Route
         path="/reporthistory"
         element={
           token ? (
@@ -405,9 +405,8 @@ const App = () => {
         element={
           token ? (
             <>
-             
               <Layout>
-              <AddLiveStream sidebar={sidebar}/>
+                <AddLiveStream sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -415,7 +414,7 @@ const App = () => {
           )
         }
       />
-      
+
       <Route
         path="/notification"
         element={
@@ -453,6 +452,20 @@ const App = () => {
                 <BillingandPayout sidebar={sidebar} />
               </Layout>
             </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/copyright"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <Copyright />
+              <Footer />
+            </div>
           ) : (
             <Navigate to="/login" />
           )
@@ -528,6 +541,7 @@ const App = () => {
           )
         }
       />
+
       {role === "student" && (
         <Route
           path="/dashboard2"

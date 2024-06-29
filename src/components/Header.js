@@ -2,12 +2,84 @@ import React from "react";
 import { MdNotifications, MdApps } from "react-icons/md";
 import { Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { Dropdown } from "antd";
+import { RightOutlined } from "@ant-design/icons";
 const Header = ({ handleToggleSidebar }) => {
   const navigate = useNavigate();
 
   const handleShoppingCart = () => {
     navigate("/shoppingcart");
   };
+  const handleViewAll = () => {
+    navigate("/teachernotifi");
+  };
+  const items = [
+    {
+      key: "1",
+      label: (
+        <div className="flex gap-3 p-3 bg-white hover:bg-[#FFECEC]">
+          <div>
+            <img
+              src="https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-1.jpg"
+              width={40}
+            />
+          </div>
+          <div className="flex flex-col">
+            <h3>Rock William</h3>
+           
+            <div className="break-words w-64">Like Your Comment On Video How to create sidebar menu.</div>
+            <div className="text-sm font-light text-gray-500">2 min ago</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <div className="flex gap-3 p-3 bg-white hover:bg-[#FFECEC]">
+          <div>
+            <img
+              src="https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-2.jpg"
+              width={40}
+            />
+          </div>
+          <div className="flex flex-col">
+            <h3>Jassica Smith</h3>
+           
+            <div className="break-words w-64">Add New Review In Video Full Stack PHP Developer.</div>
+            <div className="text-sm font-light text-gray-500">12 min ago</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <div className="flex gap-3 p-3 bg-white hover:bg-[#FFECEC]">
+          <div>
+            <img
+              src="https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-9.jpg"
+              width={40}
+            />
+          </div>
+          <div className="flex flex-col">
+            <h3>Edututs+</h3>
+           
+            <div className="break-words w-64">Your Membership Approved Upload Video.</div>
+            <div className="text-sm font-light text-gray-500">20 min ago</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <div className=" flex justify-center p-3 bg-[#FFECEC] hover:bg-black text-black hover:text-white" onClick={handleViewAll} >
+          View All   <RightOutlined />
+        </div>
+      ),
+    },
+  ];
   return (
     <div className=" z-50 flex bg-white h-[65px] w-full drop-shadow-lg fixed">
       <div className="flex">
@@ -34,7 +106,7 @@ const Header = ({ handleToggleSidebar }) => {
           />
           <button type="submit" className="top-0 left-3 absolute">
             <Image
-              className="max-w-none mt-2"
+              className="max-w-none mt-2 cursor-pointer"
               src={require("../assets/search.png")}
               width={12}
               height={12}
@@ -65,16 +137,25 @@ const Header = ({ handleToggleSidebar }) => {
           height={24}
           alt="Search"
         ></Image>
-        <Image
-          className="max-w-none mt-2 mr-4"
-          src={require("../assets/bell.png")}
-          width={24}
-          height={24}
-          alt="Search"
-        ></Image>
+        <Dropdown
+          menu={{
+            items,
+          }}
+          placement="bottomRight"
+          arrow
+        >
+          <Image
+            className="max-w-none mt-2 mr-4 cursor-pointer"
+            src={require("../assets/bell.png")}
+            width={24}
+            height={24}
+            alt="Search"
+          ></Image>
+        </Dropdown>
+
         <img
           className="rounded-full border  w-[40px] h-[40px] object-contain mx-[10px]"
-          src={require("../assets/img1.png")}
+          src={""}
           alt="ava"
         />
       </div>

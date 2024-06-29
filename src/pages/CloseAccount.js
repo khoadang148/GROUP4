@@ -1,7 +1,7 @@
 import { SettingOutlined } from '@ant-design/icons'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import {  Button, message} from 'antd';
+import {   message} from 'antd';
 const CloseAccount = () => {
     const navigate = useNavigate();
 

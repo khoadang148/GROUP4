@@ -50,6 +50,7 @@ import Career from "./pages/Career";
 import Copyright from "./pages/Copyright";
 import StudentNotification from "./pages/TeacherNotification";
 import TeacherNotification from "./pages/TeacherNotification";
+import JobApply from "./pages/JobApply";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -342,6 +343,20 @@ const App = () => {
             <div className="flex flex-col min-h-screen">
               <HeaderPages />
               <About />
+              <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/jobapply"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <JobApply />
               <Footer />
             </div>
           ) : (

@@ -11,78 +11,7 @@ import { getEnrolledCourses } from "../redux/actions/course.action";
 
 const InstructorProfile = ({ sidebar }) => {
   const [hoveredCourse, setHoveredCourse] = useState(null);
-  const thumbnails = [
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-1.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-2.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-4.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-7.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-8.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-13.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-16.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-20.jpg",
-  ];
-  const rates = ["4.5", "5", "4", "4.5", "5", "4", "5", "4"];
-  const prices = ["$10", "$10", "$10", "$10", "$10", "$10", "$10", "$10"];
-  const instructors = [
-    "John Doe",
-    "John Doe",
-    "John Doe",
-    "John Doe",
-    "John Doe",
-    "John Doe",
-    "John Doe",
-    "John Doe",
-  ];
-  const languages = [
-    "Javascript",
-    "Web Development | Python",
-    "Javascript",
-    "Web Development | Python",
-    "Javascript",
-    "Web Development | Python",
-    "Javascript",
-    "Web Development | Python",
-  ];
-  const hours = [
-    "25 hours",
-    "28 hours",
-    "30 hours",
-    "1 hour",
-    "25 hours",
-    "28 hours",
-    "30 hours",
-    "1 hour",
-  ];
-  const views = [
-    "109k views",
-    "109k views",
-    "109k views",
-    "109k views",
-    "109k views",
-    "109k views",
-    "109k views",
-    "109k views",
-  ];
-  const times = [
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-    "15 days ago",
-  ];
-  const titles = [
-    "Complete Python Bootcamp: Go from zero to hero in Python 3",
-    "Complete Python Bootcamp: Go from zero to hero in Python 3",
-    "Complete python bootcamp",
-    "Complete python bootcamp",
-    "Complete python bootcamp",
-    "Complete python bootcamp",
-    "Complete python bootcamp",
-    "Complete python bootcamp",
-  ];
+
   const handleMouseEnter = (index) => {
     setHoveredCourse(index);
   };
@@ -250,7 +179,7 @@ const InstructorProfile = ({ sidebar }) => {
                     </div>
                   </Button>
                 </div>
-                <div className="ml-3 text-base font-bold">{titles[index]}</div>
+                <div className="ml-3 text-base font-bold">{course.title}</div>
                 <div className="ml-3 text-sm text-[#91979f] mt-2">
                   {course.language}
                 </div>

@@ -16,21 +16,18 @@ import {
 import HomeScreen from "./HomeScreen";
 import Livestream from "./Livestream";
 import { AuthContextProvider, useAuth } from "./context/AuthContext";
-import withAuth from "./AuthChecker";
-import AuthChecker from "./AuthChecker";
 import { useDispatch, useSelector } from "react-redux";
-import ExploreScreen from "./ExploreScreen";
+import ExploreScreen from "../src/pages/ExploreScreen";
 import Footer from "./components/Footer";
 import SavedCourses from "./SavedCourses";
 import CertificationCenter from "./CertificationCenter";
 import DashBoard from "./DashBoard";
 import { setToken, setRole, setID } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
-import AllInstructors from "./AllInstructors";
-import InstructorProfie from "./InstructorProfile";
+import AllInstructors from "../src/pages/AllInstructors";
 import HeaderPages from "./components/HeaderPages";
 import About from "./About";
-import InstructorProfile from "./InstructorProfile";
+import InstructorProfile from "../src/pages/InstructorProfile";
 import Dashboard2 from "./Dashboard2";
 import OurBlog from "./OurBlog";
 import Help from "./Help";
@@ -113,17 +110,23 @@ const App = () => {
   useEffect(() => {
     const tokenFromCookie = Cookies.get("token");
     const idFromCookie = Cookies.get("id");
-  
+
     // Check if we are on signup or forgot password screen
-    if (tokenFromCookie && !window.location.pathname.includes("/signup") && !window.location.pathname.includes("/forgot-password")) {
+    if (
+      tokenFromCookie &&
+      !window.location.pathname.includes("/signup") &&
+      !window.location.pathname.includes("/forgot-password")
+    ) {
       dispatch(setToken(tokenFromCookie));
       dispatch(setRole(tokenFromCookie));
       dispatch(setID(idFromCookie));
-    } else if (!window.location.pathname.includes("/signup") && !window.location.pathname.includes("/forgot-password")) {
+    } else if (
+      !window.location.pathname.includes("/signup") &&
+      !window.location.pathname.includes("/forgot-password")
+    ) {
       navigate("/login");
     }
   }, [dispatch, navigate]);
-  
 
   useEffect(() => {
     if (role === "student" && isHomeVisited) {
@@ -329,13 +332,13 @@ const App = () => {
           )
         }
       />
-       <Route
+      <Route
         path="/shoppingcart"
         element={
           token ? (
             <>
               <div className="flex flex-col min-h-screen">
-                <ShoppingCart/>
+                <ShoppingCart />
                 <Footer />
               </div>
             </>

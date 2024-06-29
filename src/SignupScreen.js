@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { Form, Input, Button, Checkbox } from 'antd';
-import { login } from './redux/actions/auth.action';
-import { FaEnvelope, FaKey } from 'react-icons/fa';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Form, Input, Button, Checkbox } from "antd";
+import { login } from "./redux/actions/auth.action";
+import { FaEnvelope, FaKey } from "react-icons/fa";
 
 // Define logo URL and sign logo URL
-const logoUrl = 'https://gambolthemes.net/html-items/cursus-new-demo/images/logo.svg';
-const signBackgroundUrl = 'https://gambolthemes.net/html-items/cursus-new-demo/images/sign.svg';
-const signLogoUrl = 'https://gambolthemes.net/html-items/cursus-new-demo/images/sign_logo.png';
+const logoUrl =
+  "https://gambolthemes.net/html-items/cursus-new-demo/images/logo.svg";
+const signBackgroundUrl =
+  "https://gambolthemes.net/html-items/cursus-new-demo/images/sign.svg";
+const signLogoUrl =
+  "https://gambolthemes.net/html-items/cursus-new-demo/images/sign_logo.png";
 
 const SignupScreen = () => {
   const [loading, setLoading] = useState(false);
@@ -21,19 +24,23 @@ const SignupScreen = () => {
     await dispatch(login(values.username, values.password));
     setLoading(false);
     if (user) {
-      navigate('/home');
+      navigate("/home");
     }
   };
 
   const goToLogin = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100 relative">
       {/* Background image */}
       <div className="absolute top-0 left-0 w-full h-full z-0">
-        <img src={signBackgroundUrl} alt="Sign Background" className="w-full h-full object-cover opacity-5" />
+        <img
+          src={signBackgroundUrl}
+          alt="Sign Background"
+          className="w-full h-full object-cover opacity-5"
+        />
       </div>
 
       {/* Content */}
@@ -41,31 +48,57 @@ const SignupScreen = () => {
         <img src={logoUrl} alt="Cursus Logo" className="w-32 h-8" />
 
         <div className="bg-white p-8 rounded-lg shadow-lg mt-8 w-full">
-          <h2 className="text-2xl font-bold mb-2 text-center text-black">Welcome to Cursus</h2>
-          <p className="text-center mb-3 text-sm">Sign Up and Start Learning!</p>
+          <h2 className="text-2xl font-bold mb-2 text-center text-black">
+            Welcome to Cursus
+          </h2>
+          <p className="text-center mb-3 text-sm">
+            Sign Up and Start Learning!
+          </p>
 
           {/* Sign Up Form */}
           <Form onFinish={handleLogin} className="w-full">
-            <Form.Item name="fullname" rules={[{ required: true, message: 'Please input your full name!' }]}>
+            <Form.Item
+              name="fullname"
+              rules={[
+                { required: true, message: "Please input your full name!" },
+              ]}
+            >
               <Input placeholder="Full Name" className="w-full" />
             </Form.Item>
 
-            <Form.Item name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
+            <Form.Item
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
+            >
               <Input placeholder="Email Address" className="w-full" />
             </Form.Item>
 
-            <Form.Item name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
+            <Form.Item
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
+            >
               <Input.Password placeholder="Password" className="w-full" />
             </Form.Item>
 
             <Form.Item>
               <Checkbox>
-                <span className="text-xs">I'm in for emails with exciting discounts and personalized recommendations</span>
+                <span className="text-xs">
+                  I'm in for emails with exciting discounts and personalized
+                  recommendations
+                </span>
               </Checkbox>
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" loading={loading} block className="bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+                block
+                className="bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              >
                 Next
               </Button>
             </Form.Item>
@@ -84,7 +117,7 @@ const SignupScreen = () => {
           </p>
 
           <p className="text-center my-4 text-xs">
-            Already have an account?{' '}
+            Already have an account?{" "}
             <span className="text-blue-600 cursor-pointer" onClick={goToLogin}>
               Log In
             </span>
@@ -94,8 +127,14 @@ const SignupScreen = () => {
 
       {/* Footer */}
       <div className="mt-4 text-center mb-auto z-10">
-        <img src={signLogoUrl} alt="Sign Logo" className="h-10 inline-block mr-2" />
-        <p className="text-sm inline-block">© 2024 Cursus. All Rights Reserved.</p>
+        <img
+          src={signLogoUrl}
+          alt="Sign Logo"
+          className="h-10 inline-block mr-2"
+        />
+        <p className="text-sm inline-block">
+          © 2024 Cursus. All Rights Reserved.
+        </p>
       </div>
     </div>
   );

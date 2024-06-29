@@ -19,6 +19,7 @@ const instructorsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        error: null
       };
     case FETCH_INSTRUCTORS_SUCCESS:
       return {
@@ -29,8 +30,7 @@ const instructorsReducer = (state = initialState, action) => {
     case FETCH_INSTRUCTORS_FAILURE:
       return {
         loading: false,
-        instructors: [],
-        error: action.payload,
+        error: action.error,
       };
     case SEARCH_INSTRUCTORS_REQUEST:
       return {

@@ -310,7 +310,7 @@ const Help = ({ sidebar }) => {
               <button type="submit" className="top-0 left-3 absolute">
                 <Image
                   className="max-w-none mt-[14px]"
-                  src={require("./assets/search.png")}
+                  src={require("../assets/search.png")}
                   width={15}
                   height={15}
                   alt="Search"

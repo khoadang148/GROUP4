@@ -191,7 +191,7 @@ const Sidebar = ({ sidebar }) => {
             </Menu.Item>
           </>
         );
-      } else if (role === "teacher" && location.pathname === "/dashboard") {
+      } else if (role === "teacher" && location.pathname === "/dashboard" || location.pathname === "/earning") {
         return (
           <>
             {role === "teacher" && (

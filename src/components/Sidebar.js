@@ -111,6 +111,9 @@ const Sidebar = ({ sidebar }) => {
   const handleCareer = () => {
     navigate("/career");
   };
+  const handleJobapply = () => {
+    navigate("/jobapply");
+  };
   const handleCopyright = () => {
     navigate("/copyright");
   };
@@ -447,7 +450,7 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="31" onClick={handleCareer}>
                   Career
                 </Menu.Item>
-                <Menu.Item key="32">Job Apply</Menu.Item>
+                <Menu.Item key="32" onClick={handleJobapply}>Job Apply</Menu.Item>
                 <Menu.Item key="33" onClick={handleOurBlog}>
                   Our Blog
                 </Menu.Item>

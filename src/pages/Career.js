@@ -30,6 +30,9 @@ const Career = () => {
   const handleCareer = () => {
     navigate("/career");
   };
+  const handleJobapply = () => {
+    navigate("/jobapply");
+  };
 
   const benefits = [
     {
@@ -297,7 +300,7 @@ const Career = () => {
             <div key={index} className="text-center p-4 bg-white h-[150px] w-[650px]">
               <h3 className="text-xl font-semibold text-black">{role.title}</h3>
               <p className="text-[#686f7a]">{role.country}</p>
-              <button className="mt-2 bg-[#ed2a26] text-white text-[14px] px-6 py-2 hover:bg-[#333333] transition duration-300">
+              <button className="mt-2 bg-[#ed2a26] text-white text-[14px] px-6 py-2 hover:bg-[#333333] transition duration-300" onClick={handleJobapply}>
                 Learn More and Apply
               </button>
             </div>

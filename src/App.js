@@ -35,7 +35,7 @@ import ReportHistory from "./ReportHistory";
 import SendFeedback from "./SendFeedback";
 import AddLiveStream from "./AddLiveStream";
 import Earning from "./Earning";
-import CertificationFillForm from "./CertificationFillForm";
+import CertificationFillForm from "./pages/CertificationFillForm";
 import Press from "./pages/Press";
 import ShoppingCart from "../src/pages/ShoppingCart";
 import Career from "./pages/Career";
@@ -47,6 +47,7 @@ import MyCertificates from "./pages/MyCertificates";
 import PaidMenberShip from "./pages/PaidMenberShip";
 import TeacherMess from "./pages/TeacherMess";
 import StudentMess from "./pages/StudentMess";
+import SearchResult from "./pages/SearchResult";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -223,6 +224,22 @@ const App = () => {
             <Layout>
               <AllInstructors sidebar={sidebar} />
             </Layout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/searchresult"
+        element={
+          token ? (
+            <>
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <SearchResult />
+                <Footer />
+              </div>
+            </>
           ) : (
             <Navigate to="/login" />
           )
@@ -595,7 +612,7 @@ const App = () => {
           }
         />
       )}
-     {role === "teacher" && (
+      {role === "teacher" && (
         <Route
           path="/teacherNotification"
           element={
@@ -609,13 +626,13 @@ const App = () => {
           }
         />
       )}
-       {role === "teacher" && (
+      {role === "teacher" && (
         <Route
           path="/teacherMess"
           element={
             token ? (
               <Layout>
-                <TeacherMess/>
+                <TeacherMess />
               </Layout>
             ) : (
               <Navigate to="/login" />
@@ -629,7 +646,7 @@ const App = () => {
           element={
             token ? (
               <Layout>
-                <StudentMess/>
+                <StudentMess />
               </Layout>
             ) : (
               <Navigate to="/login" />
@@ -637,13 +654,13 @@ const App = () => {
           }
         />
       )}
-       {role === "student" && (
+      {role === "student" && (
         <Route
           path="/studentNotification"
           element={
             token ? (
               <Layout>
-                <StudentNotification/>
+                <StudentNotification />
               </Layout>
             ) : (
               <Navigate to="/login" />

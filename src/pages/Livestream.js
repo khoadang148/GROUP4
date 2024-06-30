@@ -1,72 +1,58 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadset } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeadset } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllInstructor } from "../redux/actions/instructor.action";
 
-const Livestream = () => {
-  const avatars = [
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-1.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-2.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-9.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-3.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-4.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-5.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-6.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-7.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-11.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-12.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-13.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-13.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-13.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-13.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-13.jpg",
-  ];
-  const keywords = [
-    "John Doe",
-    "Jassica",
-    "Edututs",
-    "Joginder Singh",
-    "Zoena",
-    "Albert Dua",
-    "Ridhima",
-    "Amritpal",
-    "Jimmy",
-    "Quinton Batchelor",
-    "Eli Natoli",
-    "Jaysen Batchelor",
-    "Jaysen Batchelor",
-    "Jaysen Batchelor",
-    "Jaysen Batchelor",
-    "Jaysen Batchelor",
-  ];
+const Livestream = ({ sidebar }) => {
+  const { instructors } = useSelector((state) => state.instructors);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllInstructor());
+  }, [dispatch]);
 
   return (
     <div>
       <div className="pt-[100px] pl-[30px] font-semibold">All Live Streams</div>
-      <div className="grid grid-cols-7 w-[1200px]">
+      <div
+        className={`grid grid-cols-7 ${sidebar ? "w-[1300px]" : "w-[1640px]"}`}
+      >
         <div className="col-span-5 pl-[30px]">
           <div className="grid grid-cols-4 gap-7 pt-5">
-            {keywords.map((value, i) => (
+            {instructors.map((instructor, i) => (
               <a
                 href="https://gambolthemes.net/html-items/cursus-new-demo/live_output.html"
                 key={i}
               >
-                <div key={i} className="bg-[#DED9DE] py-[20px] px-[20px]">
+                <div className="bg-[#DED9DE] py-[20px] px-[20px]">
                   <div className="bg-[#E5E0E5] py-[30px] px-[10px] drop-shadow-lg text-center relative">
                     <div className="pl-[30px]">
                       <img
-                        src={avatars[i % avatars.length]}
-                        alt={value}
-                        className="w-[60px] rounded-full relative -mt-[20px]"
+                        src={instructor.avatar}
+                        alt="img"
+                        // className="w-[60px] rounded-full relative -mt-[20px] ml-3"
+                        className={`w-[60px] rounded-full relative -mt-[20px] ml-3 ${
+                          sidebar ? "ml-28" : "ml-[40px]"
+                        }`}
                       />
                     </div>
-                    <div className="text-base mt-4">{value}</div>
+                    <div className="text-base mt-4 ">{instructor.username}</div>
+                    <div className="text-md">
+                      <span>live </span>
+                      <span className="text-red-600">•</span>
+                    </div>
                   </div>
                 </div>
               </a>
             ))}
           </div>
         </div>
-        <div className="col-span-2 bg-white ml-[30px] max-h-80 w-[100%]">
+        <div
+          className={`col-span-2 bg-white ml-[30px] max-h-80 ${
+            sidebar ? "w-[300px]" : "w-[380px]"
+          }`}
+        >
           <div className="font-semibold text-[17px] pt-2 pl-4">
             <p>Live Streaming</p>
           </div>
@@ -92,6 +78,6 @@ const Livestream = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Livestream;

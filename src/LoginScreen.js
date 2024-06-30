@@ -24,7 +24,7 @@ const LoginScreen = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.error);
+  const error = useSelector((state) => state.auth.error);
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
   console.log("user", user);
@@ -35,7 +35,11 @@ const LoginScreen = () => {
     await dispatch(login(values.username, values.password));
     setLoading(false);
 
-    if (token) {
+    // if (token) {
+    //   Cookies.set("token", token, { expires: 7 });
+    //   navigate("/home");
+    // }
+    if (Cookies.get("token")) {
       Cookies.set("token", token, { expires: 7 });
       navigate("/home");
     }
@@ -43,8 +47,6 @@ const LoginScreen = () => {
 
   const handleSocialLogin = async (provider) => {
     console.log(`Logging in with ${provider}`);
-    // Placeholder for handling social login
-    // Add logic here to handle social login with the provider
   };
   const goToSignUp = () => {
     navigate("/signup");

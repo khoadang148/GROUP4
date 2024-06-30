@@ -19,7 +19,11 @@ const Help = ({ sidebar }) => {
 
   const Instructor = () => {
     return (
-      <div className="text-black cursor-pointer w-[1300px] ml-[-80px]">
+      <div
+        className={`text-black cursor-pointer  ml-[-80px]  ${
+          sidebar ? "w-[1300px]" : "w-[1590px]"
+        }`}
+      >
         <div className="text-[20px] py-4">
           <h1>Select a topic to search for help</h1>
         </div>
@@ -152,7 +156,11 @@ const Help = ({ sidebar }) => {
 
   const Student = () => {
     return (
-      <div className="text-black cursor-pointer w-[1300px] ml-[-80px]">
+      <div
+        className={`text-black cursor-pointer  ml-[-80px]  ${
+          sidebar ? "w-[1300px]" : "w-[1590px]"
+        }`}
+      >
         <div className="text-[20px] py-4">
           <h1>Select a topic to search for help</h1>
         </div>
@@ -323,7 +331,7 @@ const Help = ({ sidebar }) => {
       <div className="bg-white">
         <div
           className={`flex gap-5 pt-6 pr-[250px] justify-center ${
-            sidebar ? "ml-28" : "ml-64"
+            sidebar ? "ml-10" : "ml-[80px]"
           }`}
         >
           <Button

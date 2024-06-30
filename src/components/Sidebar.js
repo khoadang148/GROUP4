@@ -135,6 +135,9 @@ const Sidebar = ({ sidebar }) => {
   const handleStudentMessage = () => {
     navigate("/studentMessage")
   }
+   const handleSearchResult = () => {
+     navigate("/searchresult");
+   };
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -231,17 +234,17 @@ const Sidebar = ({ sidebar }) => {
           {role === "teacher" && (
             <Menu.Item
               key="50"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleHome}
             >
-              <FontAwesomeIcon icon={faBorderAll} className="mr-2 icon" />
+              <FontAwesomeIcon icon={faBorderAll} className="mr-2 icon " />
               Dashboard
             </Menu.Item>
           )}
           {role === "teacher" && (
             <Menu.Item
               key="51"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleHome}
             >
               <FontAwesomeIcon icon={faBook} className="mr-2 icon" />
@@ -251,7 +254,7 @@ const Sidebar = ({ sidebar }) => {
           {role === "teacher" && (
             <Menu.Item
               key="52"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleHome}
             >
               <FontAwesomeIcon icon={faChartLine} className="mr-2 icon" />
@@ -261,7 +264,7 @@ const Sidebar = ({ sidebar }) => {
           {role === "teacher" && (
             <Menu.Item
               key="53"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleHome}
             >
               <FontAwesomeIcon icon={faCirclePlus} className="mr-2 icon" />
@@ -271,7 +274,7 @@ const Sidebar = ({ sidebar }) => {
           {role === "teacher" && (
             <Menu.Item
               key="54"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleMess}
             >
               <FontAwesomeIcon icon={faComment} className="mr-2 icon" />
@@ -281,7 +284,7 @@ const Sidebar = ({ sidebar }) => {
           {role === "teacher" && (
             <Menu.Item
               key="55"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleNotification}
             >
               <FontAwesomeIcon icon={faBell} className="mr-2 icon" />
@@ -291,7 +294,7 @@ const Sidebar = ({ sidebar }) => {
           {role === "teacher" && (
             <Menu.Item
               key="56"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleMyCertificates}
             >
               <FontAwesomeIcon icon={faTrophy} className="mr-2 icon" />
@@ -301,7 +304,7 @@ const Sidebar = ({ sidebar }) => {
           {role === "teacher" && (
             <Menu.Item
               key="57"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleHome}
             >
               <FontAwesomeIcon icon={faStar} className="mr-2 icon" />
@@ -311,7 +314,7 @@ const Sidebar = ({ sidebar }) => {
           {role === "teacher" && (
             <Menu.Item
               key="58"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleEarning}
             >
               <FontAwesomeIcon icon={faDollarSign} className="mr-2 icon" />
@@ -321,7 +324,7 @@ const Sidebar = ({ sidebar }) => {
           {role === "teacher" && (
             <Menu.Item
               key="59"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleHome}
             >
               <FontAwesomeIcon icon={faWallet} className="mr-2 icon" />
@@ -331,7 +334,7 @@ const Sidebar = ({ sidebar }) => {
           {role === "teacher" && (
             <Menu.Item
               key="60"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleHome}
             >
               <FontAwesomeIcon icon={faNewspaper} className="mr-2 icon" />
@@ -341,7 +344,7 @@ const Sidebar = ({ sidebar }) => {
           {role === "teacher" && (
             <Menu.Item
               key="61"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleHome}
             >
               <FontAwesomeIcon icon={faCircleCheck} className="mr-2 icon" />
@@ -351,13 +354,13 @@ const Sidebar = ({ sidebar }) => {
 
           <hr />
           {role === "teacher" && (
-            <Menu.Item key="62" onClick={handleSetting}>
+            <Menu.Item key="62" onClick={handleSetting} className="py-[27px]">
               <FontAwesomeIcon icon={faGear} className="mr-2 icon" />
               Setting
             </Menu.Item>
           )}
           {role === "teacher" && (
-            <Menu.Item key="63">
+            <Menu.Item key="63" className="py-[27px]">
               <FontAwesomeIcon icon={faMessage} className="mr-2 icon" />
               Send Feedback
             </Menu.Item>
@@ -372,7 +375,7 @@ const Sidebar = ({ sidebar }) => {
           {(role === "student" || role === "teacher") && (
             <Menu.Item
               key="1"
-              className="flex items-center"
+              className="flex items-center py-[27px]"
               onClick={handleHome}
             >
               <FontAwesomeIcon icon={faHouse} className="mr-2 icon" />
@@ -381,13 +384,13 @@ const Sidebar = ({ sidebar }) => {
           )}
 
           {(role === "student" || role === "teacher") && (
-            <Menu.Item key="2" onClick={handleLivestream}>
+            <Menu.Item key="2" onClick={handleLivestream} className="py-[27px]">
               <FontAwesomeIcon icon={faHeadset} className="mr-2 icon" />
               Live Stream
             </Menu.Item>
           )}
           {(role === "student" || role === "teacher") && (
-            <Menu.Item key="3" onClick={handleExplore}>
+            <Menu.Item key="3" onClick={handleExplore} className="py-[27px]">
               <FontAwesomeIcon icon={faMagnifyingGlass} className="mr-2 icon" />
               Explore
             </Menu.Item>
@@ -425,7 +428,7 @@ const Sidebar = ({ sidebar }) => {
               icon={<SettingOutlined />}
               title="Tests"
               style={{ color: "black" }}
-              className="submenu-hover"
+              className="submenu-hover "
             >
               <div className="font-normal pl-5">
                 <Menu.Item key="17" onClick={handleCertificationCenter}>
@@ -441,7 +444,11 @@ const Sidebar = ({ sidebar }) => {
             </SubMenu>
           )}
           {(role === "student" || role === "teacher") && (
-            <Menu.Item key="22" onClick={handleSavedCourses}>
+            <Menu.Item
+              key="22"
+              onClick={handleSavedCourses}
+              className="py-[27px]"
+            >
               <FontAwesomeIcon icon={faHeart} className="mr-2 icon" />
               Save Courses
             </Menu.Item>
@@ -452,7 +459,7 @@ const Sidebar = ({ sidebar }) => {
               icon={<SettingOutlined />}
               title="Pages"
               style={{ color: "black" }}
-              className="submenu-hover"
+              className="submenu-hover "
             >
               <div className="font-normal pl-5">
                 <Menu.Item key="23" onClick={handleAbout}>
@@ -461,7 +468,9 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="24">Sign In</Menu.Item>
                 <Menu.Item key="25">Sign Up</Menu.Item>
                 <Menu.Item key="26">Sign Up Steps</Menu.Item>
-                <Menu.Item key="27" onClick={handlePaidMemship}>Paid Membership</Menu.Item>
+                <Menu.Item key="27" onClick={handlePaidMemship}>
+                  Paid Membership
+                </Menu.Item>
                 <Menu.Item key="28">Course Detail View</Menu.Item>
                 <Menu.Item key="29">Checkout</Menu.Item>
                 <Menu.Item key="30">Invoice</Menu.Item>
@@ -485,7 +494,9 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="38" onClick={handleAddLiveStream}>
                   Add Live Steam
                 </Menu.Item>
-                <Menu.Item key="39">Search Result</Menu.Item>
+                <Menu.Item key="39" onClick={handleSearchResult}>
+                  Search Result
+                </Menu.Item>
                 <Menu.Item key="40">Thank you</Menu.Item>
                 <Menu.Item key="41">Coming Soon</Menu.Item>
                 <Menu.Item key="42">Error 404</Menu.Item>
@@ -526,7 +537,11 @@ const Sidebar = ({ sidebar }) => {
                   <p className="ml-6 pt-3">Jassica William</p>
                 </div>
               </Menu.Item>
-              <Menu.Item key="45" onClick={handleAllInstructors}>
+              <Menu.Item
+                key="45"
+                onClick={handleAllInstructors}
+                className="py-[27px]"
+              >
                 <FontAwesomeIcon icon={faCirclePlus} className="mr-2 icon" />
                 Browser Instructors
               </Menu.Item>
@@ -534,25 +549,33 @@ const Sidebar = ({ sidebar }) => {
           )}
 
           {(role === "student" || role === "teacher") && (
-            <Menu.Item key="46" onClick={handleSetting}>
+            <Menu.Item key="46" onClick={handleSetting} className="py-[27px]">
               <FontAwesomeIcon icon={faGear} className="mr-2 icon" />
               Setting
             </Menu.Item>
           )}
           {(role === "student" || role === "teacher") && (
-            <Menu.Item key="47" onClick={handleHelp}>
+            <Menu.Item key="47" onClick={handleHelp} className="py-[27px]">
               <FontAwesomeIcon icon={faCircleQuestion} className="mr-2 icon" />
               Help
             </Menu.Item>
           )}
           {(role === "student" || role === "teacher") && (
-            <Menu.Item key="48" onClick={handleReportHistory}>
+            <Menu.Item
+              key="48"
+              onClick={handleReportHistory}
+              className="py-[27px]"
+            >
               <FontAwesomeIcon icon={faFlag} className="mr-2 icon" />
               Report History
             </Menu.Item>
           )}
           {(role === "student" || role === "teacher") && (
-            <Menu.Item key="49" onClick={handleSendFeedback}>
+            <Menu.Item
+              key="49"
+              onClick={handleSendFeedback}
+              className="py-[27px]"
+            >
               <FontAwesomeIcon icon={faMessage} className="mr-2 icon" />
               Send Feedback
             </Menu.Item>

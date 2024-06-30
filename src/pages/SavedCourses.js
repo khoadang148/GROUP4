@@ -4,7 +4,7 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getEnrolledCourses } from "./redux/actions/course.action";
+import { getEnrolledCourses } from "../redux/actions/course.action";
 import { Image } from "react-bootstrap";
 
 const CourseCard = ({

@@ -98,9 +98,7 @@ const Sidebar = ({ sidebar }) => {
   const handleAddLiveStream = () => {
     navigate("/addlivestream");
   };
-  const handleEarning = () => {
-    navigate("/earning");
-  };
+
 
   const handleCertificationFillForm = () => {
     navigate("/certificationfillform");
@@ -138,6 +136,18 @@ const Sidebar = ({ sidebar }) => {
    const handleSearchResult = () => {
      navigate("/searchresult");
    };
+   const handEarning = () =>{
+    navigate("/earning")
+   }
+   const handlePurchasedCourses = () =>{
+    navigate("/purchasedcourses")
+   }
+   const handleCourseDetailView = () => {
+    navigate("/coursedetailview")
+   }
+   const handleDashboard = () => {
+    navigate("/dashboard")
+   }
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -148,7 +158,8 @@ const Sidebar = ({ sidebar }) => {
   const renderMenuItems = () => {
     if  ((role === "student" && location.pathname === "/dashboard2")||
     location.pathname === "/studentNotification"||
-    location.pathname === "/studentMessage") {
+    location.pathname === "/studentMessage" ||
+  location.pathname === "/purchasedcourses") {
       return (
         <>
           <Menu.Item key="64" icon={<FontAwesomeIcon icon={faBorderAll} />}>
@@ -158,7 +169,7 @@ const Sidebar = ({ sidebar }) => {
           <Menu.Item
             key="65"
             className="flex items-center"
-            onClick={handleHome}
+            onClick={handlePurchasedCourses}
           >
             <FontAwesomeIcon icon={faBook} className="mr-2 icon" />
             Purchased Courses
@@ -227,7 +238,8 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/earning" ||
       location.pathname === "/teacherNotification" ||
       location.pathname === "/mycertificates"||
-      location.pathname === "/teacherMess"
+      location.pathname === "/teacherMess" 
+      
     ) {
       return (
         <>
@@ -235,7 +247,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="50"
               className="flex items-center py-[27px]"
-              onClick={handleHome}
+              onClick={handleDashboard}
             >
               <FontAwesomeIcon icon={faBorderAll} className="mr-2 icon " />
               Dashboard
@@ -315,7 +327,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="58"
               className="flex items-center py-[27px]"
-              onClick={handleEarning}
+              onClick={handEarning}
             >
               <FontAwesomeIcon icon={faDollarSign} className="mr-2 icon" />
               Earning
@@ -471,7 +483,7 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="27" onClick={handlePaidMemship}>
                   Paid Membership
                 </Menu.Item>
-                <Menu.Item key="28">Course Detail View</Menu.Item>
+                <Menu.Item key="28" onClick={handleCourseDetailView}>Course Detail View</Menu.Item>
                 <Menu.Item key="29">Checkout</Menu.Item>
                 <Menu.Item key="30">Invoice</Menu.Item>
                 <Menu.Item key="31" onClick={handleCareer}>

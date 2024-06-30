@@ -11,7 +11,7 @@ import Livestream from "./pages/Livestream";
 import { useDispatch, useSelector } from "react-redux";
 import ExploreScreen from "../src/pages/ExploreScreen";
 import Footer from "./components/Footer";
-import SavedCourses from "./SavedCourses";
+import SavedCourses from "../src/pages/SavedCourses";
 import CertificationCenter from "./pages/CertificationCenter";
 import DashBoard from "./DashBoard";
 import { setToken, setRole, setID, login } from "./redux/actions/auth.action";
@@ -31,10 +31,10 @@ import CloseAccount from "../src/pages/CloseAccount";
 import Notification from "../src/pages/Notification";
 import BlogSingle from "./pages/BlogSingle";
 import CompanyDetails from "./pages/CompanyDetails";
-import ReportHistory from "./ReportHistory";
-import SendFeedback from "./SendFeedback";
+import ReportHistory from "../src/pages/ReportHistory";
+import SendFeedback from "../src/pages/SendFeedback";
 import AddLiveStream from "./AddLiveStream";
-import Earning from "./Earning";
+import Earning from "../src/pages/Earning";
 import CertificationFillForm from "./pages/CertificationFillForm";
 import Press from "./pages/Press";
 import ShoppingCart from "../src/pages/ShoppingCart";
@@ -48,6 +48,8 @@ import PaidMenberShip from "./pages/PaidMenberShip";
 import TeacherMess from "./pages/TeacherMess";
 import StudentMess from "./pages/StudentMess";
 import SearchResult from "./pages/SearchResult";
+import PurchasedCourses from "./pages/PurchasedCourses";
+import CourseDetailView from "./pages/CourseDetailView";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -456,6 +458,20 @@ const App = () => {
           )
         }
       />
+      <Route
+        path="/coursedetailview"
+        element={
+          token ? (
+            <>
+              <Layout>
+                <CourseDetailView sidebar={sidebar} />
+              </Layout>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
 
       <Route
         path="/notification"
@@ -555,6 +571,7 @@ const App = () => {
           }
         />
       )}
+      
       {role === "teacher" && (
         <Route
           path="/earning"
@@ -605,6 +622,20 @@ const App = () => {
             token ? (
               <Layout>
                 <Dashboard2 />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+      {role === "student" && (
+        <Route
+          path="/purchasedcourses"
+          element={
+            token ? (
+              <Layout>
+                <PurchasedCourses />
               </Layout>
             ) : (
               <Navigate to="/login" />

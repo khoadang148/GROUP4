@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ExploreScreen from "../src/pages/ExploreScreen";
 import Footer from "./components/Footer";
 import SavedCourses from "./SavedCourses";
-import CertificationCenter from "./CertificationCenter";
+import CertificationCenter from "./pages/CertificationCenter";
 import DashBoard from "./DashBoard";
 import { setToken, setRole, setID, login } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
@@ -44,6 +44,7 @@ import StudentNotification from "./pages/TeacherNotification";
 import TeacherNotification from "./pages/TeacherNotification";
 import JobApply from "./pages/JobApply";
 import MyCertificates from "./pages/MyCertificates";
+import PaidMenberShip from "./pages/PaidMenberShip";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -348,6 +349,20 @@ const App = () => {
             <div className="flex flex-col min-h-screen">
               <HeaderPages />
               <JobApply />
+              <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/paidmembership"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <PaidMenberShip />
               <Footer />
             </div>
           ) : (

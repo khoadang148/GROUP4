@@ -123,6 +123,9 @@ const Sidebar = ({ sidebar }) => {
   const handleMyCertificates = () => {
     navigate("/mycertificates");
   };
+  const handlePaidMemship = () => {
+    navigate("/paidmembership");
+  };
 
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -447,7 +450,7 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="24">Sign In</Menu.Item>
                 <Menu.Item key="25">Sign Up</Menu.Item>
                 <Menu.Item key="26">Sign Up Steps</Menu.Item>
-                <Menu.Item key="27">Paid Membership</Menu.Item>
+                <Menu.Item key="27" onClick={handlePaidMemship}>Paid Membership</Menu.Item>
                 <Menu.Item key="28">Course Detail View</Menu.Item>
                 <Menu.Item key="29">Checkout</Menu.Item>
                 <Menu.Item key="30">Invoice</Menu.Item>

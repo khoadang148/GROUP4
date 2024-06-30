@@ -10,7 +10,6 @@ import {
   SET_ID,
 } from "../actionType";
 
-// Thay thế URL mock API của bạn vào đây
 const API_URL = "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1";
 
 export const login = (username, password) => {
@@ -29,12 +28,10 @@ export const login = (username, password) => {
         dispatch({ type: LOGIN_SUCCESS, payload: user });
         dispatch({ type: SET_TOKEN, payload: token });
 
-        // Sử dụng cookies để lưu token
-        Cookies.set("token", token, { expires: 7 }); // Thời gian sống token là 7 ngày
-        Cookies.set("role", user.role, { expires: 7 }); // Lưu role của user
+        Cookies.set("token", token, { expires: 7 });
+        Cookies.set("role", user.role, { expires: 7 });
         Cookies.set("id", user.id, { expires: 7 });
 
-        // console.log("token:", token);
       } else {
         dispatch({ type: LOGIN_FAILURE, error: "Invalid account" });
       }
@@ -45,8 +42,8 @@ export const login = (username, password) => {
 };
 
 export const logout = () => {
-  Cookies.remove("token"); // Xóa token từ cookies
-  Cookies.remove("role"); // Xóa role từ cookies
+  Cookies.remove("token");
+  Cookies.remove("role");
   return {
     type: LOGOUT,
   };
@@ -58,7 +55,6 @@ export const setToken = (token) => ({
 });
 
 export const setRole = (role) => {
-  // Giả sử bạn có cách để lấy role từ token
   return {
     type: "SET_ROLE",
     payload: role,

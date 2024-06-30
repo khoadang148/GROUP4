@@ -11,8 +11,8 @@ import {
 } from "../actionType";
 
 const initialState = {
-  token: Cookies.get("token") || null, // Load token từ cookies
-  role: Cookies.get("role") || null, // Load role từ cookies
+  token: Cookies.get("token") || null, 
+  role: Cookies.get("role") || null, 
   user: null,
   error: null,
   loading: false,
@@ -45,7 +45,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: null,
         token: null,
-        role: null, // Xóa role khi logout
+        role: null, 
       };
     case SET_TOKEN:
       return {
@@ -57,7 +57,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         role: Cookies.get("role"),
       };
-    case SET_ID: // Xử lý hành động lưu user
+    case SET_ID: 
       return {
         ...state,
         id: Cookies.get("id"),

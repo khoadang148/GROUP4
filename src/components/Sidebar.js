@@ -120,6 +120,9 @@ const Sidebar = ({ sidebar }) => {
   const handleNotification = () => {
     navigate("/teachernotifi");
   };
+  const handleMyCertificates = () => {
+    navigate("/mycertificates");
+  };
 
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -163,7 +166,7 @@ const Sidebar = ({ sidebar }) => {
           <Menu.Item
             key="68"
             className="flex items-center"
-            
+            onClick={handleMyCertificates}
           >
             <FontAwesomeIcon icon={faTrophy} className="mr-2 icon" />
             My Certification
@@ -205,8 +208,9 @@ const Sidebar = ({ sidebar }) => {
       );
     } else if (
       (role === "teacher" && location.pathname === "/dashboard") ||
-      location.pathname === "/earning"||
-      location.pathname === "/teachernotifi"
+      location.pathname === "/earning" ||
+      location.pathname === "/teachernotifi" ||
+      location.pathname === "/mycertificates"
     ) {
       return (
         <>
@@ -274,10 +278,10 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="56"
               className="flex items-center"
-              onClick={handleHome}
+              onClick={handleMyCertificates}
             >
               <FontAwesomeIcon icon={faTrophy} className="mr-2 icon" />
-              My Certification
+              My Certificates
             </Menu.Item>
           )}
           {role === "teacher" && (
@@ -450,7 +454,9 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="31" onClick={handleCareer}>
                   Career
                 </Menu.Item>
-                <Menu.Item key="32" onClick={handleJobapply}>Job Apply</Menu.Item>
+                <Menu.Item key="32" onClick={handleJobapply}>
+                  Job Apply
+                </Menu.Item>
                 <Menu.Item key="33" onClick={handleOurBlog}>
                   Our Blog
                 </Menu.Item>

@@ -5,24 +5,16 @@ import { Container } from "react-bootstrap";
 import LoginScreen from "./LoginScreen";
 import SignupScreen from "./SignupScreen";
 import ForgotPasswordScreen from "./ForgotPasswordScreen";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-  Redirect,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import HomeScreen from "../src/pages/HomeScreen";
 import Livestream from "./pages/Livestream";
-import { AuthContextProvider, useAuth } from "./context/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
 import ExploreScreen from "../src/pages/ExploreScreen";
 import Footer from "./components/Footer";
 import SavedCourses from "./SavedCourses";
 import CertificationCenter from "./CertificationCenter";
 import DashBoard from "./DashBoard";
-import { setToken, setRole, setID } from "./redux/actions/auth.action";
+import { setToken, setRole, setID, login } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
 import AllInstructors from "../src/pages/AllInstructors";
 import HeaderPages from "./components/HeaderPages";
@@ -51,6 +43,7 @@ import Copyright from "./pages/Copyright";
 import StudentNotification from "./pages/TeacherNotification";
 import TeacherNotification from "./pages/TeacherNotification";
 import JobApply from "./pages/JobApply";
+import MyCertificates from "./pages/MyCertificates";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -105,7 +98,6 @@ const App = () => {
   const dispatch = useDispatch();
   const [sidebar, toggleSidebar] = useState(true);
   const [isHomeVisited, setIsHomeVisited] = useState(false);
-  const handleToggleSidebar = () => toggleSidebar(!sidebar);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
   const user = useSelector((state) => state.auth.user);
@@ -115,7 +107,6 @@ const App = () => {
     const tokenFromCookie = Cookies.get("token");
     const idFromCookie = Cookies.get("id");
 
-    // Check if we are on signup or forgot password screen
     if (
       tokenFromCookie &&
       !window.location.pathname.includes("/signup") &&
@@ -370,7 +361,7 @@ const App = () => {
           token ? (
             <>
               <div className="flex flex-col min-h-screen">
-               <ShoppingCart/>
+                <ShoppingCart />
                 <Footer />
               </div>
             </>
@@ -385,7 +376,7 @@ const App = () => {
           token ? (
             <>
               <Layout>
-                <SettingAccount sidebar={sidebar}/>
+                <SettingAccount sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -438,7 +429,7 @@ const App = () => {
           token ? (
             <>
               <Layout>
-                <Notification sidebar={sidebar}/>
+                <Notification sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -466,7 +457,7 @@ const App = () => {
           token ? (
             <>
               <Layout>
-               <BillingandPayout sidebar={sidebar}/>
+                <BillingandPayout sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -494,7 +485,7 @@ const App = () => {
           token ? (
             <>
               <Layout>
-                <ApiClients sidebar={sidebar}/>
+                <ApiClients sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -508,7 +499,7 @@ const App = () => {
           token ? (
             <>
               <Layout>
-                <CloseAccount sidebar={sidebar}/>
+                <CloseAccount sidebar={sidebar} />
               </Layout>
             </>
           ) : (
@@ -537,6 +528,20 @@ const App = () => {
             token ? (
               <Layout>
                 <Earning />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+      {role === "teacher" && (
+        <Route
+          path="/mycertificates"
+          element={
+            token ? (
+              <Layout>
+                <MyCertificates sidebar={sidebar} />
               </Layout>
             ) : (
               <Navigate to="/login" />
@@ -579,7 +584,7 @@ const App = () => {
           element={
             token ? (
               <Layout>
-              <TeacherNotification/>
+                <TeacherNotification />
               </Layout>
             ) : (
               <Navigate to="/login" />

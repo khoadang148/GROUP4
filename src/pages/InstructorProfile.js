@@ -21,7 +21,6 @@ const InstructorProfile = ({ sidebar }) => {
   };
   const [activeTab, setActiveTab] = useState("About");
   const userId = useSelector((state) => state.auth.id);
-  console.log(userId);
   const { courses, loading, error } = useSelector(
     (state) => state.enrolledCourses
   );

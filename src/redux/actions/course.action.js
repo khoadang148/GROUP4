@@ -20,11 +20,11 @@ export const getEnrolledCourses = (userId) => {
       const enrolledCoursesIds = userResponse.data.enrolledCourses.map(
         (course) => course.id
       );
-      // console.log("enrolled", enrolledCoursesIds);
+      console.log("enrolled", enrolledCoursesIds);
       const coursesResponse = await axios.get(`${API_URL}/courses`, {
         params: { id: enrolledCoursesIds.join("") },
       });
-
+      console.log(coursesResponse);
       dispatch({
         type: FETCH_ENROLLED_COURSES_SUCCESS,
         payload: coursesResponse.data,

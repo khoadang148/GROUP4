@@ -118,7 +118,7 @@ const Sidebar = ({ sidebar }) => {
     navigate("/copyright");
   };
   const handleNotification = () => {
-    navigate("/teachernotifi");
+    navigate("/teacherNotification");
   };
   const handleMyCertificates = () => {
     navigate("/mycertificates");
@@ -126,7 +126,15 @@ const Sidebar = ({ sidebar }) => {
   const handlePaidMemship = () => {
     navigate("/paidmembership");
   };
-
+  const handleMess = () => {
+    navigate("/teacherMess");
+  };
+  const handleStudentNotifications = () => {
+    navigate("/studentNotification")
+  }
+  const handleStudentMessage = () => {
+    navigate("/studentMessage")
+  }
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -135,7 +143,9 @@ const Sidebar = ({ sidebar }) => {
   };
 
   const renderMenuItems = () => {
-    if (role === "student" && location.pathname === "/dashboard2") {
+    if  ((role === "student" && location.pathname === "/dashboard2")||
+    location.pathname === "/studentNotification"||
+    location.pathname === "/studentMessage") {
       return (
         <>
           <Menu.Item key="64" icon={<FontAwesomeIcon icon={faBorderAll} />}>
@@ -153,7 +163,7 @@ const Sidebar = ({ sidebar }) => {
           <Menu.Item
             key="66"
             className="flex items-center"
-            onClick={handleHome}
+            onClick={handleStudentMessage}
           >
             <FontAwesomeIcon icon={faComment} className="mr-2 icon" />
             Messages
@@ -161,7 +171,7 @@ const Sidebar = ({ sidebar }) => {
           <Menu.Item
             key="67"
             className="flex items-center"
-            onClick={handleNotification}
+            onClick={handleStudentNotifications}
           >
             <FontAwesomeIcon icon={faBell} className="mr-2 icon" />
             Notifications
@@ -212,8 +222,9 @@ const Sidebar = ({ sidebar }) => {
     } else if (
       (role === "teacher" && location.pathname === "/dashboard") ||
       location.pathname === "/earning" ||
-      location.pathname === "/teachernotifi" ||
-      location.pathname === "/mycertificates"
+      location.pathname === "/teacherNotification" ||
+      location.pathname === "/mycertificates"||
+      location.pathname === "/teacherMess"
     ) {
       return (
         <>
@@ -261,7 +272,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="54"
               className="flex items-center"
-              onClick={handleHome}
+              onClick={handleMess}
             >
               <FontAwesomeIcon icon={faComment} className="mr-2 icon" />
               Messages

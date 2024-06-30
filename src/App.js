@@ -40,11 +40,13 @@ import Press from "./pages/Press";
 import ShoppingCart from "../src/pages/ShoppingCart";
 import Career from "./pages/Career";
 import Copyright from "./pages/Copyright";
-import StudentNotification from "./pages/TeacherNotification";
+import StudentNotification from "./pages/StudentNotification";
 import TeacherNotification from "./pages/TeacherNotification";
 import JobApply from "./pages/JobApply";
 import MyCertificates from "./pages/MyCertificates";
 import PaidMenberShip from "./pages/PaidMenberShip";
+import TeacherMess from "./pages/TeacherMess";
+import StudentMess from "./pages/StudentMess";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -593,13 +595,55 @@ const App = () => {
           }
         />
       )}
-      {role === "teacher" && (
+     {role === "teacher" && (
         <Route
-          path="/teachernotifi"
+          path="/teacherNotification"
           element={
             token ? (
               <Layout>
                 <TeacherNotification />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+       {role === "teacher" && (
+        <Route
+          path="/teacherMess"
+          element={
+            token ? (
+              <Layout>
+                <TeacherMess/>
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+      {role === "student" && (
+        <Route
+          path="/studentMessage"
+          element={
+            token ? (
+              <Layout>
+                <StudentMess/>
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+       {role === "student" && (
+        <Route
+          path="/studentNotification"
+          element={
+            token ? (
+              <Layout>
+                <StudentNotification/>
               </Layout>
             ) : (
               <Navigate to="/login" />

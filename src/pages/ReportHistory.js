@@ -6,9 +6,11 @@ function ReportHistory({sidebar}) {
 // thiếu truyền props sidebar để ml theo side bar
 
   return (
-    <div className=" w-[1600] relative ">
+    <div className={`flex gap-2 mt-[2px] mb-8  pt-1 group-focus-within:border-black ${
+      sidebar ? "w-[1400px]" : "w-[1640px]"
+    }`}>
       <div className="h-[75vh] bg-[#F7F7F7]  mt-0   ">
-        <div className="bg-[#F7F7F7] p-8 rounded-lg "> //w-full
+        <div className="bg-[#F7F7F7] p-8 rounded-lg "> 
           {" "}
           
           <div className="flex mt-16 py-2 px-1 gap-2">
@@ -18,11 +20,13 @@ function ReportHistory({sidebar}) {
           <p className="mb-4 text-[16px] py-[10px] font-medium">
             Thanks for reporting
           </p>
-          <p className="mb-4 text-sm text-gray-500">
+          <p className={`mb-4 text-sm text-gray-500 ${
+            sidebar ? "w-[1400px]":"w-[1640px]"
+          }`}>
             Any member of the Cursus community can flag content to us that they
             believe violates our Community Guidelines. When something is
             flagged, it’s not automatically taken down. Flagged content is{" "}
-            <br /> reviewed in line with the following guidelines:
+           reviewed in line with the following guidelines:
           </p>
           <ul className="list-disc list-inside mb-4 text-sm font-normal text-gray-500">
             <li className="text-gray-500">
@@ -48,7 +52,9 @@ function ReportHistory({sidebar}) {
               Learn more about reporting content on Cursus.
             </a>
           </div>
-          <div className="mt-6 text-gray-500 text-center py-[50px]">
+          <div className={`mt-6 text-gray-500 text-center py-[50px] ${
+            sidebar ? "w-[1400px]" : "w-[1640px]"
+          }`}>
             You haven't submitted any reports.
           </div>
         </div>

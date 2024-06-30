@@ -61,7 +61,7 @@ function SendFeedback({sidebar}) {
           <div className="text-center">
             <Image
               className="mx-auto mb-2"
-              src={require("../src/assets/cloud-computing.png")}
+              src={require("../../src/assets/cloud-computing.png")}
               alt="Upload"
               width={30}
               height={30}

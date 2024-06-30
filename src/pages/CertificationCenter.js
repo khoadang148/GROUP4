@@ -87,7 +87,7 @@ const CertificationCenter = () => {
         <button onClick={handleBackClick} className="ml-22">
           <img
             className="w-[120px] h-[30px]"
-            src={require("../src/assets/logo.png")}
+            src={require("../assets/logo.png")}
             alt="hehe"
           />
         </button>
@@ -124,7 +124,7 @@ const CertificationCenter = () => {
         </div>
             <img
               className="absolute inset-0 z-0 h-full w-full object-cover object-center filter blur-[2px] brightness-50"
-              src={require("../src/assets/center_bg.jpg")}
+              src={require("../assets/center_bg.jpg")}
               alt="Background Image"
             />
       </div>

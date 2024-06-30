@@ -1,11 +1,11 @@
-import { SettingOutlined } from '@ant-design/icons'
+import { BellOutlined } from '@ant-design/icons'
 import React from 'react'
 
-const TeacherNotification = () => {
+const StudentNotification = () => {
   return (
     <div className='mt-20 ml-5 bg-[#F7F7F7]'>
        <div className='flex gap-5 items-center  '>
-        <SettingOutlined className='text-3xl'/>
+       <BellOutlined  className='text-3xl'/>
         <h3  className='text-2xl mt-2'> Notifications</h3>
         </div>
         <button className='mt-12  bg-[#ED2A26] p-[10px]  text-white font-medium rounded-sm hover:bg-black' >Notification Setting</button>
@@ -79,4 +79,4 @@ const TeacherNotification = () => {
   )
 }
 
-export default TeacherNotification
+export default StudentNotification

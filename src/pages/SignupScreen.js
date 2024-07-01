@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; 
 import { Form, Input, Button, Checkbox } from "antd";
-import { login } from "./redux/actions/auth.action";
-import { FaEnvelope, FaKey } from "react-icons/fa";
-
+import { login } from "../redux/actions/auth.action";
 // Define logo URL and sign logo URL
-const logoUrl =
-  "https://gambolthemes.net/html-items/cursus-new-demo/images/logo.svg";
-const signBackgroundUrl =
-  "https://gambolthemes.net/html-items/cursus-new-demo/images/sign.svg";
-const signLogoUrl =
-  "https://gambolthemes.net/html-items/cursus-new-demo/images/sign_logo.png";
+const logoUrl = "https://gambolthemes.net/html-items/cursus-new-demo/images/logo.svg";
+const signBackgroundUrl = "https://gambolthemes.net/html-items/cursus-new-demo/images/sign.svg";
+const signLogoUrl = "https://gambolthemes.net/html-items/cursus-new-demo/images/sign_logo.png";
 
 const SignupScreen = () => {
   const [loading, setLoading] = useState(false);
@@ -106,13 +101,15 @@ const SignupScreen = () => {
 
           <p className="text-center my-2 text-xs">
             <span className="text-black">By signing up, you agree to our</span>
-            <a href="/terms-of-use" className="text-red-500 ml-1">
+            
+            <Link to="/copyright" className="text-red-500 ml-1">
               Terms of Use
-            </a>
+            </Link>
+
             <span className="text-black"> and</span>
-            <a href="/privacy-policy" className="text-red-500 ml-1">
+            <Link to="/copyright" className="text-red-500 ml-1">
               Privacy Policy
-            </a>
+            </Link>
             <span className="text-black">.</span>
           </p>
 

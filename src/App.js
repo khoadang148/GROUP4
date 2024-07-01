@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { Container } from "react-bootstrap";
-import LoginScreen from "./LoginScreen";
-import SignupScreen from "./SignupScreen";
-import ForgotPasswordScreen from "./ForgotPasswordScreen";
+import LoginScreen from "./pages/LoginScreen";
+import Error404 from "./pages/Error404";
+import ComingSoon from "./pages/ComingSoon";
+import SignupStep from "./pages/SignupStep";
+import Contactus from "./pages/Contactus";
+import SignupScreen from "./pages/SignupScreen";
+import ForgotPasswordScreen from "./pages/ForgotPasswordScreen";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import HomeScreen from "../src/pages/HomeScreen";
 import Livestream from "./pages/Livestream";
@@ -242,6 +246,59 @@ const App = () => {
                 <Footer />
               </div>
             </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+
+<Route
+        path="/signupstep"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <SignupStep/>
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+
+      <Route
+        path="/error404"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <Error404 />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+
+<Route
+        path="/comingsoon"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <ComingSoon />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+    <Route
+        path="/contactus"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <Contactus />
+              <Footer />
+            </div>
           ) : (
             <Navigate to="/login" />
           )

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom"; // Import Link từ react-router-dom
 import { Form, Input, Button, Checkbox } from "antd"; // Import Checkbox từ Ant Design
-import { login } from "./redux/actions/auth.action";
+import { login } from "../redux/actions/auth.action";
 import Cookies from "js-cookie";
 import {
   FaFacebook,

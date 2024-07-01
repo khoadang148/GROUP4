@@ -88,6 +88,24 @@ const Sidebar = ({ sidebar }) => {
   const handleCompany = () => {
     navigate("/company");
   };
+  const handleLogin = () => {
+    navigate("/login");
+  };
+  const handleContactus = () => {
+    navigate("/contactus");
+  };
+  const handleComingSoon = () => {
+    navigate("/comingsoon");
+  };
+  const handleSignup = () => {
+    navigate("/signup");
+  };
+  const handleSignupStep = () => {
+    navigate("/signupstep");
+  };
+  const handleError404 = () => {
+    navigate("/error404");
+  };
 
   const handleReportHistory = () => {
     navigate("/reporthistory");
@@ -477,9 +495,15 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="23" onClick={handleAbout}>
                   About
                 </Menu.Item>
-                <Menu.Item key="24">Sign In</Menu.Item>
-                <Menu.Item key="25">Sign Up</Menu.Item>
-                <Menu.Item key="26">Sign Up Steps</Menu.Item>
+                <Menu.Item key="6" onClick={handleLogin}>
+                  Sign In
+                </Menu.Item>
+                <Menu.Item key="6" onClick={handleSignup}>
+                  Sign Up
+                </Menu.Item>
+                <Menu.Item key="6" onClick={handleSignupStep}>
+                  Sign Up Step
+                </Menu.Item>
                 <Menu.Item key="27" onClick={handlePaidMemship}>
                   Paid Membership
                 </Menu.Item>
@@ -510,8 +534,12 @@ const Sidebar = ({ sidebar }) => {
                   Search Result
                 </Menu.Item>
                 <Menu.Item key="40">Thank you</Menu.Item>
-                <Menu.Item key="41">Coming Soon</Menu.Item>
-                <Menu.Item key="42">Error 404</Menu.Item>
+                <Menu.Item key="38" onClick={handleComingSoon}>
+                  Coming Soon
+                </Menu.Item>
+                <Menu.Item key="6" onClick={handleError404}>
+                  Error 404
+                </Menu.Item>
               </div>
             </SubMenu>
           )}
@@ -598,8 +626,12 @@ const Sidebar = ({ sidebar }) => {
                 <a className="px-1 hover:text-red-500" onClick={handleAbout}>
                   About
                 </a>
-                <a className="px-1 hover:text-red-500">Press</a>
-                <a className="px-1 hover:text-red-500">Contact Us</a>
+                <a className="px-1 hover:text-red-500" onClick={handlePress}>
+                  Press
+                </a>
+                <a className="hover:text-red-500" onClick={handleContactus}>
+                  Contact Us
+                </a>
               </div>
               <div className="font-medium">
                 <a className="px-1 hover:text-red-500">Advertise</a>
@@ -609,8 +641,13 @@ const Sidebar = ({ sidebar }) => {
                 </a>
               </div>
               <div className="font-medium">
-                <a className="px-1 hover:text-red-500">Privacy Policy</a>
-                <a className="px-1 hover:text-red-500">Term</a>
+              <a className="hover:text-red-500" onClick={handleCopyright}>
+    Privacy Policy
+  </a>{" "}
+  {" "}
+  <a className="hover:text-red-500" onClick={handleCopyright}>
+    Terms
+  </a>
               </div>
               <div className="text-[#9393938f] mt-[13px]">
                 <p>© 2020 Cursus. All Rights Reserved.</p>

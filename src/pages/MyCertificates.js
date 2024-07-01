@@ -45,7 +45,7 @@ const MyCertificates = ({ sidebar }) => {
         <div className="bg-[#ffecec] flex items-center h-[50px] border-1 border-[#f7f7f7]">
           <h1 className="ml-10">Item No.</h1>
           <h1 className="ml-20">Title</h1>
-          <h1 className="ml-[500px]">Marks</h1>
+          <h1 className={`${sidebar ? "ml-[400px]" : "ml-[500px]"}`}>Marks</h1>
           <h1 className="ml-24">Out Of</h1>
           <h1 className="ml-32">Upload Date</h1>
           <h1 className="ml-32">Certificate</h1>
@@ -54,9 +54,44 @@ const MyCertificates = ({ sidebar }) => {
         {certificates.map((certificate, index) => (
           <div
             key={index}
-            className="bg-white flex items-center h-[60px] border-[1px] border-[#f7f7f7] mt-[0.5px]"
+            className="bg-white flex items-center relative h-[60px] border-[1px] border-[#f7f7f7] mt-[0.5px]"
           >
             <h1 className="ml-10">{certificate.itemNo}</h1>
+            <h1 className="ml-[140px]">{certificate.title}</h1>
+            <h1
+              className={`absolute ${
+                sidebar ? "left-[630px]" : "left-[730px]"
+              }`}
+            >
+              {certificate.marks}
+            </h1>
+            <h1
+              className={`absolute ${
+                sidebar ? "left-[766px]" : "left-[865px]"
+              }`}
+            >
+              {certificate.outOf}
+            </h1>
+            <h1
+              className={`absolute ${
+                sidebar ? "left-[935px]" : "left-[1035px]"
+              }`}
+            >
+              {certificate.uploadDate}
+            </h1>
+            <h1
+              className={`absolute text-blue-600 cursor-pointer ${
+                sidebar ? "left-[1170px]" : "left-[1270px]"
+              }`}
+            >
+              View
+            </h1>
+            <Image
+              className={`w-[20px] h-[20px] absolute ${
+                sidebar ? "left-[1340px]" : "left-[1440px]"
+              }`}
+              src={require("../assets/delete.png")}
+            />
           </div>
         ))}
       </div>

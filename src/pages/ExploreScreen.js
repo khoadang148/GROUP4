@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Dropdown, Space } from "antd";
 import {
+  getAllCourses,
   getEnrolledCourses,
   searchCourses,
 } from "../redux/actions/course.action";
@@ -47,7 +48,6 @@ const ExploreScreen = ({ sidebar }) => {
     setHoveredCourse(null);
   };
 
-  const userId = useSelector((state) => state.auth.id);
   const { courses, loading, error } = useSelector(
     (state) => state.enrolledCourses
   );
@@ -56,10 +56,8 @@ const ExploreScreen = ({ sidebar }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userId) {
-      dispatch(getEnrolledCourses(userId));
-    }
-  }, [dispatch, userId]);
+    dispatch(getAllCourses())
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getAllInstructor());

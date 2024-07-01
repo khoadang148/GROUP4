@@ -10,6 +10,25 @@ import {
 
 const API_URL = "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1";
 
+export const getAllCourses = () => {
+  return async (dispatch) => {
+    dispatch({ type: FETCH_ENROLLED_COURSES_REQUEST });
+
+    try {
+      const coursesResponse = await axios.get(`${API_URL}/courses`);
+      // console.log(coursesResponse);
+      dispatch({
+        type: FETCH_ENROLLED_COURSES_SUCCESS,
+        payload: coursesResponse.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: FETCH_ENROLLED_COURSES_FAILURE,
+        error: error.message,
+      });
+    }
+  };
+};
 export const getEnrolledCourses = (userId) => {
   return async (dispatch) => {
     dispatch({ type: FETCH_ENROLLED_COURSES_REQUEST });
@@ -24,10 +43,13 @@ export const getEnrolledCourses = (userId) => {
       const coursesResponse = await axios.get(`${API_URL}/courses`, {
         params: { id: enrolledCoursesIds.join("") },
       });
-      console.log(coursesResponse);
+      // console.log(coursesResponse);
+      const filteredCourses = coursesResponse.data.filter((course) =>
+        userResponse.data.enrolledCourses.includes(course.id)
+      );
       dispatch({
         type: FETCH_ENROLLED_COURSES_SUCCESS,
-        payload: coursesResponse.data,
+        payload: filteredCourses,
       });
     } catch (error) {
       dispatch({

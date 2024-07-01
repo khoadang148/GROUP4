@@ -15,18 +15,19 @@ export const getCertificates = (userId) => {
 
     try {
       const userResponse = await axios.get(`${API_URL_USER}/users/${userId}`);
-      // console.log("user data", userResponse.data);
       const certificatesIds = userResponse.data.certificates.map(
         (certificate) => certificate.itemNo
       );
-      console.log("certificate: ", certificatesIds);
       const certificatesResponse = await axios.get(`${API_URL}/certificates`, {
         params: { itemNo: certificatesIds.join("") },
       });
-      console.log(certificatesResponse);
+      const filteredCertificates = certificatesResponse.data.filter(
+        (certificate) =>
+          userResponse.data.certificates.includes(certificate.itemNo)
+      );
       dispatch({
         type: FETCH_CERTIFICATES_SUCCESS,
-        payload: certificatesResponse.data,
+        payload: filteredCertificates,
       });
     } catch (error) {
       dispatch({

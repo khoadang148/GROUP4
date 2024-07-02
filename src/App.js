@@ -55,6 +55,7 @@ import SearchResult from "./pages/SearchResult";
 import PurchasedCourses from "./pages/PurchasedCourses";
 import CourseDetailView from "./pages/CourseDetailView";
 import Payout from "./pages/Payout";
+import Checkout from "./pages/Checkout";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -442,6 +443,20 @@ const App = () => {
             <div className="flex flex-col min-h-screen">
               <HeaderPages />
               <PaidMenberShip />
+              <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <HeaderPages />
+              <Checkout />
               <Footer />
             </div>
           ) : (

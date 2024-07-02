@@ -169,6 +169,9 @@ const Sidebar = ({ sidebar }) => {
    const handlePayout = () => {
     navigate("/payout");
    }
+   const handleCheckout = () => {
+    navigate("/checkout")
+   }
    
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -513,7 +516,7 @@ const Sidebar = ({ sidebar }) => {
                   Paid Membership
                 </Menu.Item>
                 <Menu.Item key="28" onClick={handleCourseDetailView}>Course Detail View</Menu.Item>
-                <Menu.Item key="29">Checkout</Menu.Item>
+                <Menu.Item key="29" onClick={handleCheckout}>Checkout</Menu.Item>
                 <Menu.Item key="30">Invoice</Menu.Item>
                 <Menu.Item key="31" onClick={handleCareer}>
                   Career

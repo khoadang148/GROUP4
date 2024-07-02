@@ -166,6 +166,10 @@ const Sidebar = ({ sidebar }) => {
    const handleDashboard = () => {
     navigate("/dashboard")
    }
+   const handlePayout = () => {
+    navigate("/payout");
+   }
+   
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -256,7 +260,8 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/earning" ||
       location.pathname === "/teacherNotification" ||
       location.pathname === "/mycertificates"||
-      location.pathname === "/teacherMess" 
+      location.pathname === "/teacherMess" ||
+      location.pathname === "/payout" 
       
     ) {
       return (
@@ -355,7 +360,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="59"
               className="flex items-center py-[27px]"
-              onClick={handleHome}
+             onClick={handlePayout}
             >
               <FontAwesomeIcon icon={faWallet} className="mr-2 icon" />
               Payout

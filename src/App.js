@@ -54,6 +54,7 @@ import StudentMess from "./pages/StudentMess";
 import SearchResult from "./pages/SearchResult";
 import PurchasedCourses from "./pages/PurchasedCourses";
 import CourseDetailView from "./pages/CourseDetailView";
+import Payout from "./pages/Payout";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -749,6 +750,20 @@ const App = () => {
             token ? (
               <Layout>
                 <StudentNotification />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+      {role === "teacher" && (
+        <Route
+          path="/payout"
+          element={
+            token ? (
+              <Layout>
+                <Payout sidebar={sidebar}/>
               </Layout>
             ) : (
               <Navigate to="/login" />

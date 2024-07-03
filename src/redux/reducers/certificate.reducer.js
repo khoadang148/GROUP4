@@ -1,4 +1,7 @@
 import {
+  DELETE_CERTIFICATES_FAILURE,
+  DELETE_CERTIFICATES_REQUEST,
+  DELETE_CERTIFICATES_SUCCESS,
   FETCH_CERTIFICATES_FAILURE,
   FETCH_CERTIFICATES_REQUEST,
   FETCH_CERTIFICATES_SUCCESS,
@@ -31,8 +34,31 @@ const certificatesReducer = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+    case DELETE_CERTIFICATES_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case DELETE_CERTIFICATES_SUCCESS:
+      // const updatedCertificates = state.certificates.filter(
+      //   (certificate) => certificate.itemNo !== action.payload
+      // );
+      return {
+        ...state,
+        certificates: action.payload,
+        loading: false,
+        error: null,
+      };
+    case DELETE_CERTIFICATES_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
     default:
       return state;
   }
 };
+
 export default certificatesReducer;

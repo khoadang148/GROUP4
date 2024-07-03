@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
-import { Button, Image } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCertificates } from "../redux/actions/certificate.action";
+import {
+  getCertificates,
+  deleteCertificate,
+} from "../redux/actions/certificate.action";
+import { Button, Image } from "react-bootstrap";
 
 const MyCertificates = ({ sidebar }) => {
   const userId = useSelector((state) => state.auth.id);
@@ -10,11 +13,44 @@ const MyCertificates = ({ sidebar }) => {
     (state) => state.certificates
   );
 
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const modalRef = useRef();
+
   useEffect(() => {
     if (userId) {
       dispatch(getCertificates(userId));
     }
   }, [dispatch, userId]);
+
+  const handleView = (certificate) => {
+    setSelectedCertificate(certificate);
+    setShowModal(true);
+  };
+
+  const handleClose = () => setShowModal(false);
+
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      handleClose();
+    }
+  };
+
+  useEffect(() => {
+    if (showModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showModal]);
+
+  const handleDelete = (certificateId) => {
+    dispatch(deleteCertificate(userId, certificateId));
+  };
 
   return (
     <div className="mt-24">
@@ -56,7 +92,7 @@ const MyCertificates = ({ sidebar }) => {
             key={index}
             className="bg-white flex items-center relative h-[60px] border-[1px] border-[#f7f7f7] mt-[0.5px]"
           >
-            <h1 className="ml-10">{certificate.itemNo}</h1>
+            <h1 className="ml-10">{index + 1}</h1>
             <h1 className="ml-[140px]">{certificate.title}</h1>
             <h1
               className={`absolute ${
@@ -79,22 +115,61 @@ const MyCertificates = ({ sidebar }) => {
             >
               {certificate.uploadDate}
             </h1>
-            <h1
+            <Button
               className={`absolute text-blue-600 cursor-pointer ${
                 sidebar ? "left-[1170px]" : "left-[1270px]"
               }`}
+              onClick={() => handleView(certificate)}
             >
               View
-            </h1>
-            <Image
+            </Button>
+            <Button
               className={`w-[20px] h-[20px] absolute ${
                 sidebar ? "left-[1340px]" : "left-[1440px]"
               }`}
-              src={require("../assets/delete.png")}
-            />
+              onClick={() => handleDelete(certificate.itemNo)}
+            >
+              <Image src={require("../assets/delete.png")} />
+            </Button>
           </div>
         ))}
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div
+            ref={modalRef}
+            className="bg-white p-5 rounded-lg shadow-lg max-w-lg w-full"
+          >
+            <h2 className="text-2xl font-semibold mb-4">Certificate Details</h2>
+            {selectedCertificate && (
+              <div>
+                <p>
+                  <strong>Item No:</strong> {selectedCertificate.itemNo}
+                </p>
+                <p>
+                  <strong>Title:</strong> {selectedCertificate.title}
+                </p>
+                <p>
+                  <strong>Marks:</strong> {selectedCertificate.marks}
+                </p>
+                <p>
+                  <strong>Out Of:</strong> {selectedCertificate.outOf}
+                </p>
+                <p>
+                  <strong>Upload Date:</strong> {selectedCertificate.uploadDate}
+                </p>
+              </div>
+            )}
+            <button
+              className="mt-4 px-4 py-2 bg-[#ED2A26] text-white rounded hover:bg-black"
+              onClick={handleClose}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

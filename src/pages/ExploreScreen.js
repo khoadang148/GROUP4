@@ -56,7 +56,7 @@ const ExploreScreen = ({ sidebar }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllCourses())
+    dispatch(getAllCourses());
   }, [dispatch]);
 
   useEffect(() => {

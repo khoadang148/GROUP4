@@ -42,6 +42,7 @@ import BlogSingle from "./pages/BlogSingle";
 import CompanyDetails from "./pages/CompanyDetails";
 import ReportHistory from "../src/pages/ReportHistory";
 import SendFeedback from "../src/pages/SendFeedback";
+import SendFeedback2 from "../src/pages/SendFeedback2";
 import AddLiveStream from "./AddLiveStream";
 import Earning from "../src/pages/Earning";
 import CertificationFillForm from "./pages/CertificationFillForm";
@@ -60,9 +61,12 @@ import SearchResult from "./pages/SearchResult";
 import PurchasedCourses from "./pages/PurchasedCourses";
 import CourseDetailView from "./pages/CourseDetailView";
 import Payout from "./pages/Payout";
+import credits from "./pages/Credits";
 import Checkout from "./pages/Checkout";
 import Review from "./pages/Review";
 import CreateCourse from "./pages/CreateCourse";
+import Review2 from "./pages/Review2";
+import Credits from "./pages/Credits";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -784,6 +788,51 @@ const App = () => {
             token ? (
               <Layout>
                 <Dashboard2 sidebar={sidebar} />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+
+{role === "student" && (
+        <Route
+          path="/credits"
+          element={
+            token ? (
+              <Layout>
+                <Credits sidebar={sidebar} />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+
+{role === "student" && (
+        <Route
+          path="/sendfeedback2"
+          element={
+            token ? (
+              <Layout>
+                <SendFeedback2 sidebar={sidebar} />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+
+{role === "student" && (
+        <Route
+          path="/review2"
+          element={
+            token ? (
+              <Layout>
+                <Review2 sidebar={sidebar} />
               </Layout>
             ) : (
               <Navigate to="/login" />

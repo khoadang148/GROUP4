@@ -109,6 +109,9 @@ const Sidebar = ({ sidebar }) => {
   const handleError404 = () => {
     navigate("/error404");
   };
+  const handleThankyou = () => {
+    navigate("/thankyou");
+  };
 
   const handleReportHistory = () => {
     navigate("/reporthistory");
@@ -574,7 +577,9 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="39" onClick={handleSearchResult}>
                   Search Result
                 </Menu.Item>
-                <Menu.Item key="40">Thank you</Menu.Item>
+                <Menu.Item key="6" onClick={handleThankyou}>
+                  Thank You
+                </Menu.Item>
                 <Menu.Item key="38" onClick={handleComingSoon}>
                   Coming Soon
                 </Menu.Item>

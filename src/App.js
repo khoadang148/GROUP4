@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import { Container } from "react-bootstrap";
 import LoginScreen from "./pages/LoginScreen";
 import Error404 from "./pages/Error404";
+import Thankyou from "./pages/Thankyou";
 import ComingSoon from "./pages/ComingSoon";
 import SignupStep from "./pages/SignupStep";
 import Contactus from "./pages/Contactus";
@@ -283,7 +284,18 @@ const App = () => {
           )
         }
       />
-
+      <Route
+        path="/thankyou"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <Thankyou />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
       <Route
         path="/comingsoon"
         element={

@@ -298,12 +298,9 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/teacherMess" ||
       location.pathname === "/payout" ||
       location.pathname === "/review" ||
-<<<<<<< src/components/Sidebar.js
       location.pathname === "/verification" ||
-      location.pathname === "/statements"
-=======
+      location.pathname === "/statements" ||
       location.pathname === "/createcourse"
->>>>>>> src/components/Sidebar.js
     ) {
       return (
         <>

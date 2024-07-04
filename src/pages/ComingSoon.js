@@ -37,7 +37,7 @@ const ComingSoon = () => {
     return (
         <div className="bg-[#0f0f0f] text-white h-screen flex flex-col items-center justify-center relative">
             <div className="absolute top-8">
-                <img src={logoUrl} alt="Cursus Logo" className="w-32 h-8 mb-4" />
+                <img src={logoUrl} alt="Cursus Logo" className="w-50 h-14 mb-4" />
             </div>
             <div className="flex space-x-2 text-8xl font-bold mt-8">
                 <div className="flex flex-col items-center">

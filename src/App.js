@@ -4,9 +4,13 @@ import Sidebar from "./components/Sidebar";
 import { Container } from "react-bootstrap";
 import LoginScreen from "./pages/LoginScreen";
 import Error404 from "./pages/Error404";
+import Thankyou from "./pages/Thankyou";
 import ComingSoon from "./pages/ComingSoon";
 import SignupStep from "./pages/SignupStep";
 import Contactus from "./pages/Contactus";
+import Invoice from "./pages/Invoice";
+import Statements from "../src/pages/Statements";
+import Verification from "../src/pages/Verification";
 import SignupScreen from "./pages/SignupScreen";
 import ForgotPasswordScreen from "./pages/ForgotPasswordScreen";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
@@ -281,7 +285,18 @@ const App = () => {
           )
         }
       />
-
+      <Route
+        path="/thankyou"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <Thankyou />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
       <Route
         path="/comingsoon"
         element={
@@ -418,6 +433,18 @@ const App = () => {
               <HeaderPages />
               <About />
               <Footer />
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+<Route
+        path="/invoice"
+        element={
+          token ? (
+            <div className="flex flex-col min-h-screen">
+              <Invoice />
             </div>
           ) : (
             <Navigate to="/login" />
@@ -646,6 +673,22 @@ const App = () => {
           )
         }
       />
+
+{role === "teacher" && (
+        <Route
+          path="/verification"
+          element={
+            token ? (
+              <Layout>
+                <Verification sidebar={sidebar}/>
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+
       {role === "teacher" && (
         <Route
           path="/dashboard"
@@ -661,6 +704,21 @@ const App = () => {
         />
       )}
 
+{role === "teacher" && (
+        <Route
+          path="/statements"
+          element={
+            token ? (
+              <Layout>
+                <Statements/>
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+      
       {role === "teacher" && (
         <Route
           path="/earning"

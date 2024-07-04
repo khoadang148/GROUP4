@@ -8,9 +8,6 @@ const signLogoUrl = 'https://gambolthemes.net/html-items/cursus-new-demo/images/
 const SignupStep = () => {
   const [isInstructor, setIsInstructor] = useState(true);
   const navigate = useNavigate();
-  const toggleSignupStep = () => {
-    setIsInstructor(!isInstructor);
-  };
   const goToLogin = () => {
     navigate('/login');
   };

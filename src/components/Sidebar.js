@@ -73,6 +73,9 @@ const Sidebar = ({ sidebar }) => {
   const handleAbout = () => {
     navigate("/about");
   };
+  const handleInvoice = () => {
+    navigate("/invoice");
+  };
   const handleOurBlog = () => {
     navigate("/blog");
   };
@@ -105,6 +108,9 @@ const Sidebar = ({ sidebar }) => {
   };
   const handleError404 = () => {
     navigate("/error404");
+  };
+  const handleThankyou = () => {
+    navigate("/thankyou");
   };
 
   const handleReportHistory = () => {
@@ -158,6 +164,12 @@ const Sidebar = ({ sidebar }) => {
   };
   const handlePurchasedCourses = () => {
     navigate("/purchasedcourses");
+  };
+  const handleVerification = () => {
+    navigate("/verification");
+  };
+  const handleStatements = () => {
+    navigate("/statements");
   };
   const handleCourseDetailView = () => {
     navigate("/coursedetailview");
@@ -267,6 +279,7 @@ const Sidebar = ({ sidebar }) => {
             Statements
           </Menu.Item>
           <hr />
+          
           <Menu.Item key="72" onClick={handleSetting}>
             <FontAwesomeIcon icon={faGear} className="mr-2 icon" />
             Setting
@@ -285,7 +298,12 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/teacherMess" ||
       location.pathname === "/payout" ||
       location.pathname === "/review" ||
+<<<<<<< src/components/Sidebar.js
+      location.pathname === "/verification" ||
+      location.pathname === "/statements"
+=======
       location.pathname === "/createcourse"
+>>>>>>> src/components/Sidebar.js
     ) {
       return (
         <>
@@ -393,7 +411,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="60"
               className="flex items-center py-[27px]"
-              onClick={handleHome}
+              onClick={handleStatements}
             >
               <FontAwesomeIcon icon={faNewspaper} className="mr-2 icon" />
               Statements
@@ -403,7 +421,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="61"
               className="flex items-center py-[27px]"
-              onClick={handleHome}
+              onClick={handleVerification}
             >
               <FontAwesomeIcon icon={faCircleCheck} className="mr-2 icon" />
               Verification
@@ -538,10 +556,12 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="28" onClick={handleCourseDetailView}>
                   Course Detail View
                 </Menu.Item>
-                <Menu.Item key="29" onClick={handleCheckout}>
-                  Checkout
+                <Menu.Item key="23" onClick={handleAbout}>
+                Checkout
                 </Menu.Item>
-                <Menu.Item key="30">Invoice</Menu.Item>
+                <Menu.Item key="23" onClick={handleInvoice}>
+                  Invoice
+                </Menu.Item>
                 <Menu.Item key="31" onClick={handleCareer}>
                   Career
                 </Menu.Item>
@@ -565,7 +585,9 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="39" onClick={handleSearchResult}>
                   Search Result
                 </Menu.Item>
-                <Menu.Item key="40">Thank you</Menu.Item>
+                <Menu.Item key="6" onClick={handleThankyou}>
+                  Thank You
+                </Menu.Item>
                 <Menu.Item key="38" onClick={handleComingSoon}>
                   Coming Soon
                 </Menu.Item>

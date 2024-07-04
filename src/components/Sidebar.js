@@ -119,6 +119,9 @@ const Sidebar = ({ sidebar }) => {
   const handleSendFeedback = () => {
     navigate("/sendfeedback");
   };
+  const handleSendFeedback2 = () => {
+    navigate("/sendfeedback2");
+  };
   const handleAddLiveStream = () => {
     navigate("/addlivestream");
   };
@@ -186,6 +189,9 @@ const Sidebar = ({ sidebar }) => {
   const handleDashboard2 = () => {
     navigate("/dashboard2");
   };
+  const handleCredits = () => {
+    navigate("/credits");
+  };
   const handleStatements2 = () => {
     navigate("/statements2");
   };
@@ -194,6 +200,9 @@ const Sidebar = ({ sidebar }) => {
   };
   const handleReview = () => {
     navigate("/review")
+   }
+   const handleReview2 = () => {
+    navigate("/review2")
    }
   const handleCreateCourse = () => {
     navigate("/createcourse");
@@ -214,7 +223,10 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/studentMessage" ||
       location.pathname === "/purchasedcourses" ||
       location.pathname === "/studentcertificates" ||
-      location.pathname === "/statements2" 
+      location.pathname === "/statements2" ||
+      location.pathname === "/review2" ||
+      location.pathname === "/sendfeedback2" ||
+      location.pathname === "/credits"
     ) {
       return (
         <>
@@ -258,22 +270,23 @@ const Sidebar = ({ sidebar }) => {
             <FontAwesomeIcon icon={faTrophy} className="mr-2 icon" />
             My Certification
           </Menu.Item>
+
           <Menu.Item
-            key="69"
-            className="flex items-center"
-            onClick={handleReview}
+            key="64"
+            icon={<FontAwesomeIcon icon={faBorderAll} />}
+            onClick={handleReview2}
           >
-            <FontAwesomeIcon icon={faStar} className="mr-2 icon" />
-            Reviews
+            Review
           </Menu.Item>
+
           <Menu.Item
-            key="70"
-            className="flex items-center"
-            onClick={handleHome}
+            key="64"
+            icon={<FontAwesomeIcon icon={faBorderAll} />}
+            onClick={handleCredits}
           >
-            <FontAwesomeIcon icon={faWallet} className="mr-2 icon" />
             Credits
           </Menu.Item>
+
           <Menu.Item
             key="64"
             icon={<FontAwesomeIcon icon={faBorderAll} />}
@@ -287,9 +300,12 @@ const Sidebar = ({ sidebar }) => {
             <FontAwesomeIcon icon={faGear} className="mr-2 icon" />
             Setting
           </Menu.Item>
-          <Menu.Item key="73">
-            <FontAwesomeIcon icon={faMessage} className="mr-2 icon" />
-            Send Feedback
+          <Menu.Item
+            key="64"
+            icon={<FontAwesomeIcon icon={faBorderAll} />}
+            onClick={handleSendFeedback2}
+          >
+            Feedback
           </Menu.Item>
         </>
       );

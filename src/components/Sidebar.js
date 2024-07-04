@@ -180,6 +180,9 @@ const Sidebar = ({ sidebar }) => {
   const handleReview = () => {
     navigate("/review")
    }
+  const handleCreateCourse = () => {
+    navigate("/createcourse");
+  };
 
 
   const role = useSelector((state) => state.auth.role);
@@ -281,7 +284,8 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/mycertificates" ||
       location.pathname === "/teacherMess" ||
       location.pathname === "/payout" ||
-      location.pathname === "/review"
+      location.pathname === "/review" ||
+      location.pathname === "/createcourse"
     ) {
       return (
         <>
@@ -319,7 +323,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="53"
               className="flex items-center py-[27px]"
-              onClick={handleHome}
+              onClick={handleCreateCourse}
             >
               <FontAwesomeIcon icon={faCirclePlus} className="mr-2 icon" />
               Create Course

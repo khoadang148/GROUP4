@@ -67,6 +67,7 @@ import Review from "./pages/Review";
 import CreateCourse from "./pages/CreateCourse";
 import Review2 from "./pages/Review2";
 import Credits from "./pages/Credits";
+import Analysis from "./pages/Analysis";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -946,6 +947,20 @@ const App = () => {
             token ? (
               <Layout>
                 <Payout sidebar={sidebar} />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+      {role === "teacher" && (
+        <Route
+          path="/analysis"
+          element={
+            token ? (
+              <Layout>
+             <Analysis sidebar={sidebar}/>
               </Layout>
             ) : (
               <Navigate to="/login" />

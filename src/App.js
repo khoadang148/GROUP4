@@ -29,6 +29,7 @@ import HeaderPages from "./components/HeaderPages";
 import About from "./pages/About";
 import InstructorProfile from "../src/pages/InstructorProfile";
 import Dashboard2 from "../src/pages/Dashboard2";
+import Statements2 from "../src/pages/Statements2";
 import OurBlog from "./pages/OurBlog";
 import Help from "./pages/Help";
 import SettingAccount from "../src/pages/Setting";
@@ -783,6 +784,21 @@ const App = () => {
             token ? (
               <Layout>
                 <Dashboard2 sidebar={sidebar} />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+
+{role === "student" && (
+        <Route
+          path="/statements2"
+          element={
+            token ? (
+              <Layout>
+                <Statements2 sidebar={sidebar} />
               </Layout>
             ) : (
               <Navigate to="/login" />

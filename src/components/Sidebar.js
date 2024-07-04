@@ -186,6 +186,9 @@ const Sidebar = ({ sidebar }) => {
   const handleDashboard2 = () => {
     navigate("/dashboard2");
   };
+  const handleStatements2 = () => {
+    navigate("/statements2");
+  };
   const handleStudentCertificates = () => {
     navigate("/studentcertificates");
   };
@@ -210,7 +213,8 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/studentNotification" ||
       location.pathname === "/studentMessage" ||
       location.pathname === "/purchasedcourses" ||
-      location.pathname === "/studentcertificates"
+      location.pathname === "/studentcertificates" ||
+      location.pathname === "/statements2" 
     ) {
       return (
         <>
@@ -271,11 +275,10 @@ const Sidebar = ({ sidebar }) => {
             Credits
           </Menu.Item>
           <Menu.Item
-            key="71"
-            className="flex items-center"
-            onClick={handleHome}
+            key="64"
+            icon={<FontAwesomeIcon icon={faBorderAll} />}
+            onClick={handleStatements2}
           >
-            <FontAwesomeIcon icon={faNewspaper} className="mr-2 icon" />
             Statements
           </Menu.Item>
           <hr />

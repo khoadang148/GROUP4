@@ -177,6 +177,10 @@ const Sidebar = ({ sidebar }) => {
   const handleStudentCertificates = () => {
     navigate("/studentcertificates");
   };
+  const handleReview = () => {
+    navigate("/review")
+   }
+
 
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -238,7 +242,7 @@ const Sidebar = ({ sidebar }) => {
           <Menu.Item
             key="69"
             className="flex items-center"
-            onClick={handleHome}
+            onClick={handleReview}
           >
             <FontAwesomeIcon icon={faStar} className="mr-2 icon" />
             Reviews
@@ -276,7 +280,8 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/teacherNotification" ||
       location.pathname === "/mycertificates" ||
       location.pathname === "/teacherMess" ||
-      location.pathname === "/payout"
+      location.pathname === "/payout" ||
+      location.pathname === "/review"
     ) {
       return (
         <>
@@ -354,7 +359,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="57"
               className="flex items-center py-[27px]"
-              onClick={handleHome}
+              onClick={handleReview}
             >
               <FontAwesomeIcon icon={faStar} className="mr-2 icon" />
               Reviews

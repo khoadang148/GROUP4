@@ -56,6 +56,7 @@ import PurchasedCourses from "./pages/PurchasedCourses";
 import CourseDetailView from "./pages/CourseDetailView";
 import Payout from "./pages/Payout";
 import Checkout from "./pages/Checkout";
+import Review from "./pages/Review";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -652,6 +653,20 @@ const App = () => {
             token ? (
               <Layout>
                 <Earning />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+      {role === "teacher" && (
+        <Route
+          path="/review"
+          element={
+            token ? (
+              <Layout>
+                <Review />
               </Layout>
             ) : (
               <Navigate to="/login" />

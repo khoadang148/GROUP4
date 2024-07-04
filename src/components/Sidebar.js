@@ -192,6 +192,9 @@ const Sidebar = ({ sidebar }) => {
   const handleReview = () => {
     navigate("/review")
    }
+  const handleCreateCourse = () => {
+    navigate("/createcourse");
+  };
 
 
   const role = useSelector((state) => state.auth.role);
@@ -276,6 +279,7 @@ const Sidebar = ({ sidebar }) => {
             Statements
           </Menu.Item>
           <hr />
+          
           <Menu.Item key="72" onClick={handleSetting}>
             <FontAwesomeIcon icon={faGear} className="mr-2 icon" />
             Setting
@@ -294,8 +298,12 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/teacherMess" ||
       location.pathname === "/payout" ||
       location.pathname === "/review" ||
+<<<<<<< src/components/Sidebar.js
       location.pathname === "/verification" ||
       location.pathname === "/statements"
+=======
+      location.pathname === "/createcourse"
+>>>>>>> src/components/Sidebar.js
     ) {
       return (
         <>
@@ -333,7 +341,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="53"
               className="flex items-center py-[27px]"
-              onClick={handleHome}
+              onClick={handleCreateCourse}
             >
               <FontAwesomeIcon icon={faCirclePlus} className="mr-2 icon" />
               Create Course

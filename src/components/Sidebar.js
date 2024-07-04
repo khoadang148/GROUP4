@@ -73,6 +73,9 @@ const Sidebar = ({ sidebar }) => {
   const handleAbout = () => {
     navigate("/about");
   };
+  const handleInvoice = () => {
+    navigate("/invoice");
+  };
   const handleOurBlog = () => {
     navigate("/blog");
   };
@@ -158,6 +161,12 @@ const Sidebar = ({ sidebar }) => {
   };
   const handlePurchasedCourses = () => {
     navigate("/purchasedcourses");
+  };
+  const handleVerification = () => {
+    navigate("/verification");
+  };
+  const handleStatements = () => {
+    navigate("/statements");
   };
   const handleCourseDetailView = () => {
     navigate("/coursedetailview");
@@ -281,7 +290,9 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/mycertificates" ||
       location.pathname === "/teacherMess" ||
       location.pathname === "/payout" ||
-      location.pathname === "/review"
+      location.pathname === "/review" ||
+      location.pathname === "/verification" ||
+      location.pathname === "/statements"
     ) {
       return (
         <>
@@ -389,7 +400,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="60"
               className="flex items-center py-[27px]"
-              onClick={handleHome}
+              onClick={handleStatements}
             >
               <FontAwesomeIcon icon={faNewspaper} className="mr-2 icon" />
               Statements
@@ -399,7 +410,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="61"
               className="flex items-center py-[27px]"
-              onClick={handleHome}
+              onClick={handleVerification}
             >
               <FontAwesomeIcon icon={faCircleCheck} className="mr-2 icon" />
               Verification
@@ -534,10 +545,12 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="28" onClick={handleCourseDetailView}>
                   Course Detail View
                 </Menu.Item>
-                <Menu.Item key="29" onClick={handleCheckout}>
-                  Checkout
+                <Menu.Item key="23" onClick={handleAbout}>
+                Checkout
                 </Menu.Item>
-                <Menu.Item key="30">Invoice</Menu.Item>
+                <Menu.Item key="23" onClick={handleInvoice}>
+                  Invoice
+                </Menu.Item>
                 <Menu.Item key="31" onClick={handleCareer}>
                   Career
                 </Menu.Item>

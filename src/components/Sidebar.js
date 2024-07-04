@@ -207,7 +207,9 @@ const Sidebar = ({ sidebar }) => {
   const handleCreateCourse = () => {
     navigate("/createcourse");
   };
-
+  const handleAnalysis = () => {
+    navigate("/analysis");
+   }
 
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -320,6 +322,8 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/verification" ||
       location.pathname === "/statements" ||
       location.pathname === "/createcourse"
+      ||
+      location.pathname === "/analysis"
     ) {
       return (
         <>
@@ -347,7 +351,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="52"
               className="flex items-center py-[27px]"
-              onClick={handleHome}
+              onClick={handleAnalysis}
             >
               <FontAwesomeIcon icon={faChartLine} className="mr-2 icon" />
               Analyics

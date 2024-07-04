@@ -24,7 +24,7 @@ import AllInstructors from "../src/pages/AllInstructors";
 import HeaderPages from "./components/HeaderPages";
 import About from "./pages/About";
 import InstructorProfile from "../src/pages/InstructorProfile";
-import Dashboard2 from "./Dashboard2";
+import Dashboard2 from "../src/pages/Dashboard2";
 import OurBlog from "./pages/OurBlog";
 import Help from "./pages/Help";
 import SettingAccount from "../src/pages/Setting";
@@ -254,12 +254,12 @@ const App = () => {
         }
       />
 
-<Route
+      <Route
         path="/signupstep"
         element={
           token ? (
             <div className="flex flex-col min-h-screen">
-              <SignupStep/>
+              <SignupStep />
             </div>
           ) : (
             <Navigate to="/login" />
@@ -280,7 +280,7 @@ const App = () => {
         }
       />
 
-<Route
+      <Route
         path="/comingsoon"
         element={
           token ? (
@@ -292,7 +292,7 @@ const App = () => {
           )
         }
       />
-    <Route
+      <Route
         path="/contactus"
         element={
           token ? (
@@ -644,7 +644,7 @@ const App = () => {
           }
         />
       )}
-      
+
       {role === "teacher" && (
         <Route
           path="/earning"
@@ -694,7 +694,7 @@ const App = () => {
           element={
             token ? (
               <Layout>
-                <Dashboard2 />
+                <Dashboard2 sidebar={sidebar} />
               </Layout>
             ) : (
               <Navigate to="/login" />
@@ -709,6 +709,20 @@ const App = () => {
             token ? (
               <Layout>
                 <PurchasedCourses />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      )}
+      {role === "student" && (
+        <Route
+          path="/studentcertificates"
+          element={
+            token ? (
+              <Layout>
+                <MyCertificates />
               </Layout>
             ) : (
               <Navigate to="/login" />
@@ -778,7 +792,7 @@ const App = () => {
           element={
             token ? (
               <Layout>
-                <Payout sidebar={sidebar}/>
+                <Payout sidebar={sidebar} />
               </Layout>
             ) : (
               <Navigate to="/login" />

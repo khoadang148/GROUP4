@@ -117,7 +117,6 @@ const Sidebar = ({ sidebar }) => {
     navigate("/addlivestream");
   };
 
-
   const handleCertificationFillForm = () => {
     navigate("/certificationfillform");
   };
@@ -146,33 +145,39 @@ const Sidebar = ({ sidebar }) => {
     navigate("/teacherMess");
   };
   const handleStudentNotifications = () => {
-    navigate("/studentNotification")
-  }
+    navigate("/studentNotification");
+  };
   const handleStudentMessage = () => {
-    navigate("/studentMessage")
-  }
-   const handleSearchResult = () => {
-     navigate("/searchresult");
-   };
-   const handEarning = () =>{
-    navigate("/earning")
-   }
-   const handlePurchasedCourses = () =>{
-    navigate("/purchasedcourses")
-   }
-   const handleCourseDetailView = () => {
-    navigate("/coursedetailview")
-   }
-   const handleDashboard = () => {
-    navigate("/dashboard")
-   }
-   const handlePayout = () => {
+    navigate("/studentMessage");
+  };
+  const handleSearchResult = () => {
+    navigate("/searchresult");
+  };
+  const handEarning = () => {
+    navigate("/earning");
+  };
+  const handlePurchasedCourses = () => {
+    navigate("/purchasedcourses");
+  };
+  const handleCourseDetailView = () => {
+    navigate("/coursedetailview");
+  };
+  const handleDashboard = () => {
+    navigate("/dashboard");
+  };
+  const handlePayout = () => {
     navigate("/payout");
-   }
-   const handleCheckout = () => {
-    navigate("/checkout")
-   }
-   
+  };
+  const handleCheckout = () => {
+    navigate("/checkout");
+  };
+  const handleDashboard2 = () => {
+    navigate("/dashboard2");
+  };
+  const handleStudentCertificates = () => {
+    navigate("/studentcertificates");
+  };
+
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -181,13 +186,20 @@ const Sidebar = ({ sidebar }) => {
   };
 
   const renderMenuItems = () => {
-    if  ((role === "student" && location.pathname === "/dashboard2")||
-    location.pathname === "/studentNotification"||
-    location.pathname === "/studentMessage" ||
-  location.pathname === "/purchasedcourses") {
+    if (
+      (role === "student" && location.pathname === "/dashboard2") ||
+      location.pathname === "/studentNotification" ||
+      location.pathname === "/studentMessage" ||
+      location.pathname === "/purchasedcourses" ||
+      location.pathname === "/studentcertificates"
+    ) {
       return (
         <>
-          <Menu.Item key="64" icon={<FontAwesomeIcon icon={faBorderAll} />}>
+          <Menu.Item
+            key="64"
+            icon={<FontAwesomeIcon icon={faBorderAll} />}
+            onClick={handleDashboard2}
+          >
             Dashboard
           </Menu.Item>
 
@@ -218,7 +230,7 @@ const Sidebar = ({ sidebar }) => {
           <Menu.Item
             key="68"
             className="flex items-center"
-            onClick={handleMyCertificates}
+            onClick={handleStudentCertificates}
           >
             <FontAwesomeIcon icon={faTrophy} className="mr-2 icon" />
             My Certification
@@ -262,10 +274,9 @@ const Sidebar = ({ sidebar }) => {
       (role === "teacher" && location.pathname === "/dashboard") ||
       location.pathname === "/earning" ||
       location.pathname === "/teacherNotification" ||
-      location.pathname === "/mycertificates"||
+      location.pathname === "/mycertificates" ||
       location.pathname === "/teacherMess" ||
-      location.pathname === "/payout" 
-      
+      location.pathname === "/payout"
     ) {
       return (
         <>
@@ -363,7 +374,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="59"
               className="flex items-center py-[27px]"
-             onClick={handlePayout}
+              onClick={handlePayout}
             >
               <FontAwesomeIcon icon={faWallet} className="mr-2 icon" />
               Payout
@@ -515,8 +526,12 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="27" onClick={handlePaidMemship}>
                   Paid Membership
                 </Menu.Item>
-                <Menu.Item key="28" onClick={handleCourseDetailView}>Course Detail View</Menu.Item>
-                <Menu.Item key="29" onClick={handleCheckout}>Checkout</Menu.Item>
+                <Menu.Item key="28" onClick={handleCourseDetailView}>
+                  Course Detail View
+                </Menu.Item>
+                <Menu.Item key="29" onClick={handleCheckout}>
+                  Checkout
+                </Menu.Item>
                 <Menu.Item key="30">Invoice</Menu.Item>
                 <Menu.Item key="31" onClick={handleCareer}>
                   Career
@@ -649,13 +664,12 @@ const Sidebar = ({ sidebar }) => {
                 </a>
               </div>
               <div className="font-medium">
-              <a className="hover:text-red-500" onClick={handleCopyright}>
-    Privacy Policy
-  </a>{" "}
-  {" "}
-  <a className="hover:text-red-500" onClick={handleCopyright}>
-    Terms
-  </a>
+                <a className="hover:text-red-500" onClick={handleCopyright}>
+                  Privacy Policy
+                </a>{" "}
+                <a className="hover:text-red-500" onClick={handleCopyright}>
+                  Terms
+                </a>
               </div>
               <div className="text-[#9393938f] mt-[13px]">
                 <p>© 2020 Cursus. All Rights Reserved.</p>

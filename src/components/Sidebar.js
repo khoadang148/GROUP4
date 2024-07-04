@@ -273,7 +273,7 @@ const Sidebar = ({ sidebar }) => {
 
           <Menu.Item
             key="64"
-            icon={<FontAwesomeIcon icon={faBorderAll} />}
+            icon={<FontAwesomeIcon icon={faStar} />}
             onClick={handleReview2}
           >
             Review
@@ -281,7 +281,7 @@ const Sidebar = ({ sidebar }) => {
 
           <Menu.Item
             key="64"
-            icon={<FontAwesomeIcon icon={faBorderAll} />}
+            icon={<FontAwesomeIcon icon={faWallet} />}
             onClick={handleCredits}
           >
             Credits
@@ -289,7 +289,7 @@ const Sidebar = ({ sidebar }) => {
 
           <Menu.Item
             key="64"
-            icon={<FontAwesomeIcon icon={faBorderAll} />}
+            icon={<FontAwesomeIcon icon={faNewspaper} />}
             onClick={handleStatements2}
           >
             Statements
@@ -302,7 +302,7 @@ const Sidebar = ({ sidebar }) => {
           </Menu.Item>
           <Menu.Item
             key="64"
-            icon={<FontAwesomeIcon icon={faBorderAll} />}
+            icon={<FontAwesomeIcon icon={faMessage} />}
             onClick={handleSendFeedback2}
           >
             Feedback

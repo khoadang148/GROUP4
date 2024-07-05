@@ -199,17 +199,20 @@ const Sidebar = ({ sidebar }) => {
     navigate("/studentcertificates");
   };
   const handleReview = () => {
-    navigate("/review")
-   }
-   const handleReview2 = () => {
-    navigate("/review2")
-   }
+    navigate("/review");
+  };
+  const handleReview2 = () => {
+    navigate("/review2");
+  };
   const handleCreateCourse = () => {
     navigate("/createcourse");
   };
   const handleAnalysis = () => {
     navigate("/analysis");
-   }
+  };
+  const handleCourse = () => {
+    navigate("/course");
+  };
 
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -232,6 +235,14 @@ const Sidebar = ({ sidebar }) => {
     ) {
       return (
         <>
+          <Menu.Item
+            key="100"
+            className="flex items-center py-[27px]"
+            onClick={handleHome}
+          >
+            <FontAwesomeIcon icon={faHouse} className="mr-2 icon" />
+            Home
+          </Menu.Item>
           <Menu.Item
             key="64"
             icon={<FontAwesomeIcon icon={faBorderAll} />}
@@ -297,7 +308,7 @@ const Sidebar = ({ sidebar }) => {
             Statements
           </Menu.Item>
           <hr />
-          
+
           <Menu.Item key="72" onClick={handleSetting}>
             <FontAwesomeIcon icon={faGear} className="mr-2 icon" />
             Setting
@@ -321,12 +332,20 @@ const Sidebar = ({ sidebar }) => {
       location.pathname === "/review" ||
       location.pathname === "/verification" ||
       location.pathname === "/statements" ||
-      location.pathname === "/createcourse"
-      ||
-      location.pathname === "/analysis"
+      location.pathname === "/createcourse" ||
+      location.pathname === "/analysis" ||
+      location.pathname === "/course"
     ) {
       return (
         <>
+          <Menu.Item
+            key="100"
+            className="flex items-center py-[27px]"
+            onClick={handleHome}
+          >
+            <FontAwesomeIcon icon={faHouse} className="mr-2 icon" />
+            Home
+          </Menu.Item>
           {role === "teacher" && (
             <Menu.Item
               key="50"
@@ -341,7 +360,7 @@ const Sidebar = ({ sidebar }) => {
             <Menu.Item
               key="51"
               className="flex items-center py-[27px]"
-              onClick={handleHome}
+              onClick={handleCourse}
             >
               <FontAwesomeIcon icon={faBook} className="mr-2 icon" />
               Courses
@@ -478,6 +497,16 @@ const Sidebar = ({ sidebar }) => {
               Home
             </Menu.Item>
           )}
+          {(role === "student" || role === "teacher") && (
+            <Menu.Item
+              key="1"
+              className="flex items-center py-[27px]"
+              onClick={role === "student" ? handleDashboard2 : handleDashboard}
+            >
+              <FontAwesomeIcon icon={faBorderAll} className="mr-2 icon " />
+              DashBoard
+            </Menu.Item>
+          )}
 
           {(role === "student" || role === "teacher") && (
             <Menu.Item key="2" onClick={handleLivestream} className="py-[27px]">
@@ -577,7 +606,7 @@ const Sidebar = ({ sidebar }) => {
                   Course Detail View
                 </Menu.Item>
                 <Menu.Item key="23" onClick={handleAbout}>
-                Checkout
+                  Checkout
                 </Menu.Item>
                 <Menu.Item key="23" onClick={handleInvoice}>
                   Invoice
@@ -783,4 +812,3 @@ const Sidebar = ({ sidebar }) => {
 };
 
 export default Sidebar;
-

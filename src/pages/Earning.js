@@ -1,9 +1,8 @@
-
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 
-function Earning({ sidebar }) {
+const Earning = ({ sidebar }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const handleMouseEnter = () => {
@@ -40,7 +39,11 @@ function Earning({ sidebar }) {
   ];
 
   return (
-    <div className={`mt-[100px] mr-5 ml-5 transition-all duration-1000 ${sidebar ? "ml-[50px]" : "ml-[-150px]"}`}>
+    <div
+      className={`mt-[100px] mr-5 ml-5 transition-all duration-1000 ${
+        sidebar ? "ml-[50px]" : "ml-[-150px]"
+      }`}
+    >
       <div className="flex mb-5 gap-4">
         <FontAwesomeIcon icon={faDollarSign} className="size-6" />
         <h1 className="text-[20px]">Earning</h1>
@@ -81,47 +84,88 @@ function Earning({ sidebar }) {
             </thead>
             <tbody className="text-blue-gray-900">
               {data1.map((item) => (
-                <tr key={item.key} className="border-b border-blue-gray-200 text-[14px] font-medium">
+                <tr
+                  key={item.key}
+                  className="border-b border-blue-gray-200 text-[14px] font-medium"
+                >
                   <td className="py-3 px-4 text-[#686f7a]">{item.country}</td>
-                  <td className="py-3 px-4 text-right text-[#686f7a]">{item.price}</td>
+                  <td className="py-3 px-4 text-right text-[#686f7a]">
+                    {item.price}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        <div className={`col-span-2 bg-[#F7F7F7] transition-all duration-1000 ${sidebar ? "w-[800px]" : "w-[930px]"}`}>
+        <div
+          className={`col-span-2 bg-[#F7F7F7] transition-all duration-1000 ${
+            sidebar ? "w-[800px]" : "w-[930px]"
+          }`}
+        >
           <div className="mb-2">
             <div className="mb-[30px] flex gap-3">
-              <div className="relative inline-block" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+              <div
+                className="relative inline-block"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
                 <button
                   id="dropdownHoverButton"
                   className="text-black bg-white rounded-sm shadow-sm hover:outline-red-100 text-sm px-8 py-2.5 text-center inline-flex items-center font-normal"
                   type="button"
                 >
                   Total Sales
-                  <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+                  <svg
+                    className="w-2.5 h-2.5 ms-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m1 1 4 4 4-4"
+                    />
                   </svg>
                 </button>
 
                 {isDropdownOpen && (
-                  <div id="dropdownHover" className="absolute z-10 bg-white  rounded-sm w-32  outline outline-1 outline-offset-0  hover:outline-blue-100 text-black">
-                    <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                  <div
+                    id="dropdownHover"
+                    className="absolute z-10 bg-white  rounded-sm w-32  outline outline-1 outline-offset-0  hover:outline-blue-100 text-black"
+                  >
+                    <ul
+                      className="py-1 text-sm text-gray-700 dark:text-gray-200"
+                      aria-labelledby="dropdownHoverButton"
+                    >
                       <li>
-                        <p className="block px-4 py-2 text-black hover:bg-gray-100 font-medium">Total Sales</p>
+                        <p className="block px-4 py-2 text-black hover:bg-gray-100 font-medium">
+                          Total Sales
+                        </p>
                       </li>
                       <li>
-                        <p className="block px-4 py-2 text-black hover:bg-gray-100">2020</p>
+                        <p className="block px-4 py-2 text-black hover:bg-gray-100">
+                          2020
+                        </p>
                       </li>
                       <li>
-                        <p className="block px-4 py-2 text-black hover:bg-gray-100">2021</p>
+                        <p className="block px-4 py-2 text-black hover:bg-gray-100">
+                          2021
+                        </p>
                       </li>
                       <li>
-                        <p className="block px-4 py-2 text-black hover:bg-gray-100">2022</p>
+                        <p className="block px-4 py-2 text-black hover:bg-gray-100">
+                          2022
+                        </p>
                       </li>
                       <li>
-                        <p className="block px-4 py-2 text-black hover:bg-gray-100">2023</p>
+                        <p className="block px-4 py-2 text-black hover:bg-gray-100">
+                          2023
+                        </p>
                       </li>
                     </ul>
                   </div>
@@ -129,10 +173,14 @@ function Earning({ sidebar }) {
               </div>
               <div className="flex gap-2 pt-2">
                 <div>
-                  <a href="#" className="text-blue-400 hover:text-gray-400">All time /</a>
+                  <a href="#" className="text-blue-400 hover:text-gray-400">
+                    All time /
+                  </a>
                 </div>
                 <div>
-                  <a href="#" className="text-blue-400 hover:text-gray-400">2020 /</a>
+                  <a href="#" className="text-blue-400 hover:text-gray-400">
+                    2020 /
+                  </a>
                 </div>
                 <div>
                   <p>April</p>
@@ -152,7 +200,10 @@ function Earning({ sidebar }) {
               </thead>
               <tbody>
                 {data2.map((item) => (
-                  <tr key={item.key} className="border-b border-blue-gray-200 text-[14px] font-normal">
+                  <tr
+                    key={item.key}
+                    className="border-b border-blue-gray-200 text-[14px] font-normal"
+                  >
                     <td className="py-3 px-4">{item.date}</td>
                     <td className="py-3 px-4">{item.itemcount}</td>
                     <td className="py-3 px-4">{item.earning}</td>
@@ -171,6 +222,6 @@ function Earning({ sidebar }) {
       </div>
     </div>
   );
-}
+};
 
 export default Earning;

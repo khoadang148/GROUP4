@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 import img1 from "../assets/img1.png";
@@ -30,13 +30,16 @@ import {
   faStar,
   faCircleCheck,
 } from "@fortawesome/free-regular-svg-icons";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/actions/auth.action";
+import { getAllInstructor } from "../redux/actions/instructor.action";
+import { Button } from "react-bootstrap";
 
 const { SubMenu } = Menu;
 
 const Sidebar = ({ sidebar }) => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const handleClick = (e) => {
     console.log("click ", e);
@@ -58,9 +61,17 @@ const Sidebar = ({ sidebar }) => {
   const handleHome = () => {
     navigate("/");
   };
-  const handleInstructorProfile = () => {
-    navigate("/instructorprofile");
+  const [visibleInstructors, setVisibleInstructors] = useState(2);
+
+  const handleLoadMore = () => {
+    setVisibleInstructors((prev) => prev + 2);
   };
+  useEffect(() => {
+    dispatch(getAllInstructor());
+  }, [dispatch]);
+  const instructorsState = useSelector((state) => state.instructors);
+  const { instructors, loading, error } = instructorsState;
+
   const handleExplore = () => {
     navigate("/explore");
   };
@@ -195,6 +206,7 @@ const Sidebar = ({ sidebar }) => {
   const handleStatements2 = () => {
     navigate("/statements2");
   };
+
   const handleStudentCertificates = () => {
     navigate("/studentcertificates");
   };
@@ -214,14 +226,13 @@ const Sidebar = ({ sidebar }) => {
     navigate("/course");
   };
   const handleTestView = () => {
-    navigate("/testview")
+    navigate("/testview");
   };
   const handleTestResult = () => {
-    navigate("/testresult")
+    navigate("/testresult");
   };
 
   const role = useSelector((state) => state.auth.role);
-  const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login"); // Chuyển hướng đến trang login sau khi logout
@@ -252,9 +263,8 @@ const Sidebar = ({ sidebar }) => {
           <Menu.Item
             key="64"
             icon={<FontAwesomeIcon icon={faBorderAll} />}
-             className="flex items-center py-[27px]"
+            className="flex items-center py-[27px]"
             onClick={handleDashboard2}
-            className="py-[27px]"
           >
             Dashboard
           </Menu.Item>
@@ -296,7 +306,7 @@ const Sidebar = ({ sidebar }) => {
             key="64"
             icon={<FontAwesomeIcon icon={faStar} />}
             onClick={handleReview2}
-             className="flex items-center py-[27px]"
+            className="flex items-center py-[27px]"
           >
             Review
           </Menu.Item>
@@ -305,7 +315,7 @@ const Sidebar = ({ sidebar }) => {
             key="64"
             icon={<FontAwesomeIcon icon={faWallet} />}
             onClick={handleCredits}
-             className="flex items-center py-[27px]"
+            className="flex items-center py-[27px]"
           >
             Credits
           </Menu.Item>
@@ -314,22 +324,25 @@ const Sidebar = ({ sidebar }) => {
             key="64"
             icon={<FontAwesomeIcon icon={faNewspaper} />}
             onClick={handleStatements2}
-             className="flex items-center py-[27px]"
+            className="flex items-center py-[27px]"
           >
             Statements
           </Menu.Item>
           <hr />
 
-          <Menu.Item key="72" onClick={handleSetting}  className="flex items-center py-[27px]">
+          <Menu.Item
+            key="72"
+            onClick={handleSetting}
+            className="flex items-center py-[27px]"
+          >
             <FontAwesomeIcon icon={faGear} className="mr-2 icon" />
-            
             Setting
           </Menu.Item>
           <Menu.Item
             key="64"
             icon={<FontAwesomeIcon icon={faMessage} />}
             onClick={handleSendFeedback2}
-             className="flex items-center py-[27px]"
+            className="flex items-center py-[27px]"
           >
             Feedback
           </Menu.Item>
@@ -575,8 +588,12 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="18" onClick={handleCertificationFillForm}>
                   Certification Fill Form
                 </Menu.Item>
-                <Menu.Item key="19" onClick={handleTestView}>Test View</Menu.Item>
-                <Menu.Item key="20" onClick={handleTestResult}>Test Result</Menu.Item>
+                <Menu.Item key="19" onClick={handleTestView}>
+                  Test View
+                </Menu.Item>
+                <Menu.Item key="20" onClick={handleTestResult}>
+                  Test Result
+                </Menu.Item>
                 <Menu.Item key="21">My Certification</Menu.Item>
               </div>
             </SubMenu>
@@ -667,32 +684,26 @@ const Sidebar = ({ sidebar }) => {
               title="SUBSCRIPTIONS"
               style={{ color: "black" }}
             >
-              <Menu.Item key="43">
-                <div
-                  className="flex items-center"
-                  onClick={handleInstructorProfile}
-                >
-                  <img
-                    src={img1}
-                    className="h-auto w-[30px] rounded-lg"
-                    alt="Rock Smith"
-                  />
-                  <p className="ml-6 pt-3">Rock Smith</p>
-                </div>
-              </Menu.Item>
-              <Menu.Item key="44">
-                <div
-                  className="flex items-center"
-                  onClick={handleInstructorProfile}
-                >
-                  <img
-                    src={img2}
-                    className="h-auto w-[30px] rounded-lg"
-                    alt="Rock Smith"
-                  />
-                  <p className="ml-6 pt-3">Jassica William</p>
-                </div>
-              </Menu.Item>
+              {instructors.slice(0, visibleInstructors).map((instructor) => (
+                <Menu.Item key={instructor.id}>
+                  <Link to={`/instructor/${instructor.id}`}>
+                    {" "}
+                    <div className="flex items-center">
+                      <img
+                        src={instructor.avatar}
+                        className="h-auto w-[30px] rounded-lg"
+                        alt={instructor.username}
+                      />
+                      <p className="ml-6 pt-3">{instructor.username}</p>
+                    </div>
+                  </Link>
+                </Menu.Item>
+              ))}
+              {instructors.length > visibleInstructors && (
+                <Menu.Item key="load-more" onClick={handleLoadMore}>
+                  <Button type="link">See More</Button>
+                </Menu.Item>
+              )}
               <Menu.Item
                 key="45"
                 onClick={handleAllInstructors}

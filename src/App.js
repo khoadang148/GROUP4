@@ -21,7 +21,7 @@ import ExploreScreen from "../src/pages/ExploreScreen";
 import Footer from "./components/Footer";
 import SavedCourses from "../src/pages/SavedCourses";
 import CertificationCenter from "./pages/CertificationCenter";
-import DashBoard from "./DashBoard";
+import DashBoard from "../src/pages/DashBoard";
 import { setToken, setRole, setID, login } from "./redux/actions/auth.action";
 import Cookies from "js-cookie";
 import AllInstructors from "../src/pages/AllInstructors";
@@ -43,7 +43,7 @@ import CompanyDetails from "./pages/CompanyDetails";
 import ReportHistory from "../src/pages/ReportHistory";
 import SendFeedback from "../src/pages/SendFeedback";
 import SendFeedback2 from "../src/pages/SendFeedback2";
-import AddLiveStream from "./AddLiveStream";
+import AddLiveStream from "../src/pages/AddLiveStream";
 import Earning from "../src/pages/Earning";
 import CertificationFillForm from "./pages/CertificationFillForm";
 import Press from "./pages/Press";
@@ -69,6 +69,8 @@ import Review2 from "./pages/Review2";
 import Credits from "./pages/Credits";
 import Analysis from "./pages/Analysis";
 import Course from "./pages/Course";
+import TestView from "./pages/TestView";
+import TestResult from "./pages/TestResult";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -258,6 +260,38 @@ const App = () => {
               <div className="flex flex-col min-h-screen">
                 <HeaderPages />
                 <SearchResult />
+                <Footer />
+              </div>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/testview"
+        element={
+          token ? (
+            <>
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <TestView />
+                <Footer />
+              </div>
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/testresult"
+        element={
+          token ? (
+            <>
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <TestResult />
                 <Footer />
               </div>
             </>

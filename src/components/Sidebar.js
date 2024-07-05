@@ -213,6 +213,12 @@ const Sidebar = ({ sidebar }) => {
   const handleCourse = () => {
     navigate("/course");
   };
+  const handleTestView = () => {
+    navigate("/testview")
+  };
+  const handleTestResult = () => {
+    navigate("/testresult")
+  };
 
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -246,6 +252,7 @@ const Sidebar = ({ sidebar }) => {
           <Menu.Item
             key="64"
             icon={<FontAwesomeIcon icon={faBorderAll} />}
+             className="flex items-center py-[27px]"
             onClick={handleDashboard2}
           >
             Dashboard
@@ -253,7 +260,7 @@ const Sidebar = ({ sidebar }) => {
 
           <Menu.Item
             key="65"
-            className="flex items-center"
+            className="flex items-center py-[27px]"
             onClick={handlePurchasedCourses}
           >
             <FontAwesomeIcon icon={faBook} className="mr-2 icon" />
@@ -261,7 +268,7 @@ const Sidebar = ({ sidebar }) => {
           </Menu.Item>
           <Menu.Item
             key="66"
-            className="flex items-center"
+            className="flex items-center py-[27px]"
             onClick={handleStudentMessage}
           >
             <FontAwesomeIcon icon={faComment} className="mr-2 icon" />
@@ -269,7 +276,7 @@ const Sidebar = ({ sidebar }) => {
           </Menu.Item>
           <Menu.Item
             key="67"
-            className="flex items-center"
+            className="flex items-center py-[27px]"
             onClick={handleStudentNotifications}
           >
             <FontAwesomeIcon icon={faBell} className="mr-2 icon" />
@@ -277,7 +284,7 @@ const Sidebar = ({ sidebar }) => {
           </Menu.Item>
           <Menu.Item
             key="68"
-            className="flex items-center"
+            className="flex items-center py-[27px]"
             onClick={handleStudentCertificates}
           >
             <FontAwesomeIcon icon={faTrophy} className="mr-2 icon" />
@@ -288,6 +295,7 @@ const Sidebar = ({ sidebar }) => {
             key="64"
             icon={<FontAwesomeIcon icon={faStar} />}
             onClick={handleReview2}
+             className="flex items-center py-[27px]"
           >
             Review
           </Menu.Item>
@@ -296,6 +304,7 @@ const Sidebar = ({ sidebar }) => {
             key="64"
             icon={<FontAwesomeIcon icon={faWallet} />}
             onClick={handleCredits}
+             className="flex items-center py-[27px]"
           >
             Credits
           </Menu.Item>
@@ -304,19 +313,22 @@ const Sidebar = ({ sidebar }) => {
             key="64"
             icon={<FontAwesomeIcon icon={faNewspaper} />}
             onClick={handleStatements2}
+             className="flex items-center py-[27px]"
           >
             Statements
           </Menu.Item>
           <hr />
 
-          <Menu.Item key="72" onClick={handleSetting}>
+          <Menu.Item key="72" onClick={handleSetting}  className="flex items-center py-[27px]">
             <FontAwesomeIcon icon={faGear} className="mr-2 icon" />
+            
             Setting
           </Menu.Item>
           <Menu.Item
             key="64"
             icon={<FontAwesomeIcon icon={faMessage} />}
             onClick={handleSendFeedback2}
+             className="flex items-center py-[27px]"
           >
             Feedback
           </Menu.Item>
@@ -562,8 +574,8 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="18" onClick={handleCertificationFillForm}>
                   Certification Fill Form
                 </Menu.Item>
-                <Menu.Item key="19">Test View</Menu.Item>
-                <Menu.Item key="20">Test Result</Menu.Item>
+                <Menu.Item key="19" onClick={handleTestView}>Test View</Menu.Item>
+                <Menu.Item key="20" onClick={handleTestResult}>Test Result</Menu.Item>
                 <Menu.Item key="21">My Certification</Menu.Item>
               </div>
             </SubMenu>

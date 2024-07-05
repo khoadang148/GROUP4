@@ -254,6 +254,7 @@ const Sidebar = ({ sidebar }) => {
             icon={<FontAwesomeIcon icon={faBorderAll} />}
              className="flex items-center py-[27px]"
             onClick={handleDashboard2}
+            className="py-[27px]"
           >
             Dashboard
           </Menu.Item>

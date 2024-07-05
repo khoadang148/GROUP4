@@ -6,7 +6,7 @@ import TextArea from "antd/es/input/TextArea";
 import React, { useState } from "react";
 import { Image } from "react-bootstrap";
 
-function SendFeedback2({sidebar}) {
+const SendFeedback2 = ({sidebar}) => {
   const [fileList, setFileList] = useState([]);
 
   const uploadProps = {

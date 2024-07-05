@@ -71,6 +71,7 @@ import Analysis from "./pages/Analysis";
 import Course from "./pages/Course";
 import TestView from "./pages/TestView";
 import TestResult from "./pages/TestResult";
+import InstructorDetail from "./pages/InstructorDetail";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -246,6 +247,18 @@ const App = () => {
           token ? (
             <Layout>
               <AllInstructors sidebar={sidebar} />
+            </Layout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/instructor/:id"
+        element={
+          token ? (
+            <Layout>
+              <InstructorDetail sidebar={sidebar} />
             </Layout>
           ) : (
             <Navigate to="/login" />
@@ -480,7 +493,7 @@ const App = () => {
           )
         }
       />
-<Route
+      <Route
         path="/invoice"
         element={
           token ? (
@@ -715,13 +728,13 @@ const App = () => {
         }
       />
 
-{role === "teacher" && (
+      {role === "teacher" && (
         <Route
           path="/verification"
           element={
             token ? (
               <Layout>
-                <Verification sidebar={sidebar}/>
+                <Verification sidebar={sidebar} />
               </Layout>
             ) : (
               <Navigate to="/login" />
@@ -745,13 +758,13 @@ const App = () => {
         />
       )}
 
-{role === "teacher" && (
+      {role === "teacher" && (
         <Route
           path="/statements"
           element={
             token ? (
               <Layout>
-                <Statements/>
+                <Statements />
               </Layout>
             ) : (
               <Navigate to="/login" />
@@ -759,7 +772,7 @@ const App = () => {
           }
         />
       )}
-      
+
       {role === "teacher" && (
         <Route
           path="/earning"
@@ -832,7 +845,7 @@ const App = () => {
         />
       )}
 
-{role === "student" && (
+      {role === "student" && (
         <Route
           path="/credits"
           element={
@@ -847,7 +860,7 @@ const App = () => {
         />
       )}
 
-{role === "student" && (
+      {role === "student" && (
         <Route
           path="/sendfeedback2"
           element={
@@ -862,7 +875,7 @@ const App = () => {
         />
       )}
 
-{role === "student" && (
+      {role === "student" && (
         <Route
           path="/review2"
           element={
@@ -877,7 +890,7 @@ const App = () => {
         />
       )}
 
-{role === "student" && (
+      {role === "student" && (
         <Route
           path="/statements2"
           element={
@@ -995,7 +1008,7 @@ const App = () => {
           element={
             token ? (
               <Layout>
-             <Analysis sidebar={sidebar}/>
+                <Analysis sidebar={sidebar} />
               </Layout>
             ) : (
               <Navigate to="/login" />
@@ -1003,13 +1016,13 @@ const App = () => {
           }
         />
       )}
-       {role === "teacher" && (
+      {role === "teacher" && (
         <Route
           path="/course"
           element={
             token ? (
               <Layout>
-            <Course sidebar={sidebar}/>
+                <Course sidebar={sidebar} />
               </Layout>
             ) : (
               <Navigate to="/login" />

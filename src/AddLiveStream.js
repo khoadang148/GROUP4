@@ -1,110 +1,3 @@
-// import { faVideo } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { Input } from "antd";
-// import React, { useState } from "react";
-// import { Button } from "react-bootstrap";
-
-// import { useNavigate } from "react-router-dom";
-
-// function AddLiveStream({sidebar}) {
-//   const navigate = useNavigate();
-
-//   const handleSettingStream = () => {
-//     navigate("/settingstream");
-//   };
-//   const [activeTab, setActiveTab] = useState("AddStreaming");
-
-//   const SettingStream = () => {
-//     return (
-//       <div className="mt-[200px]">
-//         <div>
-//           <button className="p-2 rounded-md  font-medium ">
-//             Add Streaming
-//           </button>
-//           <button className="p-2 rounded-md  font-medium bg-red-600 hover:bg-gray-900">
-//             Setting
-//           </button>
-//         </div>
-//         <div>setting</div>
-//       </div>
-//     );
-//   };
-//   const AddStreaming = () => {
-//     return (
-//       <div>
-//         <div className="bg-white  rounded-lg p-8 w-[800px]">
-//           <h2 className="text-[18px] font-medium mb-4 text-center">
-//             Connect your live stream to the Live API
-//           </h2>
-//           <p className="mb-4 text-[14px] text-gray-500  font-medium text-center">
-//             Use live-streaming software or a hardware encoder.{" "}
-//             <a href="#" className="text-gray-700 hover:text-red-600">
-//               Learn More
-//             </a>
-//           </p>
-//           <div className="mb-4">
-//             <h2 className="text-[18px] font-medium py-3 ml-2 text-gray-700">
-//               Preview your broadcast with a stream key or paired encoder.
-//             </h2>
-//             <label className="block font-medium mb-2 ml-2">Server URL*</label>
-//             <div className="p-2 bg-white rounded-sm flex justify-between items-center">
-//               <span className="bg-[#F7F7F7]  text-[13px] w-[800px] px-3 py-4">
-//                 rtmps://live-api-s.edututs+.com:443/rtmp/
-//               </span>
-//               <Button className="bg-red-600 hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-sm text-[13px]">
-//                 Copy
-//               </Button>
-//             </div>
-//             <div className="mb-6 mt-7">
-//               <label className="block font-medium mb-2 ml-2">
-//                 Persistent stream key*
-//               </label>
-//               <div className="p-2 bg-white rounded-sm flex justify-between items-center">
-//                 <span className="bg-[#F7F7F7]  w-[800px] text-[13px] px-3 py-4">
-//                   592030151361629?s_bl=1&s_ps=1&s_sw=065&s_vt=api-s&a=AbzB7xYk7XdnKpBf
-//                 </span>
-//                 <Button className="bg-red-600 hover:bg-gray-800 text-white  py-2 px-4 rounded-sm text-[13px] font-medium">
-//                   Copy
-//                 </Button>
-//               </div>
-//             </div>
-//             <div>
-//               <button className="bg-red-500 text-white text-[14px] font-medium rounded-sm px-[20px] py-2">
-//                 Go Live
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   };
-
-//   return (
-//     <div className="bg-white">
-//     <div className={`flex gap-5 pt-6  ${sidebar ? "ml-28" : "ml-64"}`}>
-//       <Button
-//         className={`text-black font-medium text-sm ${
-//           activeTab === "AddStreaming" ? "border-b-2 p-2 border-[#ed2a26]" : ""
-//         }`}
-//         onClick={() => setActiveTab("AddStreaming")}
-//       >
-//         AddStreaming
-//       </Button>
-//       <Button
-//         className={`text-black font-medium text-sm ${
-//           activeTab === "Setting" ? "border-b-2 p-2 border-[#ed2a26]" : ""
-//         }`}
-//         onClick={() => setActiveTab("Setting")}
-//       >
-//         Setting
-//       </Button>
-
-//     </div>
-//     </div>
-//   );
-// }
-
-// export default AddLiveStream;
 import { faVideo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
@@ -115,18 +8,11 @@ function AddLiveStream({ sidebar }) {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("AddStreaming");
 
-  //   const handleSettingStream = () => {
-  //     navigate("/settingstream");
-  //   };
 
   const SettingStream = () => {
     return (
       <div className="mt-[20px]">
-        {/* <div>
-          <button className="p-2 rounded-md font-medium bg-red-600 hover:bg-gray-900">
-            Setting
-          </button>
-        </div> */}
+       
         <div className="bg-white rounded-lg p-8 w-[800px] ">
           <h1 className="text-[18px] font-medium">Live Streaming Setting</h1>
           <div className="py-[10px] ">

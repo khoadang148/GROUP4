@@ -379,8 +379,8 @@ const InstructorDetail = ({ sidebar }) => {
         <div className="">
           <div className={`flex  mt-6 ${sidebar ? "ml-28" : "ml-64"}`}>
             <Image
-              className="w-[110px] h-[110px]"
-              src={require("../../src/assets/img1.png")}
+              className="w-[110px] h-[110px] rounded-full"
+              src={instructor?.avatar}
             />
             <div className=" ml-6 mt-6">
               <div className="text-white font-bold text-2xl">

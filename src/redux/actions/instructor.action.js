@@ -3,6 +3,9 @@ import {
   FETCH_INSTRUCTORS_FAILURE,
   FETCH_INSTRUCTORS_REQUEST,
   FETCH_INSTRUCTORS_SUCCESS,
+  GET_INSTRUCTOR_BY_ID_FAILURE,
+  GET_INSTRUCTOR_BY_ID_REQUEST,
+  GET_INSTRUCTOR_BY_ID_SUCCESS,
   SEARCH_INSTRUCTORS_FAILURE,
   SEARCH_INSTRUCTORS_REQUEST,
   SEARCH_INSTRUCTORS_SUCCESS,
@@ -37,4 +40,14 @@ export const searchInstructors = (query) => {
       dispatch({ type: SEARCH_INSTRUCTORS_FAILURE, error: error.message });
     }
   };
+};
+
+export const getInstructorById = (id) => async (dispatch) => {
+  dispatch({ type: GET_INSTRUCTOR_BY_ID_REQUEST });
+  try {
+    const { data } = await axios.get(`${API_URL}/users/${id}`);
+    dispatch({ type: GET_INSTRUCTOR_BY_ID_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: GET_INSTRUCTOR_BY_ID_FAILURE, payload: error.message });
+  }
 };

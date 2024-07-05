@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Image, Spinner, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   getAllInstructor,
   searchInstructors,
@@ -10,6 +11,7 @@ const AllInstructors = ({ sidebar }) => {
   const dispatch = useDispatch();
   const instructorsState = useSelector((state) => state.instructors);
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate(); // Add this line
 
   useEffect(() => {
     dispatch(getAllInstructor());
@@ -52,6 +54,10 @@ const AllInstructors = ({ sidebar }) => {
     };
   }, []);
 
+  const handleInstructorClick = (instructorId) => {
+    navigate(`/instructor/${instructorId}`);
+  };
+
   return (
     <div className="mt-20 ml-8 overflow-x-hidden">
       <div className="group flex">
@@ -90,17 +96,18 @@ const AllInstructors = ({ sidebar }) => {
             <Alert variant="danger">Searched not found</Alert>
           </div>
         ) : (
-          instructors.map((instructor, index) => (
+          instructors.slice(0, coursesToShow).map((instructor, index) => (
             <div
               key={index}
-              className="flex justify-center items-center bg-white"
+              className="flex justify-center items-center bg-white cursor-pointer"
+              onClick={() => handleInstructorClick(instructor.id)}
             >
               <div
                 className={`${
                   sidebar ? "w-[330px] h-[320px]" : "w-[393px] h-[320px]"
                 }`}
               >
-                <div className=" justify-center pt-8 flex cursor-pointer">
+                <div className=" justify-center pt-8 flex">
                   <Image
                     className={` ${
                       sidebar ? "w-[100px h-[100px]" : "w-[100px h-[100px]"
@@ -109,7 +116,7 @@ const AllInstructors = ({ sidebar }) => {
                   />
                 </div>
                 <div className="flex justify-center">
-                  <h1 className="text-center mt-4 text-xl cursor-pointer">
+                  <h1 className="text-center mt-4 text-xl">
                     {instructor.username}
                   </h1>
                   <Image
@@ -122,19 +129,19 @@ const AllInstructors = ({ sidebar }) => {
                 </h1>
                 <div className="flex mt-4 justify-center">
                   <Image
-                    className="w-[33px] h-[33px] mr-2 transition-transform duration-200 transform hover:scale-110 cursor-pointer"
+                    className="w-[33px] h-[33px] mr-2 transition-transform duration-200 transform hover:scale-110"
                     src={require("../../src/assets/facebook.png")}
                   />
                   <Image
-                    className="w-[33px] h-[33px] mr-2 transition-transform duration-200 transform hover:scale-110 cursor-pointer"
+                    className="w-[33px] h-[33px] mr-2 transition-transform duration-200 transform hover:scale-110"
                     src={require("../../src/assets/twitter.png")}
                   />
                   <Image
-                    className="w-[33px] h-[33px] mr-2 transition-transform duration-200 transform hover:scale-110 cursor-pointer"
+                    className="w-[33px] h-[33px] mr-2 transition-transform duration-200 transform hover:scale-110"
                     src={require("../../src/assets/linkedin.png")}
                   />
                   <Image
-                    className="w-[33px] h-[33px] mr-2 transition-transform duration-200 transform hover:scale-110 cursor-pointer"
+                    className="w-[33px] h-[33px] mr-2 transition-transform duration-200 transform hover:scale-110"
                     src={require("../../src/assets/youtube.png")}
                   />
                 </div>

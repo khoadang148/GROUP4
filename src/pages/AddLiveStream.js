@@ -4,15 +4,13 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function AddLiveStream({ sidebar }) {
+const AddLiveStream = ({ sidebar }) => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("AddStreaming");
-
 
   const SettingStream = () => {
     return (
       <div className="mt-[20px]">
-       
         <div className="bg-white rounded-lg p-8 w-[800px] ">
           <h1 className="text-[18px] font-medium">Live Streaming Setting</h1>
           <div className="py-[10px] ">
@@ -22,7 +20,9 @@ function AddLiveStream({ sidebar }) {
                 <label for="switch" class="hidden"></label>
                 <div class="peer h-6 w-11 rounded-full border bg-slate-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-green-300"></div>
               </label>
-              <span className="text-[15px] text-[#333333] font-medium">Publish this as a continuous live video</span>
+              <span className="text-[15px] text-[#333333] font-medium">
+                Publish this as a continuous live video
+              </span>
             </div>
             <div className="flex py-3 gap-5">
               <label class="relative inline-flex cursor-pointer items-center">
@@ -30,7 +30,9 @@ function AddLiveStream({ sidebar }) {
                 <label for="switch" class="hidden"></label>
                 <div class="peer h-6 w-11 rounded-full border bg-slate-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-green-300"></div>
               </label>
-              <span className="text-[15px] text-[#333333] font-medium">Allow embedding</span>
+              <span className="text-[15px] text-[#333333] font-medium">
+                Allow embedding
+              </span>
             </div>
             <div className="flex py-3 gap-5">
               <label class="relative inline-flex cursor-pointer items-center">
@@ -38,7 +40,9 @@ function AddLiveStream({ sidebar }) {
                 <label for="switch" class="hidden"></label>
                 <div class="peer h-6 w-11 rounded-full border bg-slate-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-green-300"></div>
               </label>
-              <span className="text-[15px] text-[#333333] font-medium">Unpublish after live video ends</span>
+              <span className="text-[15px] text-[#333333] font-medium">
+                Unpublish after live video ends
+              </span>
             </div>
             <div className="flex py-3 gap-5">
               <label class="relative inline-flex cursor-pointer items-center">
@@ -46,7 +50,9 @@ function AddLiveStream({ sidebar }) {
                 <label for="switch" class="hidden"></label>
                 <div class="peer h-6 w-11 rounded-full border bg-slate-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-green-300"></div>
               </label>
-              <span className="text-[15px] text-[#333333] font-medium" >Allow viewers to rewind</span>
+              <span className="text-[15px] text-[#333333] font-medium">
+                Allow viewers to rewind
+              </span>
             </div>
             <div className="flex py-3 gap-5">
               <label class="relative inline-flex cursor-pointer items-center">
@@ -54,7 +60,9 @@ function AddLiveStream({ sidebar }) {
                 <label for="switch" class="hidden"></label>
                 <div class="peer h-6 w-11 rounded-full border bg-slate-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-green-300"></div>
               </label>
-              <span  className="text-[15px] text-[#333333] font-medium">End broadcast when stream ends</span>
+              <span className="text-[15px] text-[#333333] font-medium">
+                End broadcast when stream ends
+              </span>
             </div>
             <div className="flex py-3 gap-5">
               <label class="relative inline-flex cursor-pointer items-center">
@@ -62,7 +70,9 @@ function AddLiveStream({ sidebar }) {
                 <label for="switch" class="hidden"></label>
                 <div class="peer h-6 w-11 rounded-full border bg-slate-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-green-300"></div>
               </label>
-              <span  className="text-[15px] text-[#333333] font-medium">Publish as a test broadcast</span>
+              <span className="text-[15px] text-[#333333] font-medium">
+                Publish as a test broadcast
+              </span>
             </div>
             <div className="flex py-3 gap-5">
               <label class="relative inline-flex cursor-pointer items-center">
@@ -70,7 +80,9 @@ function AddLiveStream({ sidebar }) {
                 <label for="switch" class="hidden"></label>
                 <div class="peer h-6 w-11 rounded-full border bg-slate-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-green-300"></div>
               </label>
-              <span  className="text-[15px] text-[#333333] font-medium">Turn off live commentary</span>
+              <span className="text-[15px] text-[#333333] font-medium">
+                Turn off live commentary
+              </span>
             </div>
           </div>
         </div>
@@ -119,7 +131,7 @@ function AddLiveStream({ sidebar }) {
             </div>
             <div className="ml-2">
               <button className="bg-red-500 text-white text-[14px] font-medium rounded-sm px-[20px] py-3 ">
-              <FontAwesomeIcon icon={faVideo} className="mr-2" />
+                <FontAwesomeIcon icon={faVideo} className="mr-2" />
                 Go Live
               </button>
             </div>
@@ -159,6 +171,6 @@ function AddLiveStream({ sidebar }) {
       </div>
     </div>
   );
-}
+};
 
 export default AddLiveStream;

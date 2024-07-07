@@ -18,7 +18,6 @@ const InstructorDetail = ({ sidebar }) => {
   const handleMouseEnter = (index) => {
     setHoveredCourse(index);
   };
-
   const handleMouseLeave = () => {
     setHoveredCourse(null);
   };

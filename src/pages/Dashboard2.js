@@ -1,30 +1,37 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Image, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllNews } from "../redux/actions/news.action";
 
 const Dashboard2 = ({ sidebar }) => {
-  const news = [
-    {
-      image:
-        "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/news-1.jpg",
-      title: "COVID-19 Updates & Resources",
-      description:
-        "See the latest updates to coronavirus-related content, including changes to monetization, and access new Creator support resources",
-    },
-    {
-      image:
-        "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/news-2.jpg",
-      title: "Watch: Edututs+ interview Mr. Joginder",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac eleifend ante. Duis ac pulvinar felis. Sed a nibh ligula. Mauris eget tortor id mauris tristique accumsan.",
-    },
-    {
-      image:
-        "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/news-1.jpg",
-      title: "COVID-19 Updates - April 7",
-      description:
-        "Ut porttitor mi vel orci cursus, nec elementum neque malesuada. Phasellus imperdiet quam gravida pharetra aliquet. Integer vel ligula eget nisl dignissim hendrerit.",
-    },
-  ];
+  // const news = [
+  //   {
+  //     image:
+  //       "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/news-1.jpg",
+  //     title: "COVID-19 Updates & Resources",
+  //     description:
+  //       "See the latest updates to coronavirus-related content, including changes to monetization, and access new Creator support resources",
+  //   },
+  //   {
+  //     image:
+  //       "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/news-2.jpg",
+  //     title: "Watch: Edututs+ interview Mr. Joginder",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac eleifend ante. Duis ac pulvinar felis. Sed a nibh ligula. Mauris eget tortor id mauris tristique accumsan.",
+  //   },
+  //   {
+  //     image:
+  //       "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/news-1.jpg",
+  //     title: "COVID-19 Updates - April 7",
+  //     description:
+  //       "Ut porttitor mi vel orci cursus, nec elementum neque malesuada. Phasellus imperdiet quam gravida pharetra aliquet. Integer vel ligula eget nisl dignissim hendrerit.",
+  //   },
+  // ];
+  const {news, loading, error} = useSelector((state) => state.news)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllNews())
+  }, [dispatch])
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
 
   const handleNext = () => {

@@ -6,6 +6,8 @@ import enrolledCoursesReducer from "./reducers/course.reducer";
 import instructorsReducer from "./reducers/instructor.reducer";
 import certificatesReducer from "./reducers/certificate.reducer";
 import newsReducer from "./reducers/news.reducer";
+import reviewReducer from "./reducers/review.reducer";
+
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -13,6 +15,7 @@ const rootReducer = combineReducers({
   instructors: instructorsReducer,
   certificates: certificatesReducer,
   news:newsReducer,
+  review: reviewReducer
 });
 
 const store = createStore(

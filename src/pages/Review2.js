@@ -1,17 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { StarOutlined, SearchOutlined } from '@ant-design/icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getAllReviews } from '../redux/actions/review.action';
 
 const Review = ({ sidebar }) => {
-    const [courses, setCourses] = useState([]);
+    const { reviews, loading, error } = useSelector((state) => state.review);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch('https://66806e6756c2c76b495c072b.mockapi.io/review')
-            .then(response => response.json())
-            .then(data => setCourses(data))
-            .catch(error => console.error('Error fetching data:', error));
-    }, []);
+        dispatch(getAllReviews());
+    }, [dispatch]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div>
@@ -23,7 +31,7 @@ const Review = ({ sidebar }) => {
                     <div className='text-xl mt-4 ml-1'>
                         <h1>All Student Feedback</h1>
                     </div>
-                    <div className= {` h-12 bg-[#F7F7F7] border ${sidebar ? "w-[550px]" : "w-[650px]"} `}>
+                    <div className={`h-12 bg-[#F7F7F7] border ${sidebar ? "w-[550px]" : "w-[650px]"}`}>
                         <div className='ml-6 pt-3 text-yellow-500 text-[20px] flex gap-1'>
                             <h1 className='text-black mr-2'>4.6</h1>
                             <FontAwesomeIcon icon={faStar} />
@@ -113,8 +121,8 @@ const Review = ({ sidebar }) => {
                             </div>
                         </div>
                     </div>
-                    {/* Mapping over Courses array to display reviews */}
-                    {courses.map((course, index) => (
+                    {/* Mapping over reviews array to display reviews */}
+                    {reviews.map((review, index) => (
                         <div key={index} className='bg-white w-full h-auto mt-8 pb-4'>
                             <div className='pt-4'>
                                 <h1 className='text-xl ml-4'>Course Title Here</h1>
@@ -124,14 +132,14 @@ const Review = ({ sidebar }) => {
                                 <div className='flex gap-3 mt-6 ml-4'>
                                     <div>
                                         <img
-                                            src={course.img}
+                                            src={review.img}
                                             width={40}
-                                            alt='img9'
+                                            alt='img'
                                         />
                                     </div>
                                     <div className="flex flex-col">
-                                        <h3>{course.name}</h3>
-                                        <div className="text-sm font-light text-gray-500">{course.time}</div>
+                                        <h3>{review.name}</h3>
+                                        <div className="text-sm font-light text-gray-500">{review.time}</div>
                                     </div>
                                 </div>
                                 <div className='ml-4 mt-4 text-yellow-500 text-[20px] flex gap-1'>
@@ -142,7 +150,7 @@ const Review = ({ sidebar }) => {
                                     <FontAwesomeIcon className='text-[#F7F7F7]' icon={faStar} />
                                 </div>
                                 <div className='ml-4 mt-4 leading-7'>
-                                    <p className='text-gray-400 text-[14px]'>{course.content}</p>
+                                    <p className='text-gray-400 text-[14px]'>{review.content}</p>
                                 </div>
                             </div>
                         </div>

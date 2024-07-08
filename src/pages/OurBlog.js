@@ -1,62 +1,40 @@
+import React, { useEffect, useState } from 'react';
 import { Checkbox } from 'antd';
-import React from 'react';
 import { Image } from 'react-bootstrap';
 import { faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from 'react-router-dom';
+import { getAllOurblog } from '../redux/actions/ourblog.action';
+import { useSelector, useDispatch } from 'react-redux';
 
 const OurBlog = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { ourblog, loading, error } = useSelector((state) => state.ourblog);
+  
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showLabels, setShowLabels] = useState(false);
+  const [showArchive, setShowArchive] = useState(false);
+
+  useEffect(() => {
+    dispatch(getAllOurblog());
+  }, [dispatch]);
 
   const handleBlogSingle = () => {
     navigate('/blogsingle');
   };
-  const handleAbout = () => {
-    navigate("/about");
+
+  const handleNavigate = (path) => {
+    navigate(path);
   };
-  const handleCompany = () => {
-    navigate ("/company") 
-  };
-  const handleOurBlog = () => {
-    navigate ("/blog") 
-  };
-  const handlePress = () => {
-    navigate ("/press") 
-  };
-  const handleCareer =()=>{
-    navigate("/career")
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  const courses = [
-    {
-      image: "https://gambolthemes.net/html-items/cursus-new-demo/images/blog/img-1.jpg",
-      title: "Blog Title here",
-      category: "Donec eget arcu vel mauris lacinia vestibulum id eu elit. Nam metus odio, iaculis eu nunc et, interdum mollis arcu. Pellentesque viverra faucibus diam. In sit amet laoreet dolor, vitae fringilla quam interdum mollis arcu.",
-      views: "109k views",
-      date: "March 10, 2020",
-    },
-    {
-      image: "https://gambolthemes.net/html-items/cursus-new-demo/images/blog/img-2.jpg",
-      title: "Blog Title here",
-      category: "Donec eget arcu vel mauris lacinia vestibulum id eu elit. Nam metus odio, iaculis eu nunc et, interdum mollis arcu. Pellentesque viverra faucibus diam. In sit amet laoreet dolor, vitae fringilla quam interdum mollis arcu.",
-      views: "109k views",
-      date: "March 10, 2020",
-    },
-    {
-      image: "https://gambolthemes.net/html-items/cursus-new-demo/images/blog/img-3.jpg",
-      title: "Blog Title here",
-      category: "Donec eget arcu vel mauris lacinia vestibulum id eu elit. Nam metus odio, iaculis eu nunc et, interdum mollis arcu. Pellentesque viverra faucibus diam. In sit amet laoreet dolor, vitae fringilla quam interdum mollis arcu.",
-      views: "109k views",
-      date: "March 10, 2020",
-    },
-    {
-      image: "https://gambolthemes.net/html-items/cursus-new-demo/images/blog/img-4.jpg",
-      title: "Blog Title here",
-      category: "Donec eget arcu vel mauris lacinia vestibulum id eu elit. Nam metus odio, iaculis eu nunc et, interdum mollis arcu. Pellentesque viverra faucibus diam. In sit amet laoreet dolor, vitae fringilla quam interdum mollis arcu.",
-      views: "109k views",
-      date: "March 10, 2020",
-    },
-  ];
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   const CourseCard = ({ image, title, category, views, date }) => (
     <div className="flex border p-[10px] rounded-sm shadow-md relative">
@@ -82,20 +60,19 @@ const OurBlog = () => {
     </div>
   );
 
- 
   return (
     <div>
       <div className="relative pt-[70px] p-4 z-40 flex flex-col items-center justify-center">
         <div className="pb-2">
           <div className="flex justify-center z-50 space-x-4 text-black mt-4 relative">
-            <h3 className=" cursor-pointer"  onClick={handleAbout}>About</h3>
-            <h3 className="" onClick={handleOurBlog}>Blog</h3>
-            <h3 className="" onClick={handleCompany}>Company</h3>
-            <h3 className="" onClick={handleCareer}>Careers</h3>
-            <h3 className=""onClick={handlePress} >Press</h3>
+            <h3 className="cursor-pointer" onClick={() => handleNavigate('/about')}>About</h3>
+            <h3 className="cursor-pointer" onClick={() => handleNavigate('/blog')}>Blog</h3>
+            <h3 className="cursor-pointer" onClick={() => handleNavigate('/company')}>Company</h3>
+            <h3 className="cursor-pointer" onClick={() => handleNavigate('/career')}>Careers</h3>
+            <h3 className="cursor-pointer" onClick={() => handleNavigate('/press')}>Press</h3>
           </div>
           <div className="relative z-10 text-center text-black pt-9">
-            <h1 className="text-2xl font-bold ">What others are saying</h1>
+            <h1 className="text-2xl font-bold">What others are saying</h1>
           </div>
         </div>
         <img
@@ -105,7 +82,7 @@ const OurBlog = () => {
         />
       </div>
       <div className="p-8 grid grid-cols-3 gap-8 mt-4">
-        <div className="grid grid-cols-3 gap-8 pl-[250px]">
+        <div className="grid grid-cols-1 gap-8 pl-[250px]">
           <div className="flex border p-[10px] rounded-sm shadow-md bg-white relative w-[200px] h-[300px] flex-col items-center">
             <div className="relative">
               <input
@@ -113,6 +90,8 @@ const OurBlog = () => {
                 type="text"
                 placeholder="Enter keywords..."
                 className="border border-gray-300 p-2 rounded-md w-full pl-8"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               <button
                 type="submit"
@@ -132,7 +111,7 @@ const OurBlog = () => {
               <label htmlFor="labelCheckbox" className="text-sm mb-2 text-black flex items-center">
                 <span className="mr-20">Labels</span>
                 <div>
-                  <Checkbox id="labelCheckbox" className="mr-2" />
+                  <Checkbox id="labelCheckbox" className="mr-2" checked={showLabels} onChange={(e) => setShowLabels(e.target.checked)} />
                 </div>
               </label>
             </div>
@@ -141,7 +120,7 @@ const OurBlog = () => {
               <label htmlFor="archiveCheckbox" className="text-sm mb-2 text-black flex items-center">
                 <span className="mr-20">Archive</span>
                 <div>
-                  <Checkbox id="archiveCheckbox" className="mr-2" />
+                  <Checkbox id="archiveCheckbox" className="mr-2" checked={showArchive} onChange={(e) => setShowArchive(e.target.checked)} />
                 </div>
               </label>
             </div>
@@ -163,16 +142,22 @@ const OurBlog = () => {
         </div>
 
         <div className="col-span-2 space-y-6">
-          {courses.map((course, index) => (
-            <CourseCard
-              key={index}
-              image={course.image}
-              title={course.title}
-              category={course.category}
-              views={course.views}
-              date={course.date}
-            />
-          ))}
+          {ourblog && ourblog.length > 0 ? (
+            ourblog
+              .filter((blog) => blog.title.toLowerCase().includes(searchTerm.toLowerCase()))
+              .map((blog, index) => (
+                <CourseCard
+                  key={index}
+                  image={blog.image}
+                  title={blog.title}
+                  category={blog.category}
+                  views={blog.views}
+                  date={blog.date}
+                />
+              ))
+          ) : (
+            <div>No blogs found</div>
+          )}
         </div>
       </div>
     </div>

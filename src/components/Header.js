@@ -2,21 +2,39 @@ import React from "react";
 
 import { Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { Dropdown, Menu } from "antd";
-import { RightOutlined } from "@ant-design/icons";
+import { Dropdown, Menu, Switch } from "antd";
+import { CheckCircleOutlined, MoonOutlined, RightOutlined } from "@ant-design/icons";
 
-import Cookies from "js-cookie"; // Import Cookies library
+import Cookies from "js-cookie"; 
+
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/actions/auth.action";
 const Header = ({ handleToggleSidebar }) => {
   const navigate = useNavigate();
- 
+  const user = useSelector((state) => state.auth.user);
+  const avatar = useSelector((state) => state.auth.avatar) || "https://via.placeholder.com/150"; // Lấy avatar từ state hoặc dùng placeholder
+
   const handleShoppingCart = () => {
     navigate("/shoppingcart");
   };
   
-
-
+const handleSendFeedBack = () => {
+  navigate("/sendfeedback");
+}
+const handleHelp = () => {
+  navigate("/help");
+}
+const handleSettings = () => {
+  navigate("/setting");
+}
+const handlePaidMembership = () => {
+  navigate("/paidmembership");
+}
+const handleHome = () => {
+  navigate("/home");
+}
 const handleViewAllClick = () => {
-  const role = Cookies.get("role"); // Lấy giá trị role từ Cookies
+  const role = Cookies.get("role"); 
   if (role === "teacher") {
     navigate("/teacherNotification");
   } else if (role === "student") {
@@ -24,12 +42,30 @@ const handleViewAllClick = () => {
   }
 };
 const handleViewAllClickk = () => {
-  const role = Cookies.get("role"); // Lấy giá trị role từ Cookies
+  const role = Cookies.get("role"); 
   if (role === "teacher") {
     navigate("/teacherMess");
   } else if (role === "student") {
     navigate("/studentMessage");
   }
+};
+const handleCursusDashBoard = () => {
+  const role = Cookies.get("role"); 
+  if (role === "teacher") {
+    navigate("/dashboard");
+  } else if (role === "student") {
+    navigate("/dashboard2");
+  }
+};
+const onChange = (checked, event) => {
+  event.stopPropagation();
+  console.log(`switch to ${checked}`);
+};
+
+const dispatch = useDispatch();
+const handleLogout = () => {
+  dispatch(logout());
+  navigate("/login"); // Chuyển hướng đến trang login sau khi logout
 };
   const items = (
     <Menu>
@@ -164,7 +200,71 @@ const handleViewAllClickk = () => {
       </Menu.Item>
     </Menu>
   );
-
+  const listAvatar = (
+    <Menu>
+      <Menu.Item key="1">
+        <div className="flex gap-3 p-3 bg-white hover:bg-[#FFECEC] ">
+          <div>
+            <img
+              src="https://biografieonline.it/img/bio/r/Romelu_Lukaku.jpg"
+              width={30}
+              alt="message"
+              className="rounded-full"
+            />
+          </div>
+          <div className="flex flex-col">
+            <div className="flex items-center gap-3">
+            <h3>Zoena Singh</h3>
+            <CheckCircleOutlined className="text-blue-500 mt-[-5px] " />
+            </div>
+           
+            <div className="break-words w-64">
+            lukakumap@gmail.com
+            </div>
+            <h3 className="hover:text-[#ED2A26]">View Instructor Profile</h3>
+          </div>
+        </div>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <div className="flex  justify-between p-3 bg-white hover:bg-[#FFECEC] border-t border-b border-solid">
+      
+              <MoonOutlined className="text-xl bg-[#FFECEC]  rounded-full px-3 py-3" />
+              <h1 className="mt-3">Night mode</h1>
+              <Switch className="mt-3" defaultChecked onChange={onChange} />;
+        </div>
+      </Menu.Item>
+      <Menu.Item key="3">
+        <div className="flex gap-3 p-3 bg-white hover:bg-[#FFECEC]" onClick={handleCursusDashBoard}>
+          Cursus dashboard
+        </div>
+      </Menu.Item>
+      <Menu.Item key="4">
+        <div className="flex gap-3 p-3 bg-white hover:bg-[#FFECEC]" onClick={handlePaidMembership}>
+         Paid Memberships
+        </div>
+      </Menu.Item>
+      <Menu.Item key="5">
+        <div className="flex gap-3 p-3 bg-white hover:bg-[#FFECEC]" onClick={handleSettings}>
+         Setting
+        </div>
+      </Menu.Item>
+      <Menu.Item key="6">
+        <div className="flex gap-3 p-3 bg-white hover:bg-[#FFECEC]" onClick={handleHelp}>
+         Help
+        </div>
+      </Menu.Item>
+      <Menu.Item key="7">
+        <div className="flex gap-3 p-3 bg-white hover:bg-[#FFECEC]" onClick={handleSendFeedBack}>
+         Send Feedback
+        </div>
+      </Menu.Item>
+      <Menu.Item key="8">
+        <div className="flex gap-3 p-3 bg-white hover:bg-[#FFECEC]"  onClick={handleLogout}>
+         Sign Out
+        </div>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <div className="z-50 flex bg-white h-[65px] w-full drop-shadow-lg fixed">
       <div className="flex">
@@ -174,7 +274,7 @@ const handleViewAllClickk = () => {
             src={require("../assets/menu.png")}
           />
         </button>
-        <button>
+        <button onClick={handleHome}>
           <Image
             className="w-[147px] h-[35px] ml-6 items-center justify-center text-center mt-2"
             src={require("../assets/logo.png")}
@@ -233,11 +333,16 @@ const handleViewAllClickk = () => {
             alt="Search"
           />
         </Dropdown>
-        <img
-          className="rounded-full border w-[40px] h-[40px] object-contain mx-[10px]"
-          src={"https://biografieonline.it/img/bio/r/Romelu_Lukaku.jpg"}
-          alt="ava"
-        />
+        
+          <Dropdown overlay={listAvatar} placement="bottomRight" arrow>
+          <Image
+            className="max-w-none mt-2 mr-4 cursor-pointer rounded-full"
+            src={avatar}
+            width={24}
+            height={24}
+            alt="Avatar"
+          />
+        </Dropdown>
       </div>
     </div>
   );

@@ -5,10 +5,11 @@ import {
   deleteCertificate,
 } from "../redux/actions/certificate.action";
 import { Button, Image } from "react-bootstrap";
-import { AuditOutlined,  DownloadOutlined, NotificationOutlined, TagOutlined, ToTopOutlined } from "@ant-design/icons";
+import { AuditOutlined,  DeleteOutlined,  DownloadOutlined, EditOutlined, NotificationOutlined, TagOutlined, ToTopOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import {  faDownload, faPrint,  } from '@fortawesome/free-solid-svg-icons';
+import { Collapse, DatePicker, InputNumber, Select, Table } from "antd";
 const Course = ({ sidebar }) => {
     const [activeTab, setActiveTab] = useState("myCourses");
 const userId = useSelector((state) => state.auth.id);
@@ -209,8 +210,245 @@ const userId = useSelector((state) => state.auth.id);
               </table>
             )
            
+        const UpcomingCourses =()=>(
+          <div className={`mt-24 ml-4 ${sidebar ? "w-[1400px]" : "w-[1600px]"}`}>
+          <div className="bg-[#ffecec] flex items-center h-[50px] border-1 border-[#f7f7f7]">
+            <h1 className="ml-10">Item No.</h1>
+            <h1 className="ml-20">Title</h1>
+            <h1 className={`${sidebar ? "ml-[400px]" : "ml-[500px]"}`}>Marks</h1>
+            <h1 className="ml-24">Out Of</h1>
+            <h1 className="ml-32">Upload Date</h1>
+            <h1 className="ml-32">Certificate</h1>
+            <h1 className="ml-24">Controls</h1>
+          </div>
+          {certificates.map((certificate, index) => (
+            <div
+              key={index}
+              className="bg-white flex items-center relative h-[60px] border-[1px] border-[#f7f7f7] mt-[0.5px]"
+            >
+              <h1 className="ml-10">{index + 1}</h1>
+              <h1 className="ml-[140px]">{certificate.title}</h1>
+              <h1
+                className={`absolute ${
+                  sidebar ? "left-[630px]" : "left-[730px]"
+                }`}
+              >
+                {certificate.marks}
+              </h1>
+              <h1
+                className={`absolute ${
+                  sidebar ? "left-[766px]" : "left-[865px]"
+                }`}
+              >
+                {certificate.outOf}
+              </h1>
+              <h1
+                className={`absolute ${
+                  sidebar ? "left-[935px]" : "left-[1035px]"
+                }`}
+              >
+                {certificate.uploadDate}
+              </h1>
+              <Button
+                className={`absolute text-blue-600 cursor-pointer ${
+                  sidebar ? "left-[1170px]" : "left-[1270px]"
+                }`}
+                onClick={() => handleView(certificate)}
+              >
+                View
+              </Button>
+              <Button
+                className={`w-[20px] h-[20px] absolute ${
+                  sidebar ? "left-[1340px]" : "left-[1440px]"
+                }`}
+                onClick={() => handleDelete(certificate.itemNo)}
+              >
+                <Image src={require("../assets/delete.png")} />
+              </Button>
+            </div>
+          ))}
+          {showModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div
+              ref={modalRef}
+              className="bg-white p-5 rounded-lg shadow-lg max-w-lg w-full"
+            >
+              <h2 className="text-2xl font-semibold mb-4">Certificate Details</h2>
+              {selectedCertificate && (
+                <div>
+                  <p>
+                    <strong>Item No:</strong> {selectedCertificate.itemNo}
+                  </p>
+                  <p>
+                    <strong>Title:</strong> {selectedCertificate.title}
+                  </p>
+                  <p>
+                    <strong>Marks:</strong> {selectedCertificate.marks}
+                  </p>
+                  <p>
+                    <strong>Out Of:</strong> {selectedCertificate.outOf}
+                  </p>
+                  <p>
+                    <strong>Upload Date:</strong> {selectedCertificate.uploadDate}
+                  </p>
+                </div>
+              )}
+              <button
+                className="mt-4 px-4 py-2 bg-[#ED2A26] text-white rounded hover:bg-black"
+                onClick={handleClose}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )} 
+        </div> 
+        )
+        const handleChange = (value) => {
+          console.log(`selected ${value}`);
+        };
+        const [value, setValue] = useState('0');
+        const onHandleChange = (date, dateString) => {
+          console.log(date, dateString);
+        };
+        const Text =()=>(
+          <div className="flex flex-col w-[1600px] gap-5 ">
+            <div className="flex gap-5">
+            <div  className="w-[450px] ">
+            <h1>Course*</h1>
+            <Select 
+             
+      placeholder="Select Course"
+      style={{
+        width: 450,
+        height: 40,
+      }}
+      onChange={handleChange}
+      options={[
+        {
+          value: 'jack',
+          label: 'Jack',
+        },
+        {
+          value: 'lucy',
+          label: 'Lucy',
+        },
+        {
+          value: 'Yiminghe',
+          label: 'yiminghe',
+        },
+        {
+          value: 'disabled',
+          label: 'Disabled',
+          
+        },
+      ]}
+    />
+            </div>
+            <div className="w-[450px]">
+              <h1>Discount Amount</h1>
+              <InputNumber min={1} max={99} value={value} onChange={setValue} style={{
+        width: 450, height:40,
+      }}  />
+            </div>
+            </div>
+            <div className="flex gap-5">
+            <div className="w-[450px]">
+              <h1>Start Date</h1>
+              <DatePicker placeholder="dd/mm/yyyy" onChange={onHandleChange} style={{
+        width: 450, height:40,
+      }} />
+   
+            </div>
+            <div className="w-[450px]">
+              <h1>End Date</h1>
+              <DatePicker placeholder="dd/mm/yyyy" onChange={onHandleChange} style={{
+        width: 450,  height:40,
+      }} />
+   
+            </div>
+            </div>
+            <button className="bg-[#ED2A26] hover:bg-black text-white w-[450px] p-2 font-medium rounded-full">Save Changes</button>
+          </div>
+          
+        )
+const items = [
+  {
+    key: '1',
+    label: <h1 className="text-lg">New Discounts</h1>,
+    children: <Text/>,
+  },
+  
+];
+        const onChange = (key) => {
+          console.log(key);
+        };
+        const dataSource = [
+          {
+            ItemNo: '01',
+            Course: 'Course Title Here',
+            StartDate: '02 November 2019',
+            EndDate: '19 November 2019',
+            Discount:'20%',
+            Status:<p className="text-red-500 font-medium">Active</p>,
+            Actions: <div className="flex gap-5"><EditOutlined /><DeleteOutlined /></div>
+          },
+          
+        ];
         
-      
+        const columns = [
+          {
+            title: 'Item No.',
+            dataIndex: 'ItemNo',
+            key: 'ItemNo',
+          },
+          {
+            title: 'Course',
+            dataIndex: 'Course',
+            key: 'Course',
+          },
+          {
+            title: 'Start Date',
+            dataIndex: 'StartDate',
+            key: 'StartDate',
+          },
+          {
+            title: 'End Date',
+            dataIndex: 'EndDate',
+            key: 'EndDate',
+          },
+          {
+            title: 'Discount',
+            dataIndex: 'Discount',
+            key: 'Discount',
+          },
+          {
+            title: 'Status',
+            dataIndex: 'Status',
+            key: 'Status',
+          },
+          {
+            title: 'Actions',
+            dataIndex: 'Actions',
+            key: 'Actions',
+          },
+        ];
+        const Discounts =()=>(
+          
+          <div className="w-[1600px] ">
+            <Collapse defaultActiveKey={[]} onChange={onChange} items={items} />
+            <Table dataSource={dataSource} columns={columns} />;
+          </div>
+        )
+       
+      const Promotions =()=> (
+        <div className="flex flex-col justify-center items-center gap-10 p-10">
+          <img src="https://gambolthemes.net/html-items/cursus-new-demo/images/dashboard/promotion.svg" alt="img" width={200} className="mt-20"/>
+          <h1 className="text-xl">Baby promotion plan is activated!</h1>
+          <div className="font-extralight">By activating promotion plans you can improve course views and sales.</div>
+          <button className="bg-[#ED2A26] hover:bg-black p-2 px-5 rounded-full text-white font-medium">Change New Plan</button>
+        </div>
+      )
          
       
          
@@ -244,7 +482,7 @@ const userId = useSelector((state) => state.auth.id);
         </Button>
       </div>
       <div className=" pt-5 px-5  border w-[100%] h-[100%]">
-            <div className="bg-[#F3F3F3] border ">
+            <div className="bg-[#FFFFFF] border ">
               <button
                 className={`text-black  font-medium text-[14px] px-3 py-3 w-[20%]  ${
                   activeTab === "myCourses" ? "bg-red-600 text-white" : ""
@@ -263,7 +501,7 @@ const userId = useSelector((state) => state.auth.id);
               </button>
               <button
                 className={`text-black font-medium text-[14px] px-3 py-3 w-[20%]  ${
-                  activeTab === "Paid" ? "bg-red-600 text-white" : ""
+                  activeTab === "upcoming" ? "bg-red-600 text-white" : ""
                 }`}
                 onClick={() => setActiveTab("upcoming")}
               >
@@ -271,7 +509,7 @@ const userId = useSelector((state) => state.auth.id);
               </button>
               <button
                 className={`text-black font-medium text-[14px] px-3 py-3 w-[20%]  ${
-                  activeTab === "Paid" ? "bg-red-600 text-white" : ""
+                  activeTab === "discounts" ? "bg-red-600 text-white" : ""
                 }`}
                 onClick={() => setActiveTab("discounts")}
               >
@@ -279,7 +517,7 @@ const userId = useSelector((state) => state.auth.id);
               </button>
               <button
                 className={`text-black font-medium text-[14px] px-3 py-3 w-[20%]  ${
-                  activeTab === "Paid" ? "bg-red-600 text-white" : ""
+                  activeTab === "promotions" ? "bg-red-600 text-white" : ""
                 }`}
                 onClick={() => setActiveTab("promotions")}
               >
@@ -289,6 +527,9 @@ const userId = useSelector((state) => state.auth.id);
             <div className={`mt-2 bg-white ${sidebar ? "" : "ml-[100px]"}`}>
               {activeTab === "myCourses" && <MyCourse/>}
               {activeTab === "myPurchases" && <MyPurchases/>}
+              {activeTab === "upcoming" && <UpcomingCourses/>}
+              {activeTab === "discounts" && <Discounts/>}
+              {activeTab === "promotions" && <Promotions/>}
               
             </div>
            

@@ -234,6 +234,9 @@ const Sidebar = ({ sidebar }) => {
   const handleTestResult = () => {
     navigate("/testresult");
   };
+  const handleBlogSingle = () => {
+    navigate('/blogsingle');
+  };
 
   const role = useSelector((state) => state.auth.role);
   const handleLogout = () => {
@@ -638,7 +641,7 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="28" onClick={handleCourseDetailView}>
                   Course Detail View
                 </Menu.Item>
-                <Menu.Item key="23" onClick={handleAbout}>
+                <Menu.Item key="23" onClick={handleCheckout}>
                   Checkout
                 </Menu.Item>
                 <Menu.Item key="23" onClick={handleInvoice}>
@@ -653,7 +656,7 @@ const Sidebar = ({ sidebar }) => {
                 <Menu.Item key="33" onClick={handleOurBlog}>
                   Our Blog
                 </Menu.Item>
-                <Menu.Item key="34">Blog Detail View</Menu.Item>
+                <Menu.Item key="34" onClick={handleBlogSingle}>Blog Detail View</Menu.Item>
                 <Menu.Item key="35" onClick={handleCompany}>
                   Company Details
                 </Menu.Item>

@@ -26,8 +26,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Dropdown, Row, Space } from "antd";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getAllCourses } from "../redux/actions/course.action";
+import { differenceInDays, differenceInHours, differenceInMinutes, formatDistanceToNow, parse } from "date-fns";
+import { Button, Image } from "react-bootstrap";
 
 const HomeScreen = () => {
   const items = [
@@ -81,27 +85,8 @@ const HomeScreen = () => {
       ),
     },
   ];
-  const avatars = [
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-1.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-2.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-9.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-3.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-4.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-5.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-6.jpg",
-    "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-7.jpg",
-  ];
-  const keywords = [
-    "John Doe",
-    "Jassica",
-    "Edututs",
-    "Joginder Singh",
-    "Zoena",
-    "Albert Dua",
-    "Ridhima",
-    "Amritpal",
-    "Jimmy",
-  ];
+ 
+  
   const popularInstructor = [
     {
       img: "https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-1.jpg",
@@ -300,114 +285,7 @@ const HomeScreen = () => {
       published: "2 days ago",
     },
   ];
-  const NewestCourse = [
-    {
-      img: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-14.jpg",
-      title: "Complete Python BootCamp: Go from zero to hero in python 3",
-      instructor: "John Doe",
-      rating: 4.5,
-      type: "Development | CSS",
-      price: "$10",
-
-      bestseller: true,
-      duration: "2 hours",
-      views: "12,345",
-      published: "2 days ago",
-    },
-    {
-      img: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-11.jpg",
-      title: "The complete JavaScript Course 2020: Build Real Projects!",
-      instructor: "Jassica",
-      rating: 4.0,
-      type: "Development | JavaScript",
-
-      price: "$15",
-
-      bestseller: false,
-      duration: "3 hours",
-      views: "8,765",
-      published: "1 week ago",
-    },
-    {
-      img: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-18.jpg",
-      title: "The Complete Front-End Web Development Course!",
-      instructor: "Joginder Singh",
-      rating: 4.8,
-      type: "Development | Web Development",
-      price: "$30",
-
-      bestseller: true,
-      duration: "1.5 hours",
-      views: "5,432",
-      published: "3 days ago",
-    },
-    {
-      img: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-4.jpg",
-      title: "Course Title 4",
-      instructor: "Joginder Singh",
-      rating: 4.6,
-      reviews: 180,
-      price: "$25",
-
-      bestseller: false,
-      duration: "2.5 hours",
-      views: "10,987",
-      published: "2 weeks ago",
-    },
-    {
-      img: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-5.jpg",
-      title: "Course Title 5",
-      instructor: "Zoena",
-      rating: 4.3,
-      reviews: 110,
-      price: "$20",
-
-      bestseller: true,
-      duration: "4 hours",
-      views: "15,678",
-      published: "1 month ago",
-    },
-    {
-      img: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-6.jpg",
-      title: "Course Title 6",
-      instructor: "Albert Dua",
-      rating: 4.7,
-      reviews: 140,
-      price: "$35",
-
-      bestseller: false,
-      duration: "1 hour",
-      views: "4,321",
-      published: "5 days ago",
-    },
-    {
-      img: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-7.jpg",
-      title: "Course Title 7",
-      instructor: "Ridhima",
-      rating: 4.2,
-      reviews: 90,
-      price: "$40",
-
-      bestseller: false,
-      duration: "5 hours",
-      views: "7,890",
-      published: "3 weeks ago",
-    },
-    {
-      img: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-8.jpg",
-      title: "Course Title 8",
-      instructor: "Amritpal",
-      rating: 4.1,
-      reviews: 80,
-      price: "$50",
-
-      bestseller: true,
-      duration: "2 hours",
-      views: "6,543",
-      published: "2 days ago",
-    },
-  ];
-
+  
   const [startIndex, setStartIndex] = useState(0);
   const visibleAvatars = 6;
   const avatarListRef = useRef(null);
@@ -419,7 +297,7 @@ const HomeScreen = () => {
   };
 
   const handleNextClick = () => {
-    if (startIndex < avatars.length - visibleAvatars) {
+    if (startIndex < instructors.length - visibleAvatars) {
       setStartIndex(startIndex + 1);
     }
   };
@@ -435,7 +313,7 @@ const HomeScreen = () => {
   };
 
   const handleNextClickk = () => {
-    if (startIndexx < featuresCourse.length - visiblefeatureCourses) {
+    if (startIndexx < recentCourses.length - visiblefeatureCourses) {
       setStartIndexx(startIndexx + 1);
     }
   };
@@ -459,7 +337,7 @@ const HomeScreen = () => {
   };
 
   const handleNextClickkk = () => {
-    if (startIndexxx < NewestCourse.length - visibleNewestCourses) {
+    if (startIndexxx < newestCourses.length - visibleNewestCourses) {
       setStartIndexxx(startIndexxx + 1);
     }
   };
@@ -503,7 +381,52 @@ const HomeScreen = () => {
       setStartIndexxxxx(startIndexxxxx + 1);
     }
   };
+  const dispatch = useDispatch();
+  const { instructors } = useSelector((state) => state.instructors);
 
+  const recentCourses = useSelector(state => state.enrolledCourses.recentCourses);
+  const newestCourses = useSelector(state => state.enrolledCourses.newestCourses);
+  const loading = useSelector(state => state.enrolledCourses.loading);
+  const error = useSelector(state => state.enrolledCourses.error);
+
+  useEffect(() => {
+    dispatch(getAllCourses());
+  }, [dispatch]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+
+
+  const timeAgo = (dateString) => {
+    try {
+      const date = parse(dateString, 'dd/MM/yyyy', new Date());
+  
+      const now = new Date();
+      const minutesDifference = differenceInMinutes(now, date);
+  
+      if (minutesDifference < 1) {
+        return 'Just now';
+      } else if (minutesDifference < 60) {
+        return `${minutesDifference} min ago`;
+      }
+  
+      const hoursDifference = differenceInHours(now, date);
+      if (hoursDifference < 24) {
+        return `${hoursDifference} hours ago`;
+      }
+  
+      const daysDifference = differenceInDays(now, date);
+      if (daysDifference < 7) {
+        return `${daysDifference} days ago`;
+      }
+  
+      return formatDistanceToNow(date, { addSuffix: true });
+    } catch (error) {
+      console.error('Invalid date format or value:', dateString);
+      return ''; // Trả về chuỗi rỗng hoặc giá trị mặc định khác khi có lỗi
+    }
+  };
   return (
     <div className="bg-[#F7F7F7]">
       <div className="grid grid-cols-7 bg-[#F7F7F7] gap-[200px]">
@@ -514,6 +437,9 @@ const HomeScreen = () => {
               <span className=" text-sm">See all</span>
             </Link>
           </div>
+            {/* --------------------------------------------- */}
+          {/* --------------------------------------------- */}
+          {/* --------------------------------------------- */}
           <div className="mt-4 py-2 px-0 overflow-hidden w-[1000px] relative">
             <div className="flex items-center">
               <button
@@ -528,15 +454,15 @@ const HomeScreen = () => {
                 style={{ transform: `translateX(-${startIndex * 144}px)` }}
                 ref={avatarListRef}
               >
-                {keywords.map((value, i) => (
+                {instructors.map((value, i) => (
                   <div key={i} className="bg-[#DDD8DD] rounded w-[144px]">
                     <div className="flex items-center flex-col justify-center bg-[#E3DFE3] mt-3 mb-3 ml-3 mr-3 h-[155px] drop-shadow-md">
                       <img
-                        src={avatars[i]}
+                        src={value.avatar}
                         alt={value}
                         className="w-20 h-20 rounded-full border-white"
                       />
-                      <h3 className="text-xs">{value}</h3>
+                      <h3 className="text-xs">{value.username}</h3>
                       <span className="text-xs">
                         <span>live </span>
                         <span className="text-red-600">•</span>
@@ -547,7 +473,7 @@ const HomeScreen = () => {
               </div>
               <button
                 onClick={handleNextClick}
-                disabled={startIndex >= avatars.length - visibleAvatars}
+                disabled={startIndex >= instructors.length - visibleAvatars}
                 className="group bg-white hover:bg-red-600 absolute right-[20px] z-50 cursor-pointer px-2 py-0 rounded-[5px]"
               >
                 <h1 className="group-hover:text-white">{">"}</h1>
@@ -578,7 +504,7 @@ const HomeScreen = () => {
                 style={{ transform: `translateX(-${startIndexx * 296}px)` }}
                 ref={courseListRef}
               >
-                {featuresCourse.map((course, i) => (
+                {recentCourses.map((course, i) => (
                   <div
                     key={i}
                     className="bg-white shadow-md rounded w-[296px]"
@@ -587,7 +513,7 @@ const HomeScreen = () => {
                   >
                     <div className="relative">
                       <img
-                        src={course.img}
+                        src={course.thumbnail}
                         alt={course.title}
                         className="w-full h-[160px] object-cover rounded-t"
                       />
@@ -597,16 +523,33 @@ const HomeScreen = () => {
                         </div>
                       )}
                       <div className="absolute top-2 left-2 bg-yellow-400 text-white text-sm font-medium   px-2 py-1 rounded ">
-                        <StarOutlined /> {course.rating}
+                        <StarOutlined /> {course.rate}
                       </div>
                       <div className="absolute bottom-2 right-2 bg-[#4E4E4E]  text-white text-sm font-medium   px-2 py-1 rounded">
-                        {course.duration}
+                        {course.hours}
                       </div>
+                      <div
+                  className="absolute  top-0 shadow-inset-bottom w-[296px] h-[160px]"
+                >
+                  {hoveredCourse === i && (
+                    <div className=" inset-0 flex items-center justify-center mt-10   ">
+                      <Button className="group relative" variant="light">
+                        <div className="border-2 border-white p-4 rounded-full group-hover:bg-black group-hover:opacity-30">
+                          <Image
+                            className="w-[30px] inset-0 h-[35px] ml-2 opacity-100 z-50 "
+                            src={require("../assets/pause.png")}
+                          />
+                        </div>
+                      </Button>
                     </div>
+                  )}
+                </div>
+                    </div>
+                   
                     <div className="p-4">
                       <div className="text-sm text-gray-500 mt-2 flex justify-between items-center">
                         <span>
-                          {course.views} views • {course.published}{" "}
+                          {course.views} views • {timeAgo(course.date)}{" "}
                         </span>
 
                         <Dropdown
@@ -624,7 +567,7 @@ const HomeScreen = () => {
                       <h3 className="text-base font-semibold">
                         {course.title}
                       </h3>
-                      <span className="text-sm">{course.type}</span>
+                      <span className="text-sm">{course.language}</span>
                       <div className="flex justify-between items-center mt-3">
                         <div className="flex gap-2">
                           <span className="text-sm">By</span>
@@ -643,11 +586,12 @@ const HomeScreen = () => {
                     </div>
                   </div>
                 ))}
+                
               </div>
               <button
                 onClick={handleNextClickk}
                 disabled={
-                  startIndexx >= featuresCourse.length - visiblefeatureCourses
+                  startIndexx >= recentCourses.length - visiblefeatureCourses
                 }
                 className="group bg-white hover:bg-red-600 absolute right-[0px] z-50 cursor-pointer px-2 py-0 rounded-[5px]  top-36"
               >
@@ -678,7 +622,7 @@ const HomeScreen = () => {
                 style={{ transform: `translateX(-${startIndexxx * 296}px)` }}
                 ref={NewcourseListRef}
               >
-                {NewestCourse.map((course, k) => (
+                {newestCourses.map((course, k) => (
                   <div
                     key={k}
                     className="bg-white shadow-md rounded w-[296px]"
@@ -687,7 +631,7 @@ const HomeScreen = () => {
                   >
                     <div className="relative">
                       <img
-                        src={course.img}
+                        src={course.thumbnail}
                         alt={course.title}
                         className="w-full h-[160px] object-cover rounded-t"
                       />
@@ -697,16 +641,32 @@ const HomeScreen = () => {
                         </div>
                       )}
                       <div className="absolute top-2 left-2 bg-yellow-400 text-white text-sm font-medium   px-2 py-1 rounded ">
-                        <StarOutlined /> {course.rating}
+                        <StarOutlined /> {course.rate}
                       </div>
                       <div className="absolute bottom-2 right-2 bg-[#4E4E4E]  text-white text-sm font-medium   px-2 py-1 rounded">
-                        {course.duration}
+                        {course.hours}
                       </div>
+                      <div
+                  className="absolute  top-0 shadow-inset-bottom w-[296px] h-[160px]"
+                >
+                  {hoveredCoursee === k && (
+                    <div className=" inset-0 flex items-center justify-center mt-10   ">
+                      <Button className="group relative" variant="light">
+                        <div className="border-2 border-white p-4 rounded-full group-hover:bg-black group-hover:opacity-30">
+                          <Image
+                            className="w-[30px] inset-0 h-[35px] ml-2 opacity-100 z-50 "
+                            src={require("../assets/pause.png")}
+                          />
+                        </div>
+                      </Button>
+                    </div>
+                  )}
+                </div>
                     </div>
                     <div className="p-4">
                       <div className="text-sm text-gray-500 mt-2 flex justify-between items-center">
                         <span>
-                          {course.views} views • {course.published}{" "}
+                          {course.views} views • {timeAgo(course.date)}{" "}
                         </span>
 
                         <Dropdown
@@ -724,7 +684,7 @@ const HomeScreen = () => {
                       <h3 className="text-base font-semibold">
                         {course.title}
                       </h3>
-                      <span className="text-sm">{course.type}</span>
+                      <span className="text-sm">{course.language}</span>
                       <div className="flex justify-between items-center mt-3">
                         <div className="flex gap-2">
                           <span className="text-sm">By</span>
@@ -747,7 +707,7 @@ const HomeScreen = () => {
               <button
                 onClick={handleNextClickkk}
                 disabled={
-                  startIndexxx >= NewestCourse.length - visibleNewestCourses
+                  startIndexxx >= newestCourses.length - visibleNewestCourses
                 }
                 className="group bg-white hover:bg-red-600 absolute right-[0px] z-50 cursor-pointer px-2 py-0 rounded-[5px]  top-36"
               >

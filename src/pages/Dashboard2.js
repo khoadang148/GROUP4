@@ -4,35 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllNews } from "../redux/actions/news.action";
 
 const Dashboard2 = ({ sidebar }) => {
-  // const news = [
-  //   {
-  //     image:
-  //       "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/news-1.jpg",
-  //     title: "COVID-19 Updates & Resources",
-  //     description:
-  //       "See the latest updates to coronavirus-related content, including changes to monetization, and access new Creator support resources",
-  //   },
-  //   {
-  //     image:
-  //       "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/news-2.jpg",
-  //     title: "Watch: Edututs+ interview Mr. Joginder",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac eleifend ante. Duis ac pulvinar felis. Sed a nibh ligula. Mauris eget tortor id mauris tristique accumsan.",
-  //   },
-  //   {
-  //     image:
-  //       "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/news-1.jpg",
-  //     title: "COVID-19 Updates - April 7",
-  //     description:
-  //       "Ut porttitor mi vel orci cursus, nec elementum neque malesuada. Phasellus imperdiet quam gravida pharetra aliquet. Integer vel ligula eget nisl dignissim hendrerit.",
-  //   },
-  // ];
-  const {news, loading, error} = useSelector((state) => state.news)
+  const { news, loading, error } = useSelector((state) => state.news);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllNews())
-  }, [dispatch])
+    dispatch(getAllNews());
+  }, [dispatch]);
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
+  const [visibleNews, setVisibleNews] = useState(3);
+  const handleLoadMore = () => {
+    setVisibleNews((prev) => prev + 2);
+  };
 
   const handleNext = () => {
     setCurrentNewsIndex((prevIndex) => (prevIndex + 1) % news.length);
@@ -163,13 +144,18 @@ const Dashboard2 = ({ sidebar }) => {
           <div className="text-xl font-semibold mb-4">
             What's new in Cursus?
           </div>
-          {news.map((item, index) => (
+          {news.slice(0, visibleNews).map((item) => (
             <div className="mt-[1px] w-[500px] h-[50px] bg-white">
               <h1 className="items-center pt-4 pl-4 font-light text-sm">
                 {item.title}
               </h1>
             </div>
           ))}
+          {news.length > visibleNews && (
+            <Button className="mt-6 ml-[430px]" onClick={handleLoadMore}>
+              See more
+            </Button>
+          )}
         </div>
       </div>
     </div>

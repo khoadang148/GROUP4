@@ -688,7 +688,7 @@ const Sidebar = ({ sidebar }) => {
               style={{ color: "black" }}
             >
               {instructors.slice(0, visibleInstructors).map((instructor) => (
-                <Menu.Item key={instructor.id}>
+                <Menu.Item key={instructor.id + 1}>
                   <Link to={`/instructor/${instructor.id}`}>
                     {" "}
                     <div className="flex items-center">
@@ -759,26 +759,44 @@ const Sidebar = ({ sidebar }) => {
                 <a className="px-1 hover:text-red-500" onClick={handlePress}>
                   Press
                 </a>
-                <a className="px-1 hover:text-red-500" onClick={handleContactus}>
+                <a
+                  className="px-1 hover:text-red-500"
+                  onClick={handleContactus}
+                >
                   Contact Us
                 </a>
               </div>
               <div className="font-medium">
-              <a className="px-1 hover:text-red-500" onClick={handleComingSoon}>
-              Advertise 
+                <a
+                  className="px-1 hover:text-red-500"
+                  onClick={handleComingSoon}
+                >
+                  Advertise
                 </a>
-                <a className="px-1 hover:text-red-500" onClick={handleComingSoon}>
-              Developer
+                <a
+                  className="px-1 hover:text-red-500"
+                  onClick={handleComingSoon}
+                >
+                  Developer
                 </a>
-                <a className="px-1 hover:text-red-500" onClick={handleCopyright}>
+                <a
+                  className="px-1 hover:text-red-500"
+                  onClick={handleCopyright}
+                >
                   Copyright
                 </a>
               </div>
               <div className="font-medium">
-                <a className="px-1 hover:text-red-500" onClick={handleCopyright}>
+                <a
+                  className="px-1 hover:text-red-500"
+                  onClick={handleCopyright}
+                >
                   Privacy Policy
                 </a>{" "}
-                <a className="px-1 hover:text-red-500" onClick={handleCopyright}>
+                <a
+                  className="px-1 hover:text-red-500"
+                  onClick={handleCopyright}
+                >
                   Terms
                 </a>
               </div>

@@ -4,7 +4,23 @@ import React, { useState } from "react";
 import { Button, Image } from "react-bootstrap";
 
 const DashBoard = ({ sidebar }) => {
-  const latestcourse = [];
+  const latestcourse = [
+    {
+      image: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-1.jpg",
+      title: "Complete Python Bootcamp: Go from zero to hero in Python 3",
+      time: "First 2 days 22 hours"
+    },
+    {
+      image: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-2.jpg",
+      title: "The Complete JavaScript Course 2020: Build Real Projects!",
+       time: "First 2 days 22 hours  "
+    },
+    {
+      image: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-3.jpg",
+      title: "Beginning C++ Programming - From Beginner to Beyond",
+       time: "First 2 days 22 hours"
+    },
+  ];
   const news2 = [
     {
       image:
@@ -29,14 +45,23 @@ const DashBoard = ({ sidebar }) => {
     },
   ];
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
+  const [currentNewsIndexx, setCurrentNewsIndexx] = useState(0);
 
   const handleNext = () => {
     setCurrentNewsIndex((prevIndex) => (prevIndex + 1) % news2.length);
+  };
+  const handleNextt = () => {
+    setCurrentNewsIndexx((prevIndex) => (prevIndex + 1) % latestcourse.length);
   };
 
   const handlePrev = () => {
     setCurrentNewsIndex((prevIndex) =>
       prevIndex === 0 ? news2.length - 1 : prevIndex - 1
+    );
+  };
+  const handlePrevv = () => {
+    setCurrentNewsIndexx((prevIndex) =>
+      prevIndex === 0 ? latestcourse.length - 1 : prevIndex - 1
     );
   };
 
@@ -127,31 +152,31 @@ const DashBoard = ({ sidebar }) => {
               >
                 <Button
                   className={`px-2 py-1 bg-white text-center rounded ${
-                    currentNewsIndex === 0
+                    currentNewsIndexx === 0
                       ? "opacity-50 cursor-not-allowed"
                       : ""
                   }`}
-                  onClick={handlePrev}
-                  disabled={currentNewsIndex === 0}
+                  onClick={handlePrevv}
+                  disabled={currentNewsIndexx === 0}
                 >
                   &lt;
                 </Button>
                 <Button
                   className={`px-2 py-1 bg-white text-center rounded ${
-                    currentNewsIndex === news2.length - 1
+                    currentNewsIndexx === latestcourse.length - 1
                       ? "opacity-50 cursor-not-allowed"
                       : ""
                   }`}
-                  onClick={handleNext}
-                  disabled={currentNewsIndex === news2.length - 1}
+                  onClick={handleNextt}
+                  disabled={currentNewsIndexx === latestcourse.length - 1}
                 >
                   &gt;
                 </Button>
               </div>
             </div>
-            {news2.map(
+            {latestcourse.map(
               (item, index) =>
-                index === currentNewsIndex && (
+                index === currentNewsIndexx && (
                   <div
                     key={index}
                     className={`bg-white ${
@@ -172,10 +197,11 @@ const DashBoard = ({ sidebar }) => {
                         src={item.image}
                       />
                     </div>
+                    <span>{item.time}</span>
                     <h1 className="mt-10 ml-3 text-xl">{item.title}</h1>
-                    <div className="mt-4 ml-3 text-md">{item.description}</div>
+                    {/* <div className="mt-4 ml-3 text-md">{item.description}</div> */}
                     <div className="mt-10 ml-3 text-xs font-semibold">
-                      WATCH NOW
+                     
                     </div>
                   </div>
                 )

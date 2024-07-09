@@ -836,24 +836,28 @@ const HomeScreen = () => {
                         <img
                           src="https://cdn.pixabay.com/photo/2015/05/17/10/51/facebook-770688_960_720.png"
                           className="w-[40px] rounded-lg "
+                          alt=""
                         />
                       </div>
                       <div>
                         <img
                           src="https://cdn.pixabay.com/photo/2017/08/23/11/30/twitter-2672572_960_720.jpg"
                           className="w-[40px] rounded-lg"
+                          alt=""
                         />
                       </div>
                       <div>
                         <img
                           src="https://i1.wp.com/globalinfusion.org/wp-content/uploads/2018/01/ig-logo-email.png?ssl=1"
                           className="w-[40px] rounded-lg"
+                          alt=""
                         />
                       </div>
                       <div>
                         <img
                           src="https://1.bp.blogspot.com/-hY5-pNrOcKw/XeI_00cpCgI/AAAAAAAAF4A/J7jS49V8kNozycy0PgY6wfc7SUU9gulTgCLcBGAsYHQ/s1600/Youtube-Icon-square-2340x2340.png"
                           className="w-[40px] rounded-lg"
+                          alt=""
                         />
                       </div>
                     </div>
@@ -883,10 +887,11 @@ const HomeScreen = () => {
         {/* COT BEN PHAI */}
         {/* ////////////////////////// */}
         <div className="col-span-2 mt-20">
-          <div className="bg-[#FFFFFF] mt-9 w-[250px] ml-[-50px] flex flex-col items-center justify-center rounded-sm">
+          <div className="bg-[#FFFFFF] mt-9 w-[250px] ml-[-50px] flex flex-col items-center justify-center rounded-sm px-10 py-5 border border-solid">
             <img
               src="https://gambolthemes.net/html-items/cursus-new-demo/images/left-imgs/img-3.jpg"
               className="rounded-full w-16 mt-7"
+              alt=""
             />
             <div className="flex mt-5">
               <h3>Joginder Singh</h3>
@@ -900,24 +905,28 @@ const HomeScreen = () => {
                 <img
                   src="https://cdn.pixabay.com/photo/2015/05/17/10/51/facebook-770688_960_720.png"
                   className="w-[40px] rounded-lg"
+                  alt=""
                 />
               </div>
               <div>
                 <img
                   src="https://cdn.pixabay.com/photo/2017/08/23/11/30/twitter-2672572_960_720.jpg"
                   className="w-[40px] rounded-lg"
+                  alt=""
                 />
               </div>
               <div>
                 <img
                   src="https://i1.wp.com/globalinfusion.org/wp-content/uploads/2018/01/ig-logo-email.png?ssl=1"
                   className="w-[40px] rounded-lg"
+                  alt=""
                 />
               </div>
               <div>
                 <img
                   src="https://1.bp.blogspot.com/-hY5-pNrOcKw/XeI_00cpCgI/AAAAAAAAF4A/J7jS49V8kNozycy0PgY6wfc7SUU9gulTgCLcBGAsYHQ/s1600/Youtube-Icon-square-2340x2340.png"
                   className="w-[40px] rounded-lg"
+                  alt=""
                 />
               </div>
             </div>
@@ -930,9 +939,9 @@ const HomeScreen = () => {
           {/* //////////////////////////////// */}
           {/* //////////////////////////////// */}
           {/* //////////////////////////////// */}
-          <div className="bg-[#FFFFFF] mt-6 w-[250px] ml-[-50px] rounded-sm">
-            <h3 className="text-base ml-5 pt-3 pb-3">Live Streaming</h3>
-            <hr className="text-xl"></hr>
+          <div className="bg-[#FFFFFF] mt-6 w-[250px] ml-[-50px] rounded-sm  py-5 border border-solid">
+            <h3 className="text-base ml-5">Live Streaming</h3>
+            <hr/>
             <div className="flex flex-col items-center justify-center pb-3">
               <FontAwesomeIcon
                 icon={faHeadset}
@@ -944,7 +953,7 @@ const HomeScreen = () => {
               <button className="bg-[#FF0000] hover:bg-[#333333] rounded-sm text-white mt-6 px-2 py-2 text-sm w-24">
                 Get Started
               </button>
-              <span className="text-sm mt-6 ">
+              <span className="text-sm mt-6  ">
                 Info : This feature only for 'Instructors'.
               </span>
             </div>
@@ -952,10 +961,11 @@ const HomeScreen = () => {
           {/* //////////////////////////////// */}
           {/* //////////////////////////////// */}
           {/* //////////////////////////////// */}
-          <div className="w-[250px] ml-[-50px] mt-6 relative rounded-sm">
+          <div className="w-[250px] ml-[-50px] mt-6 relative rounded-sm ">
             <img
               src="https://c4.wallpaperflare.com/wallpaper/135/692/935/astronaut-space-black-background-artwork-hd-wallpaper-thumb.jpg"
               className="w-[250px] object-cover rounded-sm"
+              alt=""
             />
             <h3 className="top-3 left-3 absolute text-white text-sm">
               Get personalized recommendations
@@ -1017,7 +1027,7 @@ const HomeScreen = () => {
           {/* //////////////////////////////// */}
           {/* //////////////////////////////// */}
           {/* //////////////////////////////// */}
-          <div className="bg-[#FFFFFF] mt-6 w-[250px] ml-[-50px] rounded-sm">
+          <div className="bg-[#FFFFFF] mt-6 w-[250px] ml-[-50px] rounded-sm px-10 py-5">
             <div className="flex flex-col items-center justify-center pb-3">
               <h3 className="pt-4">Become an Instructor</h3>
               <span className="text-xs">

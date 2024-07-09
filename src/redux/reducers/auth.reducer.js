@@ -8,6 +8,7 @@ import {
   SET_ROLE,
   SET_USER,
   SET_ID,
+
 } from "../actionType";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   error: null,
   loading: false,
   id: Cookies.get("id") || null,
+  avatar: Cookies.get("avatar") || null, // Ensure avatar is loaded from cookies
 };
 
 const authReducer = (state = initialState, action) => {
@@ -30,6 +32,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+        avatar: Cookies.get("avatar"), // Save avatar to state
         error: null,
         loading: false,
       };
@@ -46,6 +49,7 @@ const authReducer = (state = initialState, action) => {
         user: null,
         token: null,
         role: null, 
+        avatar: null,
       };
     case SET_TOKEN:
       return {
@@ -62,6 +66,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         id: Cookies.get("id"),
       };
+    
     default:
       return state;
   }

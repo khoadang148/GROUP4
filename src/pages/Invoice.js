@@ -5,7 +5,7 @@ const Invoice = () => {
     window.print();
   };
   return (
-    <div className="mt-16">
+    <div>
     <div className="w-full max-w-3xl mx-auto"> 
     <header className="bg-black text-white py-6 h-auto">
   <div >
@@ -16,8 +16,8 @@ const Invoice = () => {
     </div>
   </div>
 </header>
-
-  <div className="mt-10 ml-[30rem]">
+   <div className="bg-white">
+  <div className="ml-[30rem]">
   <table className="w-full">
   <tbody>
     <tr>
@@ -85,8 +85,8 @@ const Invoice = () => {
   </div>
 
   <div className="mt-10 text-right">
-    <span className="text-gray-700 font-medium text-lg">Invoice Total : USD $220.00</span> {/* Thay đổi text-base thành text-lg để tăng kích thước chữ */}
-    <p className="text-gray-500 text-base">Paid via Paypal</p> {/* Thay đổi text-sm thành text-base để tăng kích thước chữ */}
+    <span className="text-gray-700 font-medium text-lg">Invoice Total : USD $220.00</span> 
+    <p className="text-gray-500 text-base">Paid via Paypal</p>
   </div>
   <p className="text-gray-500 text-base ml-[3rem]">Thanks for buying.</p> 
 
@@ -94,6 +94,7 @@ const Invoice = () => {
   PRINT
 </button>
 
+</div>
 </div>
 </div>
   );

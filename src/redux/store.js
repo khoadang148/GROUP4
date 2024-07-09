@@ -8,13 +8,14 @@ import certificatesReducer from "./reducers/certificate.reducer";
 import newsReducer from "./reducers/news.reducer";
 import reviewReducer from "./reducers/review.reducer";
 import ourblogReducer from "./reducers/ourblog.reducer";
-
+import statementsReducer from "./reducers/statements.reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   enrolledCourses: enrolledCoursesReducer,
   instructors: instructorsReducer,
   certificates: certificatesReducer,
+  statements: statementsReducer,
   news:newsReducer,
   review: reviewReducer,
   ourblog: ourblogReducer

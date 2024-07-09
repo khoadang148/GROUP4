@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom"; 
 import { Form, Input, Button, Checkbox } from "antd";
 import { login } from "../redux/actions/auth.action";
+
 // Define logo URL and sign logo URL
 const logoUrl = "https://gambolthemes.net/html-items/cursus-new-demo/images/logo.svg";
 const signBackgroundUrl = "https://gambolthemes.net/html-items/cursus-new-demo/images/sign.svg";
@@ -19,12 +20,16 @@ const SignupScreen = () => {
     await dispatch(login(values.username, values.password));
     setLoading(false);
     if (user) {
-      navigate("/home");
+      goToSignupStep(); // Navigate to SignupStep upon successful login
     }
   };
 
   const goToLogin = () => {
     navigate("/login");
+  };
+
+  const goToSignupStep = () => {
+    navigate("/signupstep");
   };
 
   return (
@@ -100,14 +105,12 @@ const SignupScreen = () => {
           </Form>
 
           <p className="text-center my-2 text-xs">
-            <span className="text-black">By signing up, you agree to our</span>
-            
-            <Link to="/copyright" className="text-red-500 ml-1">
+            <span className="text-black">By signing up, you agree to our</span>{" "}
+            <Link to="/term" className="text-red-500 ml-1">
               Terms of Use
-            </Link>
-
-            <span className="text-black"> and</span>
-            <Link to="/copyright" className="text-red-500 ml-1">
+            </Link>{" "}
+            <span className="text-black">and</span>{" "}
+            <Link to="/term" className="text-red-500 ml-1">
               Privacy Policy
             </Link>
             <span className="text-black">.</span>

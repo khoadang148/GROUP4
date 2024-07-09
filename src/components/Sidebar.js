@@ -90,6 +90,9 @@ const Sidebar = ({ sidebar }) => {
   const handleOurBlog = () => {
     navigate("/blog");
   };
+  const handleTerm = () => {
+    navigate("/term");
+  };
   const handleHelp = () => {
     navigate("/help");
   };
@@ -756,22 +759,26 @@ const Sidebar = ({ sidebar }) => {
                 <a className="px-1 hover:text-red-500" onClick={handlePress}>
                   Press
                 </a>
-                <a className="hover:text-red-500" onClick={handleContactus}>
+                <a className="px-1 hover:text-red-500" onClick={handleContactus}>
                   Contact Us
                 </a>
               </div>
               <div className="font-medium">
-                <a className="px-1 hover:text-red-500">Advertise</a>
-                <a className="px-1 hover:text-red-500">Developer</a>
-                <a className="hover:text-red-500" onClick={handleCopyright}>
+              <a className="px-1 hover:text-red-500" onClick={handleComingSoon}>
+              Advertise 
+                </a>
+                <a className="px-1 hover:text-red-500" onClick={handleComingSoon}>
+              Developer
+                </a>
+                <a className="px-1 hover:text-red-500" onClick={handleCopyright}>
                   Copyright
                 </a>
               </div>
               <div className="font-medium">
-                <a className="hover:text-red-500" onClick={handleCopyright}>
+                <a className="px-1 hover:text-red-500" onClick={handleCopyright}>
                   Privacy Policy
                 </a>{" "}
-                <a className="hover:text-red-500" onClick={handleCopyright}>
+                <a className="px-1 hover:text-red-500" onClick={handleCopyright}>
                   Terms
                 </a>
               </div>

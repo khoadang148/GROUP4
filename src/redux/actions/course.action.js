@@ -87,3 +87,15 @@ export const searchCoursesByInstructor = (query) => {
     }
   };
 };
+export const createCourse = (courseData) => async (dispatch) => {
+  dispatch({ type: "CREATE_COURSE_REQUEST" });
+  try {
+    const response = await axios.post(
+      "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1/courses",
+      courseData
+    );
+    dispatch({ type: "CREATE_COURSE_SUCCESS", payload: response.data });
+  } catch (error) {
+    dispatch({ type: "CREATE_COURSE_FAILURE", payload: error.message });
+  }
+};

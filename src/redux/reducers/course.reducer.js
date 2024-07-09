@@ -49,6 +49,22 @@ const enrolledCoursesReducer = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+    case "CREATE_COURSE_REQUEST":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "CREATE_COURSE_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        courses: [...state.courses, action.payload],
+      };
+    case "CREATE_COURSE_FAILURE":
+      return { 
+        ...state, 
+        loading: false, 
+        error: action.payload };
     default:
       return state;
   }

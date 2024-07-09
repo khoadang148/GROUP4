@@ -7,13 +7,14 @@ import { CheckCircleOutlined, MoonOutlined, RightOutlined } from "@ant-design/ic
 
 import Cookies from "js-cookie"; 
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/auth.action";
 const Header = ({ handleToggleSidebar }) => {
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
-  const avatar = useSelector((state) => state.auth.avatar) || "https://via.placeholder.com/150"; // Lấy avatar từ state hoặc dùng placeholder
 
+ 
+  const avatar = Cookies.get('avatar');
+  
   const handleShoppingCart = () => {
     navigate("/shoppingcart");
   };
@@ -206,7 +207,7 @@ const handleLogout = () => {
         <div className="flex gap-3 p-3 bg-white hover:bg-[#FFECEC] ">
           <div>
             <img
-              src="https://biografieonline.it/img/bio/r/Romelu_Lukaku.jpg"
+              src={avatar}
               width={30}
               alt="message"
               className="rounded-full"

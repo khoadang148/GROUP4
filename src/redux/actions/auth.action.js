@@ -8,6 +8,7 @@ import {
   LOGOUT,
   SET_TOKEN,
   SET_ID,
+
 } from "../actionType";
 
 const API_URL = "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1";
@@ -31,7 +32,7 @@ export const login = (username, password) => {
         Cookies.set("token", token, { expires: 7 });
         Cookies.set("role", user.role, { expires: 7 });
         Cookies.set("id", user.id, { expires: 7 });
-
+        Cookies.set("avatar", user.avatar, { expires: 7 });
       } else {
         dispatch({ type: LOGIN_FAILURE, error: "Invalid account" });
       }
@@ -44,6 +45,7 @@ export const login = (username, password) => {
 export const logout = () => {
   Cookies.remove("token");
   Cookies.remove("role");
+  Cookies.remove("avatar");
   return {
     type: LOGOUT,
   };
@@ -67,4 +69,5 @@ export const setID = (id) => {
     type: SET_ID,
     payload: id,
   };
+ 
 };

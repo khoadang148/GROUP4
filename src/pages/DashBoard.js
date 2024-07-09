@@ -6,19 +6,31 @@ import { Button, Image } from "react-bootstrap";
 const DashBoard = ({ sidebar }) => {
   const latestcourse = [
     {
-      image: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-1.jpg",
+      image:
+        "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-1.jpg",
       title: "Complete Python Bootcamp: Go from zero to hero in Python 3",
-      time: "First 2 days 22 hours"
+      time: "First 2 days 22 hours",
+      view: "100k",
+      purchased: "200",
+      like: "1k",
     },
     {
-      image: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-2.jpg",
+      image:
+        "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-2.jpg",
       title: "The Complete JavaScript Course 2020: Build Real Projects!",
-       time: "First 2 days 22 hours  "
+      time: "First 2 days 22 hours  ",
+      view: "100k",
+      purchased: "200",
+      like: "1k",
     },
     {
-      image: "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-3.jpg",
+      image:
+        "https://gambolthemes.net/html-items/cursus-new-demo/images/courses/img-3.jpg",
       title: "Beginning C++ Programming - From Beginner to Beyond",
-       time: "First 2 days 22 hours"
+      time: "First 2 days 22 hours",
+      view: "100k",
+      purchased: "200",
+      like: "1k",
     },
   ];
   const news2 = [
@@ -137,8 +149,8 @@ const DashBoard = ({ sidebar }) => {
               Jump Into Course Creation
             </h1>
           </div>
-          <button className="py-2 px-6 bg-red-600 font-medium text-white rounded-sm text-[14px]">
-            Create your Course
+          <button className="py-3 px-6 bg-red-600 font-medium text-white rounded-sm text-[15px]">
+            Create Your Course
           </button>
         </div>
         <div className="flex mt-7">
@@ -180,35 +192,69 @@ const DashBoard = ({ sidebar }) => {
                   <div
                     key={index}
                     className={`bg-white ${
-                      sidebar ? "h-[480px] w-[400px]" : "h-[480px] w-[410px]"
+                      sidebar ? "h-[600px] w-[400px]" : "h-[600px] w-[400px]"
                     }`}
                   >
                     <div
                       className={`ml-[5px] mt-[5px] ${
-                        sidebar ? "w-[390px] h-[270px]" : "w-[400px] h-[270px]"
+                        sidebar ? "w-[390px] h-[270px]" : "w-[390px] h-[270px]"
                       }`}
                     >
                       <Image
                         className={`pt-2 ${
                           sidebar
                             ? "w-[440px] h-[270px]"
-                            : "w-[500px] h-[270px]"
+                            : "w-[440px] h-[270px]"
                         }`}
                         src={item.image}
                       />
                     </div>
-                    <span>{item.time}</span>
-                    <h1 className="mt-10 ml-3 text-xl">{item.title}</h1>
+                    <div className="ml-3 pt-2 ">
+                      <span>{item.time}</span>
+                    </div>
+                    <h1 className="mt-5 ml-3 text-[18px]">{item.title}</h1>
                     {/* <div className="mt-4 ml-3 text-md">{item.description}</div> */}
-                    <div className="mt-10 ml-3 text-xs font-semibold">
-                     
+                    <div className=" w-[350px] mt-2 ml-3 text-[14px] font-medium space-y-3 text-gray-500">
+                      <div className=" flex justify-between">
+                        <div>View</div>
+                        <div>{item.view}</div>
+                      </div>
+                      <div className=" flex justify-between">
+                        <div>Purchased</div>
+                        <div>{item.purchased}</div>
+                      </div>
+                      <div className=" flex justify-between">
+                        <div>Like</div>
+                        <div>{item.like}</div>
+                      </div>
+                    </div>
+                    <hr className="mt-6 w-[85%] ml-6"></hr>
+                    <div className="flex flex-col space-y-2 p-4">
+                      <a
+                        href="#"
+                        className="text-black font-medium hover:underline"
+                      >
+                        GO TO COURSE ANALYTICS
+                      </a>
+                      <a
+                        href="#"
+                        className="text-black font-medium  hover:underline"
+                      >
+                        SEE COMMENTS
+                      </a>
+                      <a
+                        href="#"
+                        className="text-black font-medium hover:underline"
+                      >
+                        SEE REVIEWS
+                      </a>
                     </div>
                   </div>
                 )
             )}
           </div>
-          <div className="flex-1">
-            <div className="flex items-center mb-3">
+          <div className="flex-1 ml-5">
+            <div className="flex items-start mb-3 gap-[140px]">
               <h1 className="text-[16px]">News</h1>
               <div
                 className={`flex items-center gap-2 justify-end ${
@@ -245,7 +291,7 @@ const DashBoard = ({ sidebar }) => {
                   <div
                     key={index}
                     className={`bg-white ${
-                      sidebar ? "h-[480px] w-[400px]" : "h-[480px] w-[410px]"
+                      sidebar ? "h-[500px] w-[400px]" : "h-[500px] w-[410px]"
                     }`}
                   >
                     <div
@@ -257,7 +303,7 @@ const DashBoard = ({ sidebar }) => {
                         className={`pt-2 ${
                           sidebar
                             ? "w-[440px] h-[270px]"
-                            : "w-[500px] h-[270px]"
+                            : "w-[440px] h-[270px]"
                         }`}
                         src={item.image}
                       />
@@ -271,8 +317,16 @@ const DashBoard = ({ sidebar }) => {
                 )
             )}
           </div>
-          <div className="flex-1 ml-10">
-            <div></div>
+          <div className="flex-1 ml-5">
+            <div className="text-xl font-semibold mb-4 ">Profile Analytics</div>
+            <div  className="mt-[1px] w-full h-[300px] bg-white">
+            <div className=" p-4 space-y-4">
+            <h6 className="text-[14px] text-[#686f7a]">Current Subcribers</h6>
+            <h3 className="text-[24px] text-black">999</h3>
+            </div>
+            <hr></hr>
+
+            </div>
             <div className="text-xl font-semibold mb-4">
               What's new in Cursus?
             </div>

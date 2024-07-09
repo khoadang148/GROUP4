@@ -39,218 +39,194 @@ import {
 import { DownOutlined, UploadOutlined } from "@ant-design/icons";
 import { Button, message } from "antd";
 import thumnail from "../assets/thumnail.png";
-import { createCourse } from "../redux/actions/course.action";
-import { useDispatch } from "react-redux";
 
 const CreateCourse = () => {
   const [activeTab, setActiveTab] = useState("Basic");
 
   const Basic = () => {
-  const [courseData, setCourseData] = useState({
-    title: '',
-    shortDescription: '',
-    description: '',
-    learnings: '',
-    requirements: '',
-    level: '',
-    audioLanguage: '',
-    closeCaption: '',
-    category: ''
-  });
+    const handleNext = () => {
+      setActiveTab("Curriculum");
+      setCurrent(1);
+    };
 
-  const dispatch = useDispatch();
+    const items = [
+      { label: <a href="https://www.antgroup.com">Beginner</a>, key: "0" },
+      { label: <a href="https://www.aliyun.com">Intermediate</a>, key: "1" },
+      { label: <a href="https://www.antgroup.com">Expert</a>, key: "2" },
+    ];
+    
+   
+    const audioItems = [
+      { label: <a href="https://www.audio1.com">English</a>, key: "6" },
+      { label: <a href="https://www.audio2.com">Spanish</a>, key: "7" },
+      { label: <a href="https://www.audio3.com">French</a>, key: "8" },
+      { label: <a href="https://www.audio4.com">German</a>, key: "9" },
+      { label: <a href="https://www.audio5.com">Italian</a>, key: "10" },
+      { label: <a href="https://www.audio6.com">Chinese</a>, key: "11" },
+    ];
+    
+    // Another set of additional items
+   
+    
+    // Combined audio items
+    const combinedAudioItems = [...audioItems];
+    
+    const combinedItems = [...items];
+    
+    console.log(combinedItems);
+    
+    
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCourseData({
-      ...courseData,
-      [name]: value,
-    });
-  };
 
-  const handleSubmit = () => {
-    dispatch(createCourse(courseData));
-  };
-
-  const items = [
-    { label: 'Beginner', key: 'Beginner' },
-    { label: 'Intermediate', key: 'Intermediate' },
-    { label: 'Expert', key: 'Expert' },
-  ];
-
-  const ittems = [
-    { label: 'English', key: 'English' },
-    { label: 'Español', key: 'Español' },
-    { label: 'Português', key: 'Português' },
-    { label: '日本語', key: '日本語' },
-    { label: 'Deutsch', key: 'Deutsch' },
-    { label: 'Français', key: 'Français' },
-    { label: 'Türkçe', key: 'Türkçe' },
-    { label: 'हिन्दी', key: 'हिन्दी' },
-    { label: 'Italiano', key: 'Italiano' },
-    { label: 'Polski', key: 'Polski' },
-    { label: 'ภาษาไทย', key: 'ภาษาไทย' },
-    { label: 'Română', key: 'Română' },
-    { label: 'Telugu', key: 'Telugu' },
-    { label: 'मराठी', key: 'मराठी' },
-  ];
-
-  return (
-    <div>
-      <div className="flex gap-x-3">
-        <FontAwesomeIcon icon={faCircleInfo} className="mt-[4px] text-[15px]" />
-        <p className="text-[18px] font-semibold">Basic Information</p>
-      </div>
-      <Divider />
+    return (
       <div>
-        <div className="py-4 px-4 pb-10 bg-white">
-          <div className="pl-5 pt-5 pr-5">
-            <div>
-              <p className="font-semibold text-[14px]">Course Title*</p>
-              <input
-                name="title"
-                placeholder="Course title here"
-                className="border border-gray-200 w-[100%] h-10 pl-5 font-normal"
-                value={courseData.title}
-                onChange={handleChange}
-              />
-              <p className="text-[12px] text-[#686F7A] pt-1">
-                (Please make this a maximum of 100 characters and unique.)
-              </p>
-            </div>
-            <div>
-              <p className="font-semibold text-[14px]">Short Description*</p>
-              <input
-                name="shortDescription"
-                placeholder="Item description here..."
-                className="border border-gray-200 w-[100%] h-[130px] pl-5 font-normal pb-[100px]"
-                value={courseData.shortDescription}
-                onChange={handleChange}
-              />
-              <p className="text-[12px] text-[#686F7A] pt-1">220 words</p>
-            </div>
-            <div>
-              <p className="font-semibold text-[14px]">Course Description*</p>
-              <input
-                name="description"
-                placeholder="Item description here..."
-                className="border border-gray-200 w-[100%] h-[130px] pl-5 font-normal pb-[100px]"
-                value={courseData.description}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex">
-              <div className="pr-[30px]">
-                <p className="font-semibold text-[14px]">
-                  What will students learn in your course?*
-                </p>
+        <div className="flex gap-x-3">
+          <FontAwesomeIcon
+            icon={faCircleInfo}
+            className="mt-[4px] text-[15px]"
+          />
+          <p className="text-[18px] font-semibold">Basic Information</p>
+        </div>
+        <Divider />
+        <div>
+          <div className="py-4 px-4 pb-10 bg-white ">
+            <div className="pl-5 pt-5 pr-5">
+              <div>
+                <p className="font-semibold  text-[14px]">Course Title*</p>
                 <input
-                  name="learnings"
-                  className="border border-gray-200 w-[500px] h-[130px] pl-5 font-normal pb-[100px]"
-                  value={courseData.learnings}
-                  onChange={handleChange}
+                  placeholder="Course title here"
+                  className="border border-gray-200 w-[100%] h-10 pl-5 font-normal"
                 />
-                <p className="text-[11px] text-[#686F7A] pt-1">
-                  Student will gain this skills, knowledge after completing
-                  this course. (One per line).
+                <p className="text-[12px] text-[#686F7A] pt-1">
+                  (Please make this a maximum of 100 characters and unique.)
                 </p>
               </div>
               <div>
-                <p className="font-semibold text-[14px]">Requirements*</p>
+                <p className="font-semibold text-[14px] ">Short Description*</p>
                 <input
-                  name="requirements"
-                  className="border border-gray-200 w-[500px] h-[130px] pl-5 font-normal pb-[100px]"
-                  value={courseData.requirements}
-                  onChange={handleChange}
+                  placeholder="Item description here..."
+                  className="border border-gray-200 w-[100%] h-[130px] pl-5 font-normal pb-[100px]"
                 />
-                <p className="text-[11px] text-[#686F7A] pt-1">
-                  What knowledge, technology, tools required by users to start
-                  this course. (One per line).
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <p className="font-semibold text-[14px] pt-7 pl-2">Course Level*</p>
-                <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
-                  <Dropdown
-                    menu={{ items }}
-                    trigger={['click']}
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <Space>
-                      <div className="gap-[330px] flex">
-                        <p className="mt-[8px] text-[14px]">Nothing Selected</p>
-                        <DownOutlined />
-                      </div>
-                    </Space>
-                  </Dropdown>
-                </button>
+                <p className="text-[12px] text-[#686F7A] pt-1">220 words</p>
               </div>
               <div>
-                <p className="font-semibold text-[14px] pt-7 pl-2">Audio Language*</p>
-                <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
-                  <Dropdown
-                    menu={{ ittems }}
-                    trigger={['click']}
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <Space>
-                      <div className="gap-[360px] flex">
-                        <p className="mt-[8px] text-[14px]">Select Audio</p>
-                        <DownOutlined />
-                      </div>
-                    </Space>
-                  </Dropdown>
-                </button>
+                <p className="font-semibold text-[14px]">Course Description*</p>
+                <input
+                  placeholder="Item description here..."
+                  className="border border-gray-200 w-[100%] h-[130px] pl-5 font-normal pb-[100px]"
+                />
+                <p className="text-[12px] text-[#686F7A] pt-1"></p>
               </div>
-              <div>
-                <p className="font-semibold text-[14px] pt-7 pl-2">Close Caption*</p>
-                <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
-                  <Dropdown
-                    menu={{ ittems }}
-                    trigger={['click']}
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <Space>
-                      <div className="gap-[330px] flex">
-                        <p className="mt-[8px] text-[14px]">Select Caption</p>
-                        <DownOutlined />
-                      </div>
-                    </Space>
-                  </Dropdown>
-                </button>
+              <div className="flex">
+                <div className="pr-[30px]">
+                  <p className="font-semibold text-[14px]">
+                    What will students learn in your course?*
+                  </p>
+                  <input className="border border-gray-200 w-[500px] h-[130px] pl-5 font-normal pb-[100px]" />
+                  <p className="text-[11px] text-[#686F7A] pt-1">
+                    Student will gain this skills, knowledge after completing
+                    this course. (One per line).
+                  </p>
+                </div>
+                <div>
+                  <p className="font-semibold text-[14px]">Requirements*</p>
+                  <input className="border border-gray-200 w-[500px] h-[130px] pl-5 font-normal pb-[100px]" />
+                  <p className="text-[11px] text-[#686F7A] pt-1">
+                    What knowledge, technology, tools required by users to start
+                    this course. (One per line).
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-[14px] pt-7 pl-2">Course Category*</p>
-                <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
-                  <Dropdown
-                    menu={{ ittems }}
-                    trigger={['click']}
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <Space>
-                      <div className="gap-[330px] flex">
-                        <p className="mt-[8px] text-[14px]">Web Development</p>
-                        <DownOutlined />
-                      </div>
-                    </Space>
-                  </Dropdown>
-                </button>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="font-semibold text-[14px] pt-7 pl-2">
+                    Course Level*
+                  </p>
+               
+                  <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
+                    <Dropdown menu={{ items: combinedItems }} trigger={["click"]}>
+                      <a onClick={(e) => e.preventDefault()}>
+                        <Space>
+                          <div className="gap-[330px] flex">
+                            <p className="mt-[8px] text-[14px]">
+                              Nothing Selected
+                            </p>
+                            <DownOutlined />
+                          </div>
+                        </Space>
+                      </a>
+                    </Dropdown>
+                  </button>
+
+                </div>
+                <div>
+                  <p className="font-semibold text-[14px] pt-7 pl-2">
+                    Audio Language*
+                  </p>
+                  <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
+                    <Dropdown menu={{ items: combinedAudioItems}} trigger={["click"]}>
+                      <a onClick={(e) => e.preventDefault()}>
+                        <Space>
+                          <div className="gap-[360px] flex">
+                            <p className="mt-[8px] text-[14px]">Select Audio</p>
+                            <DownOutlined />
+                          </div>
+                        </Space>
+                      </a>
+                    </Dropdown>
+                  </button>
+                </div>
+                <div>
+                  <p className="font-semibold text-[14px] pt-7 pl-2">
+                    Close Caption*
+                  </p>
+                  <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
+                    <Dropdown menu={{items: combinedAudioItems }} trigger={["click"]}>
+                      <a onClick={(e) => e.preventDefault()}>
+                        <Space>
+                          <div className="gap-[330px] flex">
+                            <p className="mt-[8px] text-[14px]">
+                              Select Caption
+                            </p>
+                            <DownOutlined />
+                          </div>
+                        </Space>
+                      </a>
+                    </Dropdown>
+                  </button>
+                </div>
+                <div>
+                  <p className="font-semibold text-[14px] pt-7 pl-2">
+                    Course Category*
+                  </p>
+                  <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
+                    <Dropdown menu={{ items: combinedAudioItems }} trigger={["click"]}>
+                      <a onClick={(e) => e.preventDefault()}>
+                        <Space>
+                          <div className="gap-[330px] flex">
+                            <p className="mt-[8px] text-[14px]">
+                              Web Development
+                            </p>
+                            <DownOutlined />
+                          </div>
+                        </Space>
+                      </a>
+                    </Dropdown>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <button
+          className="mt-10 py-3 px-6 bg-white text-[#48c790] border hover:bg-black hover:text-white "
+          onClick={handleNext}
+        >
+          Next
+        </button>
       </div>
-      <button
-        className="mt-10 py-3 px-6 bg-white text-[#48c790] border hover:bg-black hover:text-white"
-        onClick={handleSubmit}
-      >
-        Next
-      </button>
-    </div>
-  );
-};
+    );
+  };
 
   const Curriculum = ({ sidebar }) => {
     const handlePrevious = () => {

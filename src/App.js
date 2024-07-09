@@ -73,6 +73,7 @@ import TestView from "./pages/TestView";
 import TestResult from "./pages/TestResult";
 import InstructorDetail from "./pages/InstructorDetail";
 import Term from "./pages/Term";
+import Livestreamdetail from "./pages/Livesteamdetail";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -373,6 +374,20 @@ const App = () => {
               <Contactus />
               <Footer />
             </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/livestreamdetail/:id"
+        element={
+          token ? (
+            <>
+              <Layout>
+                <Livestreamdetail sidebar={sidebar} />
+              </Layout>
+            </>
           ) : (
             <Navigate to="/login" />
           )

@@ -72,6 +72,7 @@ import Course from "./pages/Course";
 import TestView from "./pages/TestView";
 import TestResult from "./pages/TestResult";
 import InstructorDetail from "./pages/InstructorDetail";
+import Term from "./pages/Term";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();

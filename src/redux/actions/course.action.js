@@ -6,9 +6,20 @@ import {
   SEARCH_COURSES_REQUEST,
   SEARCH_COURSES_SUCCESS,
   SEARCH_COURSES_FAILURE,
+  SET_RECENT_COURSES,
+  SET_NEWEST_COURSES,
 } from "../actionType";
+import { parse, differenceInDays } from "date-fns";
 
 const API_URL = "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1";
+
+const isRecentCourse = (courseDate, daysThreshold = 30) => {
+  const today = new Date();
+  const courseParsedDate = parse(courseDate, 'dd/MM/yyyy', new Date());
+  const daysDifference = differenceInDays(today, courseParsedDate);
+
+  return daysDifference <= daysThreshold;
+};
 
 export const getAllCourses = () => {
   return async (dispatch) => {
@@ -16,10 +27,24 @@ export const getAllCourses = () => {
 
     try {
       const coursesResponse = await axios.get(`${API_URL}/courses`);
-      // console.log(coursesResponse);
+      const allCourses = coursesResponse.data;
+
+      const recentCourses = allCourses.filter(course => isRecentCourse(course.date));
+      const newestCourses = [...allCourses].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 8);
+
       dispatch({
         type: FETCH_ENROLLED_COURSES_SUCCESS,
-        payload: coursesResponse.data,
+        payload: allCourses,
+      });
+
+      dispatch({
+        type: SET_RECENT_COURSES,
+        payload: recentCourses,
+      });
+
+      dispatch({
+        type: SET_NEWEST_COURSES,
+        payload: newestCourses,
       });
     } catch (error) {
       dispatch({
@@ -29,21 +54,19 @@ export const getAllCourses = () => {
     }
   };
 };
+
 export const getEnrolledCourses = (userId) => {
   return async (dispatch) => {
     dispatch({ type: FETCH_ENROLLED_COURSES_REQUEST });
 
     try {
       const userResponse = await axios.get(`${API_URL}/users/${userId}`);
-      // console.log("user data", userResponse.data);
       const enrolledCoursesIds = userResponse.data.enrolledCourses.map(
         (course) => course.id
       );
-      console.log("enrolled", enrolledCoursesIds);
       const coursesResponse = await axios.get(`${API_URL}/courses`, {
         params: { id: enrolledCoursesIds.join("") },
       });
-      // console.log(coursesResponse);
       const filteredCourses = coursesResponse.data.filter((course) =>
         userResponse.data.enrolledCourses.includes(course.id)
       );
@@ -67,13 +90,13 @@ export const searchCourses = (query) => {
       const response = await axios.get(`${API_URL}/courses`, {
         params: { title: query },
       });
-      console.log(response);
       dispatch({ type: SEARCH_COURSES_SUCCESS, payload: response.data });
     } catch (error) {
       dispatch({ type: SEARCH_COURSES_FAILURE, error: error.message });
     }
   };
 };
+
 export const searchCoursesByInstructor = (query) => {
   return async (dispatch) => {
     dispatch({ type: SEARCH_COURSES_REQUEST });
@@ -86,16 +109,4 @@ export const searchCoursesByInstructor = (query) => {
       dispatch({ type: SEARCH_COURSES_FAILURE, payload: error.message });
     }
   };
-};
-export const createCourse = (courseData) => async (dispatch) => {
-  dispatch({ type: "CREATE_COURSE_REQUEST" });
-  try {
-    const response = await axios.post(
-      "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1/courses",
-      courseData
-    );
-    dispatch({ type: "CREATE_COURSE_SUCCESS", payload: response.data });
-  } catch (error) {
-    dispatch({ type: "CREATE_COURSE_FAILURE", payload: error.message });
-  }
 };

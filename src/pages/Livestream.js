@@ -3,14 +3,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeadset } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllInstructor } from "../redux/actions/instructor.action";
+import { useNavigate } from "react-router-dom";
 
 const Livestream = ({ sidebar }) => {
+  const navigate = useNavigate();
   const { instructors } = useSelector((state) => state.instructors);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllInstructor());
   }, [dispatch]);
+
+  const handleInstructorClick = (instructorId) => {
+    navigate(`/livestreamdetail/${instructorId}`);
+  };
 
   return (
     <div>
@@ -22,8 +28,10 @@ const Livestream = ({ sidebar }) => {
           <div className="grid grid-cols-4 gap-7 pt-5">
             {instructors.map((instructor, i) => (
               <a
-                href="https://gambolthemes.net/html-items/cursus-new-demo/live_output.html"
+                href=""
+                alt="day"
                 key={i}
+                onClick={() => handleInstructorClick(instructor.id)}
               >
                 <div className="bg-[#DED9DE] py-[20px] px-[20px]">
                   <div className="bg-[#E5E0E5] py-[30px] px-[10px] drop-shadow-lg text-center relative">
@@ -31,7 +39,6 @@ const Livestream = ({ sidebar }) => {
                       <img
                         src={instructor.avatar}
                         alt="img"
-                        // className="w-[60px] rounded-full relative -mt-[20px] ml-3"
                         className={`w-[60px] rounded-full relative -mt-[20px] ml-3 ${
                           sidebar ? "ml-28" : "ml-[40px]"
                         }`}

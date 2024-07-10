@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Image } from "react-bootstrap";
+import { Alert, Button, Image, Spinner } from "react-bootstrap";
 import { Dropdown, Input, Menu, Radio, Space } from "antd";
-import { DownOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  MoreOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getEnrolledCourses } from "../redux/actions/course.action";
+import {
+  getAllCourses,
+  getEnrolledCourses,
+  searchCourses,
+} from "../redux/actions/course.action";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getAllInstructor } from "../redux/actions/instructor.action";
 
 const items = [
   {
@@ -461,7 +470,6 @@ const CourseCard = ({
           }`}
         >
           <ShoppingCartOutlined className="text-black text-[18px]" />
-          {/* <span className="text-lg font-bold">${price}</span> */}
         </div>
 
         <div className="text-[18px] font-bold">{price}</div>
@@ -490,30 +498,54 @@ const drop = [
     key: "3",
   },
 ];
+const combineDrop = [...drop];
 
-const SearchResult = () => {
+const SearchResult = ({ sidebar }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [coursesToShow, setCoursesToShow] = useState(11);
+
+  const dispatch = useDispatch();
+
   const [hoveredCourse, setHoveredCourse] = useState(null);
+
   const handleMouseEnter = (index) => {
     setHoveredCourse(index);
   };
+
   const handleMouseLeave = () => {
     setHoveredCourse(null);
   };
+
   const userId = useSelector((state) => state.auth.id);
+
   console.log(userId);
   const { courses, loading, error } = useSelector(
     (state) => state.enrolledCourses
   );
-  const dispatch = useDispatch();
+
   useEffect(() => {
     if (userId) {
       dispatch(getEnrolledCourses(userId));
     }
   }, [dispatch, userId]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchQuery) {
+        dispatch(searchCourses(searchQuery));
+      } else {
+        dispatch(getAllCourses());
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery, dispatch]);
   const navigate = useNavigate();
+
   const handleHome = () => {
     navigate("/home");
   };
+
   const [value, setValue] = useState(1);
   const [stateOpenKeys, setStateOpenKeys] = useState(["2", "23"]);
   const [selectedKeys, setSelectedKeys] = useState([]);
@@ -546,6 +578,10 @@ const SearchResult = () => {
     setSelectedKeys([key]);
     setValue(Number(key));
   };
+  const handleInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
     <div>
       <div>
@@ -560,6 +596,8 @@ const SearchResult = () => {
                 type="text"
                 placeholder="Search"
                 className=" w-[250px] h-11 border border-gray-200 pl-14 "
+                value={searchQuery}
+                onChange={handleInputChange}
               />
               <button type="submit" className="bottom-1 right-60  relative">
                 <Image
@@ -583,12 +621,7 @@ const SearchResult = () => {
                 <h2 className="text-xl  w-full">Filters</h2>
               </div>
               <div className="pl-[310px] pt-2">
-                <Dropdown
-                  menu={{
-                    drop,
-                  }}
-                  trigger={["click"]}
-                >
+                <Dropdown menu={{ items: combineDrop }} trigger={["click"]}>
                   <a onClick={(e) => e.preventDefault()}>
                     <Space className="font-semibold">
                       Sort
@@ -607,7 +640,7 @@ const SearchResult = () => {
               <Menu
                 className="bg-transparent border border-[#F7F7F7] border-transparent "
                 mode="inline"
-                defaultSelectedKeys={["11"]}
+                defaultSelectedKeys={["8"]}
                 selectedKeys={selectedKeys}
                 openKeys={stateOpenKeys}
                 onOpenChange={onOpenChange}
@@ -621,26 +654,44 @@ const SearchResult = () => {
               />
             </Radio.Group>
           </div>
-          <div className="col-span-2 space-y-6 w-[900px]">
-            <h1 className="text-md   text-black">{courses.length} Results</h1>
-            {courses.map((course, index) => (
-              <CourseCard
-                key={index}
-                thumbnail={course.thumbnail}
-                rate={course.rate}
-                title={course.title}
-                category={course.category}
-                instructor={course.instructor}
-                hours={course.hours}
-                price={course.price}
-                views={course.views}
-                date={course.date}
-                index={index}
-                hoveredCourse={hoveredCourse}
-                handleMouseEnter={handleMouseEnter}
-                handleMouseLeave={handleMouseLeave}
-              />
-            ))}
+          <div>
+            <h1 className="text-md text-black">{courses.length} Results</h1>
+            <div className="col-span-2 space-y-6 ">
+              {loading ? (
+                <div className="col-span-4 flex justify-center">
+                  <Spinner animation="border" />
+                </div>
+              ) : error ? (
+                <div className="col-span-4">
+                  <Alert variant="danger">No courses found</Alert>
+                </div>
+              ) : courses.length === 0 ? (
+                <div className="col-span-4">
+                  <Alert variant="info">No courses found</Alert>
+                </div>
+              ) : (
+                courses.slice(0, coursesToShow).map((course, index) => (
+                  <div className="col-span-2 space-y-6 w-[900px]">
+                    <CourseCard
+                      key={index}
+                      thumbnail={course.thumbnail}
+                      rating={course.rating}
+                      title={course.title}
+                      category={course.category}
+                      author={course.author}
+                      hours={course.hours}
+                      price={course.price}
+                      views={course.views}
+                      date={course.date}
+                      index={index}
+                      hoveredCourse={hoveredCourse}
+                      handleMouseEnter={handleMouseEnter}
+                      handleMouseLeave={handleMouseLeave}
+                    />
+                  </div>
+                ))
+              )}
+            </div>
           </div>
         </div>
       </div>

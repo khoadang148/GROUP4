@@ -53,6 +53,9 @@ const CreateCourse = () => {
     audioLanguage: "",
     closeCaption: "",
     category: "",
+    dropdown: "",
+    regularPrice: "",
+    discountPrice: "",
   });
 
   const dispatch = useDispatch();
@@ -168,7 +171,7 @@ const CreateCourse = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex">
+              <div className="flex mt-10">
                 <div className="pr-[30px]">
                   <p className="font-semibold text-[14px]">
                     What will students learn in your course?*
@@ -208,6 +211,7 @@ const CreateCourse = () => {
                       menu={{ items: combinedItems }}
                       trigger={["click"]}
                       onClick={(e) => e.preventDefault()}
+                      value={courseData.dropdown}
                     >
                       <Space>
                         <div className="gap-[330px] flex">
@@ -229,6 +233,7 @@ const CreateCourse = () => {
                       menu={{ items: combinedAudioItems }}
                       trigger={["click"]}
                       onClick={(e) => e.preventDefault()}
+                      value={courseData.dropdown}
                     >
                       <Space>
                         <div className="gap-[360px] flex">
@@ -248,6 +253,7 @@ const CreateCourse = () => {
                       menu={{ items: combinedItems }}
                       trigger={["click"]}
                       onClick={(e) => e.preventDefault()}
+                      value={courseData.dropdown}
                     >
                       <Space>
                         <div className="gap-[330px] flex">
@@ -267,6 +273,7 @@ const CreateCourse = () => {
                       menu={{ items: combinedItems }}
                       trigger={["click"]}
                       onClick={(e) => e.preventDefault()}
+                      value={courseData.dropdown}
                     >
                       <Space>
                         <div className="gap-[330px] flex">
@@ -1676,6 +1683,7 @@ const CreateCourse = () => {
               <input
                 placeholder="$0"
                 className="border w-[360px] pl-3 h-10 object-cover"
+                value={courseData.regularPrice}
               />
               <p className="bg-[#F7F7F7]  ml-[-45px] mt-2 p-2 rounded-sm text-[12px] font-bold">
                 USD
@@ -1688,6 +1696,7 @@ const CreateCourse = () => {
               <input
                 placeholder="$0"
                 className="border w-[360px] pl-3 h-10 object-cover"
+                value={courseData.discountPrice}
               />
               <p className="bg-[#F7F7F7]  ml-[-45px] mt-2 p-2 rounded-sm text-[12px] font-bold">
                 USD
@@ -1700,7 +1709,7 @@ const CreateCourse = () => {
 
     return (
       <div>
-        <div className="flex gap-x-3">
+        <div className="flex gap-x-3 ">
           <FontAwesomeIcon
             icon={faMoneyBill1}
             className="mt-[2px] text-[20px]"
@@ -1742,7 +1751,7 @@ const CreateCourse = () => {
         </button>
         <button
           className="py-3 px-7 bg-white text-[#48c790] border hover:bg-black hover:text-white "
-          onClick={handleNext}
+          onClick={handleSubmit}
         >
           Next
         </button>

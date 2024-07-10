@@ -5,14 +5,10 @@ import {
   SEARCH_COURSES_FAILURE,
   SEARCH_COURSES_REQUEST,
   SEARCH_COURSES_SUCCESS,
-  SET_RECENT_COURSES,
-  SET_NEWEST_COURSES,
 } from "../actionType";
 
 const initialState = {
   courses: [],
-  recentCourses: [],
-  newestCourses: [],
   loading: false,
   error: "",
 };
@@ -27,13 +23,11 @@ const enrolledCoursesReducer = (state = initialState, action) => {
       };
     case FETCH_ENROLLED_COURSES_SUCCESS:
       return {
-        ...state,
         loading: false,
         courses: action.payload,
       };
     case FETCH_ENROLLED_COURSES_FAILURE:
       return {
-        ...state,
         loading: false,
         error: action.error,
       };
@@ -55,16 +49,22 @@ const enrolledCoursesReducer = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
-    case SET_RECENT_COURSES:
+    case "CREATE_COURSE_REQUEST":
       return {
         ...state,
-        recentCourses: action.payload,
+        loading: true,
       };
-    case SET_NEWEST_COURSES:
+    case "CREATE_COURSE_SUCCESS":
       return {
         ...state,
-        newestCourses: action.payload,
+        loading: false,
+        courses: [...state.courses, action.payload],
       };
+    case "CREATE_COURSE_FAILURE":
+      return { 
+        ...state, 
+        loading: false, 
+        error: action.payload };
     default:
       return state;
   }

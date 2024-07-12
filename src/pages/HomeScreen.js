@@ -28,7 +28,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  Dropdown,  Space } from "antd";
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAllCourses } from "../redux/actions/course.action";
 import { differenceInDays, differenceInHours, differenceInMinutes, formatDistanceToNow, parse } from "date-fns";
 import { Button, Image } from "react-bootstrap";
@@ -256,6 +256,10 @@ const HomeScreen = () => {
       return ''; // Trả về chuỗi rỗng hoặc giá trị mặc định khác khi có lỗi
     }
   };
+  const navigate = useNavigate();
+  const handleInstructorClick = (instructorId) => {
+    navigate(`/livestreamdetail/${instructorId}`);
+  };
   return (
     <div className="bg-[#F7F7F7]">
       <div className="grid grid-cols-7 bg-[#F7F7F7] gap-[200px]">
@@ -266,7 +270,7 @@ const HomeScreen = () => {
               <span className=" text-sm">See all</span>
             </Link>
           </div>
-            {/* --------------------------------------------- */}
+          {/* --------------------------------------------- */}
           {/* --------------------------------------------- */}
           {/* --------------------------------------------- */}
           <div className="mt-4 py-2 px-0 overflow-hidden w-[1000px] relative">
@@ -284,7 +288,11 @@ const HomeScreen = () => {
                 ref={avatarListRef}
               >
                 {instructors.map((value, i) => (
-                  <div key={i} className="bg-[#DDD8DD] rounded w-[144px]">
+                  <div
+                    key={i}
+                    className="bg-[#DDD8DD] rounded w-[144px] cursor-pointer"
+                    onClick={() => handleInstructorClick(value.id)}
+                  >
                     <div className="flex items-center flex-col justify-center bg-[#E3DFE3] mt-3 mb-3 ml-3 mr-3 h-[155px] drop-shadow-md">
                       <img
                         src={value.avatar}
@@ -357,24 +365,22 @@ const HomeScreen = () => {
                       <div className="absolute bottom-2 right-2 bg-[#4E4E4E]  text-white text-sm font-medium   px-2 py-1 rounded">
                         {course.hours}
                       </div>
-                      <div
-                  className="absolute  top-0 shadow-inset-bottom w-[296px] h-[160px]"
-                >
-                  {hoveredCourse === i && (
-                    <div className=" inset-0 flex items-center justify-center mt-10   ">
-                      <Button className="group relative" variant="light">
-                        <div className="border-2 border-white p-4 rounded-full group-hover:bg-black group-hover:opacity-30">
-                          <Image
-                            className="w-[30px] inset-0 h-[35px] ml-2 opacity-100 z-50 "
-                            src={require("../assets/pause.png")}
-                          />
-                        </div>
-                      </Button>
+                      <div className="absolute  top-0 shadow-inset-bottom w-[296px] h-[160px]">
+                        {hoveredCourse === i && (
+                          <div className=" inset-0 flex items-center justify-center mt-10   ">
+                            <Button className="group relative" variant="light">
+                              <div className="border-2 border-white p-4 rounded-full group-hover:bg-black group-hover:opacity-30">
+                                <Image
+                                  className="w-[30px] inset-0 h-[35px] ml-2 opacity-100 z-50 "
+                                  src={require("../assets/pause.png")}
+                                />
+                              </div>
+                            </Button>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  )}
-                </div>
-                    </div>
-                   
+
                     <div className="p-4">
                       <div className="text-sm text-gray-500 mt-2 flex justify-between items-center">
                         <span>
@@ -415,7 +421,6 @@ const HomeScreen = () => {
                     </div>
                   </div>
                 ))}
-                
               </div>
               <button
                 onClick={handleNextClickk}
@@ -475,22 +480,20 @@ const HomeScreen = () => {
                       <div className="absolute bottom-2 right-2 bg-[#4E4E4E]  text-white text-sm font-medium   px-2 py-1 rounded">
                         {course.hours}
                       </div>
-                      <div
-                  className="absolute  top-0 shadow-inset-bottom w-[296px] h-[160px]"
-                >
-                  {hoveredCoursee === k && (
-                    <div className=" inset-0 flex items-center justify-center mt-10   ">
-                      <Button className="group relative" variant="light">
-                        <div className="border-2 border-white p-4 rounded-full group-hover:bg-black group-hover:opacity-30">
-                          <Image
-                            className="w-[30px] inset-0 h-[35px] ml-2 opacity-100 z-50 "
-                            src={require("../assets/pause.png")}
-                          />
-                        </div>
-                      </Button>
-                    </div>
-                  )}
-                </div>
+                      <div className="absolute  top-0 shadow-inset-bottom w-[296px] h-[160px]">
+                        {hoveredCoursee === k && (
+                          <div className=" inset-0 flex items-center justify-center mt-10   ">
+                            <Button className="group relative" variant="light">
+                              <div className="border-2 border-white p-4 rounded-full group-hover:bg-black group-hover:opacity-30">
+                                <Image
+                                  className="w-[30px] inset-0 h-[35px] ml-2 opacity-100 z-50 "
+                                  src={require("../assets/pause.png")}
+                                />
+                              </div>
+                            </Button>
+                          </div>
+                        )}
+                      </div>
                     </div>
                     <div className="p-4">
                       <div className="text-sm text-gray-500 mt-2 flex justify-between items-center">
@@ -651,7 +654,7 @@ const HomeScreen = () => {
                       </div>
                     </div>
                     <span className="mt-10 font-light text-sm">
-                      {ppl.subscriber} • {ppl.noCreatedCourses} 
+                      {ppl.subscriber} • {ppl.noCreatedCourses}
                     </span>
                   </div>
                 ))}
@@ -659,8 +662,7 @@ const HomeScreen = () => {
               <button
                 onClick={handleNextClickkkk}
                 disabled={
-                  startIndexxxx >=
-                  instructors.length - visiblepopularInstructor
+                  startIndexxxx >= instructors.length - visiblepopularInstructor
                 }
                 className="group bg-white hover:bg-red-600 absolute right-[0px] z-50 cursor-pointer px-2 py-0 rounded-[5px]  top-36"
               >
@@ -730,7 +732,7 @@ const HomeScreen = () => {
           {/* //////////////////////////////// */}
           <div className="bg-[#FFFFFF] mt-6 w-[250px] ml-[-50px] rounded-sm  py-5 border border-solid">
             <h3 className="text-base ml-5">Live Streaming</h3>
-            <hr/>
+            <hr />
             <div className="flex flex-col items-center justify-center pb-3">
               <FontAwesomeIcon
                 icon={faHeadset}

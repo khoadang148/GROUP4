@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getInstructorById } from "../redux/actions/instructor.action";
 import { addMessage, setMessages } from "../redux/actions/chat.action";
 import { Image } from "react-bootstrap";
@@ -106,8 +106,12 @@ const Livestreamdetail = ({ sidebar }) => {
       setStartIndex(startIndex + 1);
     }
   };
+   const navigate = useNavigate();
+   const handleInstructorClick = (instructorId) => {
+     navigate(`/livestreamdetail/${instructorId}`);
+   };
 
-
+const { instructors } = useSelector((state) => state.instructors);
   return (
     <div className="mt-[100px] ml-10">
       <div className={`flex ${sidebar ? "w-[1200px]" : "w-[1640px]"}`}>
@@ -130,10 +134,16 @@ const Livestreamdetail = ({ sidebar }) => {
                 className="w-[50px] h-[50px] rounded-full"
                 src={instructor?.avatar}
               />
-              <div className=" px-5 font-semibold ">{instructor?.username}</div>
-              <button className="mt-7 px-5 py-[7px] bg-red-600 text-white text-center -ml-[96px]">
-                Subscribe
-              </button>
+              <div>
+                <div className=" px-5 font-semibold ">
+                  {instructor?.username}
+                </div>
+                <div>
+                  <button className="mt-2 px-5 py-[7px] bg-red-600 text-white text-center ml-[10px]">
+                    Subscribe
+                  </button>
+                </div>
+              </div>
             </div>
             <div>
               <div className="flex">
@@ -180,20 +190,20 @@ const Livestreamdetail = ({ sidebar }) => {
             ))}
           </div>
           <div className="mt-4">
-          <input
-    type="text"
-    value={inputMessage}
-    onChange={(e) => setInputMessage(e.target.value)}
-    onKeyPress={handleKeyPress} // Thêm sự kiện này
-    className="w-full border rounded px-3 py-2"
-    placeholder="Enter your message..."
-  />
-  <button
-    onClick={handleSendMessage}
-    className="mt-2 bg-red-600 text-white px-4 py-2 rounded"
-  >
-    Send
-  </button>
+            <input
+              type="text"
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              onKeyPress={handleKeyPress} // Thêm sự kiện này
+              className="w-full border rounded px-3 py-2"
+              placeholder="Enter your message..."
+            />
+            <button
+              onClick={handleSendMessage}
+              className="mt-2 bg-red-600 text-white px-4 py-2 rounded"
+            >
+              Send
+            </button>
           </div>
         </div>
       </div>
@@ -210,11 +220,7 @@ const Livestreamdetail = ({ sidebar }) => {
           </Link>
         </div>
 
-        <div
-          className={`mt-4 py-2 px-0 overflow-hidden  relative  ${
-            sidebar ? "w-[1270px]" : "w-[1400px]"
-          }`}
-        >
+        <div className="mt-4 py-2 px-0 overflow-hidden w-[1400px] relative">
           <div className="flex items-center">
             <button
               onClick={handlePrevClick}
@@ -228,15 +234,19 @@ const Livestreamdetail = ({ sidebar }) => {
               style={{ transform: `translateX(-${startIndex * 144}px)` }}
               ref={avatarListRef}
             >
-              {keywords.map((value, i) => (
-                <div key={i} className="bg-[#DDD8DD] rounded w-[180px]">
+              {instructors.map((value, i) => (
+                <div
+                  key={i}
+                  className="bg-[#DDD8DD] rounded w-[200px]"
+                  onClick={() => handleInstructorClick(value.id)}
+                >
                   <div className="flex items-center flex-col justify-center bg-[#E3DFE3] mt-3 mb-3 ml-3 mr-3 h-[155px] drop-shadow-md">
                     <img
-                      src={avatars[i]}
+                      src={value.avatar}
                       alt={value}
                       className="w-20 h-20 rounded-full border-white"
                     />
-                    <h3 className="text-xs">{value}</h3>
+                    <h3 className="text-xs">{value.username}</h3>
                     <span className="text-xs">
                       <span>live </span>
                       <span className="text-red-600">•</span>
@@ -247,8 +257,8 @@ const Livestreamdetail = ({ sidebar }) => {
             </div>
             <button
               onClick={handleNextClick}
-              disabled={startIndex >= avatars.length - visibleAvatars}
-              className="group bg-white hover:bg-red-600 absolute right-[70px] z-50 cursor-pointer px-2 py-0 rounded-[5px]"
+              disabled={startIndex >= instructors.length - visibleAvatars}
+              className="group bg-white hover:bg-red-600 absolute right-[150px] z-50 cursor-pointer px-2 py-0 rounded-[5px]"
             >
               <h1 className="group-hover:text-white">{">"}</h1>
             </button>

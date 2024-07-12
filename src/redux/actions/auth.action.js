@@ -33,6 +33,7 @@ export const login = (username, password) => {
         Cookies.set("role", user.role, { expires: 7 });
         Cookies.set("id", user.id, { expires: 7 });
         Cookies.set("avatar", user.avatar, { expires: 7 });
+        Cookies.set("username", user.username, { expires: 365 });
       } else {
         dispatch({ type: LOGIN_FAILURE, error: "Invalid account" });
       }
@@ -46,6 +47,7 @@ export const logout = () => {
   Cookies.remove("token");
   Cookies.remove("role");
   Cookies.remove("avatar");
+  Cookies.remove("username");
   return {
     type: LOGOUT,
   };

@@ -19,6 +19,7 @@ const initialState = {
   loading: false,
   id: Cookies.get("id") || null,
   avatar: Cookies.get("avatar") || null, // Ensure avatar is loaded from cookies
+  username: Cookies.get("username") || null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -33,6 +34,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
         avatar: Cookies.get("avatar"), // Save avatar to state
+        username: Cookies.get("username"),
         error: null,
         loading: false,
       };
@@ -50,6 +52,7 @@ const authReducer = (state = initialState, action) => {
         token: null,
         role: null, 
         avatar: null,
+        username: null
       };
     case SET_TOKEN:
       return {

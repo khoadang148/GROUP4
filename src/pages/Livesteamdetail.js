@@ -134,10 +134,16 @@ const { instructors } = useSelector((state) => state.instructors);
                 className="w-[50px] h-[50px] rounded-full"
                 src={instructor?.avatar}
               />
-              <div className=" px-5 font-semibold ">{instructor?.username}</div>
-              <button className="mt-7 px-5 py-[7px] bg-red-600 text-white text-center -ml-[96px]">
-                Subscribe
-              </button>
+              <div>
+                <div className=" px-5 font-semibold ">
+                  {instructor?.username}
+                </div>
+                <div>
+                  <button className="mt-2 px-5 py-[7px] bg-red-600 text-white text-center ml-[10px]">
+                    Subscribe
+                  </button>
+                </div>
+              </div>
             </div>
             <div>
               <div className="flex">

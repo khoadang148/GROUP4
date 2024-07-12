@@ -74,6 +74,7 @@ import TestResult from "./pages/TestResult";
 import InstructorDetail from "./pages/InstructorDetail";
 import Term from "./pages/Term";
 import Livestreamdetail from "./pages/Livesteamdetail";
+import { WebSocketProvider } from "./WebSocketProvider";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();
@@ -165,890 +166,895 @@ const App = () => {
     setIsHomeVisited(true);
   };
   return (
-    <Routes>
-      <Route path="/login" element={<LoginScreen />} />
-      <Route path="/signup" element={<SignupScreen />} />
-      <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
-      <Route
-        path="/home"
-        element={
-          token ? (
-            <Layout>
-              <HomeScreen onVisit={handleHomeVisit} />
-            </Layout>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/livestream"
-        element={
-          token ? (
-            <Layout>
-              <Livestream />
-            </Layout>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/explore"
-        element={
-          token ? (
-            <>
+    <WebSocketProvider>
+      <Routes>
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/signup" element={<SignupScreen />} />
+        <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
+        <Route
+          path="/home"
+          element={
+            token ? (
               <Layout>
-                <ExploreScreen sidebar={sidebar} />
+                <HomeScreen onVisit={handleHomeVisit} />
               </Layout>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/savedcourses"
-        element={
-          token ? (
-            <Layout>
-              <SavedCourses />
-            </Layout>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/instructorprofile"
-        element={
-          token ? (
-            <Layout>
-              <InstructorProfile sidebar={sidebar} />
-            </Layout>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/help"
-        element={
-          token ? (
-            <Layout>
-              <Help sidebar={sidebar} />
-            </Layout>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/allinstructors"
-        element={
-          token ? (
-            <Layout>
-              <AllInstructors sidebar={sidebar} />
-            </Layout>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/instructor/:id"
-        element={
-          token ? (
-            <Layout>
-              <InstructorDetail sidebar={sidebar} />
-            </Layout>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/searchresult"
-        element={
-          token ? (
-            <>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/livestream"
+          element={
+            token ? (
+              <Layout>
+                <Livestream />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/explore"
+          element={
+            token ? (
+              <>
+                <Layout>
+                  <ExploreScreen sidebar={sidebar} />
+                </Layout>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/savedcourses"
+          element={
+            token ? (
+              <Layout>
+                <SavedCourses />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/instructorprofile"
+          element={
+            token ? (
+              <Layout>
+                <InstructorProfile sidebar={sidebar} />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/help"
+          element={
+            token ? (
+              <Layout>
+                <Help sidebar={sidebar} />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/allinstructors"
+          element={
+            token ? (
+              <Layout>
+                <AllInstructors sidebar={sidebar} />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/instructor/:id"
+          element={
+            token ? (
+              <Layout>
+                <InstructorDetail sidebar={sidebar} />
+              </Layout>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/searchresult"
+          element={
+            token ? (
+              <>
+                <div className="flex flex-col min-h-screen">
+                  <HeaderPages />
+                  <SearchResult />
+                  <Footer />
+                </div>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/testview"
+          element={
+            token ? (
+              <>
+                <div className="flex flex-col min-h-screen">
+                  <HeaderPages />
+                  <TestView />
+                  <Footer />
+                </div>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/testresult"
+          element={
+            token ? (
+              <>
+                <div className="flex flex-col min-h-screen">
+                  <HeaderPages />
+                  <TestResult />
+                  <Footer />
+                </div>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+
+        <Route
+          path="/signupstep"
+          element={
+            token ? (
+              <div className="flex flex-col min-h-screen">
+                <SignupStep />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+
+        <Route
+          path="/error404"
+          element={
+            token ? (
+              <div className="flex flex-col min-h-screen">
+                <Error404 />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/thankyou"
+          element={
+            token ? (
+              <div className="flex flex-col min-h-screen">
+                <Thankyou />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/comingsoon"
+          element={
+            token ? (
+              <div className="flex flex-col min-h-screen">
+                <ComingSoon />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/contactus"
+          element={
+            token ? (
               <div className="flex flex-col min-h-screen">
                 <HeaderPages />
-                <SearchResult />
+                <Contactus />
                 <Footer />
               </div>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/testview"
-        element={
-          token ? (
-            <>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/livestreamdetail/:id"
+          element={
+            token ? (
+              <>
+                <Layout>
+                  <Livestreamdetail sidebar={sidebar} />
+                </Layout>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+
+        <Route
+          path="/certificationcenter"
+          element={
+            token ? (
+              <>
+                <div className="flex flex-col min-h-screen">
+                  <CertificationCenter />
+                  <Footer />
+                </div>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/certificationfillform"
+          element={
+            token ? (
+              <>
+                <div className="flex flex-col min-h-screen">
+                  <HeaderPages />
+                  <CertificationFillForm />
+                  <Footer />
+                </div>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/blog"
+          element={
+            token ? (
               <div className="flex flex-col min-h-screen">
                 <HeaderPages />
-                <TestView />
+                <OurBlog />
                 <Footer />
               </div>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/testresult"
-        element={
-          token ? (
-            <>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/blogsingle"
+          element={
+            token ? (
               <div className="flex flex-col min-h-screen">
                 <HeaderPages />
-                <TestResult />
+                <BlogSingle />
                 <Footer />
               </div>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-
-      <Route
-        path="/signupstep"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <SignupStep />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-
-      <Route
-        path="/error404"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <Error404 />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/thankyou"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <Thankyou />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/comingsoon"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <ComingSoon />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/contactus"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <Contactus />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/livestreamdetail/:id"
-        element={
-          token ? (
-            <>
-              <Layout>
-                <Livestreamdetail sidebar={sidebar} />
-              </Layout>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-
-      <Route
-        path="/certificationcenter"
-        element={
-          token ? (
-            <>
-              <div className="flex flex-col min-h-screen">
-                <CertificationCenter />
-                <Footer />
-              </div>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/certificationfillform"
-        element={
-          token ? (
-            <>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/company"
+          element={
+            token ? (
               <div className="flex flex-col min-h-screen">
                 <HeaderPages />
-                <CertificationFillForm />
+                <CompanyDetails />
                 <Footer />
               </div>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/blog"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <OurBlog />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/blogsingle"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <BlogSingle />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/company"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <CompanyDetails />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/press"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <Press />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/career"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <Career />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/about"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <About />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/invoice"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <Invoice />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/jobapply"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <JobApply />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      {role === "teacher" && (
-        <Route
-          path="/createcourse"
-          element={
-            token ? (
-              <Layout>
-                <CreateCourse />
-              </Layout>
             ) : (
               <Navigate to="/login" />
             )
           }
         />
-      )}
-      <Route
-        path="/paidmembership"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <PaidMenberShip />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/checkout"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <Checkout />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/shoppingcart"
-        element={
-          token ? (
-            <>
+        <Route
+          path="/press"
+          element={
+            token ? (
               <div className="flex flex-col min-h-screen">
-                <ShoppingCart />
+                <HeaderPages />
+                <Press />
                 <Footer />
               </div>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/setting"
-        element={
-          token ? (
-            <>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/career"
+          element={
+            token ? (
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <Career />
+                <Footer />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            token ? (
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <About />
+                <Footer />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/invoice"
+          element={
+            token ? (
+              <div className="flex flex-col min-h-screen">
+                <Invoice />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/jobapply"
+          element={
+            token ? (
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <JobApply />
+                <Footer />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        {role === "teacher" && (
+          <Route
+            path="/createcourse"
+            element={
+              token ? (
+                <Layout>
+                  <CreateCourse />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        <Route
+          path="/paidmembership"
+          element={
+            token ? (
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <PaidMenberShip />
+                <Footer />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            token ? (
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <Checkout />
+                <Footer />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/shoppingcart"
+          element={
+            token ? (
+              <>
+                <div className="flex flex-col min-h-screen">
+                  <ShoppingCart />
+                  <Footer />
+                </div>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/setting"
+          element={
+            token ? (
+              <>
+                <Layout>
+                  <SettingAccount sidebar={sidebar} />
+                </Layout>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/reporthistory"
+          element={
+            token ? (
               <Layout>
-                <SettingAccount sidebar={sidebar} />
+                <ReportHistory />
               </Layout>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/reporthistory"
-        element={
-          token ? (
-            <Layout>
-              <ReportHistory />
-            </Layout>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/sendfeedback"
-        element={
-          token ? (
-            <Layout>
-              <SendFeedback />
-            </Layout>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/addlivestream"
-        element={
-          token ? (
-            <>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/sendfeedback"
+          element={
+            token ? (
               <Layout>
-                <AddLiveStream sidebar={sidebar} />
+                <SendFeedback />
               </Layout>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/coursedetailview"
-        element={
-          token ? (
-            <>
-              <Layout>
-                <CourseDetailView sidebar={sidebar} />
-              </Layout>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/addlivestream"
+          element={
+            token ? (
+              <>
+                <Layout>
+                  <AddLiveStream sidebar={sidebar} />
+                </Layout>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/coursedetailview"
+          element={
+            token ? (
+              <>
+                <Layout>
+                  <CourseDetailView sidebar={sidebar} />
+                </Layout>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
 
-      <Route
-        path="/notification"
-        element={
-          token ? (
-            <>
-              <Layout>
-                <Notification sidebar={sidebar} />
-              </Layout>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/privacy"
-        element={
-          token ? (
-            <>
-              <Layout>
-                <Privacy sidebar={sidebar} />
-              </Layout>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/billing"
-        element={
-          token ? (
-            <>
-              <Layout>
-                <BillingandPayout sidebar={sidebar} />
-              </Layout>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/copyright"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <Copyright />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/apiclient"
-        element={
-          token ? (
-            <>
-              <Layout>
-                <ApiClients sidebar={sidebar} />
-              </Layout>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-      <Route
-        path="/closeAccount"
-        element={
-          token ? (
-            <>
-              <Layout>
-                <CloseAccount sidebar={sidebar} />
-              </Layout>
-            </>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
+        <Route
+          path="/notification"
+          element={
+            token ? (
+              <>
+                <Layout>
+                  <Notification sidebar={sidebar} />
+                </Layout>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/privacy"
+          element={
+            token ? (
+              <>
+                <Layout>
+                  <Privacy sidebar={sidebar} />
+                </Layout>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/billing"
+          element={
+            token ? (
+              <>
+                <Layout>
+                  <BillingandPayout sidebar={sidebar} />
+                </Layout>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/copyright"
+          element={
+            token ? (
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <Copyright />
+                <Footer />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/apiclient"
+          element={
+            token ? (
+              <>
+                <Layout>
+                  <ApiClients sidebar={sidebar} />
+                </Layout>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/closeAccount"
+          element={
+            token ? (
+              <>
+                <Layout>
+                  <CloseAccount sidebar={sidebar} />
+                </Layout>
+              </>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
 
-      {role === "teacher" && (
-        <Route
-          path="/verification"
-          element={
-            token ? (
-              <Layout>
-                <Verification sidebar={sidebar} />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
+        {role === "teacher" && (
+          <Route
+            path="/verification"
+            element={
+              token ? (
+                <Layout>
+                  <Verification sidebar={sidebar} />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
 
-      {role === "teacher" && (
-        <Route
-          path="/dashboard"
-          element={
-            token ? (
-              <Layout>
-                <DashBoard />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
+        {role === "teacher" && (
+          <Route
+            path="/dashboard"
+            element={
+              token ? (
+                <Layout>
+                  <DashBoard />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
 
-      {role === "teacher" && (
-        <Route
-          path="/statements"
-          element={
-            token ? (
-              <Layout>
-                <Statements />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
+        {role === "teacher" && (
+          <Route
+            path="/statements"
+            element={
+              token ? (
+                <Layout>
+                  <Statements />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
 
-      {role === "teacher" && (
+        {role === "teacher" && (
+          <Route
+            path="/earning"
+            element={
+              token ? (
+                <Layout>
+                  <Earning />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        {role === "teacher" && (
+          <Route
+            path="/review"
+            element={
+              token ? (
+                <Layout>
+                  <Review />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        {role === "teacher" && (
+          <Route
+            path="/mycertificates"
+            element={
+              token ? (
+                <Layout>
+                  <MyCertificates sidebar={sidebar} />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
         <Route
-          path="/earning"
+          path="/about"
           element={
             token ? (
-              <Layout>
-                <Earning />
-              </Layout>
+              <div className="flex flex-col min-h-screen">
+                <HeaderPages />
+                <About />
+                <Footer />
+              </div>
             ) : (
               <Navigate to="/login" />
             )
           }
         />
-      )}
-      {role === "teacher" && (
-        <Route
-          path="/review"
-          element={
-            token ? (
-              <Layout>
-                <Review />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
-      {role === "teacher" && (
-        <Route
-          path="/mycertificates"
-          element={
-            token ? (
-              <Layout>
-                <MyCertificates sidebar={sidebar} />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
-      <Route
-        path="/about"
-        element={
-          token ? (
-            <div className="flex flex-col min-h-screen">
-              <HeaderPages />
-              <About />
-              <Footer />
-            </div>
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
 
-      {role === "student" && (
-        <Route
-          path="/dashboard2"
-          element={
-            token ? (
-              <Layout>
-                <Dashboard2 sidebar={sidebar} />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
+        {role === "student" && (
+          <Route
+            path="/dashboard2"
+            element={
+              token ? (
+                <Layout>
+                  <Dashboard2 sidebar={sidebar} />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
 
-      {role === "student" && (
-        <Route
-          path="/credits"
-          element={
-            token ? (
-              <Layout>
-                <Credits sidebar={sidebar} />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
+        {role === "student" && (
+          <Route
+            path="/credits"
+            element={
+              token ? (
+                <Layout>
+                  <Credits sidebar={sidebar} />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
 
-      {role === "student" && (
-        <Route
-          path="/sendfeedback2"
-          element={
-            token ? (
-              <Layout>
-                <SendFeedback2 sidebar={sidebar} />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
+        {role === "student" && (
+          <Route
+            path="/sendfeedback2"
+            element={
+              token ? (
+                <Layout>
+                  <SendFeedback2 sidebar={sidebar} />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
 
-      {role === "student" && (
-        <Route
-          path="/review2"
-          element={
-            token ? (
-              <Layout>
-                <Review2 sidebar={sidebar} />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
+        {role === "student" && (
+          <Route
+            path="/review2"
+            element={
+              token ? (
+                <Layout>
+                  <Review2 sidebar={sidebar} />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
 
-      {role === "student" && (
-        <Route
-          path="/statements2"
-          element={
-            token ? (
-              <Layout>
-                <Statements2 sidebar={sidebar} />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
-      {role === "student" && (
-        <Route
-          path="/purchasedcourses"
-          element={
-            token ? (
-              <Layout>
-                <PurchasedCourses />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
-      {role === "student" && (
-        <Route
-          path="/studentcertificates"
-          element={
-            token ? (
-              <Layout>
-                <MyCertificates />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
-      {role === "teacher" && (
-        <Route
-          path="/teacherNotification"
-          element={
-            token ? (
-              <Layout>
-                <TeacherNotification />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
-      {role === "teacher" && (
-        <Route
-          path="/teacherMess"
-          element={
-            token ? (
-              <Layout>
-                <TeacherMess />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
-      {role === "student" && (
-        <Route
-          path="/studentMessage"
-          element={
-            token ? (
-              <Layout>
-                <StudentMess />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
-      {role === "student" && (
-        <Route
-          path="/studentNotification"
-          element={
-            token ? (
-              <Layout>
-                <StudentNotification />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
-      {role === "teacher" && (
-        <Route
-          path="/payout"
-          element={
-            token ? (
-              <Layout>
-                <Payout sidebar={sidebar} />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
-      {role === "teacher" && (
-        <Route
-          path="/analysis"
-          element={
-            token ? (
-              <Layout>
-                <Analysis sidebar={sidebar} />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
-      {role === "teacher" && (
-        <Route
-          path="/course"
-          element={
-            token ? (
-              <Layout>
-                <Course sidebar={sidebar} />
-              </Layout>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      )}
+        {role === "student" && (
+          <Route
+            path="/statements2"
+            element={
+              token ? (
+                <Layout>
+                  <Statements2 sidebar={sidebar} />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        {role === "student" && (
+          <Route
+            path="/purchasedcourses"
+            element={
+              token ? (
+                <Layout>
+                  <PurchasedCourses />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        {role === "student" && (
+          <Route
+            path="/studentcertificates"
+            element={
+              token ? (
+                <Layout>
+                  <MyCertificates />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        {role === "teacher" && (
+          <Route
+            path="/teacherNotification"
+            element={
+              token ? (
+                <Layout>
+                  <TeacherNotification />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        {role === "teacher" && (
+          <Route
+            path="/teacherMess"
+            element={
+              token ? (
+                <Layout>
+                  <TeacherMess />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        {role === "student" && (
+          <Route
+            path="/studentMessage"
+            element={
+              token ? (
+                <Layout>
+                  <StudentMess />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        {role === "student" && (
+          <Route
+            path="/studentNotification"
+            element={
+              token ? (
+                <Layout>
+                  <StudentNotification />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        {role === "teacher" && (
+          <Route
+            path="/payout"
+            element={
+              token ? (
+                <Layout>
+                  <Payout sidebar={sidebar} />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        {role === "teacher" && (
+          <Route
+            path="/analysis"
+            element={
+              token ? (
+                <Layout>
+                  <Analysis sidebar={sidebar} />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
+        {role === "teacher" && (
+          <Route
+            path="/course"
+            element={
+              token ? (
+                <Layout>
+                  <Course sidebar={sidebar} />
+                </Layout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
 
-      <Route path="*" element={<Navigate to={token ? "/home" : "/login"} />} />
-    </Routes>
+        <Route
+          path="*"
+          element={<Navigate to={token ? "/home" : "/login"} />}
+        />
+      </Routes>
+    </WebSocketProvider>
   );
 };
 

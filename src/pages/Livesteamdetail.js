@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getInstructorById } from "../redux/actions/instructor.action";
+import { addMessage, setMessages } from "../redux/actions/chat.action";
 import { Image } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,15 +11,64 @@ import {
   faThumbsUp,
 } from "@fortawesome/free-regular-svg-icons";
 import { faShareNodes } from "@fortawesome/free-solid-svg-icons";
-
+import Cookies from "js-cookie"; 
 const Livestreamdetail = ({ sidebar }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { instructor } = useSelector((state) => state.instructors);
+  const { messages } = useSelector((state) => state.chat);
+  const [inputMessage, setInputMessage] = useState("");
+  const [username, setUsername] = useState("");  // Add state for username
+  const websocketRef = useRef(null);
+
   useEffect(() => {
     dispatch(getInstructorById(id));
   }, [dispatch, id]);
 
+  useEffect(() => {
+    // Get the username from cookies
+    const name = Cookies.get('username');
+    setUsername(name);
+    
+    const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+    dispatch(setMessages(savedMessages));
+
+    websocketRef.current = new WebSocket("ws://localhost:8080");
+
+    websocketRef.current.onopen = () => {
+      console.log("Connected to WebSocket server");
+    };
+
+    websocketRef.current.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      dispatch(addMessage(message));
+    };
+
+    websocketRef.current.onclose = () => {
+      console.log("Disconnected from WebSocket server");
+    };
+
+    return () => {
+      websocketRef.current.close();
+    };
+  }, [dispatch]);
+
+  const handleSendMessage = () => {
+    if (inputMessage.trim() !== "") {
+      const message = {
+        username: username,  // Use the state value for username
+        content: inputMessage,
+      };
+      websocketRef.current.send(JSON.stringify(message));
+      dispatch(addMessage(message));
+      setInputMessage("");
+    }
+  };
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSendMessage();
+    }
+  };
   const keywords = [
     "John Doe",
     "Jassica",
@@ -56,6 +106,7 @@ const Livestreamdetail = ({ sidebar }) => {
       setStartIndex(startIndex + 1);
     }
   };
+
 
   return (
     <div className="mt-[100px] ml-10">
@@ -120,6 +171,30 @@ const Livestreamdetail = ({ sidebar }) => {
         </div>
         <div className="bg-white px-5 py-5 w-[1000px] ml-10">
           <p className="font-semibold">Live Chat</p>
+          <div className="h-96 overflow-y-scroll">
+            {messages.map((message, index) => (
+              <div key={index} className="my-2">
+                <strong>{message.username}: </strong>
+                <span>{message.content}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4">
+          <input
+    type="text"
+    value={inputMessage}
+    onChange={(e) => setInputMessage(e.target.value)}
+    onKeyPress={handleKeyPress} // Thêm sự kiện này
+    className="w-full border rounded px-3 py-2"
+    placeholder="Enter your message..."
+  />
+  <button
+    onClick={handleSendMessage}
+    className="mt-2 bg-red-600 text-white px-4 py-2 rounded"
+  >
+    Send
+  </button>
+          </div>
         </div>
       </div>
 

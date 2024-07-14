@@ -64,7 +64,7 @@ import Payout from "./pages/Payout";
 import credits from "./pages/Credits";
 import Checkout from "./pages/Checkout";
 import Review from "./pages/Review";
-import CreateCourse from "./pages/CreateCourse";
+
 import Review2 from "./pages/Review2";
 import Credits from "./pages/Credits";
 import Analysis from "./pages/Analysis";
@@ -75,6 +75,7 @@ import InstructorDetail from "./pages/InstructorDetail";
 import Term from "./pages/Term";
 import Livestreamdetail from "./pages/Livesteamdetail";
 import { WebSocketProvider } from "./WebSocketProvider";
+import CreateCourse from "./pages/CreateCourse";
 
 // const ProtectedRoute = ({ element: Element, ...rest }) => {
 //   const { user } = useAuth();

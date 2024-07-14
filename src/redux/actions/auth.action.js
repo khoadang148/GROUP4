@@ -34,6 +34,8 @@ export const login = (username, password) => {
         Cookies.set("id", user.id, { expires: 7 });
         Cookies.set("avatar", user.avatar, { expires: 7 });
         Cookies.set("username", user.username, { expires: 365 });
+        localStorage.setItem('firstName', user.firstName || '');
+        localStorage.setItem('lastName', user.lastName || '');
       } else {
         dispatch({ type: LOGIN_FAILURE, error: "Invalid account" });
       }
@@ -48,6 +50,15 @@ export const logout = () => {
   Cookies.remove("role");
   Cookies.remove("avatar");
   Cookies.remove("username");
+  localStorage.removeItem('firstName');
+  localStorage.removeItem('lastName');
+  localStorage.removeItem('headline');
+  localStorage.removeItem('description');
+  localStorage.removeItem('mysite ');
+  localStorage.removeItem('facebookbprofile');
+  localStorage.removeItem('twitterprofile');
+  localStorage.removeItem('linkedinprofile');
+  localStorage.removeItem('youtubeprofile');
   return {
     type: LOGOUT,
   };

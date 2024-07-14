@@ -142,14 +142,16 @@ const App = () => {
     if (
       tokenFromCookie &&
       !window.location.pathname.includes("/signup") &&
-      !window.location.pathname.includes("/forgot-password")
+      !window.location.pathname.includes("/forgot-password") &&
+      !window.location.pathname.includes("/signupstep") 
     ) {
       dispatch(setToken(tokenFromCookie));
       dispatch(setRole(tokenFromCookie));
       dispatch(setID(idFromCookie));
     } else if (
       !window.location.pathname.includes("/signup") &&
-      !window.location.pathname.includes("/forgot-password")
+      !window.location.pathname.includes("/forgot-password") &&
+      !window.location.pathname.includes("/signupstep") 
     ) {
       navigate("/login");
     }
@@ -171,6 +173,7 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/signup" element={<SignupScreen />} />
+        <Route path="/signupstep" element={<SignupStep />} />
         <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
         <Route
           path="/home"

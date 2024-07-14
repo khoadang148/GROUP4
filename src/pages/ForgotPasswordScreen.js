@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
+import { useDispatch } from 'react-redux';  
+import { forgotPassword } from '../redux/actions/auth.action';
 
 // Define logo URL and sign logo URL
 const logoUrl = 'https://gambolthemes.net/html-items/cursus-new-demo/images/logo.svg';
@@ -9,15 +11,22 @@ const signLogoUrl = 'https://gambolthemes.net/html-items/cursus-new-demo/images/
 
 const ForgotPasswordScreen = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleForgotPassword = async (values) => {
     setLoading(true);
-    // Placeholder for sending reset password email
-    // Simulate API call or backend logic
-    console.log('Submitting forgot password:', values.email);
-    setLoading(false);
-    navigate('/login'); // Navigate back to login screen after submitting
+    // Dispatch the action to initiate password reset
+    dispatch(forgotPassword(values.email))
+      .then(() => {
+        setLoading(false);
+        navigate('/login'); // Navigate back to login screen after success
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error('Password reset failed:', error);
+        // Handle error scenarios as needed
+      });
   };
 
   return (

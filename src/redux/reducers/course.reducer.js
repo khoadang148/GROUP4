@@ -7,6 +7,9 @@ import {
   SEARCH_COURSES_SUCCESS,
   SET_RECENT_COURSES,
   SET_NEWEST_COURSES,
+  CREATE_COURSE_FAILURE,
+  CREATE_COURSE_SUCCESS,
+  CREATE_COURSE_REQUEST,
 } from "../actionType";
 
 const initialState = {
@@ -65,18 +68,18 @@ const enrolledCoursesReducer = (state = initialState, action) => {
         ...state,
         newestCourses: action.payload,
       };
-      case "CREATE_COURSE_REQUEST":
+      case CREATE_COURSE_REQUEST:
         return {
           ...state,
           loading: true,
         };
-      case "CREATE_COURSE_SUCCESS":
+      case CREATE_COURSE_SUCCESS:
         return {
           ...state,
           loading: false,
           courses: [...state.courses, action.payload],
         };
-      case "CREATE_COURSE_FAILURE":
+      case CREATE_COURSE_FAILURE:
         return { 
           ...state, 
           loading: false, 

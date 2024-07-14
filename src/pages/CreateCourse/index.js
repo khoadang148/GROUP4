@@ -4,6 +4,7 @@ import {
   Divider,
   Dropdown,
   InputNumber,
+  Menu,
   Modal,
   Space,
   Steps,
@@ -15,11 +16,7 @@ import {
   faArrowUpFromBracket,
   faBars,
   faChartLine,
-  faCircleInfo,
-  faClapperboard,
-  faFileCircleQuestion,
   faGear,
-  faMoneyBill1,
   faPaperclip,
   faPlus,
   faTrashCan,
@@ -31,282 +28,40 @@ import {
   faCircleQuestion,
   faClipboard,
   faFileLines,
-  faImage,
   faNewspaper,
   faPenToSquare,
   faPlusSquare,
 } from "@fortawesome/free-regular-svg-icons";
-import { DownOutlined, UploadOutlined } from "@ant-design/icons";
-import { Button, message } from "antd";
-import thumnail from "../assets/thumnail.png";
-import { useDispatch } from "react-redux";
-import { createCourse } from "../redux/actions/course.action";
+import { DownOutlined } from "@ant-design/icons";
+import { message } from "antd";
+import Media from "./Media";
+import Basic from "./Basic";
+import Price from "./Price";
+
+export const initialCourseData = {
+  title: "",
+  shortDescription: "",
+  description: "",
+  learnings: "",
+  requirements: "",
+  level: "",
+  audioLanguage: "",
+  closeCaption: "",
+  category: "",
+  regularPrice: "",
+  discountPrice: "",
+  thumbnail: "",
+};
 
 const CreateCourse = () => {
-  const [courseData, setCourseData] = useState({
-    title: "",
-    shortDescription: "",
-    description: "",
-    learnings: "",
-    requirements: "",
-    level: "",
-    audioLanguage: "",
-    closeCaption: "",
-    category: "",
-    dropdown: "",
-    regularPrice: "",
-    discountPrice: "",
-  });
-
-  const dispatch = useDispatch();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCourseData({
-      ...courseData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = () => {
-    dispatch(createCourse(courseData));
-  };
-
-  const [fileList, setFileList] = useState([]);
-  const uploadProps = {
-    name: "file",
-    accept: "image/*",
-    multiple: true,
-    fileList: fileList,
-    beforeUpload: (file) => {
-      const isImage = file.type.startsWith("image/");
-      if (!isImage) {
-        message.error("You can only upload image files!");
-      }
-      return isImage || Upload.LIST_IGNORE;
-    },
-    onChange(info) {
-      let newFileList = [...info.fileList];
-      newFileList = newFileList.slice(-5);
-      setFileList(newFileList);
-
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-    onRemove(file) {
-      setFileList((prevFileList) =>
-        prevFileList.filter((item) => item.uid !== file.uid)
-      );
-    },
-  };
-  const [activeTab, setActiveTab] = useState("Basic");
-
-  const Basic = () => {
-    const items = [
-      { label: <a href="https://www.antgroup.com">Beginner</a>, key: "0" },
-      { label: <a href="https://www.aliyun.com">Intermediate</a>, key: "1" },
-      { label: <a href="https://www.antgroup.com">Expert</a>, key: "2" },
-    ];
-
-    const audioItems = [
-      { label: <a href="https://www.audio1.com">English</a>, key: "6" },
-      { label: <a href="https://www.audio2.com">Spanish</a>, key: "7" },
-      { label: <a href="https://www.audio3.com">French</a>, key: "8" },
-      { label: <a href="https://www.audio4.com">German</a>, key: "9" },
-      { label: <a href="https://www.audio5.com">Italian</a>, key: "10" },
-      { label: <a href="https://www.audio6.com">Chinese</a>, key: "11" },
-    ];
-
-    const combinedAudioItems = [...audioItems];
-
-    const combinedItems = [...items];
-
-    return (
-      <div>
-        <div className="flex gap-x-3">
-          <FontAwesomeIcon
-            icon={faCircleInfo}
-            className="mt-[4px] text-[15px]"
-          />
-          <p className="text-[18px] font-semibold">Basic Information</p>
-        </div>
-        <Divider />
-        <div>
-          <div className="py-4 px-4 pb-10 bg-white">
-            <div className="pl-5 pt-5 pr-5">
-              <div>
-                <p className="font-semibold text-[14px]">Course Title*</p>
-                <input
-                  name="title"
-                  placeholder="Course title here"
-                  className="border border-gray-200 w-[100%] h-10 pl-5 font-normal"
-                  value={courseData.title}
-                  onChange={handleChange}
-                />
-                <p className="text-[12px] text-[#686F7A] pt-1">
-                  (Please make this a maximum of 100 characters and unique.)
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold text-[14px]">Short Description*</p>
-                <input
-                  name="shortDescription"
-                  placeholder="Item description here..."
-                  className="border border-gray-200 w-[100%] h-[130px] pl-5 font-normal pb-[100px]"
-                  value={courseData.shortDescription}
-                  onChange={handleChange}
-                />
-                <p className="text-[12px] text-[#686F7A] pt-1">220 words</p>
-              </div>
-              <div>
-                <p className="font-semibold text-[14px]">Course Description*</p>
-                <input
-                  name="description"
-                  placeholder="Item description here..."
-                  className="border border-gray-200 w-[100%] h-[130px] pl-5 font-normal pb-[100px]"
-                  value={courseData.description}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex mt-10">
-                <div className="pr-[30px]">
-                  <p className="font-semibold text-[14px]">
-                    What will students learn in your course?*
-                  </p>
-                  <input
-                    name="learnings"
-                    className="border border-gray-200 w-[500px] h-[130px] pl-5 font-normal pb-[100px]"
-                    value={courseData.learnings}
-                    onChange={handleChange}
-                  />
-                  <p className="text-[11px] text-[#686F7A] pt-1">
-                    Student will gain this skills, knowledge after completing
-                    this course. (One per line).
-                  </p>
-                </div>
-                <div>
-                  <p className="font-semibold text-[14px]">Requirements*</p>
-                  <input
-                    name="requirements"
-                    className="border border-gray-200 w-[500px] h-[130px] pl-5 font-normal pb-[100px]"
-                    value={courseData.requirements}
-                    onChange={handleChange}
-                  />
-                  <p className="text-[11px] text-[#686F7A] pt-1">
-                    What knowledge, technology, tools required by users to start
-                    this course. (One per line).
-                  </p>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="font-semibold text-[14px] pt-7 pl-2">
-                    Course Level*
-                  </p>
-                  <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
-                    <Dropdown
-                      menu={{ items: combinedItems }}
-                      trigger={["click"]}
-                      onClick={(e) => e.preventDefault()}
-                      value={courseData.dropdown}
-                    >
-                      <Space>
-                        <div className="gap-[330px] flex">
-                          <p className="mt-[8px] text-[14px]">
-                            Nothing Selected
-                          </p>
-                          <DownOutlined />
-                        </div>
-                      </Space>
-                    </Dropdown>
-                  </button>
-                </div>
-                <div>
-                  <p className="font-semibold text-[14px] pt-7 pl-2">
-                    Audio Language*
-                  </p>
-                  <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
-                    <Dropdown
-                      menu={{ items: combinedAudioItems }}
-                      trigger={["click"]}
-                      onClick={(e) => e.preventDefault()}
-                      value={courseData.dropdown}
-                    >
-                      <Space>
-                        <div className="gap-[360px] flex">
-                          <p className="mt-[8px] text-[14px]">Select Audio</p>
-                          <DownOutlined />
-                        </div>
-                      </Space>
-                    </Dropdown>
-                  </button>
-                </div>
-                <div>
-                  <p className="font-semibold text-[14px] pt-7 pl-2">
-                    Close Caption*
-                  </p>
-                  <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
-                    <Dropdown
-                      menu={{ items: combinedItems }}
-                      trigger={["click"]}
-                      onClick={(e) => e.preventDefault()}
-                      value={courseData.dropdown}
-                    >
-                      <Space>
-                        <div className="gap-[330px] flex">
-                          <p className="mt-[8px] text-[14px]">Select Caption</p>
-                          <DownOutlined />
-                        </div>
-                      </Space>
-                    </Dropdown>
-                  </button>
-                </div>
-                <div>
-                  <p className="font-semibold text-[14px] pt-7 pl-2">
-                    Course Category*
-                  </p>
-                  <button className="border border-gray-200 w-[100%] h-[50px] font-normal text-[#48c790] hover:text-black">
-                    <Dropdown
-                      menu={{ items: combinedItems }}
-                      trigger={["click"]}
-                      onClick={(e) => e.preventDefault()}
-                      value={courseData.dropdown}
-                    >
-                      <Space>
-                        <div className="gap-[330px] flex">
-                          <p className="mt-[8px] text-[14px]">
-                            Web Development
-                          </p>
-                          <DownOutlined />
-                        </div>
-                      </Space>
-                    </Dropdown>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button
-          className="mt-10 py-3 px-6 bg-white text-[#48c790] border hover:bg-black hover:text-white"
-          onClick={handleSubmit}
-        >
-          Next
-        </button>
-      </div>
-    );
-  };
+  const [courseData, setCourseData] = useState(initialCourseData);
+  const [current, setCurrent] = useState(0);
 
   const Curriculum = ({ sidebar }) => {
     const handlePrevious = () => {
-      setActiveTab("Basic");
       setCurrent(0);
     };
     const handleNext = () => {
-      setActiveTab("Media");
       setCurrent(2);
     };
 
@@ -424,22 +179,22 @@ const CreateCourse = () => {
           <div className="-ml-[40px]">
             <div className="flex ">
               <div className="  mt-7 bg-white w-[50%] text-center border-dashed border-2  border-gray-200 h-[170px] mr-5">
-                <Upload {...uploadProps}>
+                {/* <Upload {...uploadProps}>
                   <button className="border-red-500 font-semibold border px-5 py-2 mt-6 text-red-500 mb-5">
                     UPLOAD VIDEO
                   </button>
-                </Upload>
+                </Upload> */}
                 <p className="text-[15px] text-[#828181]">File Format: .mp4</p>
                 <p className=" flex text-[15px] pl-[130px]">
                   Uploaded ID : <p className="font-semibold">12</p>
                 </p>
               </div>
               <div className="  mt-7 bg-white w-[50%] text-center border-dashed border-2  border-gray-200 h-[170px]">
-                <Upload {...uploadProps}>
+                {/* <Upload {...uploadProps}>
                   <button className="border-red-500 font-semibold border px-5 py-2 mt-6 text-red-500 mb-5">
                     VIDEO POSTER
                   </button>
-                </Upload>
+                </Upload> */}
                 <p className="text-[15px] text-[#828181]">
                   Uploaded ID : preview.jpg
                 </p>
@@ -665,11 +420,11 @@ const CreateCourse = () => {
       return (
         <div className="-ml-[100px]">
           <div className="  mt-7 bg-white w-[100%] text-center border-dashed border-2  border-gray-200 h-[170px] mr-5 h-auto">
-            <Upload {...uploadProps}>
+            {/* <Upload {...uploadProps}>
               <button className="border-red-500 font-semibold border px-5 py-2 mt-6 text-red-500 mb-5">
                 ATTACHMENT
               </button>
-            </Upload>
+            </Upload> */}
             <p className="text-[15px] text-[#828181]">
               Supports: jpg, jpeg, png, pdf or .zip
             </p>
@@ -999,11 +754,11 @@ const CreateCourse = () => {
           <div>
             <div className="mb-4">
               <div className="  mt-7 bg-white w-[100%] text-center border-dashed border-2  border-gray-200 h-[170px] mr-5 h-auto">
-                <Upload {...uploadProps}>
+                {/* <Upload {...uploadProps}>
                   <button className="border-red-500 font-semibold border px-5 py-2 mt-6 text-red-500 mb-5">
                     ATTACHMENT
                   </button>
-                </Upload>
+                </Upload> */}
                 <p className="text-[15px] text-[#828181]">
                   Supports: jpg, jpeg, png, pdf or .zip
                 </p>
@@ -1349,419 +1104,8 @@ const CreateCourse = () => {
     );
   };
 
-  const Media = ({ sidebar }) => {
-    const handlePrevious = () => {
-      setActiveTab("Currilum");
-      setCurrent(1);
-    };
-    const handleNext = () => {
-      setActiveTab("Price");
-      setCurrent(3);
-    };
-
-    const [activeTab, setActiveTab2] = useState("HTML");
-    const HTML = () => {
-      return (
-        <div className="pt-5 -ml-[20px]">
-          <div className=" pb-6 bg-white w-[480px] h-[150px] text-center pt-3">
-            <Upload {...uploadProps}>
-              <button className="border-red-500 font-semibold border px-5 py-2 mt-5 text-red-500 shadow-md">
-                UPLOAD VIDEO
-              </button>
-            </Upload>
-            <p className="pt-4 text-[14px]">File Format: .mp4</p>
-          </div>
-          <div>
-            <p className="text-[14px] font-semibold mt-9">Course thumbnail*</p>
-            <img
-              src={thumnail}
-              alt="Course thumbnail"
-              className="w-[500px] h-[280px] object-cover"
-            />
-            <div className=" pb-6 bg-white w-[500px] text-center">
-              <Upload {...uploadProps}>
-                <button className="border-red-500 font-semibold border px-5 py-2 mt-5 text-red-500">
-                  CHOOSE THUMBNAIL
-                </button>
-              </Upload>
-              <p className="pt-4 text-[13px]">
-                Size: 590x300 pixels. Supports: jpg,jpeg, or png
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    const External = () => {
-      return (
-        <div className="pt-6 -ml-[20px]">
-          <div>
-            <p className="text-[14px] font-semibold">External URL*</p>
-            <input
-              placeholder="External Video URL"
-              className="w-[100%] h-[40px]  text-[14px] pl-2 border border-gray-100"
-            />
-          </div>
-          <div>
-            <p className="text-[14px] font-semibold mt-9">Course thumbnail*</p>
-            <img
-              src={thumnail}
-              alt="Course thumbnail"
-              className="w-[500px] h-[280px] object-cover"
-            />
-            <div className=" pb-6 bg-white w-[500px] text-center">
-              <Upload {...uploadProps}>
-                <button className="border-red-500 font-semibold border px-5 py-2 mt-5 text-red-500">
-                  CHOOSE THUMBNAIL
-                </button>
-              </Upload>
-              <p className="pt-4 text-[13px]">
-                Size: 590x300 pixels. Supports: jpg,jpeg, or png
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    const Youtube = () => {
-      return (
-        <div className="pt-6 -ml-[20px]">
-          <div>
-            <p className="text-[14px] font-semibold">Youtube URL*</p>
-            <input
-              placeholder="External Video URL"
-              className="w-[100%] h-[40px]  text-[14px] pl-2 border border-gray-100"
-            />
-          </div>
-          <div>
-            <p className="text-[14px] font-semibold mt-9">Course thumbnail*</p>
-            <img
-              src={thumnail}
-              alt="Course thumbnail"
-              className="w-[500px] h-[280px] object-cover"
-            />
-            <div className=" pb-6 bg-white w-[500px] text-center">
-              <Upload {...uploadProps}>
-                <button className="border-red-500 font-semibold border px-5 py-2 mt-5 text-red-500">
-                  CHOOSE THUMBNAIL
-                </button>
-              </Upload>
-              <p className="pt-4 text-[13px]">
-                Size: 590x300 pixels. Supports: jpg,jpeg, or png
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    const Vimeo = () => {
-      return (
-        <div className="pt-6 -ml-[20px]">
-          <div>
-            <p className="text-[14px] font-semibold">Vimeo URL*</p>
-            <input
-              placeholder="External Video URL"
-              className="w-[100%] h-[40px]  text-[14px] pl-2 border border-gray-100"
-            />
-          </div>
-          <div>
-            <p className="text-[14px] font-semibold mt-9">Course thumbnail*</p>
-            <img
-              src={thumnail}
-              alt="Course thumbnail"
-              className="w-[500px] h-[280px] object-cover"
-            />
-            <div className=" pb-6 bg-white w-[500px] text-center">
-              <Upload {...uploadProps}>
-                <button className="border-red-500 font-semibold border px-5 py-2 mt-5 text-red-500">
-                  CHOOSE THUMBNAIL
-                </button>
-              </Upload>
-              <p className="pt-4 text-[13px]">
-                Size: 590x300 pixels. Supports: jpg,jpeg, or png
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    const Embedded = () => {
-      return (
-        <div className="pt-6 -ml-[20px]">
-          <div>
-            <p className="text-[14px] font-semibold">Embedded Code*</p>
-            <input
-              placeholder="Place your embedded code herex"
-              className="w-[100%] h-[130px] pb-[100px] text-[14px] pl-2"
-            />
-          </div>
-          <div>
-            <p className="text-[14px] font-semibold mt-9">Course thumbnail*</p>
-            <img
-              src={thumnail}
-              alt="Course thumbnail"
-              className="w-[500px] h-[280px] object-cover"
-            />
-            <div className=" pb-6 bg-white w-[500px] text-center">
-              <Upload {...uploadProps}>
-                <button className="border-red-500 font-semibold border px-5 py-2 mt-5 text-red-500">
-                  CHOOSE THUMBNAIL
-                </button>
-              </Upload>
-              <p className="pt-4 text-[13px]">
-                Size: 590x300 pixels. Supports: jpg,jpeg, or png
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    return (
-      <div className="h-[900px]">
-        <div className="flex gap-x-3">
-          <FontAwesomeIcon icon={faImage} className="mt-[4px] text-[15px]" />
-          <p className="text-[18px] font-semibold">Media</p>
-        </div>
-        <Divider />
-        <div>
-          <p className="text-[#7c7c7c] text-[13px]   ">
-            Intro Course overview provider type. (.mp4, YouTube, Vimeo etc.)
-          </p>
-        </div>
-        <div className="-ml-[80px]">
-          <div>
-            <div className={`flex gap-5   ${sidebar ? "ml-10" : "ml-[80px]"}`}>
-              <div className="bg-white">
-                <button
-                  className={`text-black font-medium text-[14px] b px-5 py-3 ${
-                    activeTab === "HTML" ? "bg-red-600 text-white" : ""
-                  }`}
-                  onClick={() => setActiveTab2("HTML")}
-                >
-                  HTML5(mp4)
-                </button>
-              </div>
-              <div className="bg-white">
-                <button
-                  className={`text-black font-medium text-[14px]  px-5 py-3 ${
-                    activeTab === "External" ? "bg-red-600 text-white" : ""
-                  }`}
-                  onClick={() => setActiveTab2("External")}
-                >
-                  External URL
-                </button>
-              </div>
-              <div className="bg-white">
-                <button
-                  className={`text-black font-medium text-[14px]  px-5 py-3 ${
-                    activeTab === "Youtube" ? "bg-red-600 text-white" : ""
-                  }`}
-                  onClick={() => setActiveTab2("Youtube")}
-                >
-                  Youtube
-                </button>
-              </div>
-
-              <div className="bg-white">
-                <button
-                  className={`text-black font-medium text-[14px]  px-5 py-3 ${
-                    activeTab === "Vimeo" ? "bg-red-600 text-white" : ""
-                  }`}
-                  onClick={() => setActiveTab2("Vimeo")}
-                >
-                  Vimeo
-                </button>
-              </div>
-
-              <div className="bg-white">
-                <button
-                  className={`text-black  font-medium text-[14px]  px-5 py-3 ${
-                    activeTab === "Embedded" ? "bg-red-600 text-white" : ""
-                  }`}
-                  onClick={() => setActiveTab2("Embedded")}
-                >
-                  Embedded
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className={`mt-4 ${sidebar ? "ml-28" : "ml-[100px]"}`}>
-            {activeTab === "HTML" && <HTML />}
-            {activeTab === "External" && <External />}
-            {activeTab === "Youtube" && <Youtube />}
-            {activeTab === "Vimeo" && <Vimeo />}
-            {activeTab === "Embedded" && <Embedded />}
-          </div>
-        </div>
-        <div className="mt-[60px]">
-          <button
-            className="py-3 px-4 bg-white text-[#48c790] border hover:bg-black hover:text-white mr-[850px] "
-            onClick={handlePrevious}
-          >
-            Previous
-          </button>
-          <button
-            className="py-3 px-7 bg-white text-[#48c790] border hover:bg-black hover:text-white "
-            onClick={handleNext}
-          >
-            Next
-          </button>
-        </div>
-      </div>
-    );
-  };
-
-  const Price = ({ sidebar }) => {
-    const handlePrevious = () => {
-      setActiveTab("Media");
-      setCurrent(2);
-    };
-    const handleNext = () => {
-      setActiveTab("Publish");
-      setCurrent(4);
-    };
-    const [activeTab, setActiveTab1] = useState("Free");
-
-    const Free = () => {
-      const [checked, setChecked] = useState(false);
-      const onChange = (checked) => {
-        console.log(`switch to ${checked}`);
-        setChecked(checked);
-      };
-      const [checkedd, setCheckedd] = useState(false);
-      const onChangee = (checkedd) => {
-        console.log(`switch to ${checkedd}`);
-        setCheckedd(checkedd);
-      };
-      return (
-        <div className="   bg-white ml-[-120px] h-[200px] w-[1000px]">
-          <div className="ml-[400px] pt-5">
-            <div className="flex gap-3 ">
-              <Switch
-                defaultChecked={checked}
-                onChange={onChange}
-                className="w-[10px] "
-                style={{ backgroundColor: checked ? "#ED2A26" : "#CCCCCC " }}
-              />
-              <div className="flex flex-col text-[12px] pt-1 font-semibold">
-                <h3>Require Log In</h3>
-              </div>
-            </div>
-            <div className="flex gap-3 mt-3">
-              <Switch
-                defaultChecked={checkedd}
-                onChange={onChangee}
-                className="w-[10px] "
-                style={{ backgroundColor: checkedd ? "#ED2A26" : "#CCCCCC " }}
-              />
-              <div className="flex flex-col text-[12px] pt-1 font-semibold">
-                <h3>Require Enroll</h3>
-              </div>
-            </div>
-            <div className="-ml-[360px] text-[#606060] mt-10">
-              <p>
-                If the course is free, if student require to enroll your course,
-                if not required enroll, if students required sign in to your
-                website to take<p className="text-center">this course.</p>
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-    };
-    const Paid = () => {
-      return (
-        <div className="h-[300px]">
-          <div className="-ml-[100px]">
-            <p className="text-[14px] font-semibold">Regular Price*</p>
-            <div className="flex items-center ">
-              <input
-                placeholder="$0"
-                className="border w-[360px] pl-3 h-10 object-cover"
-                value={courseData.regularPrice}
-              />
-              <p className="bg-[#F7F7F7]  ml-[-45px] mt-2 p-2 rounded-sm text-[12px] font-bold">
-                USD
-              </p>
-            </div>
-          </div>
-          <div className="-ml-[100px] mt-5">
-            <p className="text-[14px] font-semibold">Discount Price*</p>
-            <div className="flex items-center ">
-              <input
-                placeholder="$0"
-                className="border w-[360px] pl-3 h-10 object-cover"
-                value={courseData.discountPrice}
-              />
-              <p className="bg-[#F7F7F7]  ml-[-45px] mt-2 p-2 rounded-sm text-[12px] font-bold">
-                USD
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    return (
-      <div>
-        <div className="flex gap-x-3 ">
-          <FontAwesomeIcon
-            icon={faMoneyBill1}
-            className="mt-[2px] text-[20px]"
-          />
-          <p className="text-[18px] font-semibold">Price</p>
-        </div>
-        <Divider />
-        <div className="  w-[1000px] h-[380px]">
-          <div className="bg-white pt-5 px-5 h-[300px] border">
-            <div className="bg-[#F3F3F3] border ">
-              <button
-                className={`text-black  font-medium text-[14px] px-3 py-3 w-[50%]  ${
-                  activeTab === "Free" ? "bg-red-600 text-white" : ""
-                }`}
-                onClick={() => setActiveTab1("Free")}
-              >
-                Free
-              </button>
-              <button
-                className={`text-black font-medium text-[14px] px-3 py-3 w-[50%]  ${
-                  activeTab === "Paid" ? "bg-red-600 text-white" : ""
-                }`}
-                onClick={() => setActiveTab1("Paid")}
-              >
-                Paid
-              </button>
-            </div>
-            <div className={`mt-4 ${sidebar ? "ml-28" : "ml-[100px]"}`}>
-              {activeTab === "Free" && <Free />}
-              {activeTab === "Paid" && <Paid />}
-            </div>
-          </div>
-        </div>
-        <button
-          className="py-3 px-4 bg-white text-[#48c790] border hover:bg-black hover:text-white mr-[850px] "
-          onClick={handlePrevious}
-        >
-          Previous
-        </button>
-        <button
-          className="py-3 px-7 bg-white text-[#48c790] border hover:bg-black hover:text-white "
-          onClick={handleSubmit}
-        >
-          Next
-        </button>
-      </div>
-    );
-  };
-
   const Publish = () => {
     const handlePrevious = () => {
-      setActiveTab("Price");
       setCurrent(3);
     };
     const [messageApi, contextHolder] = message.useMessage();
@@ -1815,42 +1159,15 @@ const CreateCourse = () => {
     );
   };
 
-  const [current, setCurrent] = useState(0);
-
-  const onChange = (value) => {
-    setCurrent(value);
-    switch (value) {
-      case 0:
-        setActiveTab("Basic");
-        break;
-      case 1:
-        setActiveTab("Curriculum");
-        break;
-      case 2:
-        setActiveTab("Media");
-        break;
-      case 3:
-        setActiveTab("Price");
-        break;
-      case 4:
-        setActiveTab("Publish");
-        break;
-      default:
-        setActiveTab("Basic");
-    }
-  };
-
   return (
     <div className="pt-[100px] pl-[100px] bg-[#f7f7f7] ">
       <div className="pb-[80px] gap-x-3 flex">
         <FontAwesomeIcon icon={faChartLine} className="mt-2" />
         <h1 className="text-2xl ">Create New Course</h1>
       </div>
-
       <div>
         <Steps
           current={current}
-          onChange={onChange}
           className="w-[1080px]"
           items={[
             {
@@ -1873,11 +1190,29 @@ const CreateCourse = () => {
       </div>
       <Divider className="mt-[100px] " />
       <div>
-        {activeTab === "Basic" && <Basic />}
-        {activeTab === "Curriculum" && <Curriculum />}
-        {activeTab === "Media" && <Media />}
-        {activeTab === "Price" && <Price />}
-        {activeTab === "Publish" && <Publish />}
+        {current === 0 && (
+          <Basic
+            courseData={courseData}
+            setCourseData={setCourseData}
+            setCurrent={setCurrent}
+          />
+        )}
+        {current === 1 && <Curriculum />}
+        {current === 2 && (
+          <Media
+            courseData={courseData}
+            setCourseData={setCourseData}
+            setCurrent={setCurrent}
+          />
+        )}
+        {current === 3 && (
+          <Price
+            courseData={courseData}
+            setCourseData={setCourseData}
+            setCurrent={setCurrent}
+          />
+        )}
+        {current === 4 && <Publish />}
       </div>
     </div>
   );

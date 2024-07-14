@@ -10,6 +10,7 @@ import reviewReducer from "./reducers/review.reducer";
 import ourblogReducer from "./reducers/ourblog.reducer";
 import statementsReducer from "./reducers/statements.reducer";
 import chatReducer from "./reducers/chat.reducer";
+import userReducer from "./reducers/user.reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   review: reviewReducer,
   ourblog: ourblogReducer,
   chat: chatReducer,
+  userUpdate: userReducer,
 });
 
 const store = createStore(

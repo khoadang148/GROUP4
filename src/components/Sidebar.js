@@ -309,7 +309,7 @@ const Sidebar = ({ sidebar }) => {
           </Menu.Item>
 
           <Menu.Item
-            key="64"
+            key="130"
             icon={<FontAwesomeIcon icon={faStar} />}
             onClick={handleReview2}
             className="flex items-center py-[27px]"
@@ -318,7 +318,7 @@ const Sidebar = ({ sidebar }) => {
           </Menu.Item>
 
           <Menu.Item
-            key="64"
+            key="131"
             icon={<FontAwesomeIcon icon={faWallet} />}
             onClick={handleCredits}
             className="flex items-center py-[27px]"
@@ -327,7 +327,7 @@ const Sidebar = ({ sidebar }) => {
           </Menu.Item>
 
           <Menu.Item
-            key="64"
+            key="132"
             icon={<FontAwesomeIcon icon={faNewspaper} />}
             onClick={handleStatements2}
             className="flex items-center py-[27px]"
@@ -345,7 +345,7 @@ const Sidebar = ({ sidebar }) => {
             Setting
           </Menu.Item>
           <Menu.Item
-            key="64"
+            key="133"
             icon={<FontAwesomeIcon icon={faMessage} />}
             onClick={handleSendFeedback2}
             className="flex items-center py-[27px]"

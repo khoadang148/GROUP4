@@ -69,7 +69,12 @@ const authReducer = (state = initialState, action) => {
         ...state,
         id: Cookies.get("id"),
       };
-    
+      case 'RESET_PASSWORD_ERROR':
+        return {
+          ...state,
+          loading: false,
+          error: action.error,
+        };
     default:
       return state;
   }

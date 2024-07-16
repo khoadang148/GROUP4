@@ -15,7 +15,7 @@ import { faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
 import Webcam from "react-webcam";
 
-const Livestreamdetail = ({ sidebar }) => {
+const LivestreamDetail = ({ sidebar }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { instructor } = useSelector((state) => state.instructors);
@@ -38,6 +38,13 @@ const Livestreamdetail = ({ sidebar }) => {
     dispatch(setMessages(savedMessages));
   }, [dispatch, id]);
 
+  useEffect(() => {
+    // When component mounts, start the livestream if it's the instructor's own livestream
+    if (id === instructor?.id) {
+      sendMessage("startLivestream", id); // Send message to start livestream on server
+    }
+  }, [id, instructor, sendMessage]);
+
   const handleSendMessage = () => {
     if (inputMessage.trim() !== "") {
       const message = {
@@ -45,7 +52,7 @@ const Livestreamdetail = ({ sidebar }) => {
         content: inputMessage,
         instructorId: id,
       };
-      sendMessage(message);
+      sendMessage("sendMessage", message); // Send message to server
       dispatch(addMessage(message));
       setInputMessage("");
 
@@ -68,14 +75,24 @@ const Livestreamdetail = ({ sidebar }) => {
       <div className={`flex ${sidebar ? "w-[1200px]" : "w-[1640px]"}`}>
         <div>
           <div>
-            <Webcam
-              audio={false}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              width={808}
-              height={435}
-              className={`${sidebar ? "w-[800px]" : "w-[1000px]"}`}
-            />
+            {id === instructor?.id ? (
+              <Webcam
+                audio={false}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+                width={808}
+                height={435}
+                className={`${sidebar ? "w-[800px]" : "w-[1000px]"}`}
+              />
+            ) : (
+              <div>
+                <Image
+                  className="w-[800px] h-[450px]"
+                  src={instructor?.liveStream}
+                  alt="Live stream preview"
+                />
+              </div>
+            )}
           </div>
           <div className="mt-7 flex justify-between">
             <div className="flex">
@@ -159,4 +176,4 @@ const Livestreamdetail = ({ sidebar }) => {
   );
 };
 
-export default Livestreamdetail;
+export default LivestreamDetail;

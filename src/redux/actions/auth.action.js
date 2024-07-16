@@ -12,16 +12,19 @@ import {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
-  SET_ROLE, SET_USER
+  SET_ROLE, SET_USER,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAILURE
 } from "../actionType";
 
-const API_URL = "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1";
+const API_URL = "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1/users";
 
 export const login = (email, password) => {
   return async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
     try {
-      const response = await axios.get(`${API_URL}/users`, {
+      const response = await axios.get(`${API_URL}`, {
         params: { email, password },
       });
       console.log(response);
@@ -89,7 +92,7 @@ export const signup = (fullname, email, password, role = 'student') => {
   return async (dispatch) => {
     dispatch({ type: SIGNUP_REQUEST });
     try {
-      const response = await axios.post(`${API_URL}/users`, {
+      const response = await axios.post(`${API_URL}`, {
         fullname,
         email,
         password,
@@ -133,33 +136,35 @@ export const register = (userData) => async (dispatch) => {
     dispatch({ type: LOGIN_FAILURE, error: error.message });
   }
 };
-export const checkEmailExists = (email) => {
-  return axios.get(`https://your-api-url/check-email/${email}`);
-};
-
 export const forgotPassword = (email) => {
   return async (dispatch) => {
+    dispatch({ type: FORGOT_PASSWORD_REQUEST });
+
     try {
-      // Kiểm tra xem email đã tồn tại trong hệ thống
-      const emailExistsResponse = await checkEmailExists(email);
-
-      // Nếu email tồn tại, tiến hành yêu cầu đổi mật khẩu
-      if (emailExistsResponse.data.exists) {
-        // Gửi yêu cầu đến server để đổi mật khẩu
-        const response = await axios.post('https://your-api-url/reset-password', { email });
-
-        // Xử lý phản hồi thành công từ server nếu cần
-        dispatch({ type: 'FORGOT_PASSWORD_SUCCESS', payload: response.data });
-        return response.data; // Trả về dữ liệu từ server nếu cần
-      } else {
-        // Xử lý khi email không tồn tại trong hệ thống
+      // Fetch user by email
+      const { data: users } = await axios.get(`${API_URL}/?email=${email}`);
+      if (users.length === 0) {
         throw new Error('Email not found');
       }
+      
+      const user = users[0];
+      const userId = user.id;
+      const defaultPassword = 'password'; // Your default password
 
+      // Update user password
+      await axios.put(`${API_URL}/${userId}`, { ...user, password: defaultPassword });
+
+      dispatch({
+        type: FORGOT_PASSWORD_SUCCESS,
+        payload: {
+          defaultPassword: defaultPassword,
+        },
+      });
     } catch (error) {
-      // Xử lý lỗi nếu yêu cầu thất bại
-      dispatch({ type: 'FORGOT_PASSWORD_FAILURE', error });
-      throw error; // Ném lỗi để bên gọi có thể xử lý
+      dispatch({
+        type: FORGOT_PASSWORD_FAILURE,
+        payload: { error: error.message },
+      });
     }
   };
 };

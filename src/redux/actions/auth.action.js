@@ -12,20 +12,16 @@ import {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
-  SET_ROLE, SET_USER,
-  FORGOT_PASSWORD_REQUEST,
-  FORGOT_PASSWORD_SUCCESS,
-  FORGOT_PASSWORD_FAILURE
-
+  SET_ROLE, SET_USER
 } from "../actionType";
 
-const API_URL = "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1/users";
+const API_URL = "https://667e5671297972455f67ee82.mockapi.io/projectojt/api/v1";
 
 export const login = (email, password) => {
   return async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
     try {
-      const response = await axios.get(`${API_URL}`, {
+      const response = await axios.get(`${API_URL}/users`, {
         params: { email, password },
       });
       console.log(response);
@@ -137,36 +133,33 @@ export const register = (userData) => async (dispatch) => {
     dispatch({ type: LOGIN_FAILURE, error: error.message });
   }
 };
+export const checkEmailExists = (email) => {
+  return axios.get(`https://your-api-url/check-email/${email}`);
+};
 
 export const forgotPassword = (email) => {
   return async (dispatch) => {
-    dispatch({ type: FORGOT_PASSWORD_REQUEST });
-
     try {
-      // Fetch user by email
-      const { data: users } = await axios.get(`${API_URL}/?email=${email}`);
-      if (users.length === 0) {
+      // Kiểm tra xem email đã tồn tại trong hệ thống
+      const emailExistsResponse = await checkEmailExists(email);
+
+      // Nếu email tồn tại, tiến hành yêu cầu đổi mật khẩu
+      if (emailExistsResponse.data.exists) {
+        // Gửi yêu cầu đến server để đổi mật khẩu
+        const response = await axios.post('https://your-api-url/reset-password', { email });
+
+        // Xử lý phản hồi thành công từ server nếu cần
+        dispatch({ type: 'FORGOT_PASSWORD_SUCCESS', payload: response.data });
+        return response.data; // Trả về dữ liệu từ server nếu cần
+      } else {
+        // Xử lý khi email không tồn tại trong hệ thống
         throw new Error('Email not found');
       }
-      
-      const user = users[0];
-      const userId = user.id;
-      const defaultPassword = 'password'; // Your default password
 
-      // Update user password
-      await axios.put(`${API_URL}/${userId}`, { ...user, password: defaultPassword });
-
-      dispatch({
-        type: FORGOT_PASSWORD_SUCCESS,
-        payload: {
-          defaultPassword: defaultPassword,
-        },
-      });
     } catch (error) {
-      dispatch({
-        type: FORGOT_PASSWORD_FAILURE,
-        payload: { error: error.message },
-      });
+      // Xử lý lỗi nếu yêu cầu thất bại
+      dispatch({ type: 'FORGOT_PASSWORD_FAILURE', error });
+      throw error; // Ném lỗi để bên gọi có thể xử lý
     }
   };
 };

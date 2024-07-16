@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getInstructorById } from "../redux/actions/instructor.action";
@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
+import Webcam from "react-webcam";
 
 const Livestreamdetail = ({ sidebar }) => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ const Livestreamdetail = ({ sidebar }) => {
   const [inputMessage, setInputMessage] = useState("");
   const [username, setUsername] = useState("");
   const { sendMessage } = useWebSocket();
+  const webcamRef = useRef(null);
 
   useEffect(() => {
     dispatch(getInstructorById(id));
@@ -32,19 +34,26 @@ const Livestreamdetail = ({ sidebar }) => {
     setUsername(name);
 
     const savedMessages =
-      JSON.parse(localStorage.getItem("chatMessages")) || [];
+      JSON.parse(localStorage.getItem(`chatMessages_${id}`)) || [];
     dispatch(setMessages(savedMessages));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   const handleSendMessage = () => {
     if (inputMessage.trim() !== "") {
       const message = {
         username,
         content: inputMessage,
+        instructorId: id,
       };
       sendMessage(message);
       dispatch(addMessage(message));
       setInputMessage("");
+
+      const updatedMessages = [...messages, message];
+      localStorage.setItem(
+        `chatMessages_${id}`,
+        JSON.stringify(updatedMessages)
+      );
     }
   };
 
@@ -59,15 +68,13 @@ const Livestreamdetail = ({ sidebar }) => {
       <div className={`flex ${sidebar ? "w-[1200px]" : "w-[1640px]"}`}>
         <div>
           <div>
-            <iframe
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
               width={808}
               height={435}
-              src="https://www.youtube.com/embed/Ohe_JzKksvA"
-              title='What is a "Good Font"?'
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              className={` ${sidebar ? "w-[800px]" : "w-[1000px]"}`}
+              className={`${sidebar ? "w-[800px]" : "w-[1000px]"}`}
             />
           </div>
           <div className="mt-7 flex justify-between">
@@ -125,20 +132,19 @@ const Livestreamdetail = ({ sidebar }) => {
           <p className="font-semibold">Live Chat</p>
           <div className="h-96 overflow-y-scroll">
             {messages.map((message, index) => (
-              <div key={index} className="my-2">
-                <strong>{message.username}: </strong>
-                <span>{message.content}</span>
+              <div key={index} className="mb-4">
+                <strong>{message.username}:</strong> {message.content}
               </div>
             ))}
           </div>
-          <div className="mt-4">
+          <div className="flex mt-4">
             <input
               type="text"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               className="w-full border rounded px-3 py-2"
-              placeholder="Enter your message..."
+              placeholder="Say Something..."
             />
             <button
               onClick={handleSendMessage}

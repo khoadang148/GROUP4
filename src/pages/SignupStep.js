@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers, updateUserRole } from '../redux/actions/auth.action';
 
 const logoUrl = 'https://gambolthemes.net/html-items/cursus-new-demo/images/logo.svg';
 const signBackgroundUrl = 'https://gambolthemes.net/html-items/cursus-new-demo/images/sign.svg';
@@ -7,20 +9,48 @@ const signLogoUrl = 'https://gambolthemes.net/html-items/cursus-new-demo/images/
 
 const SignupStep = () => {
   const [isInstructor, setIsInstructor] = useState(true);
+  const [isLoading, setLoading] = useState(false); // State for loading indicator
+  const [bio, setBio] = useState(''); // State for bio description
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { users } = useSelector((state) => state.auth); // Select users from Redux state
+
+  useEffect(() => {
+    if (!users || users.length === 0) {
+      dispatch(fetchUsers()); // Dispatch fetchUsers action when component mounts
+    }
+  }, [dispatch, users]);
+
   const goToLogin = () => {
     navigate('/login');
   };
 
   const handleSignup = async () => {
-    // Gửi dữ liệu lên API với vai trò đã chọn (instructor hoặc student)
-    if (isInstructor) {
-      // Gửi dữ liệu lên API với role là "teacher"
-    } else {
-      // Gửi dữ liệu lên API với role là "student"
-    }
+    setLoading(true); // Start loading indicator
 
-    // Sau khi gửi thành công, điều hướng về trang chủ hoặc trang khác
+    try {
+      // Dispatch action to update user role
+      const maxId = getMaxId(users); // Assuming you have a function to get max ID from users
+      const role = isInstructor ? 'teacher' : 'student';
+      await dispatch(updateUserRole(maxId, role));
+
+      setLoading(false); // Stop loading indicator
+      // Handle success action (e.g., redirect or show success message)
+    } catch (error) {
+      setLoading(false); // Stop loading indicator on error
+      console.error('Failed to update user role:', error);
+      // Handle error here
+    }
+  };
+
+  const getMaxId = (users) => {
+    const ids = users.map(user => parseInt(user.id));
+    return Math.max(...ids);
+  };
+
+  // Function to handle textarea change
+  const handleBioChange = (e) => {
+    setBio(e.target.value);
   };
 
   return (
@@ -38,13 +68,13 @@ const SignupStep = () => {
               onClick={() => setIsInstructor(true)}
               className={`py-2 px-4 font-semibold ${isInstructor ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-500'}`}
             >
-              Instructor Sign Up
+              {isLoading && isInstructor ? 'Signing Up...' : 'Instructor Sign Up Now'}
             </button>
             <button
               onClick={() => setIsInstructor(false)}
               className={`py-2 px-4 font-semibold ${!isInstructor ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-500'}`}
             >
-              Student Sign Up
+              {isLoading && !isInstructor ? 'Signing Up...' : 'Student Sign Up Now'}
             </button>
           </div>
 
@@ -56,7 +86,7 @@ const SignupStep = () => {
                   <option>Select Category</option>
                   <option>Development</option>
                   <option>Business</option>
-                  <option>Finance & Accounting </option>
+                  <option>Finance & Accounting</option>
                   <option>IT & Software</option>
                   <option>Office Productivity</option>
                   <option>Personal Development</option>
@@ -74,10 +104,18 @@ const SignupStep = () => {
                   id="description"
                   className="w-full px-3 py-2 border rounded"
                   placeholder="Write a little description about you..."
+                  value={bio}
+                  onChange={handleBioChange}
                 ></textarea>
               </div>
-              <p className="text-gray-500 mb-4">Your biography should have at least 12000 characters.</p>
-              <button onClick={handleSignup} className="w-full bg-red-500 text-white py-2 rounded">Instructor Sign Up Now</button>
+              <p className="text-gray-500 mb-4">Your biography should have at least 10 characters.</p>
+              <button
+                onClick={handleSignup}
+                className={`w-full bg-red-500 text-white py-2 rounded ${bio.length < 10 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={bio.length < 10 || isLoading}
+              >
+                {isLoading ? 'Signing Up...' : 'Instructor Sign Up Now'}
+              </button>
             </div>
           ) : (
             <div>
@@ -87,11 +125,19 @@ const SignupStep = () => {
                   id="description"
                   className="w-full px-3 py-2 border rounded"
                   placeholder="Write a little description about you..."
+                  value={bio}
+                  onChange={handleBioChange}
                 ></textarea>
               </div>
 
-              <p className="text-xxs font-thin text-gray-500 mb-4">Your biography should have at least 12000 characters.</p>
-              <button onClick={handleSignup} className="w-full bg-red-500 text-white py-2 rounded">Student Sign Up Now</button>
+              <p className="text-xxs font-thin text-gray-500 mb-4">Your biography should have at least 10 characters.</p>
+              <button
+                onClick={handleSignup}
+                className={`w-full bg-red-500 text-white py-2 rounded ${bio.length < 10 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={bio.length < 10 || isLoading}
+              >
+                {isLoading ? 'Signing Up...' : 'Student Sign Up Now'}
+              </button>
             </div>
           )}
 
